@@ -1,9 +1,19 @@
 require 'sinatra'
 require 'erb'
 require 'pry-byebug'
+require './helpers/weather_scraper.rb'
 
 enable :sessions
 
 get '/' do
-  erb :index
+  :home
+end
+
+# get '/index' do
+#   erb :index
+# end
+
+post '/index' do
+  session[:weather_scraper] = WeatherScraper.new("Oakland, California")
+  redirect to "results"
 end

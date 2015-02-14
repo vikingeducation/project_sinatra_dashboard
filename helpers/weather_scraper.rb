@@ -17,6 +17,19 @@ class WeatherScraper
     @forecast = get_forecast
   end
 
+  def render
+    html = ""
+    @forecast.each do |day|
+      html += "<tr>"
+      html += "<td>#{day.date}</td>"
+      html += "<td>#{day.high_temp}</td>"
+      html += "<td>#{day.low_temp}</td>"
+      html += "<td>#{day.classification}</td>"
+      html += "</tr>"
+    end
+    return html
+  end
+
   private
 
   attr_reader :location, :weatherman, :page, :calendar, :next_ten_days
