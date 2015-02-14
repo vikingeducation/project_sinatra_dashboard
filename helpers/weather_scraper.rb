@@ -10,7 +10,7 @@ class WeatherScraper
   attr_reader :forecast
   def initialize(location)
     @location = location
-    @weatherman = weatherman = Mechanize.new
+    @weatherman = Mechanize.new
     @page = get_page
     @calendar = get_calendar
     @next_ten_days = assemble_next_ten_days
