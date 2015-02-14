@@ -7,7 +7,7 @@ require_relative 'weather_day.rb'
 
 
 class WeatherScraper
-  attr_reader :location, :weatherman, :page, :calendar, :next_ten_days, :forecast
+  attr_reader :forecast
   def initialize(location)
     @location = location
     @weatherman = weatherman = Mechanize.new
@@ -16,6 +16,10 @@ class WeatherScraper
     @next_ten_days = assemble_next_ten_days
     @forecast = get_forecast
   end
+
+  private
+
+  attr_reader :location, :weatherman, :page, :calendar, :next_ten_days
 
   def get_page
     wunderground_url = "http://www.wunderground.com/cgi-bin/findweather/getForecast?query=" + location.to_s
