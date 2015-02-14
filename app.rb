@@ -7,14 +7,15 @@ enable :sessions
 set :server, 'thin'
 
 get '/' do
-  :home
+  erb :home
 end
 
-# get '/index' do
-#   erb :index
-# end
+post '/home' do
+  session[:location] = params[:location]
+  redirect to "/results"
+end
 
-post '/index' do
-  session[:weather_scraper] = WeatherScraper.new("Oakland, California")
-  redirect to "results"
+get '/results' do
+  @w = WeatherScraper.new(session[:location])
+  erb :results
 end
