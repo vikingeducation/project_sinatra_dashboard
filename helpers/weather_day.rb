@@ -1,1 +1,1 @@
-WeatherDay = Struct.new(:date, :temperate, :classification)
+WeatherDay = Struct.new(:date, :high_temp, :low_temp, :classification)
