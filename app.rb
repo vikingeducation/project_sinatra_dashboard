@@ -4,6 +4,7 @@ require 'pry-byebug'
 require './helpers/weather_scraper.rb'
 
 enable :sessions
+set :server, 'thin'
 
 get '/' do
   :home

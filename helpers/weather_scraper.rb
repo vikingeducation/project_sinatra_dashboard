@@ -1,9 +1,6 @@
-require 'rubygems'
-require 'bundler/setup'
 require 'mechanize'
-require 'nokogiri'
 require 'pry'
-require_relative 'weather_day.rb'
+require_relative 'weather_day'
 
 
 class WeatherScraper
