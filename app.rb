@@ -31,8 +31,8 @@ end
 
 post '/ebay' do
   #user inputs last
-  @keyword_text = save_input( params[:keyword], params[:maxprice])
-  # @max_price = save_input( params[:maxprice])
+  @keyword_text = save_keyword( params[:keyword])
+  @max_price = save_maxprice( params[:maxprice])
   @ebay_search = InHouseEbay.new(@keyword_text, @max_price)
   @ebay_results = @ebay_search.all_items
   # binding.pry

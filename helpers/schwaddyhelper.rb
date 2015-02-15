@@ -10,8 +10,11 @@ module Schwaddyhelper
   WeatherDay = Struct.new(:high_temp, :low_temp, :forecast)
   SuchEbay = Struct.new(:title, :link, :price)
 
-  def save_input(keyword, maxprice)
+  def save_keyword(keyword)
     session[:keyword] = keyword
+  end
+
+  def save_maxprice(maxprice)
     session[:maxprice] = maxprice
   end
 
@@ -65,7 +68,7 @@ module Schwaddyhelper
   end
 
   class InHouseEbay
-    attr_reader :page, :search_page, :item_header, :item_link, :search_page, :price, :all_items
+    attr_reader :page, :search_page, :item_header, :item_link, :search_page, :price, :all_items, :top_price
     def initialize(keyword, top_price)
       agent = Mechanize.new
       @top_price = top_price
@@ -98,7 +101,7 @@ module Schwaddyhelper
       @all_items = []
       counter = 0
       while counter < 20 && @item_header[counter] != nil
-        if @item_link[counter][1..-1].to_f > @top_price.to_f
+        if @price[counter][1..-1].to_f > @top_price.to_f
           counter += 1
           next
         else
