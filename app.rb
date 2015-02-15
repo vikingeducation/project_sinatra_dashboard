@@ -1,10 +1,10 @@
-require 'rubygems'
-require 'bundler/setup'
 require 'sinatra'
 require 'json'
 require 'mechanize'
 require 'pry'
 require './helpers/schwaddyhelper.rb'
+require './models/weather.rb'
+require './models/inhouseebay.rb'
 
 # require_relative 'weatherday'
 
@@ -18,6 +18,7 @@ enable :sessions
 # #DON'T GOOF AROUND W CLASSES SCHWAD
 
 get '/' do
+  # binding.pry
   @my_weather = Weather.new("Missoula, MT")
   @my_individualized_weather = @my_weather.ten_day_forecast
   @ebay_results = nil
