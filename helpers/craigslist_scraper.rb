@@ -1,7 +1,8 @@
 require 'mechanize'
+require_relative 'posting'
 
 class CraigslistScraper
-  attr_reader :search_page, :scraper, :results_page
+  attr_reader :search_page, :scraper, :results_page, :postings
   def initialize(min_price, max_price, keywords)
     @scraper = Mechanize.new
     @scraper.history_added = Proc.new { sleep 0.5 }
@@ -12,11 +13,17 @@ class CraigslistScraper
     form["query"] = keywords
     @results_page = scraper.submit(form)
     @results_nodes = @results_page.search("div.content p.row")
+    @postings = get_postings
   end
 
-  # def get_postings
-  #   (0..99).each_with_object([]) do |posting, classfield|
-  # end
+  def get_postings
+    (0..99).each_with_object([]) do |posting, classified|
+      classified << Posting.new(get_name(posting),
+                                get_url(posting),
+                                get_price(posting),
+                                get_location(posting))
+    end
+  end
 
   def get_name(posting)
     @results_nodes[posting].search("span.pl a").text.strip
@@ -26,14 +33,27 @@ class CraigslistScraper
     "http://sfbay.craigslist.org" + @results_nodes[posting].search("a.i").first[:href]
   end
 
-  def get_price
-    # @results_nodes[posting].search("span.pl a").text.strip
+  def get_price(posting)
+    @results_nodes[posting].search("span.price").text.strip
   end
 
-  def get_location
-    # @results_nodes[posting].search("span.pl a").text.strip
+  def get_location(posting)
+    begin
+      with_parens = @results_nodes[posting].search("span.pnr small").text.strip
+      with_parens[1..-2]
+    rescue
+      nil
+    end
   end
 
-  def get_email
+  def append_emails
+    @postings.each do |posting|
+      post_number = /\/(\d+).html$/.match(posting.url)[1]
+      reply_page = scraper.get("http://sfbay.craigslist.org/reply/" + post_number)
+      begin
+      posting.email = reply_page.search(".mailapp").text
+      rescue
+      end
+    end
   end
 end
