@@ -10,6 +10,16 @@ module Schwaddyhelper
   WeatherDay = Struct.new(:high_temp, :low_temp, :forecast)
   SuchEbay = Struct.new(:title, :link, :price)
 
+  def save_input(keyword, maxprice)
+    session[:keyword] = keyword
+    session[:maxprice] = maxprice
+  end
+
+  def load_input
+    session[:keyword]
+    session[:maxprice]
+  end
+
   class Weather
     attr_accessor :location, :weather_site, :searched_page, :forecast_ary, :low_temp_ary, :high_temp_ary, :ten_day_forecast
     def initialize(location)

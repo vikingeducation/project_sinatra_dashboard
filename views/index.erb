@@ -37,7 +37,14 @@
     <!-- craigslist -->
     <div class="col-xs-6">
       <h3>Search Ebay</h3>
-      <h4>user inputs stuff here</h4>
+      <h4>Enter Your Search Criteria and max price</h4>
+      <form action="/ebay" method="post">
+        <textarea type="text" name="keyword" placeholder="e.g. Pokemon..."></textarea>
+        <textarea type="text" name="maxprice" placeholder="e.g. 400"></textarea>
+        <br>
+        <input type="submit" value="Searchify!">
+      </form>
+      <% unless @ebay_results == nil %>
       <table class="table">
         <thead>
           <tr>
@@ -60,6 +67,7 @@
           <% end %>
         </tbody>
       </table>
+      <% end %>
     </div>
   </div>
 </container>
