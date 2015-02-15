@@ -1,0 +1,17 @@
+<h3>Okay, Here we GO!</h3>
+<br>
+<!-- NO LOGIC PLEASE -->
+<p>The player has a <%= @player_hand.to_s %></p>
+<p>The dealer has a <%= @dealer_hand[0].to_s %></p>
+<br>
+<h1>Hit or stay?</h1>
+<h2> <%= session[:feedback] %> </h2>
+<h2> <%= session[:dealer_show] %> </h2>
+<h2> <%= session[:dealer_feedback] %>
+<form action="/blackjack/hit" method="post">
+  <input type="submit" value="Hit" name="hit">
+</form>
+<form action="/blackjack/stay" method="post">
+  <input type="submit" value="Stay" name="stay">
+</form>
+

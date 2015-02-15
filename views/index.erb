@@ -1,0 +1,65 @@
+<container>
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>Schwaddys Sweet Dashboard</h1>
+    </div>
+  </div>
+  <div class="row">
+
+    <!-- weather -->
+    <div class="col-xs-6">
+      <h3>Weather for Missoula, Montana</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>High Temperature</th>
+            <th>Low Temperature</th>
+            <th>Forecast</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% counter = 1 %>
+          <% @my_individualized_weather.each do |day| %>
+          <tr>
+            <td> <%= counter %></td>
+            <td> <%= day.high_temp %> </td>
+            <td> <%= day.low_temp %> </td>
+            <td> <%= day.forecast %> </td>
+          </tr>         
+      <% counter += 1 %>
+      <% end %> 
+        </tbody>
+      </table>
+    </div>
+
+
+    <!-- craigslist -->
+    <div class="col-xs-6">
+      <h3>Search Ebay</h3>
+      <h4>user inputs stuff here</h4>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Number</th>
+            <th>Price</th>
+            <th>Item Name</th>
+            <th>Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% item_counter = 1 %>
+          <% @ebay_results.each do |item| %>
+            <tr>
+              <td> <%= item_counter %></td>
+              <td> <%= item.price %></td>
+              <td> <%= item.title %></td>
+              <td> <a href= "<%= item.link %>" alt="">Link</a></td>
+            </tr>
+            <% item_counter += 1 %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</container>
