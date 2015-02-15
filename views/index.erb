@@ -9,7 +9,7 @@
     <!-- weather -->
     <div class="col-xs-6">
       <h3>Weather for Missoula, Montana</h3>
-      <table class="table">
+      <table class="table table-striped weather">
         <thead>
           <tr>
             <th>Day</th>
@@ -45,28 +45,30 @@
         <input type="submit" value="Searchify!">
       </form>
       <% unless @ebay_results == nil %>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Number</th>
-            <th>Price</th>
-            <th>Item Name</th>
-            <th>Link</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% item_counter = 1 %>
-          <% @ebay_results.each do |item| %>
-            <tr>
-              <td> <%= item_counter %></td>
-              <td> <%= item.price %></td>
-              <td> <%= item.title %></td>
-              <td> <a href= "<%= item.link %>" alt="">Link</a></td>
-            </tr>
-            <% item_counter += 1 %>
-          <% end %>
-        </tbody>
-      </table>
+        <div class="ebay-table">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Number</th>
+                <th>Price</th>
+                <th>Item Name</th>
+                <th>Link</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% item_counter = 1 %>
+              <% @ebay_results.each do |item| %>
+                <tr>
+                  <td> <%= item_counter %></td>
+                  <td> <%= item.price %></td>
+                  <td> <%= item.title %></td>
+                  <td> <a href= "<%= item.link %>" alt="">Link</a></td>
+                </tr>
+                <% item_counter += 1 %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
       <% end %>
     </div>
   </div>

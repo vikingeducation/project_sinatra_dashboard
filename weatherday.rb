@@ -1,1 +1,0 @@
-WeatherDay = Struct.new(:high_temp, :low_temp, :forecast)

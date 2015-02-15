@@ -9,6 +9,10 @@ class InHouseEbay
     my_form._nkw = keyword
     @max_price = price
     @search_page = agent.submit(my_form)    
+    generate_results
+  end
+
+  def generate_results
     item_header
     link_to_page
     very_price
@@ -17,8 +21,8 @@ class InHouseEbay
 
   def item_header
     @item_header = @search_page.search("a.vip").map {|item| item.text.strip}
-
   end
+  
   def very_price
     @price = @search_page.search("span.bold").map {|item| item.text.strip}
   end
@@ -31,7 +35,7 @@ class InHouseEbay
   def top_items
     @all_items = []
     counter = 0
-    while counter < 20 && @item_header[counter] != nil
+    while @item_header[counter] != nil
       if @price[counter][1..-1].to_f > @top_price.to_f
         counter += 1
         next
