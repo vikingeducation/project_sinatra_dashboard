@@ -3,6 +3,7 @@ require_relative 'posting'
 
 class CraigslistScraper
   attr_reader :search_page, :scraper, :results_page, :postings
+
   def initialize(min_price, max_price, keywords)
     @scraper = Mechanize.new
     @scraper.history_added = Proc.new { sleep 0.5 }
@@ -14,10 +15,27 @@ class CraigslistScraper
     @results_page = scraper.submit(form)
     @results_nodes = @results_page.search("div.content p.row")
     @postings = get_postings
+    append_emails
+  end
+
+  def render
+    html = ""
+    @postings.each do |post|
+      html += "<tr>"
+      html += "<td>#{post.name}</td>"
+      html += "<td>#{post.price}</td>"
+      html += "<td>#{post.location}</td>"
+      html += "<td><a href='#{post.url}'>link</a></td>"
+      if post.email
+        html += "<td>#{post.email}</td>"
+      end
+      html += "</tr>"
+    end
+    return html
   end
 
   def get_postings
-    (0..99).each_with_object([]) do |posting, classified|
+    (0..(@results_nodes.count-1)).each_with_object([]) do |posting, classified|
       classified << Posting.new(get_name(posting),
                                 get_url(posting),
                                 get_price(posting),
@@ -47,7 +65,7 @@ class CraigslistScraper
   end
 
   def append_emails
-    @postings.each do |posting|
+    @postings[0..9].each do |posting|
       post_number = /\/(\d+).html$/.match(posting.url)[1]
       reply_page = scraper.get("http://sfbay.craigslist.org/reply/" + post_number)
       begin
