@@ -24,9 +24,3 @@ get '/results' do
   @c = CraigslistScraper.new(session[:min_price], session[:max_price], session[:keywords])
   erb :results
 end
-
-# get '/emails' do
-#   erb :emails
-#   @c.append_emails
-#   erb :results
-# end

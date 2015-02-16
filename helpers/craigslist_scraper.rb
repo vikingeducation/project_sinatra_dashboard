@@ -19,19 +19,11 @@ class CraigslistScraper
   end
 
   def render
-    html = ""
-    @postings.each do |post|
-      html += "<tr>"
-      html += "<td>#{post.name}</td>"
-      html += "<td>#{post.price}</td>"
-      html += "<td>#{post.location}</td>"
-      html += "<td><a href='#{post.url}'>link</a></td>"
-      if post.email
-        html += "<td>#{post.email}</td>"
-      end
+    @postings.inject("") do |html, post|
+      html += "<tr><td>#{post.name}</td><td>#{post.price}</td><td>#{post.location}</td><td><a href='#{post.url}'>link</a></td>"
+      html += "<td>#{post.email}</td>" if post.email
       html += "</tr>"
     end
-    return html
   end
 
   def get_postings
