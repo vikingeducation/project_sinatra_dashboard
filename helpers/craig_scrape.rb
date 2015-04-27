@@ -22,6 +22,14 @@ class CraigScraper
     end # performing the search from the apts/housing page
   end
 
+  def fetch_emails
+    @listings.each do |listing|
+      listing_id = /\/(\d+).html$/.match(listing.link)[1]
+      email_page = @scraper.get('http://sfbay.craigslist.org/reply/' + listing_id)
+      listing.email = email_page.search('.mailapp').text.strip
+    end
+  end
+
   def listings
     form_submit
 
@@ -41,6 +49,7 @@ class CraigScraper
 
       @listings << current_listing
     end
+    fetch_emails
   end
 
   def table_render
@@ -48,8 +57,8 @@ class CraigScraper
     @listings.each do |listing|
       code += '<tr>'
       code += "<td>#{listing.name}</td>"
-      code += "<td><a href='#{listing.link}''>#{listing.link}</a></td>"
-      code += "<td>#{listing.email}</td>"
+      code += "<td><a href='#{listing.link}'>#{listing.link}</a></td>"
+      code += "<td><a href='mailto:#{listing.email}'>#{listing.email}</a></td>" if listing.email
       code += "<td>#{listing.price}</td>"
       code += "<td>#{listing.location}</td>"
       code += '<tr>'
