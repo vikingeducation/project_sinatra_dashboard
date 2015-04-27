@@ -39,4 +39,14 @@ class CraigScraper
       @listings << current_listing
     end
   end
+
+  def render_listings
+    @listings.each do |listing|
+      puts "#{listing.name}"
+    end
+  end
 end
+
+test = CraigScraper.new(1000, 3000, 'family')
+test.get_listings
+test.render_listings
