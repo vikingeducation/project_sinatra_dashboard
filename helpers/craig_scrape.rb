@@ -40,13 +40,17 @@ class CraigScraper
     end
   end
 
-  def render_listings
+  def table_render
+    code = ''
     @listings.each do |listing|
-      puts "#{listing.name}"
+      code += '<tr>'
+      code += "<td>#{listing.name}</td>"
+      code += "<td>#{listing.link}</td>"
+      code += "<td>#{listing.email}</td>"
+      code += "<td>#{listing.price}</td>"
+      code += "<td>#{listing.location}</td>"
+      code += '<tr>'
     end
+    code
   end
 end
-
-test = CraigScraper.new(1000, 3000, 'family')
-test.listings
-test.render_listings
