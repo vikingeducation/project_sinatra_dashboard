@@ -6,7 +6,7 @@ class CraigScraper
   def initialize(min_ask, max_ask, keywords)
     @listings = []
     @scraper = Mechanize.new
-    @scraper.history_added = proc { sleep 0.5 }
+    # @scraper.history_added = proc { sleep 0.5 }
     @min = min_ask
     @max = max_ask
     @keywords = keywords
@@ -26,6 +26,9 @@ class CraigScraper
     form_submit
 
     @results_page.links_with(href: %r{\/.{3}\/apa}).each do |link|
+
+      next if link.text == ''
+
       current_listing = Listing.new
 
       current_listing.name = link.text.strip
