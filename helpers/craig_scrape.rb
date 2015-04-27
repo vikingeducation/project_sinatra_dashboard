@@ -48,7 +48,7 @@ class CraigScraper
     @listings.each do |listing|
       code += '<tr>'
       code += "<td>#{listing.name}</td>"
-      code += "<td>#{listing.link}</td>"
+      code += "<td><a href='#{listing.link}''>#{listing.link}</a></td>"
       code += "<td>#{listing.email}</td>"
       code += "<td>#{listing.price}</td>"
       code += "<td>#{listing.location}</td>"
