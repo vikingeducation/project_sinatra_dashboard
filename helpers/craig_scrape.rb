@@ -48,5 +48,5 @@ class CraigScraper
 end
 
 test = CraigScraper.new(1000, 3000, 'family')
-test.get_listings
+test.listings
 test.render_listings
