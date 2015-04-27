@@ -1,5 +1,4 @@
 require 'mechanize'
-require 'csv'
 require 'date'
 
 Weather = Struct.new(:date, :temp_high, :temp_low, :description)
@@ -21,7 +20,7 @@ class WeatherScraper
 
     scraper.get('http://www.wunderground.com/US/CA/Santa_Clara.html') do |page|
 
-      calendar_page =   page.links_with(href: /history\/airport/)[0].click
+      calendar_page = page.links_with(href: /history\/airport/)[0].click
 
       calendar_page.search('.day').each do |day|
 
