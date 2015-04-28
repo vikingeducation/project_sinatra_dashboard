@@ -1,0 +1,23 @@
+<h2>Forecast</h2>
+<table>
+  <tr>
+    <th>Date</th>
+    <th>High/Low</th>
+    <th>Description</th>
+  </tr>
+  <% @forecast.weather %>
+  <%= @forecast.table_render %>
+</table>
+
+<h2>Housing listings</h2>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Link</th>
+    <th>Email</th>
+    <th>Price</th>
+    <th>Location</th>
+  </tr>
+  <% @craig.listings %>
+  <%= @craig.table_render %>
+</table>
