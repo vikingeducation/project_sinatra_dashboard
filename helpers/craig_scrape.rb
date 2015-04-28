@@ -6,7 +6,6 @@ class CraigScraper
   def initialize(min_ask, max_ask, keywords)
     @listings = []
     @scraper = Mechanize.new
-    # @scraper.history_added = proc { sleep 0.5 }
     @min = min_ask
     @max = max_ask
     @keywords = keywords
