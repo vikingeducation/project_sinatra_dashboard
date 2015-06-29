@@ -1,17 +1,38 @@
 <h1>Dice.com Job Scraper</h1>
 
 <form action="/" method="get">
-  <input type="text" name="search-text" placeholder="web developer">
-  <input type="text" name="search-location" placeholder="Boston, MA">
-  <input type="date" name="start-date" value=<%= today %>>
-  <input type="submit" value="Scrape!">
+
+  <div class="row">
+
+    <div class="form-group col-md-5">
+      <label for="search-text">Search criteria:</label>
+      <input type="text" name="search-text" class="form-control" placeholder="web developer">
+    </div>
+
+    <div class="form-group col-md-3">
+      <label for="search-location">Location:</label>
+      <input type="text" name="search-location" class="form-control" placeholder="Boston, MA">
+    </div>
+
+    <div class="form-group col-md-2">
+      <label for="start-date">Start Date:</label>
+      <input type="date" name="start-date" class="form-control" value=<%= today %>>
+    </div>
+
+    <div class="form-group col-md-2">
+      <label>Search Dice.com!</label>
+      <input type="submit" class="form-control btn btn-default" value="Go">
+    </div>
+
+  </div>
+
 </form>
 
 
 
 <h3>Results</h3>
 
-<table>
+<table class = 'table table-striped table-bordered table-condensed'>
 
   <tr>
     <th>Job Title</th>
