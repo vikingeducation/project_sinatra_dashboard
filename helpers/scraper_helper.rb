@@ -30,9 +30,14 @@ module ScraperHelper
       search_form.l = search_location
 
       response = @agent.submit(search_form)
+      #response_url = response.uri.to_s
+      #sorted_url = response_url + "&sort=date"
+      #response_sorted = @agent.get(sorted_url)
 
-      #job_list = scrape_jobs( sort_by_date( response ) ) # see below
-      job_list = scrape_jobs( response )
+      #sort_by_date(response)
+
+      job_list = scrape_jobs( sort_by_date( response ) ) # see below
+      #job_list = scrape_jobs( response_sorted )
 
       results = []
 
@@ -62,10 +67,14 @@ module ScraperHelper
 =begin  Removing this and allowing Relevance to deal with old posts.
         Sort By link currently uses JS
         Could refactor to put sort type right into URL
-    def sort_by_date(results_page)
-      results_page.link_with(:id => "sort-by-date-link").click #need page=?
-    end
 =end
+    def sort_by_date(results_page)
+      #results_page.link_with(:id => "sort-by-date-link").click #need page=?
+      response_url = results_page.uri.to_s
+      sorted_url = response_url + "&sort=date"
+      @agent.get(sorted_url)
+    end
+
 
 
     def scrape_jobs(results_page)
