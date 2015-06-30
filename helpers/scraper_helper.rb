@@ -18,6 +18,7 @@ module ScraperHelper
     # Usage: search("jobs or keywords", "Location (City, ST or ZIP)", Start Date)
     def search(params)
 
+      # need to fix defaults when param=""
       search_text = params[:'search-text'] || "web developer"
       search_location = params[:'search-location'] || "Boston, MA"
       start_date = params[:'start-date'] || Date.today
@@ -33,7 +34,7 @@ module ScraperHelper
 
       job_list = scrape_jobs( sort_by_date( response ) )
 
-      results = []
+      results = [search_text, search_location, start_date.to_s]
 
       job_list.each_entry do |job|
         results << scrape_details(job, start_date)
@@ -56,6 +57,11 @@ module ScraperHelper
       page = @agent.get(BASE_URL)
 
       page.form_with(:id => 'searchJob')
+    end
+
+
+    def set_parameters
+
     end
 
 
