@@ -1,7 +1,7 @@
 require 'sinatra'
 require 'erb'
 require 'thin'
-require 'pry'
+#require 'pry'
 #require './locator.rb'
 #require './dice_scraper.rb'
 #require './company_profiler.rb'
