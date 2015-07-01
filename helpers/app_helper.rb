@@ -32,6 +32,7 @@ module AppHelper
 
 
   # Profiler uses GlassDoor's API to append company ratings & reviews to job listings
+=begin
   def add_profiles!(results)
     profiler = CompanyProfiler.new
 
@@ -51,6 +52,7 @@ module AppHelper
     results
 
   end
+=end
 
 
   private

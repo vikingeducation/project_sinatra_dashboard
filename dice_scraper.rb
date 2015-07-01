@@ -12,8 +12,9 @@ class DiceScraper
 
   def initialize
     @agent = Mechanize.new
+    @profiler = CompanyProfiler.new
 
-    rate_limit(0.5)
+    #rate_limit(0.5)
   end
 
 
@@ -40,9 +41,9 @@ class DiceScraper
   private
 
 
-  def rate_limit(lim)
-    @agent.history_added = Proc.new { sleep lim }
-  end
+  #def rate_limit(lim)
+    #@agent.history_added = Proc.new { sleep lim }
+  #end
 
 
   def get_search_form
@@ -72,21 +73,17 @@ class DiceScraper
     results = []
 
 
-    profiler = CompanyProfiler.new
 
 
     job_list.each_entry do |job|
       result = scrape_details(job, start_date)
 
       unless result.nil?
-        profile = profiler.get_profile(result[:company])
-
-        result[:GD_name] = profile[:name]
-        result[:ratings] = profile[:ratings]
-        result[:review] = profile[:review]
-
-        results << result
+        final_result = append_profile(result)
+        results << final_result
       end
+
+      sleep 0.5
     end
 
     [query, results]
@@ -168,6 +165,19 @@ class DiceScraper
     ids = url.match(/dice.com(?:\/.*?){3}\/(.*?)\/(.*?)\?/)
     ids ||= Array.new(3)
     ids
+  end
+
+
+  def append_profile(dice_result)
+    final_result = dice_result.dup
+
+    profile = @profiler.get_profile(dice_result[:company])
+
+    final_result[:GD_name] = profile[:name]
+    final_result[:ratings] = profile[:ratings]
+    final_result[:review] = profile[:review]
+
+    final_result
   end
 
 
