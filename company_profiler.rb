@@ -3,7 +3,6 @@ class CompanyProfiler
 
   require 'json'
   require 'httparty'
-  require 'pp'
 
   include HTTParty
 
@@ -22,33 +21,55 @@ class CompanyProfiler
                           :action     => "employers"
                         }
                 }
-    @response = {}
   end
+
+
+  def check_all_companies
+    profiles = []
+    companies = []
+
+    companies.each do |company|
+      response = fetch_data(company)
+      profile = { name: company,
+                  ratings: get_ratings(response),
+                  review: featured_review(response)
+                }
+      profiles << profile
+      sleep 1.0
+    end
+
+    profiles
+
+  end
+
+
+  private
 
 
   def fetch_data(company)
     search = @options
     search[:query][:q] = company
     full_response = self.class.get("/api/api.htm", search)
-    @response = full_response["response"]["employers"][0]
+
+    full_response["response"]["employers"][0]
   end
 
 
-  def get_ratings
-    @ratings = {count: @response["numberOfRatings"],
-                overall: @response["overallRating"],
-                culture: @response["cultureAndValuesRating"],
-                leadership: @response["seniorLeadershipRating"],
-                compensation: @response["compensationAndBenefitsRating"],
-                opportunity: @response["careerOpportunitiesRating"],
-                balance: @response["workLifeBalanceRating"],
-                recommend: @response["recommendToFriendRating"]
-                }
+  def get_ratings(response)
+    { count: response["numberOfRatings"],
+      overall: response["overallRating"],
+      culture: response["cultureAndValuesRating"],
+      leadership: response["seniorLeadershipRating"],
+      compensation: response["compensationAndBenefitsRating"],
+      opportunity: response["careerOpportunitiesRating"],
+      balance: response["workLifeBalanceRating"],
+      recommend: response["recommendToFriendRating"]
+    }
   end
 
 
-  def featured_review
-    @review = @response["featuredReview"]
+  def featured_review(response)
+    response["featuredReview"]
   end
 
 

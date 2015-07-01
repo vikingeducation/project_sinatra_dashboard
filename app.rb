@@ -1,29 +1,23 @@
 require 'sinatra'
 require 'erb'
 require 'thin'
-require './dice_scraper.rb'
-require './company_profiler.rb'
+#require './locator.rb'
+#require './dice_scraper.rb'
+#require './company_profiler.rb'
+
+require './helpers/app_helper.rb'
+
+helpers AppHelper
 
 
 get "/" do
 
-  if session[:zip].nil?
-    locator = Locator.new
-    location = locator.fetch_location
-    session[:zip] = location
-  end
+  location = session_location
 
-  profile = CompanyProfiler.new.fetch_data("Google")
+  results = run_search(location)
 
-  location = session[:zip]
+  add_profiles!(results)
 
-  scraper = DiceScraper.new
 
-  if params.nil?
-    results = scraper.search(location)
-  else
-    results = scraper.search_with_params(params, location)
-  end
-
-  erb :index, :locals => { :results => results, :today => Date.today, :profile_test => profile.rating_overall }
+  erb :index, :locals => { :results => results, :today => Date.today }
 end
