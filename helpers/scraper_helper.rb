@@ -17,7 +17,7 @@ module ScraperHelper
       rate_limit(0.5)
     end
 
-    # Usage: search("jobs or keywords", "Location (City, ST or ZIP)", Start Date)
+
     def search(location)
       params = {}
 
@@ -36,7 +36,6 @@ module ScraperHelper
 
       run_search(params)
     end
-
 
 
     private
@@ -80,21 +79,12 @@ module ScraperHelper
 
     end
 
-    #def get_location
-    #  locator = Locator.new
-    #  locator.fetch_location
-    #end
-    #def default_if_missing(param, default)
-    #  default if param.nil? || param.empty?
-    #end
-
 
     def sort_by_date(results_page)
       response_url = results_page.uri.to_s
       sorted_url = response_url + "&sort=date"
       @agent.get(sorted_url)
     end
-
 
 
     def scrape_jobs(results_page)
