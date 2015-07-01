@@ -4,9 +4,8 @@ class CompanyProfiler
   require 'httparty'
 
   include HTTParty
-  debug_output $stderr
 
-  base_uri = "http://api.glassdoor.com"
+  base_uri "http://api.glassdoor.com"
   API_ID = ENV["GLASSDOOR_API_ID"]
   API_KEY = ENV["GLASSDOOR_API_KEY"]
 
