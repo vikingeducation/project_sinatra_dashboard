@@ -173,7 +173,7 @@ class DiceScraper
 
     profile = @profiler.get_profile(dice_result[:company])
 
-    final_result[:GD_name] = profile[:name]
+    #final_result[:GD_name] = profile[:name]
     final_result[:ratings] = profile[:ratings]
     final_result[:review] = profile[:review]
 

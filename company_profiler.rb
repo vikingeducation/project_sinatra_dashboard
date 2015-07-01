@@ -68,13 +68,12 @@ class CompanyProfiler
       compensation: response["compensationAndBenefitsRating"],
       opportunity: response["careerOpportunitiesRating"],
       balance: response["workLifeBalanceRating"],
-      recommend: response["recommendToFriendRating"]
     }
   end
 
 
   def featured_review(response)
-    response["featuredReview"]
+    response["featuredReview"] || "n/a"
   end
 
 
