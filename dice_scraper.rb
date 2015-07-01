@@ -13,8 +13,6 @@ class DiceScraper
   def initialize
     @agent = Mechanize.new
     @profiler = CompanyProfiler.new
-
-    #rate_limit(0.5)
   end
 
 
@@ -39,11 +37,6 @@ class DiceScraper
 
 
   private
-
-
-  #def rate_limit(lim)
-    #@agent.history_added = Proc.new { sleep lim }
-  #end
 
 
   def get_search_form
@@ -75,7 +68,7 @@ class DiceScraper
 
 
 
-    job_list.each_entry do |job|
+    job_list[0..9].each_entry do |job| # limit to first 10 jobs for testing
       result = scrape_details(job, start_date)
 
       unless result.nil?

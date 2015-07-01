@@ -2,7 +2,6 @@ module AppHelper
 
   require './locator.rb'
   require './dice_scraper.rb'
-  require './company_profiler.rb'
 
   # Locator pulls ZIP code based on client IP
   def session_location
@@ -29,30 +28,6 @@ module AppHelper
 
     results
   end
-
-
-  # Profiler uses GlassDoor's API to append company ratings & reviews to job listings
-=begin
-  def add_profiles!(results)
-    profiler = CompanyProfiler.new
-
-    results.each do |result|
-      company = result[:company]
-      # test valid company
-
-      profile = profiler.get_profile(company)
-
-      result[:GD_name] = profile[:name]
-      result[:ratings] = profile[:ratings]
-      result[:review] = profile[:review]
-
-      sleep 0.5
-    end
-
-    results
-
-  end
-=end
 
 
   private

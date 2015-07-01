@@ -7,7 +7,6 @@ class Locator
   include HTTParty
 
   base_uri "http://www.telize.com/"
-  # API_KEY = ENV["TELIZE_API_KEY"]
 
   def initialize
   end
