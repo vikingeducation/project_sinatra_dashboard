@@ -2,6 +2,7 @@ require 'sinatra'
 require 'erb'
 require 'thin'
 require './dice_scraper.rb'
+require './company_profiler.rb'
 
 
 get "/" do
@@ -11,6 +12,8 @@ get "/" do
     location = locator.fetch_location
     session[:zip] = location
   end
+
+  profile = CompanyProfiler.new.fetch_data("Google")
 
   location = session[:zip]
 
@@ -22,5 +25,5 @@ get "/" do
     results = scraper.search_with_params(params, location)
   end
 
-  erb :index, :locals => { :results => results, :today => Date.today }
+  erb :index, :locals => { :results => results, :today => Date.today, :profile_test => profile.rating_overall }
 end
