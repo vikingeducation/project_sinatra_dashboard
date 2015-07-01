@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'erb'
 require 'thin'
+require 'pry'
 #require './locator.rb'
 #require './dice_scraper.rb'
 #require './company_profiler.rb'
@@ -14,9 +15,9 @@ get "/" do
 
   location = session_location
 
-  results = run_search(location)
+  dice_results = run_search(location)
 
-  add_profiles!(results)
+  results = add_profiles!(dice_results)
 
 
   erb :index, :locals => { :results => results, :today => Date.today }

@@ -24,6 +24,25 @@ class CompanyProfiler
   end
 
 
+  def get_profile(company)
+    response = fetch_data(company)
+
+    if response.nil?
+      profile = { name: "n/a",
+                  ratings: "n/a",
+                  review: "n/a"
+                }
+    else
+      profile = { name: company,
+                  ratings: get_ratings(response),
+                  review: featured_review(response)
+                }
+    end
+
+    profile
+  end
+
+
   def check_all_companies
     profiles = []
     companies = []
@@ -35,7 +54,7 @@ class CompanyProfiler
                   review: featured_review(response)
                 }
       profiles << profile
-      sleep 1.0
+      sleep 0.5
     end
 
     profiles
@@ -51,7 +70,12 @@ class CompanyProfiler
     search[:query][:q] = company
     full_response = self.class.get("/api/api.htm", search)
 
-    full_response["response"]["employers"][0]
+    if full_response.nil?
+      nil
+    else
+      full_response["response"]["employers"][0]
+    end
+
   end
 
 

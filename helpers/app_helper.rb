@@ -33,6 +33,22 @@ module AppHelper
 
   # Profiler uses GlassDoor's API to append company ratings & reviews to job listings
   def add_profiles!(results)
+    profiler = CompanyProfiler.new
+
+    results[3..-1].each do |result|
+      company = result[:company]
+      # test valid company
+
+      profile = profiler.get_profile(company)
+
+      # add key/value pairs from GD
+      result[:ratings] = profile[:ratings]
+      result[:review] = profile[:review]
+
+      sleep 0.5
+    end
+
+    results
 
   end
 
