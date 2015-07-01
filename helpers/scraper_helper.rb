@@ -4,6 +4,8 @@ module ScraperHelper
   require 'mechanize'
   require 'csv'
 
+  require './locator.rb'
+
   class DiceScraper
 
     BASE_URL = "https://www.dice.com/jobs"
@@ -16,12 +18,46 @@ module ScraperHelper
     end
 
     # Usage: search("jobs or keywords", "Location (City, ST or ZIP)", Start Date)
-    def search(params)
+    def search(location)
+      params = {}
 
-      # need to fix defaults when param=""
-      search_text = params[:'search-text'] || "web developer"
-      search_location = params[:'search-location'] || "Boston, MA"
-      start_date = params[:'start-date'] || Date.today
+      params[:'search-text'] = "web developer"
+      params[:'search-location'] = location
+      params[:'start_date'] = Date.today
+
+      search_with_params(params)
+    end
+
+
+    def search_with_params(params, location)
+      params[:'search-text'] = "web developer" if params[:'search-text'].nil? || params[:'search-text'].empty?
+      params[:'search-location'] = location if params[:'search-location'].nil? || params[:'search-location'].empty?
+      params[:'start-date'] = Date.today if params[:'start-date'].nil? || params[:'start-date'].empty?
+
+      run_search(params)
+    end
+
+
+
+    private
+
+
+    def rate_limit(lim)
+      @agent.history_added = Proc.new { sleep lim }
+    end
+
+
+    def get_search_form
+      page = @agent.get(BASE_URL)
+
+      page.form_with(:id => 'searchJob')
+    end
+
+
+    def run_search(params)
+      search_text = params[:'search-text']
+      search_location = params[:'search-location']
+      start_date = params[:'start-date']
 
       start_date = Date.strptime(start_date) if start_date.is_a?(String)
 
@@ -44,25 +80,13 @@ module ScraperHelper
 
     end
 
-
-    private
-
-
-    def rate_limit(lim)
-      @agent.history_added = Proc.new { sleep lim }
-    end
-
-
-    def get_search_form
-      page = @agent.get(BASE_URL)
-
-      page.form_with(:id => 'searchJob')
-    end
-
-
-    def set_parameters
-
-    end
+    #def get_location
+    #  locator = Locator.new
+    #  locator.fetch_location
+    #end
+    #def default_if_missing(param, default)
+    #  default if param.nil? || param.empty?
+    #end
 
 
     def sort_by_date(results_page)
