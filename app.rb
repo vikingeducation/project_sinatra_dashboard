@@ -9,7 +9,8 @@ helpers AppHelper
 
 get "/" do
 
-  location = session_location
+  ip = request.ip
+  location = session_location(ip)
 
   dice_pull = run_search(location)
 

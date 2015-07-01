@@ -4,9 +4,9 @@ module AppHelper
   require './dice_scraper.rb'
 
   # Locator pulls ZIP code based on client IP
-  def session_location
+  def session_location(client_ip)
     if session[:zip].nil?
-      location = get_location
+      location = get_location(client_ip)
       save(location)
     else
       location = load_location
@@ -33,8 +33,8 @@ module AppHelper
   private
 
 
-  def get_location
-    locator = Locator.new
+  def get_location(client_ip)
+    locator = Locator.new(client_ip)
     locator.fetch_location
   end
 

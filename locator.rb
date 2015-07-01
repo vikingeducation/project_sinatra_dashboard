@@ -8,20 +8,22 @@ class Locator
 
   base_uri "http://www.telize.com/"
 
-  def initialize
+  def initialize(client_ip)
+    @ip = client_ip
+    check_client_ip
   end
 
 
   def fetch_location
-    parse( get_location( get_client_ip ) )
+    parse( get_location( @ip ) )
   end
 
 
   private
 
 
-  def get_client_ip
-    ENV["REMOTE_ADDR"] # try request.ip in app.rb
+  def check_client_ip
+    @ip = ENV["REMOTE_ADDR"] if @ip == "127.0.0.1"
   end
 
 
