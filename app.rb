@@ -15,10 +15,14 @@ get "/" do
 
   location = session_location
 
-  dice_results = run_search(location)
+  dice_pull = run_search(location)
+  #binding.pry
 
-  results = add_profiles!(dice_results)
+  query = dice_pull[0]
+  results = dice_pull[1]
+
+  #results = add_profiles!(dice_results)
 
 
-  erb :index, :locals => { :results => results, :today => Date.today }
+  erb :index, :locals => { :query => query, :results => results, :today => Date.today }
 end

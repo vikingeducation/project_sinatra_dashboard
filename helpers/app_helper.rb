@@ -35,13 +35,13 @@ module AppHelper
   def add_profiles!(results)
     profiler = CompanyProfiler.new
 
-    results[3..-1].each do |result|
+    results.each do |result|
       company = result[:company]
       # test valid company
 
       profile = profiler.get_profile(company)
 
-      # add key/value pairs from GD
+      result[:GD_name] = profile[:name]
       result[:ratings] = profile[:ratings]
       result[:review] = profile[:review]
 

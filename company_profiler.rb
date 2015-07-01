@@ -43,25 +43,6 @@ class CompanyProfiler
   end
 
 
-  def check_all_companies
-    profiles = []
-    companies = []
-
-    companies.each do |company|
-      response = fetch_data(company)
-      profile = { name: company,
-                  ratings: get_ratings(response),
-                  review: featured_review(response)
-                }
-      profiles << profile
-      sleep 0.5
-    end
-
-    profiles
-
-  end
-
-
   private
 
 

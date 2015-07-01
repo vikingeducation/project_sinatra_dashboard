@@ -1,36 +1,10 @@
 <h1>Dice.com Job Scraper</h1>
 
-<form action="/" method="get">
-
-  <div class="row">
-
-    <div class="form-group col-md-5">
-      <label for="search-text">Search criteria:</label>
-      <input type="text" name="search-text" class="form-control" value='<%= results[0] %>'>
-    </div>
-
-    <div class="form-group col-md-3">
-      <label for="search-location">Location:</label>
-      <input type="text" name="search-location" class="form-control" value='<%= results[1] %>'>
-    </div>
-
-    <div class="form-group col-md-2">
-      <label for="start-date">Start Date:</label>
-      <input type="date" name="start-date" class="form-control" value='<%= results[2] %>'>
-    </div>
-
-    <div class="form-group col-md-2">
-      <label>Search Dice.com!</label>
-      <input type="submit" class="form-control btn btn-default" value="Go">
-    </div>
-
-  </div>
-
-</form>
+<%= erb :search_bar, :locals => { :query => query } %>
 
 
 
-<h3>Jobs in <%= results[1] %></h3>
+<h3>Jobs in <%= query[1] %></h3>
 
 <a href='http://www.glassdoor.com/index.htm'>powered by <img src='http://www.glassdoor.com/static/img/api/glassdoor_logo_80.png' title='Job Search' /></a>
 
@@ -47,7 +21,7 @@
     <th>Job ID</th>
   </tr>
 
-  <% results[3..-1].each do |result| %>
+  <% results.each do |result| %>
     <tr>
 
       <% unless result.nil? %>

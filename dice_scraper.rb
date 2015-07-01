@@ -5,6 +5,7 @@ class DiceScraper
   require 'csv'
 
   require './locator.rb'
+  require './company_profiler.rb'
 
   BASE_URL = "https://www.dice.com/jobs"
 
@@ -67,13 +68,28 @@ class DiceScraper
 
     job_list = scrape_jobs( sort_by_date( response ) )
 
-    results = [search_text, search_location, start_date.to_s]
+    query = [search_text, search_location, start_date.to_s]
+    results = []
+
+
+    profiler = CompanyProfiler.new
+
 
     job_list.each_entry do |job|
-      results << scrape_details(job, start_date)
+      result = scrape_details(job, start_date)
+
+      unless result.nil?
+        profile = profiler.get_profile(result[:company])
+
+        result[:GD_name] = profile[:name]
+        result[:ratings] = profile[:ratings]
+        result[:review] = profile[:review]
+
+        results << result
+      end
     end
 
-    results
+    [query, results]
 
   end
 
