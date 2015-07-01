@@ -27,7 +27,7 @@ class CompanyProfiler
   def get_profile(company)
     response = fetch_data(company)
 
-    if response.nil?
+    if response.nil? || response["industry"] == "Staffing & Outsourcing"
       profile = { name: "n/a",
                   ratings: "n/a",
                   review: "n/a"
@@ -51,11 +51,15 @@ class CompanyProfiler
     search[:query][:q] = company
     full_response = self.class.get("/api/api.htm", search)
 
-    if full_response.nil?
-      nil
+    employers = full_response["response"]["employers"]
+
+    if employers.empty?
+      output = nil
     else
-      full_response["response"]["employers"][0]
+      output = employers[0]
     end
+
+    output
 
   end
 
