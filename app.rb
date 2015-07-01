@@ -1,10 +1,8 @@
 require 'sinatra'
 require 'erb'
 require 'thin'
-#require './locator.rb'
+require './dice_scraper.rb'
 
-require './helpers/scraper_helper.rb'
-helpers ScraperHelper
 
 get "/" do
 
@@ -16,7 +14,7 @@ get "/" do
 
   location = session[:zip]
 
-  scraper = ScraperHelper::DiceScraper.new
+  scraper = DiceScraper.new
 
   if params.nil?
     results = scraper.search(location)
