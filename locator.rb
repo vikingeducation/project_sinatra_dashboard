@@ -35,10 +35,10 @@ class Locator
   def parse(response)
     response = JSON.parse(response.body)
     # ERROR if response["country_code"] != "US"
-    zip = response["postal_code"]
-    city = response["city"]
-    state = response["region"]
-    coords = [ response["latitude"], response["longitude"] ]
+    zip = response["postal_code"] || "02118"
+    # city = response["city"]
+    # state = response["region"]
+    # coords = [ response["latitude"], response["longitude"] ]
 
     zip
   end

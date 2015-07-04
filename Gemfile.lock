@@ -53,3 +53,6 @@ DEPENDENCIES
   mechanize (~> 2.7.2, < 2.7.3)
   sinatra
   thin
+
+BUNDLED WITH
+   1.10.1
