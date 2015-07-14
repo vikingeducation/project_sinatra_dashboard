@@ -1,0 +1,13 @@
+<table class="table-striped">
+	<tr>
+		<td> Job Title </td>
+		<td> Company Name </td>
+		<td> URL </td>
+		<td> Location </td>
+		<td> Date </td>
+		<td> CID </td>
+		<td> Job ID </td>
+	<% results.each do |result| %>
+		<%= erb :result, locals: {res: result} %>
+	<% end %>
+</table>
