@@ -49,7 +49,7 @@ class DiceScraper
           inside_duration = false
           break
         end
-        @info_array << info
+        @info_array << info unless @info_array.any? {|row| row[:jid] == info[:jid]}
       end
       @page_num += 1
 

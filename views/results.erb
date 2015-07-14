@@ -2,17 +2,18 @@
 	<%= loc %>
 </h2>
 <% unless results.length == 0 %>
-	<table class="table-striped">
+	<table class="table-striped table-bordered">
 		<tr>
+			<td> Result # </td>
 			<td> Job Title </td>
 			<td> Company Name </td>
-			<td> URL </td>
 			<td> Location </td>
 			<td> Date </td>
 			<td> CID </td>
 			<td> Job ID </td>
-		<% results.each do |result| %>
-			<%= erb :result, locals: {res: result} %>
+			<td> </td>
+		<% results.each_with_index do |result, num| %>
+			<%= erb :result, locals: {res: result, num: num} %>
 		<% end %>
 	</table>
 <% else %>

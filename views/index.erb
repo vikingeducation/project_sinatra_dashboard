@@ -6,9 +6,11 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
 <body>
+	<div class="container">
 	<%= erb :search %>
 	<% if results %>
 		<%= erb :results, locals:{results: results, loc: loc} %>
 	<% end %>
+	</div>
 </body>
 </html>

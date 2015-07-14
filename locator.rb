@@ -11,8 +11,8 @@ class Locator
 
   def find(ip)
     result = JSON::load(@agent.get("http://www.telize.com/geoip/#{ip}").body)
-    if result && result["city"]
-      return result["city"]
+    if result && result["city"] && result["region_code"]
+      return result["city"] + ", " + result["region_code"]
     else
       return nil
     end
