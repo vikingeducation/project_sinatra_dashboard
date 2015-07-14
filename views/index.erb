@@ -8,7 +8,7 @@
 <body>
 	<%= erb :search %>
 	<% if results %>
-		<%= erb :results, locals:{results: results} %>
+		<%= erb :results, locals:{results: results, loc: loc} %>
 	<% end %>
 </body>
 </html>

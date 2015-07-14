@@ -1,13 +1,20 @@
-<table class="table-striped">
-	<tr>
-		<td> Job Title </td>
-		<td> Company Name </td>
-		<td> URL </td>
-		<td> Location </td>
-		<td> Date </td>
-		<td> CID </td>
-		<td> Job ID </td>
-	<% results.each do |result| %>
-		<%= erb :result, locals: {res: result} %>
-	<% end %>
-</table>
+<h2>
+	<%= loc %>
+</h2>
+<% unless results.length == 0 %>
+	<table class="table-striped">
+		<tr>
+			<td> Job Title </td>
+			<td> Company Name </td>
+			<td> URL </td>
+			<td> Location </td>
+			<td> Date </td>
+			<td> CID </td>
+			<td> Job ID </td>
+		<% results.each do |result| %>
+			<%= erb :result, locals: {res: result} %>
+		<% end %>
+	</table>
+<% else %>
+	<p> "There doesn't appear to be any jobs! Try altering your search criteria!"</p>
+<% end %>
