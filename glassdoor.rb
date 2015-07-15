@@ -7,7 +7,7 @@ class GlassDoorScraper
     @@key = File.readlines("keys.txt")[1].strip
   else
     @@key = ENV['GKEY']
-    @id = ENV['GID']
+    @@id = ENV['GID']
   end
 
   def initialize
