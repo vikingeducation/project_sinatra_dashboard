@@ -1,8 +1,14 @@
 require 'httparty'
 
 class GlassDoorScraper
-  @@id = File.readlines("keys.txt")[0].strip
-  @@key = File.readlines("keys.txt")[1].strip
+
+  if File.exist?("keys.txt")
+    @@id = File.readlines("keys.txt")[0].strip
+    @@key = File.readlines("keys.txt")[1].strip
+  else
+    @@key = ENV['GKEY']
+    @id = ENV['GID']
+  end
 
   def initialize
     @base_url = "http://api.glassdoor.com/api/api.htm?t.p=#{@@id}&t.k=#{@@key}&useragent=Mozilla/%2F4.0&format=json&v=1"

@@ -2,7 +2,12 @@ require 'httparty'
 require 'date'
 
 class NewYorkTimesScraper
-  @@key = File.readlines("keys.txt")[2].strip
+
+  if File.exist?("keys.txt")
+    @@key = File.readlines("keys.txt")[2].strip
+  else
+    @@key = ENV['NYT_KEY']
+  end
 
   def initalize
     @target_date = (DateTime.now - 90).strftime("%Y%m%d").to_s
