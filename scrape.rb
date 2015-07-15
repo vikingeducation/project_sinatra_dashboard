@@ -1,6 +1,5 @@
 require 'mechanize'
 require 'csv'
-require 'pry'
 
 class DiceScraper
 
