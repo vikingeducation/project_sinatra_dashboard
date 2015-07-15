@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12" style = "text-align:center">
+      <h2>Scrape results for <%= job_title %> in <%= location %></h1>
+        <!-- Table goes here -->
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <% array.shift.each do |columns| %>
+              <th>
+                <%= columns %>
+              </th>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody>
+            <% array.each do |row| %>
+              <tr>
+                <% row.each do |field| %>
+                <td>
+                  <%= field %>
+                </td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+    </div>
+  </div>
+  <hr>
+</div>
