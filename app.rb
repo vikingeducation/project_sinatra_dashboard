@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'sinatra'
+require 'sinatra/reloader'
 require 'erb'
 require_relative 'helpers/scraper.rb'
 

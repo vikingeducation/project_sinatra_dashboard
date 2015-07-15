@@ -7,21 +7,6 @@
 # "Hi my name is Michael"
 # ==> "Michael is name my Hi"
 
-# def reverse(words)
-
-#   reverse = []
-
-#   words = words.scan(/\w+/)
-
-#   words.each do |word|
-#     reverse.unshift(word)
-#   end
-
-#   reverse
-
-# end
-
-
 
 def reverse(words)
 
