@@ -1,0 +1,22 @@
+1. Sinatra gets a request for the index page
+
+2. A helper module gets info from scraping and sends to index.erb, which renders the page
+
+
+3. Refreshing the page should kick off scraping operations
+	- scraper should be a helper module
+
+4. There should be a form for my search query that tells the scraper what to search for
+	- form with what they would like to search for Position and Location
+
+5. Display the job hunt data in a table on the page
+	- render the view appropriately
+
+6. Load bootstrap into sinatra app and use it to style the job hund widget
+
+
+-----
+
+GlassDoor Integration
+
+1. User IP
