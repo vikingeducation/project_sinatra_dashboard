@@ -1,0 +1,8 @@
+
+<h3> Begin the job hunt </h3>
+<form action="/search_results" method="post">
+	<input type="text" name="job_description" placeholder="Job Description">
+	<input type="text" name="location" placeholder="Location">
+	<input type="submit" value="Search">
+</form>
+<p> Great day to be job hunting in <%= @user_ip[0] %>, <%= @user_ip[1] %>, <%= @user_ip[2] %> </p>

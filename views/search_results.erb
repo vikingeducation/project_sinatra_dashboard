@@ -1,0 +1,41 @@
+
+<h3>Search results</h3>
+<h4>Quick Search: Jobs in <%=city%></h4>
+<% results.each do |job| %>
+<table style="width:100%" class="table">
+	<thead>
+		<tr>
+			<col width="300">
+			<col width="150">
+			<col width="150">
+			<col width="80">
+			<col width="80">
+			<col width="80">
+			<col width="100">
+			<td>Position</td>
+			<td>Company</td>
+			<td>Location</td>
+			<td>Posted On</td>
+			<td>Culture Rating</td>
+			<td>Compensation Rating</td>
+			<td>Review</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><%= job[0] %></td>
+			<td>
+				<a href="<%= job[2] %>"> <%=job[1]%> </a>
+			</td>
+			<td><%= job[3] %></td>
+			<td><%= job[5] %></td>
+			<td><%= job[6] %></td>
+			<td><%= job[7] %></td>
+			<td>
+				<%= job[8]%>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<% end %>
+<footer><a href='http://www.glassdoor.com/index.htm'>powered by <img src='http://www.glassdoor.com/static/img/api/glassdoor_logo_80.png' title='Job Search' /></a></footer>
