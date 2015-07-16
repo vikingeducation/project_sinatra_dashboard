@@ -16,9 +16,13 @@
 
   <div class="jumbotron">
     <div class="container">
-      <%= yield %>
+      <%= erb :index %>
     </div>
   </div>
+
+  <% if results %>
+    <%= yield %>
+  <% end %>
 
   <div class="container">
     <footer>

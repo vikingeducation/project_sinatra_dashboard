@@ -12,7 +12,7 @@ module Scraper
       @agent = Mechanize.new
       @agent.history_added = Proc.new { sleep 0.5 }
       @job_title = job_title.split(" ").join("+")
-      @location = location.split(" ").join("%2C+")
+      @location = location.split(", ").join("%2C+")
 
     end
 
