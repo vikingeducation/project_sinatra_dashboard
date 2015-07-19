@@ -1,0 +1,1 @@
+Posting = Struct.new(:name, :url, :price, :location, :email)
