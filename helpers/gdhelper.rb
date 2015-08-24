@@ -11,8 +11,8 @@ module Glassdoorhelper
    class Gdhelper
       include HTTParty
       attr_reader :gdresult
-      PID = "41791"#ENV['GDPID']
-      API_KEY = "krPn8AAytmm"#ENV['GDAPI']
+      PID = ENV['GDPID']
+      API_KEY = ENV['GDAPI']
 
       def initialize(employer = "ibm")
         @place = self.class.get("http://www.telize.com/geoip")
