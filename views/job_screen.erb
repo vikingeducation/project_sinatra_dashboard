@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <h1>Result</h1>
+    <%1.upto(10) do |index|%>
+    <ul>
+      <li>JOB iD <%=job_list[index][:jobId]%></li>
+      <li>JOB Title <%=job_list[index][:jobTitle]%></li>
+      <li>COMPANY NAME <%=job_list[index][:companyName]%></li>
+      <li>JOB LINK <%=job_list[index][:jobLink]%></li>
+      <li>JOB LOCATION <%=job_list[index][:location]%></li>
+      <li>POST DATE <%=job_list[index][:date]%></li>
+      <li>COMPANY ID <%=job_list[index][:companyId]%></li>
+    </ul>
+    <%end%>
+</html>
