@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <img src= <%=response["response"]["employers"].first["squareLogo"]%> alt = "logo of the company">
+  <ul>
+    <li>COMPANY NAME: <%=response["response"]["employers"].first["name"]%></li>
+    <li>LINK: <a href = <%=response["response"]["employers"].first["website"]%>><%=response["response"]["employers"].first["website"]%></a> </li>
+    <li>OVERALL RATING: <%=response["response"]["employers"].first["overallRating"]%></li>
+    <li>NUMBERS OF RATING: <%=response["response"]["employers"].first["numberOfRatings"]%></li>
+  </ul>
+  <h3>Featured Review</h3>
+  <h4>title: <%=response["response"]["employers"].first["featuredReview"]["jobTitle"] %> </h4>
+  <p>HeadLine: <%=response["response"]["employers"].first["featuredReview"]["headline"]%></p>
+  <p>Pros: <%=response["response"]["employers"].first["featuredReview"]["pros"]%></p>
+  <p>Cons: <%=response["response"]["employers"].first["featuredReview"]["cons"]%></p>
+  <form action='/' method="get">
+    <button type="submit" >Click Here to start a new search</button>
+  </form>
+  <form action='/search' method="get">
+    <button type="submit" >Click Here to go back</button>
+  </form>
+  <a href='http://www.glassdoor.com/index.htm'>powered by <img src='https://www.glassdoor.com/static/img/api/glassdoor_logo_80.png' title='Job Search' /></a>
+</html>
