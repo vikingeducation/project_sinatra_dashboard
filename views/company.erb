@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
-  <img src= <%=response["response"]["employers"].first["squareLogo"]%> alt = "logo of the company">
+  <img src= <%=response["response"]["employers"].first["squareLogo"]%> alt = "logo of the company"/>
   <ul>
     <li>COMPANY NAME: <%=response["response"]["employers"].first["name"]%></li>
-    <li>LINK: <a href = <%=response["response"]["employers"].first["website"]%>><%=response["response"]["employers"].first["website"]%></a> </li>
+    <li>LINK: <a href = <%=response["response"]["employers"].first["website"] %>><%=response["response"]["employers"].first["website"] || ""%></a> </li>
     <li>OVERALL RATING: <%=response["response"]["employers"].first["overallRating"]%></li>
     <li>NUMBERS OF RATING: <%=response["response"]["employers"].first["numberOfRatings"]%></li>
   </ul>
   <h3>Featured Review</h3>
-  <h4>title: <%=response["response"]["employers"].first["featuredReview"]["jobTitle"] %> </h4>
-  <p>HeadLine: <%=response["response"]["employers"].first["featuredReview"]["headline"]%></p>
+  <h4>title: <%=response["response"]["employers"].first["featuredReview"]["jobTitle"]%> </h4>
+  <p>HeadLine: <%= response["response"]["employers"].first["featuredReview"]["headline"]%></p>
   <p>Pros: <%=response["response"]["employers"].first["featuredReview"]["pros"]%></p>
   <p>Cons: <%=response["response"]["employers"].first["featuredReview"]["cons"]%></p>
   <form action='/' method="get">

@@ -1,4 +1,5 @@
 require 'sinatra'
+#require 'sinatra/reloader'
 require 'json'
 require './helpers/dice.rb'
 require './helpers/gdhelper.rb'
@@ -30,7 +31,10 @@ get '/search' do
 end
 
 get '/company' do
-  name = params[:company]
+  name = params[:companyName]
+  #binding.pry
+  #name.gsub! ' ', '-'
+  #binding.pry
   company = Glassdoorhelper::Gdhelper.new(name).gdresult
   #binding.pry
   erb :company, :locals => {:response => company}
