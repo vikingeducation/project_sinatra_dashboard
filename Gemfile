@@ -6,6 +6,7 @@ gem 'chronic'
 gem 'sinatra'
 gem 'thin'
 gem 'gon-sinatra'
+gem 'envyable'
 
 group :development do
   gem 'sinatra-contrib'

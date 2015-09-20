@@ -6,7 +6,6 @@ require 'gon-sinatra'
 require 'sinatra/reloader' if development?
 require 'pry-byebug' if development?
 
-
 Sinatra::register Gon::Sinatra
 enable :sessions
 

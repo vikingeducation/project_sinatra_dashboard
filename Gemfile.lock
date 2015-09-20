@@ -10,6 +10,7 @@ GEM
     daemons (1.2.3)
     domain_name (0.5.24)
       unf (>= 0.0.5, < 1.0.0)
+    envyable (0.2.0)
     eventmachine (1.0.8)
     gon-sinatra (0.1.2)
       sinatra
@@ -77,6 +78,7 @@ PLATFORMS
 
 DEPENDENCIES
   chronic
+  envyable
   gon-sinatra
   httparty
   mechanize (~> 2.7.2, < 2.7.3)

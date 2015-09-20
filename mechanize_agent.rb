@@ -2,7 +2,7 @@ require 'rubygems'
 require 'bundler/setup'
 require 'mechanize'
 
-class DiceMech < Mechanize
+class SlowMech < Mechanize
 
   def initialize
     super

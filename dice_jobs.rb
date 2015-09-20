@@ -7,7 +7,7 @@ Job = Struct.new(:title, :job_id, :company, :company_id, :posting_link,
 class DiceJobs
 
   def initialize
-    @agent = DiceMech.new
+    @agent = SlowMech.new
   end
 
 
