@@ -21,7 +21,7 @@
   <div class="two-thirds column"><input type="submit" class="button-primary" value="Search"></div>
   <div class="one-third column">
     <label>
-      <input type="checkbox" onclick="setLocation()">
+      <input id="locationCheck" type="checkbox">
       <span class="label-body">Use your current location?</span>
     </label>
   </div>
@@ -30,11 +30,15 @@
 </form>
 
 <script type="text/javascript">
-   function setLocation()
-   {
-       document.getElementById('locationsInput').readOnly = true;
-       document.getElementById('locationsInput').value = gon.location;
-   }
+    document.getElementById('locationCheck').onclick = function()
+    {
+      if ( this.checked ) {
+        document.getElementById('locationsInput').readOnly = true;
+        document.getElementById('locationsInput').value = gon.location;
+      } else {
+        document.getElementById('locationsInput').readOnly = false;
+      }
+    };
 </script>
 
 <% if @results %>
