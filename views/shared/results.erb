@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="two-thirds column" style="margin-top: 5%">
+    <h5><%= heading %>:</h5>
+  </div>
+</div>
+
+<div class="row">
+  <table class="u-full-width">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Company</th>
+        <th>Location</th>
+        <th>Posting Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% results.each do |job| %>
+        <tr>
+        <td><a href='<%= job["posting_link"] %>'><%= job["title"] %></a></td>
+        <td><a href='/company?id=<%= job["company_id"] %>&amp;name=<%= job["company"] %>'>
+        <%= job["company"] %></a></td>
+        <td><%= job["location"] %></td>
+        <td><%= job["posting_date"] %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

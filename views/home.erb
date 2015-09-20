@@ -1,6 +1,6 @@
 <div class="row">
   <div class="two-thirds column" style="margin-top: 15%">
-    <h4>Welcome, please to be finding a job.</h1>
+    <h2>Looking for a job?</h2>
   </div>
 </div>
 
@@ -41,32 +41,26 @@
     };
 </script>
 
-<% if @results %>
-
-<div class="row">
-  <table class="u-full-width">
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Company</th>
-        <th>Location</th>
-        <th>Posting Date</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @results.each do |job| %>
-        <tr>
-        <td><a href='<%= job.posting_link %>'><%= job.title %></a></td>
-        <td><a href='https://www.dice.com/company/<%= job.company_id %>'>
-        <%= job.company %></a></td>
-        <td><%= job.location %></td>
-        <td><%= job.posting_date %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
-
+<% if @message %>
+  <div class="row">  
+    <div class="two-thirds column">
+      <span style="color: red;"><%= @message %></span>
+    </div>
+  </div>
 <% end %>
 
-<a href='http://www.glassdoor.com/index.htm'>powered by <img src='https://www.glassdoor.com/static/img/api/glassdoor_logo_80.png' title='Job Search' /></a>
+<% if @new_results && @new_results.length > 0 %>
+
+<%= erb :"shared/results", :locals => { :results => @new_results, 
+                                        :heading => "Latest Search Results" } %>
+<% end %>
+
+<% if @previous_results %>
+
+<%= erb :"shared/results", :locals => { :results => @previous_results, 
+                                        :heading => "Previous Results" } %>
+<% end %>
+
+<a href='http://www.glassdoor.com/index.htm'>powered by 
+<img src='https://www.glassdoor.com/static/img/api/glassdoor_logo_80.png' title='Job Search' />
+</a>

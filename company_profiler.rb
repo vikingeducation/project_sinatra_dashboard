@@ -4,9 +4,6 @@ require 'JSON'
 
 Envyable.load('config/env.yml')
 
-Ratings = Struct.new(:count, :overall, :culture, :compensation)
-Review = Struct.new(:date, :job_title, :pros, :cons)
-
 class CompanyProfiler
 
   include HTTParty
@@ -29,25 +26,24 @@ class CompanyProfiler
     # raw_profile will be nil if glassdoor couldn't find a company
     unless raw_profile.nil?
 
-      rating = Ratings.new
-      rating.count = raw_profile["numberOfRatings"].to_s
-      rating.overall = raw_profile["overallRating"].to_s
-      rating.culture = raw_profile["cultureAndValuesRating"]
-      rating.compensation = raw_profile["compensationAndBenefitsRating"]
-      profile[:ratings] = rating
+      profile["number_of_ratings"] = raw_profile["numberOfRatings"].to_s
+      profile["overall_rating"] = raw_profile["overallRating"].to_s
+      profile["culture_rating"] = raw_profile["cultureAndValuesRating"]
+      profile["compensation_rating"] = raw_profile["compensationAndBenefitsRating"]
 
       if raw_profile["featuredReview"]
-        review = Review.new
         raw_review = raw_profile["featuredReview"]
-        review.date = Date.parse(raw_review["reviewDateTime"]).strftime("%Y-%m-%d")
-        review.job_title = raw_review["jobTitle"]
-        review.pros = raw_review["pros"]
-        review.cons = raw_review["cons"]
-        profile[:review] = review
+        profile["review?"] = true
+        profile["review_date"] = Date.parse(raw_review["reviewDateTime"]).strftime("%Y-%m-%d")
+        profile["reviewer_job_title"] = raw_review["jobTitle"]
+        profile["review_pros"] = raw_review["pros"]
+        profile["review_cons"] = raw_review["cons"]
+      else
+        profile["review?"] = false
       end
 
-      profile[:website] = raw_profile["website"]
-      profile[:industry] = raw_profile["industryName"]
+      profile["website"] = raw_profile["website"]
+      profile["industry"] = raw_profile["industryName"]
 
     end
 
