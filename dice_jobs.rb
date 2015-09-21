@@ -1,4 +1,4 @@
-require 'mechanize_agent'
+require './mechanize_agent.rb'
 require 'chronic'
 
 class DiceJobs
