@@ -1,4 +1,4 @@
-require_relative 'mechanize_agent'
+require 'mechanize_agent'
 require 'chronic'
 
 class DiceJobs

@@ -1,6 +1,6 @@
 require 'httparty'
 require 'envyable'
-require 'JSON'
+require 'json'
 
 Envyable.load('config/env.yml')
 
