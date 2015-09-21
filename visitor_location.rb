@@ -4,10 +4,19 @@ class VisitorLocation
 
   include HTTParty
 
-  def zipcode(ip)
+  def best_location(ip)
     location = get_location(ip)
-    location["postal_code"]
+    if location["postal_code"]
+      location["postal_code"]
+    elsif location["region"]
+      location["region"]
+    else 
+      location["country_code"]
+    end
   end
+
+  
+  private
 
 
   def get_location(ip)

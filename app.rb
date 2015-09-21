@@ -23,7 +23,7 @@ get '/' do
   # only get location once every 24 hours, otherwise initial page load is slow
   unless request.cookies["zipcode"]
     ip = settings.development? ? "99.68.49.223" : request.ip
-    response.set_cookie("zipcode", :value => VisitorLocation.new.zipcode(ip),
+    response.set_cookie("zipcode", :value => VisitorLocation.new.best_location(ip),
                         :expires => Time.now + 86400 )
   end 
 
