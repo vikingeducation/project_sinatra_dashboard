@@ -37,7 +37,7 @@ class DiceJobs
           # Dice appends search query to posting link, remove this
           link.slice!(/&q(.*)/)
           # links appear twice on page, so check for duplicates
-          # also handles duplicates from overlaping locations
+          # slice! also handles duplicates from overlaping locations
           links << link unless links.include?(link)
         end
 

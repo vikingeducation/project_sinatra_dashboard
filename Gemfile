@@ -7,6 +7,7 @@ gem 'sinatra'
 gem 'thin'
 gem 'gon-sinatra'
 gem 'envyable'
+gem 'google-drive'
 
 group :development do
   gem 'sinatra-contrib'
