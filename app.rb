@@ -85,6 +85,6 @@ end
 
 get '/foo' do
 
-  VisitorLocation.new.get_location(request.ip)    
+  VisitorLocation.new.best_location(request.ip)    
 
 end
