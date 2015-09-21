@@ -81,10 +81,3 @@ get '/company' do
 
   erb :company_profile
 end
-
-
-get '/foo' do
-
-  VisitorLocation.new.best_location(request.ip)    
-
-end
