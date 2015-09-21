@@ -31,7 +31,9 @@ get '/' do
   end 
 
   # so we can set location within javascript
-  gon.location = request.cookies["zipcode"] 
+  if request.cookies["zipcode"] 
+    gon.location = request.cookies["zipcode"] 
+  end
   
   erb :home
 end
