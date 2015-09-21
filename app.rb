@@ -20,6 +20,7 @@ get '/' do
   @locations = session[:locations].nil? ? Array.new : session[:locations]
   google_sheets = GoogleSheets.new
   @previous_results = google_sheets.load_jobs
+  @page_title = "Home"
 
   # only get location once every 24 hours, otherwise initial page load is slow
   if request.cookies["zipcode"] 
@@ -46,7 +47,8 @@ post '/search' do
   @locations = params[:locations].split(" ")
   google_sheets = GoogleSheets.new
   @previous_results = google_sheets.load_jobs
-  gon.location = request.cookies["zipcode"] 
+  gon.location = request.cookies["zipcode"]
+  @page_title = "Search Results" 
 
   # save last search to session, so we see it when we come back
   session[:keywords] = @keywords
@@ -64,7 +66,7 @@ post '/search' do
   google_sheets.save_jobs(@new_results)
 
   erb :home
-  
+
 end
 
 
@@ -74,6 +76,7 @@ get '/company' do
   id = params[:id]
   name = params[:name]
   google_sheets = GoogleSheets.new
+  @page_title = "#{name}"
 
   # see if we can load an existing profile and avoid hitting glassdoor API
   @profile = google_sheets.load_company_profile(id)
