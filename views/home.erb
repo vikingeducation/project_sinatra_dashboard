@@ -8,13 +8,13 @@
   </div>
 <% end %>
 
-<% if @new_results && @new_results.length > 0 %>
+<% if @new_results && !@new_results.empty? %>
 
 <%= erb :"shared/results", :locals => { :results => @new_results, 
                                         :heading => "Latest Search Results" } %>
 <% end %>
 
-<% if @previous_results %>
+<% if @previous_results && !@previous_results.empty? %>
 
 <%= erb :"shared/results", :locals => { :results => @previous_results, 
                                         :heading => "Previous Results" } %>

@@ -3,7 +3,6 @@ require './dice_jobs'
 require './company_profiler.rb'
 require './visitor_location.rb'
 require './helpers/store_results.rb'
-require './google_sheets.rb'
 
 require 'sinatra'
 require 'gon-sinatra'
@@ -19,18 +18,21 @@ get '/' do
   # search boxes pre-populated with previous search
   @keywords = session[:keywords].nil? ? Array.new : session[:keywords]
   @locations = session[:locations].nil? ? Array.new : session[:locations]
-  google_sheets = GoogleSheets.new
-  @previous_results = google_sheets.load_jobs
+  @previous_results = load_jobs_csv
 
   # only get location once every 24 hours, otherwise initial page load is slow
-  if request.cookies["zipcode"] 
-    # so we can set location within javascript
-    gon.location = request.cookies["zipcode"]
-  else
-   ip = settings.development? ? "99.68.49.223" : request.ip
-    gon.location = VisitorLocation.new.best_location(ip)
-    response.set_cookie("zipcode", :value => gon.location,
+  unless request.cookies["zipcode"]
+    ip = settings.development? ? "99.68.49.223" : request.ip
+    location = VisitorLocation.new.best_location(ip)
+
+    gon.location = location # needed for first page load
+    response.set_cookie("zipcode", :value => location,
                         :expires => Time.now + 86400 )
+  end 
+
+  # so we can set location within javascript
+  if request.cookies["zipcode"] 
+    gon.location = request.cookies["zipcode"] 
   end
   
   erb :home
@@ -47,10 +49,9 @@ post '/search' do
   session[:keywords] = @keywords
   session[:locations] = @locations
 
-  google_sheets = GoogleSheets.new
-  @previous_results = google_sheets.load_jobs
+  @previous_results = load_jobs_csv
   # get job ids from previous results, won't bother rescraping on dice
-  old_job_ids = @previous_results.nil? ? [] : google_sheets.existing_job_ids
+  old_job_ids = @previous_results.nil? ? [] : existing_csv_job_ids
 
   @new_results = DiceJobs.new.search(@keywords, @locations, old_job_ids)
 
@@ -58,7 +59,7 @@ post '/search' do
     @message = '¯\_(ツ)_/¯ No New Results!'
   end
 
-  google_sheets.save_jobs(@new_results)
+  save_jobs_csv(@new_results)
 
   erb :home
 end
@@ -70,8 +71,7 @@ get '/company' do
   name = params[:name]
 
   # see if we can load an existing profile and avoid hitting glassdoor API
-  google_sheets = GoogleSheets.new
-  @profile = google_sheets.load_company_profile(id)
+  @profile = load_company_profile_csv(id)
   if @profile.nil?
     @profile = CompanyProfiler.new.get_profile(name)
     if @profile.nil?
@@ -80,7 +80,7 @@ get '/company' do
     else
       @profile["company_name"] = name
       @profile["company_id"] = id
-      google_sheets.save_company_profile(@profile)
+      save_companies_csv(@profile)
     end
   end
 
