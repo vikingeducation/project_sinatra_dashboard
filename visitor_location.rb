@@ -15,6 +15,7 @@ class VisitorLocation
 
   def get_location(ip)
     base_url = "http://www.telize.com/geoip"
+    puts "getting location for #{ip}"
     self.class.get(base_url + ip)
   end
 
