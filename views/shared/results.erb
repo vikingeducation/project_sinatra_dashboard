@@ -18,8 +18,8 @@
       <% results.each do |job| %>
         <tr>
         <td><a href='<%= job["posting_link"] %>'><%= job["title"] %></a></td>
-        <td><a href='/company?id=<%= job["company_id"] %>&amp;name=<%= job["company"] %>'>
-        <%= job["company"] %></a></td>
+        <td><a href='/company?id=<%= job["company_id"] %>&amp;name=<%= job["company"] %>'
+        target="_blank"><%= job["company"] %></a></td>
         <td><%= job["location"] %></td>
         <td><%= job["posting_date"] %></td>
         </tr>

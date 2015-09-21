@@ -19,6 +19,7 @@ class CompanyProfiler
     profile = {}
     options = { query: { q: company_name } }
 
+    puts "Searching Glassdoor for #{company_name}"
     api_data = self.class.get(BASE_URL, options)
     api_data = JSON.parse(api_data.response.body)
     raw_profile = api_data["response"]["employers"][0]
@@ -47,6 +48,7 @@ class CompanyProfiler
 
     end
 
+    # want to return nil if Glassdoor couldn't find anything
     profile unless profile.empty?
   end
   

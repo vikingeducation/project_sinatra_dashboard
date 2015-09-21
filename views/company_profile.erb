@@ -1,1 +1,79 @@
-<%= @profile %>
+<% if @message %>
+  <div class="row">  
+    <div class="two-thirds column">
+      <span style="color: red;"><%= @message %></span>
+    </div>
+  </div>
+<% end %>
+
+<% unless @profile.nil? %>
+
+<div class="row" style="margin-top: 2%">
+  <div class="three columns"><strong><%= @profile["company_name"] %></strong></div>
+  <div class="nine columns">&nbsp;</div>
+</div>
+
+<div class="row">
+  <div class="three columns"><a href='http://<%= @profile["website"] %>' target="_blank">
+    <%= @profile["website"] %></a>
+  </div>
+  <div class="nine columns">&nbsp;</div>
+</div>
+
+<div class="row" style="margin-top: 2%">
+  <div class="three columns">Industry</div>
+  <div class="nine columns"><%= @profile["industry"] %></div>
+</div>
+
+<div class="row">
+  <div class="three columns">Glassdoor Reviews</div>
+  <div class="nine columns"><%= @profile["number_of_ratings"] %></div>
+</div>
+
+<div class="row">
+  <div class="three columns">Overall Rating (1-5)</div>
+  <div class="nine columns"><%= @profile["overall_rating"] %></div>
+</div>
+
+<div class="row">
+  <div class="three columns">Culture Rating (1-5)</div>
+  <div class="nine columns"><%= @profile["culture_rating"] %></div>
+</div>
+
+<div class="row">
+  <div class="three columns">Compensation Rating (1-5)</div>
+  <div class="nine columns"><%= @profile["compensation_rating"] %></div>
+</div>
+
+<% if @profile["review_date"] %>
+
+<div class="row" style="margin-top: 2%">
+    <div class="two-thirds column" >
+    <strong>Glassdoor Featured Review</strong>
+  </div>
+</div>
+
+<div class="row">
+  <div class="three columns">Pros:</div>
+  <div class="nine columns"><%= @profile["review_pros"] %></div>
+</div>
+
+<div class="row">
+  <div class="three columns">Cons:</div>
+  <div class="nine columns"><%= @profile["review_cons"] %></div>
+</div>
+
+<div class="row">
+  <div class="nine columns">&nbsp;</div>
+  <div class="three columns">
+    <em>by <%= @profile["reviewer_job_title"] %> on <%= @profile["review_date"] %></em>
+  </div>
+</div>
+
+<% end %>
+
+<% end %>
+
+powered by <br><a href='http://www.glassdoor.com/index.htm'>
+<img src='https://www.glassdoor.com/static/img/api/glassdoor_logo_80.png' title='Job Search' />
+</a>

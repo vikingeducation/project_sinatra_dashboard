@@ -18,22 +18,11 @@ module StoreResults
   end
 
 
-  def profile_exist_in_csv?(company_id)
-    exist = false
-
-    CSV.open('companies.csv', headers:true) do |csv|
-      if csv.find { |row| row["company_id"] == company_id }
-        exist = true
-      end
-    end
-
-    exist
-  end
-
-
   def load_company_profile_csv(company_id)
-    profiles = CSV.read('companies.csv', headers:true) 
-    profiles.find { |row| row["company_id"] == company_id }
+    if File.exist?('companies.csv')
+      profiles = CSV.read('companies.csv', headers:true) 
+      profiles.find { |row| row["company_id"] == company_id }
+    end
   end
 
 

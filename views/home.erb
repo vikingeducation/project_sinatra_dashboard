@@ -1,45 +1,4 @@
-<div class="row">
-  <div class="two-thirds column" style="margin-top: 15%">
-    <h2>Looking for a job?</h2>
-  </div>
-</div>
-
-<form action="/search" method="post">
-
-<div class="row">
-  <div class="two-thirds column">
-    <label for="keywordsInput">Job title, skills, or keywords</label>
-    <input class="u-full-width" type="text" name="keywords" value='<%= @keywords.join(" ") %>' id="keywordsInput">
-  </div>
-  <div class="one-third column">
-    <label for="locationsInput">Zipcodes, cities, or states</label>
-    <input class="u-full-width" type="text" name="locations" value='<%= @locations.join(" ") %>' id="locationsInput">
-  </div>
-</div>
-
-<div class="row">
-  <div class="two-thirds column"><input type="submit" class="button-primary" value="Search"></div>
-  <div class="one-third column">
-    <label>
-      <input id="locationCheck" type="checkbox">
-      <span class="label-body">Use your current location?</span>
-    </label>
-  </div>
-</div>
-
-</form>
-
-<script type="text/javascript">
-    document.getElementById('locationCheck').onclick = function()
-    {
-      if ( this.checked ) {
-        document.getElementById('locationsInput').readOnly = true;
-        document.getElementById('locationsInput').value = gon.location;
-      } else {
-        document.getElementById('locationsInput').readOnly = false;
-      }
-    };
-</script>
+<%= erb :search, :locals => { :keywords => @keywords, :locations => @locations } %>
 
 <% if @message %>
   <div class="row">  
@@ -60,7 +19,3 @@
 <%= erb :"shared/results", :locals => { :results => @previous_results, 
                                         :heading => "Previous Results" } %>
 <% end %>
-
-<a href='http://www.glassdoor.com/index.htm'>powered by 
-<img src='https://www.glassdoor.com/static/img/api/glassdoor_logo_80.png' title='Job Search' />
-</a>
