@@ -85,6 +85,6 @@ end
 
 get '/foo' do
 
-  VisitorLocation.new.zipcode(request.ip)    
+  VisitorLocation.new.get_location(request.ip)    
 
 end
