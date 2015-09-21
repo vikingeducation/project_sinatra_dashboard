@@ -27,7 +27,7 @@ class DiceJobs
       # Dice search results page for first 100 results, 40 mile radius of ZIP
       search_url = "https://www.dice.com/jobs/q-" +
                    "#{keywords.join("+")}-l-#{location}" + 
-                   "-radius-40-startPage-1-limit-100-jobs.html"
+                   "-radius-40-startPage-1-limit-20-jobs.html"
       page = get_search_page(search_url) 
 
       unless page.nil?
