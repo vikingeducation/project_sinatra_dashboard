@@ -1,0 +1,32 @@
+<%= erb :'shared/form' %>
+<br>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Job Title</th>
+      <th>Company Name</th>
+      <th>Link</th>
+      <th>Location</th>
+      <th>Post Date</th>
+      <th>Company ID</th>
+      <th>Job ID</th>
+      <th>Glassdoor Info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% results.each do |result| %>
+      <tr>
+        <% result.each do |data| %>
+          <td>
+            <%= data %>
+          </td>
+        <% end %>
+          <td>
+            <a href="/company/<%=result.company_name.split.join('_')%>"><%= result.company_name %></a>
+          </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

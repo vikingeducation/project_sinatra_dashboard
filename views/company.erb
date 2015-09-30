@@ -1,0 +1,18 @@
+<table>
+  <thead>
+    <tr>
+      <% companies.each do |company| %>
+        <% company.each do |info, value| %>
+          <th><%=info%></th>
+        <% end %>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% companies.each do |company| %>
+      <% company.each do |info, value| %>
+        <td><%=value%></td>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
