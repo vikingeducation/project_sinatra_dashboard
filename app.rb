@@ -4,7 +4,7 @@ require 'sinatra/reloader' if development?
 require 'erb'
 require 'json'
 require 'uri'
-require 'pry'
+require 'pry' if development?
 require 'httparty'
 require 'envyable'
 # Load secrets
