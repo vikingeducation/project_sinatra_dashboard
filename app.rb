@@ -3,15 +3,21 @@ require 'sinatra/partial'
 require 'sinatra/reloader' if development?
 require 'erb'
 require 'json'
+require 'uri'
 require 'pry'
 require 'httparty'
-require_relative 'dice_scraper'
+require 'envyable'
+# Load secrets
+Envyable.load('env.yml')
 
-# options for partials
+require_relative 'dice_scraper'
+require_relative 'company_profiler'
+
+# Options for partials
 set :partial_template_engine, :erb
 enable :partial_underscores
 
-# saves search terms
+# Saves search terms
 enable :sessions
 
 
@@ -56,4 +62,16 @@ post '/results/clear' do
   session[:location] = nil
 
   redirect to('/')
+end
+
+get '/company/:name' do
+  company_string = params[:name]
+  agent = URI.escape(request.user_agent.split(' ').first)
+  ip = request.ip
+
+  profile = CompanyProfiler.new(company_string, agent, ip)
+  company_object = profile.company
+  featured_review_object = company_object['featuredReview']
+
+  erb :company, locals: {company: company_object, review: featured_review_object}
 end

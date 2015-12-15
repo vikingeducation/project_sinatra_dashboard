@@ -22,7 +22,11 @@
             <%= job.title %>
           </a>
         </td>
-        <td><%= job.company %></td>
+        <td>
+          <%= job.company %> <a href="/company/<%= URI.escape(job.company) %>" target="_blank">
+            <i class="fa fa-info-circle"></i>
+          </a>
+        </td>
         <td><%= job.location %></td>
         <td><%= job.post_date %></td>
       </tr>
