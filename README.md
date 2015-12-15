@@ -1,11 +1,14 @@
-# project_sinatra_dashboard
-[A Ruby and Sinatra project that uses web scraping with the Mechanize gem from the Viking Code School](http://www.vikingcodeschool.com)
+# Job Hunt
+[A Ruby and Sinatra project that uses web scraping with the Mechanize gem from the Viking Code School](http://www.vikingcodeschool.com) for the project_sinatra_dashboard
 
 by Sia Karamalegos
 
-Job Hunt Sinatra application that allows the user to search for jobs based on keywords and location (or use current location), and returns results from Dice.com using a web scraper.
+Job Hunt is a Sinatra application that allows the user to search for jobs based on keywords and location (or use current location), and returns results from [Dice.com](http://www.dice.com/) using a web scraper.
 
-Also provides rating and review information on each company returned from the search using the Glassdoor API.
+Job Hunt also provides rating and review information on each company returned from the search using the [Glassdoor API](https://www.glassdoor.com/developer/index.htm).
+
+You can find the deployed app here:
+[Job Hunt Central](https://jobhuntcentral.herokuapp.com/)
 
 ## Instructions to Run Locally
 
