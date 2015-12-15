@@ -3,7 +3,7 @@
 
 by Sia Karamalegos
 
-Job Hunt is a Sinatra application that allows the user to search for jobs based on keywords and location (or use current location), and returns results from [Dice.com](http://www.dice.com/) using a web scraper.
+Job Hunt is a Sinatra application that allows the user to search for jobs based on keywords and location (or use current location based on IP address through the [freegeoip API](http://freegeoip.net/)), and returns results from [Dice.com](http://www.dice.com/) using a web scraper.
 
 Job Hunt also provides rating and review information on each company returned from the search using the [Glassdoor API](https://www.glassdoor.com/developer/index.htm).
 
