@@ -4,6 +4,7 @@ require 'sinatra/reloader' if development?
 require 'erb'
 require 'json'
 require 'pry'
+require 'httparty'
 require_relative 'dice_scraper'
 
 # options for partials
@@ -32,7 +33,20 @@ end
 
 post '/scrape/new' do
   session[:keywords] = params[:keywords]
-  session[:location] = params[:location]
+  if params[:location] != ''
+    session[:location] = params[:location]
+  else
+    # Hard-code IP when in development
+    Sinatra::Base.development? ? ip_address = '174.70.110.150' : ip_address = request.ip
+
+    # Get geo-location of IP
+    uri = "http://freegeoip.net/json/#{ip_address}"
+    location_response = HTTParty.get(uri)
+    city = location_response["city"]
+    state = location_response["region_code"]
+    country = location_response["country_code"]
+    session[:location] = "#{city}, #{state}, #{country}"
+  end
 
   redirect to('/')
 end
