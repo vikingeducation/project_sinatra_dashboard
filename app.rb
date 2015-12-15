@@ -65,7 +65,7 @@ post '/results/clear' do
 end
 
 get '/company/:name' do
-  company_string = params[:name]
+  company_string = URI.escape(params[:name])
   agent = URI.escape(request.user_agent.split(' ').first)
   ip = request.ip
 
