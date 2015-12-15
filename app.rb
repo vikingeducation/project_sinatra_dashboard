@@ -25,7 +25,7 @@ get '/' do
   if session[:keywords] || session[:location]
     dice_results = DiceScraper.new(session[:keywords], session[:location])
     jobs = dice_results.jobs
-    erb :index, locals: {jobs: jobs, show_results: true}
+    erb :index, locals: {jobs: jobs, show_results: true, location: session[:location]}
   else
     erb :index, locals: {show_results: false}
   end

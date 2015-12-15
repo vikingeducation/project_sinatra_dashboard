@@ -10,7 +10,7 @@
 
   <% if show_results %>
     <br>
-    <%= partial :results, locals: {jobs: jobs} %>
+    <%= partial :results, locals: {jobs: jobs, location: location} %>
 
     <p>
       <form action='/results/clear' method='post'>
