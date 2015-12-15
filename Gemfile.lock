@@ -5,6 +5,7 @@ GEM
     coderay (1.1.0)
     domain_name (0.5.25)
       unf (>= 0.0.5, < 1.0.0)
+    envyable (0.2.0)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     httparty (0.13.7)
@@ -63,6 +64,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  envyable
   httparty
   mechanize
   pry

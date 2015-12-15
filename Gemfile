@@ -6,3 +6,4 @@ gem 'sinatra-contrib'
 gem 'pry', group: :development
 gem 'mechanize'
 gem 'httparty'
+gem 'envyable'
