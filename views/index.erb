@@ -5,6 +5,15 @@
 
   <%= partial :form %>
 
-  <br>
-  <%= partial :results %>
+  <% if show_results %>
+    <br>
+    <%= partial :results, locals: {jobs: jobs} %>
+
+    <p>
+      <form action='/results/clear' method='post'>
+        <input type='submit' value='Clear Results' class='btn btn-default'>
+      </form>
+    </p>
+  <% end %>
+
 </div>
