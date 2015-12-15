@@ -7,3 +7,4 @@ gem 'pry', group: :development
 gem 'mechanize'
 gem 'httparty'
 gem 'envyable'
+gem 'thin'

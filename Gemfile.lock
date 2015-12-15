@@ -3,9 +3,11 @@ GEM
   specs:
     backports (3.6.7)
     coderay (1.1.0)
+    daemons (1.2.2)
     domain_name (0.5.25)
       unf (>= 0.0.5, < 1.0.0)
     envyable (0.2.0)
+    eventmachine (1.0.7)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     httparty (0.13.7)
@@ -54,6 +56,10 @@ GEM
     sinatra-partial (0.4.0)
       sinatra
     slop (3.6.0)
+    thin (1.6.3)
+      daemons (~> 1.0, >= 1.0.9)
+      eventmachine (~> 1.0)
+      rack (~> 1.0)
     tilt (2.0.1)
     unf (0.1.4)
       unf_ext
@@ -71,6 +77,7 @@ DEPENDENCIES
   sinatra
   sinatra-contrib
   sinatra-partial
+  thin
 
 BUNDLED WITH
    1.10.6
