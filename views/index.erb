@@ -1,0 +1,19 @@
+<h1 class="title text-primary">
+  <i class="fa fa-briefcase"></i>
+  Job Hunt Central
+</h1>
+<p class='text-muted'>A tool to search jobs and look up ratings and other information on the hiring companies</p>
+<hr>
+
+<%= partial :form %>
+
+<% if show_results %>
+  <br>
+  <%= partial :results, locals: {jobs: jobs, location: location} %>
+
+  <p>
+    <form action='/results/clear' method='post'>
+      <input type='submit' value='Clear Results' class='btn btn-default'>
+    </form>
+  </p>
+<% end %>

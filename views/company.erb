@@ -1,0 +1,51 @@
+<span class='pull-right'>
+  <a href="/"><i class="fa fa-briefcase"></i> Return to Results</a>
+</span>
+
+<h2>
+  <a href="<%= company['website'] %>" target="_blank">
+    <%= company['name'] %> <i class="fa fa-external-link"></i>
+  </a>
+</h2>
+<h3><small><%= company['industry'] %></small></h3>
+
+<h3>Ratings</h3>
+
+<dl class="dl-horizontal">
+  <dt>Overall</dt>
+  <dd><%= company['overallRating'] %> (<%= company['ratingDescription'] %>)</dd>
+
+  <dt>Culture and Values</dt>
+  <dd><%= company['cultureAndValuesRating'] %></dd>
+
+  <dt>Senior Leadership</dt>
+  <dd><%= company['seniorLeadershipRating'] %></dd>
+
+  <dt>Compensation and Benefits</dt>
+  <dd><%= company['compensationAndBenefitsRating'] %></dd>
+
+  <dt>Career Opportunities</dt>
+  <dd><%= company['careerOpportunitiesRating'] %></dd>
+
+  <dt>Work-Life Balance</dt>
+  <dd><%= company['workLifeBalanceRating'] %></dd>
+
+  <dt>Recommend to Friend</dt>
+  <dd><%= company['recommendToFriendRating'] %></dd>
+</dl>
+
+<h3>Featured Review</h3>
+<h4><%= review['headline'] %></h4>
+<p>
+  <strong>Overall:</strong> <%= review['overall'] %>
+</p>
+<p>
+  <strong>Pros:</strong> <%= review['pros'] %>
+</p>
+<p>
+  <strong>Cons:</strong> <%= review['cons'] %>
+</p>
+
+
+<!-- Glassdoor attribution -->
+<a href='https://www.glassdoor.com/index.htm'>powered by <img src='https://www.glassdoor.com/static/img/api/glassdoor_logo_80.png' title='Job Search' /></a>
