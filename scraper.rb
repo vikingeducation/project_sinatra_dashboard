@@ -2,7 +2,7 @@ require 'rubygems'
 require 'bundler/setup'
 require 'mechanize'
 require 'nokogiri'
-require 'csv' 
+require 'csv'
 
 class DiceScraper
 
@@ -19,7 +19,7 @@ class DiceScraper
     units = posted_array[1]
 
     case units
-    when "hour",  "hours" 
+    when "hour",  "hours"
       difference = num * 3600
       posted_time = now_time - difference
     when "day",  "days"
@@ -48,29 +48,28 @@ class DiceScraper
 
     jobs = page.search(".col-md-9 > #serp > .serp-result-content")
     CSV.open('dice_job.csv', 'w') do |csv|
-      
+
       jobs.each do |job|
-        title = job.at("h3 a").attributes["title"].value.gsub(/"/, "") # job title
-        location = job.at(".location").text.to_s.gsub(/"/, "") # location
-        company = job.at("ul li span a").text.to_s.gsub(/"/, "") # location
-        link = job.at("h3 a").attributes["href"].value.gsub(/"/, "")
-        posted =  job.at(".posted").text.gsub(/"/, "")
-        posted_date = Time.at( convert_to_date( posted )).strftime("%Y-%m-%d").gsub(/"/, "")
+        title = job.at("h3 a").attributes["title"].value # job title
+        location = job.at(".location").text # location
+        company = job.at("ul li span a").text # location
+        link = job.at("h3 a").attributes["href"].value
+        posted =  job.at(".posted").text
+        posted_date = Time.at( convert_to_date( posted )).strftime("%Y-%m-%d")
 
         company_id_link = job.at(".dice-btn-link").attributes["href"].value
         company_id, job_id = "", ""
         if company_id_link.include? "detail"
-          job_id =  company_id_link.split("/")[7].split("?").first.gsub(/"/, "")
-          company_id = company_id_link.split("/")[6].gsub(/"/, "")
+          job_id =  company_id_link.split("/")[7].split("?").first
+          company_id = company_id_link.split("/")[6]
         end
 
         csv << [ title, location, company, posted_date, company_id, job_id, link ]
       end
     end
-  
+
   end
 end
 
 # scraper = DiceScraper.new
 # scraper.scrape
-
