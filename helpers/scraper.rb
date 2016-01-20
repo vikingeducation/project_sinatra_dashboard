@@ -33,7 +33,7 @@ class DiceScraper
   def scrape_jobs(query)
     page = search_for(query)
     count = 1
-    until error_page?(page)
+    # until error_page?(page)
       puts "Searching page # #{count}"
       job_nodes = get_job_nodes(page)
       job_nodes.each do |job_node|
@@ -41,8 +41,8 @@ class DiceScraper
         @jobs << new_job
       end
       count += 1
-      page = search_page(query, count)
-    end
+      # page = search_page(query, count)
+    # end
   end
 
   def error_page?(page)
