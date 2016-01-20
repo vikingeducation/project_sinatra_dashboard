@@ -1,0 +1,9 @@
+
+<form action="/" method="get">
+  <input type="text" name="job_query">
+  <input type="submit" value="Submit">
+</form>
+
+<% job_results.each  do |job| %>
+   <h1> <%=job %> </h1>
+<% end %>    
