@@ -1,11 +1,16 @@
 <table class='table table-striped'>
-  <% job_results.each do |job| %>
-    <tr>
-      <td><%= job.title %></td>
-      <td><%= job.company %></td>
-      <td><%= job.link %></td>
-      <td><%= job.location %></td>
-      <td><%= job.date %></td>
-    </tr>
-  <% end %>
+  <thead>
+    <tr>Here are jobs for <%= location%>:  </tr>
+  </thead>
+  <tbody>
+    <% job_results.each do |job| %>
+      <tr>
+        <td><%= job.title %></td>
+        <td><%= job.company %></td>
+        <td><%= job.link %></td>
+        <td><%= job.location %></td>
+        <td><%= job.date %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>

@@ -13,13 +13,13 @@ class DiceScraper
 
   ID_REGEX = /\/([^\/]+)\/([^\/]+?)\?icid/
 
-  def initialize(location = "san francisco")
+  def initialize(location="reno")
     @agent = Mechanize.new do |agent|
       agent.user_agent_alias = "Mac Safari"
       agent.history_added = Proc.new { sleep 0.5 }
     end
     @jobs = []
-    @location = location.split(" ").join("_")
+    @location = location
   end
 
   def search_for(query)
@@ -28,7 +28,8 @@ class DiceScraper
   end
 
   def search_page(query, page = 1)
-    @agent.get("https://www.dice.com/jobs/q-#{query}-l=#{@location}-limit-120-startPage-#{page}-limit-120-jobs")
+    @agent.get("https://www.dice.com/jobs?q=#{query}&l=#{@location}")
+    # @agent.get("https://www.dice.com/jobs/q-#{query}-l-reno-limit-120-startPage-#{page}-limit-120-jobs")
   end
 
   def scrape_jobs(query)
@@ -77,9 +78,9 @@ class DiceScraper
 
 end
 
-scraper = DiceScraper.new
-pp scraper.scrape_jobs("Ruby on Rails")
-pp scraper.location
+# scraper = DiceScraper.new
+# pp scraper.scrape_jobs("python")
+
 # filter = Filter.new(date: "1 day ago", title: "Developer")
 # jobs = filter.filter_jobs(scraper.jobs)
 # JobSaver.new(jobs).save_to_csv
