@@ -1,9 +1,21 @@
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Company</th>
+        <th>Location</th>
+      </tr>
+    </thead>
 
-<form action="/" method="get">
-  <input type="text" name="job_query">
-  <input type="submit" value="Submit">
-</form>
-
-<% job_results.each  do |job| %>
-   <h1> <%=job %> </h1>
-<% end %>    
+    <tbody>
+    <% job_results.each do |job| %>
+      <tr>
+      <td> <%= job.title %> </td>
+      <td> <%= job.company %> </td>
+      <td> <%= job.location %> </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
