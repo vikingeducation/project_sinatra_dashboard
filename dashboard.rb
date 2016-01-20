@@ -13,12 +13,10 @@ end
 
 post '/' do
   keywords = params[:keywords]
-  keywords = keywords.split("")
   location = params[:location]
 
-  scraper = DiceScraper.new
+  scraper = DiceScraper.new(keywords, location)
   scraper.scrape
   job_array = CSV.read("dice_job.csv")
   erb :index, locals: { job_table: job_array}
-
 end

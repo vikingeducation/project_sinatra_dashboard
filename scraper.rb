@@ -6,11 +6,11 @@ require 'csv'
 
 class DiceScraper
 
-  def initialize( address = "https://www.dice.com/jobs?q=ruby&l=San+Jose" )
-    @address = address
+  def initialize(keywords="python", location="san jose")
+    words = keywords.gsub(/ /, '+')
+    loc = location.gsub(/ /, '+').gsub(/,/, '%2C')
+    @address = "https://www.dice.com/jobs?q=#{words}&l=#{loc}"
   end
-
-# address = "https://www.dice.com/jobs?q=ruby&l=San+Jose%2C+CA"
 
   def convert_to_date( posted )
     now_time = Time.now.to_i
@@ -70,6 +70,3 @@ class DiceScraper
 
   end
 end
-
-# scraper = DiceScraper.new
-# scraper.scrape
