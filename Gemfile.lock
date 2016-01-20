@@ -8,6 +8,7 @@ GEM
     bootstrap (4.0.0.alpha3)
       autoprefixer-rails (>= 6.0.3)
       sass (>= 3.4.19)
+    byebug (8.2.1)
     coderay (1.1.0)
     daemons (1.2.3)
     domain_name (0.5.25)
@@ -16,6 +17,9 @@ GEM
     execjs (2.6.0)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
+    httparty (0.13.7)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     json (1.8.3)
     mechanize (2.7.2)
       domain_name (~> 0.5, >= 0.5.1)
@@ -30,6 +34,7 @@ GEM
     mime-types (1.25.1)
     mini_portile2 (2.0.0)
     multi_json (1.11.2)
+    multi_xml (0.5.5)
     net-http-digest_auth (1.4)
     net-http-persistent (2.9.4)
     nokogiri (1.6.7.1)
@@ -39,6 +44,9 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    pry-byebug (3.3.0)
+      byebug (~> 8.0)
+      pry (~> 0.10)
     rack (1.6.4)
     rack-protection (1.5.3)
       rack
@@ -72,8 +80,9 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap
+  httparty
   mechanize (~> 2.7.2, < 2.7.3)
-  pry
+  pry-byebug
   sinatra
   sinatra-contrib
   thin
