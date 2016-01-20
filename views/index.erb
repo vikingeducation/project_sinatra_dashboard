@@ -1,11 +1,32 @@
-<h1>Local Job Hunt</h1>
+<%= erb :"header" %>
 
-<form action='/' method='post'>
-  <input type='text' name="search_term" placeholder='Search Jobs' autofocus>
-  <input type='submit' value='Submit'>
-</form>
+<body>
+  <div class='container'>
+    <div class='row'>
+      <div class='col-md-offset-2 col-md-8'>
 
-<% if !results.nil? %>
-  <h2>Jobs scraped from Dice.com</h2>
-  <%= erb :"table_partial", :layout => false, :locals => { :results => results } %>
-<% end %>
+
+        <h1>Local Job Hunt</h1>
+
+        <form class='input-group' action='/' method='post'>
+          <input type='text' class="form-control" name="search_term" placeholder='Search Jobs' autofocus>
+          <span class='input-group-btn'>
+            <button type='submit' class="btn btn-submit glyphicon glyphicon-search" value='Submit'></button>
+          </span>
+        </form>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-md-12'>
+
+        <% if !results.nil? %>
+          <h2>Jobs scraped from Dice.com</h2>
+          <%= erb :"table_partial", :layout => false, :locals => { :results => results } %>
+        <% end %>
+
+        <%= erb :"footer" %>
+
+      </div>
+    </div>
+  </div>
+</body>
