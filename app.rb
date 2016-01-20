@@ -1,10 +1,12 @@
 require 'sinatra'
-require 'sinatra/reloader' if development?
 require 'thin'
 require 'mechanize'
 require 'byebug'
 require 'chronic'
 require 'csv'
+require 'figaro'
+require 'sinatra/reloader' if development?
+require_relative 'figaro_setup'
 require_relative 'lib/scraper'
 require_relative 'lib/location'
 
@@ -20,6 +22,7 @@ end
 
 get '/' do
   puts user_location
+  puts ENV["glassdoor_key"]
   job_results = []
   if query = params[:job_query]
     job_results = DiceScraper.new(user_location).scrape_jobs(query)
