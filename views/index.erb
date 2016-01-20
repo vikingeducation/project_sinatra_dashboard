@@ -1,0 +1,40 @@
+
+<!doctype HTML>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Job Dashboard</title>
+</head>
+<body>
+    <h4>Dashboard</h4>
+    <table border="1">
+      <tr>
+        <th>Job Title</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Company</th>
+        <th>Post Date</th>
+        <th>Company ID</th>
+        <th>Job Id</th>
+        <th>Link</th>
+      </tr>
+
+    <%  if defined? job_table %>
+      <% job_table.each do |row|  %>
+        <tr>
+          <td><%="#{row[0]}"%></td>
+          <td><%="#{row[1]}"%></td>
+          <td><%="#{row[2]}"%></td>
+          <td><%="#{row[3]}"%></td>
+          <td><%="#{row[4]}"%></td>
+          <td><%="#{row[5]}"%></td>
+          <td><%="#{row[6]}"%></td>
+          <td><%="#{row[7]}"%></td>
+        </tr>
+      <% end %>
+    <% end %>
+
+    </table>
+</body>
+</html>
