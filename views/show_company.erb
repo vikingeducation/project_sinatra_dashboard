@@ -1,0 +1,23 @@
+<div class="container">
+<% if company %>
+  <h1><%= company.name%></h1>
+  <p><%= company.website %></p>
+  <p><%= company.rating %></p>
+  <p><%= company.num_ratings %></p>
+
+  <% if company.review %>
+    <h2><%= company.review.job_title%></h2>
+    <p><%= company.review.rating%></p>
+    <p><%= company.review.pros%></p>
+    <p><%= company.review.cons%></p>
+  <% end %>
+
+<% else %>
+
+  <h2>Company not found.</h2>
+
+<% end %>
+
+<hr>
+
+<a href='https://www.glassdoor.com/index.htm'>powered by <img src='https://www.glassdoor.com/static/img/api/glassdoor_logo_80.png' title='Job Search' /></a>

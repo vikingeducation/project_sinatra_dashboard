@@ -35,14 +35,14 @@ class DiceScraper
     page = search_for(query)
     count = 1
     # until error_page?(page)
-      puts "Searching page # #{count}"
-      job_nodes = get_job_nodes(page)
-      job_nodes.each do |job_node|
-        new_job = job_from_node(job_node)
-        @jobs << new_job
-      end
-      # count += 1
-      # page = search_page(query, count)
+    puts "Searching page # #{count}"
+    job_nodes = get_job_nodes(page)
+    job_nodes.each do |job_node|
+      new_job = job_from_node(job_node)
+      @jobs << new_job
+    end
+    # count += 1
+    # page = search_page(query, count)
     # end
     @jobs
   end

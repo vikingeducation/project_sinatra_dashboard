@@ -1,22 +1,26 @@
 <div class="container">
-  <table class="table">
-    <caption> Jobs in <%= user_location["city"] + ", " + user_location["region_name"]%> </caption>
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Company</th>
-        <th>Location</th>
-      </tr>
-    </thead>
+  <% if job_results.any? %>
+    <table class="table">
+      <caption> Jobs in <%= user_location["city"] + ", " + user_location["region_name"]%> </caption>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Company</th>
+          <th>Location</th>
+        </tr>
+      </thead>
 
-    <tbody>
-    <% job_results.each do |job| %>
-      <tr>
-      <td> <%= job.title %> </td>
-      <td> <%= job.company %> </td>
-      <td> <%= job.location %> </td>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
+      <tbody>
+        <% job_results.each do |job| %>
+          <tr>
+            <td> <%= "<a href='#{job.link}'>#{job.title}</a>" %> </td>
+            <td> <%= "<a href='company/#{job.company}'>#{job.company}</a>" %> </td>
+            <td> <%= job.location %> </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <h1>Search for a company!</h1>
+  <% end %>
 </div>

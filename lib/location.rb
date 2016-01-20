@@ -1,5 +1,3 @@
-require 'httparty'
-
 class Location
   include HTTParty
 
@@ -9,5 +7,3 @@ class Location
     get("/#{ip_address}")
   end
 end
-
-

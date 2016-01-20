@@ -1,14 +1,19 @@
 require 'sinatra'
+require 'httparty'
 require 'thin'
 require 'mechanize'
 require 'byebug'
 require 'chronic'
 require 'csv'
-require 'figaro'
 require 'sinatra/reloader' if development?
-require_relative 'figaro_setup'
+require_relative 'figaro_setup' if development?
 require_relative 'lib/scraper'
 require_relative 'lib/location'
+require_relative 'lib/glass_door'
+
+also_reload 'lib/*'
+
+enable :sessions
 
 helpers do
   def user_location
@@ -21,15 +26,16 @@ helpers do
 end
 
 get '/' do
-  puts user_location
-  puts ENV["glassdoor_key"]
   job_results = []
   if query = params[:job_query]
     job_results = DiceScraper.new(user_location).scrape_jobs(query)
-    # byebug
   end
-  
   erb :job_search, locals: {job_results: job_results}
-
 end
 
+get '/company/:company_name' do
+  company_name = params[:company_name]
+  company = GlassDoor.for_company(company_name, request.ip, request.user_agent)
+  company
+  erb :show_company, locals: {company: company}
+end
