@@ -8,3 +8,4 @@ gem 'mechanize', '~>2.7.2', '<2.7.3'
 gem 'httparty'
 gem 'json'
 gem 'pry' # because you'll probably need it
+gem 'figaro'

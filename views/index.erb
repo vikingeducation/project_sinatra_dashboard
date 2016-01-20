@@ -14,46 +14,45 @@
 </head>
 <body>
   <div class="container">
-    <h4>Dashboard</h4>
-
-    <h4>Enter Job Keywords and Location</h4>
-    <form action="/" method="post">
-      <label for="keywords">Keywords</label>
-      <input type="text" id="keywords" name="keywords">
-      <label for="location">Location</label>
-      <input type="text" id="location" name="location">
-      <input type="submit" value="Search">
-    </form>
-    <br><br><br>
-    <%  if defined? job_table %>
-      <h3><%="Jobs in #{job_table[0][1]}"%></h3>
-    <% end %>
-    <table class="table table-border table-striped">
-      <tr>
-        <th>Job Title</th>
-        <th>Location</th>
-        <th>Company</th>
-        <th>Post Date</th>
-        <th>Company ID</th>
-        <th>Job Id</th>
-        <th>Link</th>
-      </tr>
-
-    <%  if defined? job_table %>
-      <% job_table.each do |row|  %>
-        <tr>
-          <td><%="#{row[0]}"%></td>
-          <td><%="#{row[1]}"%></td>
-          <td><%="#{row[2]}"%></td>
-          <td><%="#{row[3]}"%></td>
-          <td><%="#{row[4]}"%></td>
-          <td><%="#{row[5]}"%></td>
-          <td><%="#{row[6]}"%></td>
-        </tr>
+      <div class="row">
+      <h4>Dashboard</h4>
+      <h4>Enter Job Keywords and Location</h4>
+      <form action="/" method="post">
+        <label for="keywords">Keywords</label>
+        <input type="text" id="keywords" name="keywords">
+        <label for="location">Location</label>
+        <input type="text" id="location" name="location">
+        <input type="submit" value="Search">
+      </form>
+      <br><br><br>
+      <%  if defined?(job_table) %>
+        <h3><%="Jobs in #{job_table[0][1]}"%></h3>
       <% end %>
-    <% end %>
-
-    </table>
+      <table class="table table-border table-striped">
+        <tr>
+          <th>Job Title</th>
+          <th>Location</th>
+          <th>Company</th>
+          <th>Post Date</th>
+          <th>Company ID</th>
+          <th>Job Id</th>
+          <th>Link</th>
+        </tr>
+        <%  if defined?(job_table) %>
+          <% job_table.each do |row|  %>
+            <tr>
+              <td><%="#{row[0]}"%></td>
+              <td><%="#{row[1]}"%></td>
+              <td><%="#{row[2]}"%></td>
+              <td><%="#{row[3]}"%></td>
+              <td><%="#{row[4]}"%></td>
+              <td><%="#{row[5]}"%></td>
+              <td><%="#{row[6]}"%></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </table>
+    </div>
   </div>
 </body>
 </html>
