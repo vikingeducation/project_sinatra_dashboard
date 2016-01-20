@@ -8,3 +8,4 @@ gem 'pry-byebug' # because you'll probably need it
 gem 'sinatra-contrib'
 gem 'bootstrap'
 gem 'httparty'
+gem 'figaro'
