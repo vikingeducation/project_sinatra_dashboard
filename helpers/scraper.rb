@@ -7,7 +7,8 @@ require_relative 'job'
 require_relative 'job_saver'
 require_relative 'filter'
 
-class DiceScraper
+module DiceScraper
+
   attr_reader :jobs
 
   ID_REGEX = /\/([^\/]+)\/([^\/]+?)\?icid/
@@ -67,10 +68,16 @@ class DiceScraper
     end
     Job.new(title: title, company: company, link: link, location: location, date: date, company_id: company_id, job_id: job_id)
   end
+
+  def run(search_term)
+    scrape_jobs(search_term)
+  end
+
+
 end
 
-scraper = DiceScraper.new
-scraper.scrape_jobs("Ruby on Rails")
-filter = Filter.new(date: "1 day ago", title: "Developer")
-jobs = filter.filter_jobs(scraper.jobs)
-JobSaver.new(jobs).save_to_csv
+# scraper = include DiceScraper
+# scraper.scrape_jobs("Ruby on Rails")
+# filter = Filter.new(date: "1 day ago", title: "Developer")
+# jobs = filter.filter_jobs(scraper.jobs)
+# JobSaver.new(jobs).save_to_csv
