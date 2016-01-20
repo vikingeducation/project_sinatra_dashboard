@@ -33,14 +33,16 @@ class DiceScraper
 
       next if get_date(job) < date
 
-      ids = get_ids(job)
-      @jobs << [get_job(job), get_descript(job), get_employer(job), get_link(job), get_location(job), get_date(job), ids[0], ids[1]]
+      # ids = get_ids(job)
+      @jobs << [get_job(job), get_descript(job), get_employer(job), get_location(job), get_date(job)]
     end
     puts
   end
 
   def get_job(job)
-    job.at('h3 a').attributes["title"].value
+    title = job.at('h3 a').attributes["title"].value
+    link = job.at('h3 a').attributes["href"].value
+    "<a href=#{link}>#{title}</a>"
   end
 
   def get_descript(job)
@@ -52,7 +54,8 @@ class DiceScraper
   end
 
   def get_link(job)
-    job.at('h3 a').attributes["href"].value
+    link = job.at('h3 a').attributes["href"].value
+    "<a href=#{link}>link</a>"
   end
 
   def get_location(job)
