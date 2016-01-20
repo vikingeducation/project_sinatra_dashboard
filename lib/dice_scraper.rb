@@ -5,6 +5,8 @@ require 'csv'
 
 class DiceScraper
 
+  attr_reader :jobs
+
   def initialize
     @mech = Mechanize.new
     @mech.user_agent_alias = 'Mac Safari'
@@ -13,16 +15,16 @@ class DiceScraper
     @jobs = []
   end
 
-  def scrape_jobs(date)
-    (1..10).each do |page_num|
-      print "Currently scraping page #{page_num}"
-
-      @page = @mech.get("https://www.dice.com/jobs/q-Ruby_on_Rails-limit-30-l-New_York%2C_NY-radius-30-startPage-#{page_num}-limit-30-jobs")
+  def scrape_jobs(date, search_term)
+    # (1..10).each do |page_num|
+      # print "Currently scraping page #{page_num}"
+      page_num = 1
+      @page = @mech.get("https://www.dice.com/jobs/q-#{search_term}-limit-30-l-New_York%2C_NY-radius-30-startPage-#{page_num}-limit-30-jobs")
       results = @page.search('#search-results-control .col-md-9 #serp .serp-result-content')
 
       scrape_page(results, date)
-    end
-    puts "Scraping Complete!"
+    # end
+    # puts "Scraping Complete!"
   end
 
   def scrape_page(nokogiri_result, date)
@@ -103,9 +105,9 @@ class DiceScraper
   end
 end
 
-scraper = DiceScraper.new
-scraper.scrape_jobs(Time.new(2016, 1, 18))
-scraper.create_csv
+# scraper = DiceScraper.new
+# scraper.scrape_jobs(Time.new(2016, 1, 18))
+# scraper.create_csv
 
 
 
