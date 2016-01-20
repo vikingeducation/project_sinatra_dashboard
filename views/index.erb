@@ -13,6 +13,7 @@
 
 </head>
 <body>
+  <div class="container">
     <h4>Dashboard</h4>
 
     <h4>Enter Job Keywords and Location</h4>
@@ -24,6 +25,9 @@
       <input type="submit" value="Search">
     </form>
     <br><br><br>
+    <%  if defined? job_table %>
+      <h3><%="Jobs in #{job_table[0][1]}"%></h3>
+    <% end %>
     <table class="table table-border table-striped">
       <tr>
         <th>Job Title</th>
@@ -50,5 +54,6 @@
     <% end %>
 
     </table>
+  </div>
 </body>
 </html>
