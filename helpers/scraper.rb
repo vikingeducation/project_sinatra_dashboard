@@ -7,7 +7,7 @@ require_relative 'job'
 require_relative 'job_saver'
 require_relative 'filter'
 
-module DiceScraper
+class DiceScraper
 
   attr_reader :jobs
 
