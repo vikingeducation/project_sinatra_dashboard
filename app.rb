@@ -1,4 +1,9 @@
 #!/usr/bin/env ruby
+
+require 'rubygems'
+require 'bundler/setup'
+require 'mechanize'
+require 'csv'
 require 'sinatra'
 require "sinatra/reloader" if development?
 require './helpers/scraper_helper.rb'

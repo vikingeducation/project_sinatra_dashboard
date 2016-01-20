@@ -1,8 +1,3 @@
-require 'rubygems'
-require 'bundler/setup'
-require 'mechanize'
-require 'csv'
-
 class DiceScraper
 
   attr_reader :jobs
