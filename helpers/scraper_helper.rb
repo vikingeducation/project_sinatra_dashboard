@@ -1,4 +1,4 @@
-require '../lib/dice_scraper.rb'
+require_relative '../lib/dice_scraper.rb'
 
 module ScraperHelper
 
