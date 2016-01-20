@@ -11,7 +11,7 @@ require_relative 'lib/location'
 helpers do
   def user_location
     if Sinatra::Base.development?
-      session[:location] = Location.location_for('69.116.162.235')
+      session[:location] = Location.location_for('24.130.159.134')
     else
       session[:location] ||= Location.location_for(request.ip)
     end
@@ -25,6 +25,8 @@ get '/' do
     job_results = DiceScraper.new(user_location).scrape_jobs(query)
     # byebug
   end
+  
   erb :job_search, locals: {job_results: job_results}
+
 end
 
