@@ -9,16 +9,17 @@ require_relative 'filter'
 
 class DiceScraper
 
-  attr_reader :jobs
+  attr_reader :jobs, :location
 
   ID_REGEX = /\/([^\/]+)\/([^\/]+?)\?icid/
 
-  def initialize
+  def initialize(location = "san francisco")
     @agent = Mechanize.new do |agent|
       agent.user_agent_alias = "Mac Safari"
       agent.history_added = Proc.new { sleep 0.5 }
     end
     @jobs = []
+    @location = location.split(" ").join("_")
   end
 
   def search_for(query)
@@ -27,7 +28,7 @@ class DiceScraper
   end
 
   def search_page(query, page = 1)
-    @agent.get("https://www.dice.com/jobs/q-#{query}-limit-120-startPage-#{page}-limit-120-jobs")
+    @agent.get("https://www.dice.com/jobs/q-#{query}-l=#{@location}-limit-120-startPage-#{page}-limit-120-jobs")
   end
 
   def scrape_jobs(query)
@@ -41,6 +42,7 @@ class DiceScraper
         @jobs << new_job
       end
       count += 1
+      @jobs
       # page = search_page(query, count)
     # end
   end
@@ -73,11 +75,11 @@ class DiceScraper
     scrape_jobs(search_term)
   end
 
-
 end
 
-# scraper = include DiceScraper
-# scraper.scrape_jobs("Ruby on Rails")
+scraper = DiceScraper.new
+pp scraper.scrape_jobs("Ruby on Rails")
+pp scraper.location
 # filter = Filter.new(date: "1 day ago", title: "Developer")
 # jobs = filter.filter_jobs(scraper.jobs)
 # JobSaver.new(jobs).save_to_csv
