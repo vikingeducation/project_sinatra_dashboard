@@ -106,7 +106,7 @@ class DiceScraper
 end
 
 # scraper = DiceScraper.new
-# scraper.scrape_jobs(Time.new(2016, 1, 18))
+# scraper.scrape_jobs(Time.new(2016, 1, 20), "Ruby Developer")
 # scraper.create_csv
 
 

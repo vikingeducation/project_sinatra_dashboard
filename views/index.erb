@@ -7,5 +7,5 @@
 
 <% if !results.nil? %>
   <h2>Jobs scraped from Dice.com</h2>
-  <%= erb :"table_partial" %>
+  <%= erb :"table_partial", :layout => false, :locals => { :results => results } %>
 <% end %>
