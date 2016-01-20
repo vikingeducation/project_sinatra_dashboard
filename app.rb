@@ -15,22 +15,24 @@ helpers ScraperHelper
 enable :sessions
 
 get '/' do
-  get_api_location
+  get_api_location if session['zip'].nil?
   erb :index, locals: {results: nil}
 end
-
 
 post '/' do
   search_term = params[:search_term]
   time = Time.now - 12 * 3600
 
-  results = scraper_helper(time, search_term)
+  results = scraper_helper(time, search_term, session['zip'])
 
-  erb :index, locals: {results: results}
+  erb :index, locals: {results: results, city: session['city'], region: session['region']}
 end
 
 def get_api_location
-  response = HTTParty.get("https://freegeoip.net/json/174.60.246.251")
+  response = HTTParty.get("https://freegeoip.net/json/108.185.219.255")
+  session['city'] = "#{response['city']}"
+  session['region'] = "#{response['region_code']}"
+  session['zip'] = "#{response['zip_code']}"
 end
 
 # country_code region_code city

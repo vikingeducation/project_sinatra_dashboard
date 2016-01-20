@@ -10,13 +10,12 @@ class DiceScraper
     @jobs = []
   end
 
-  def scrape_jobs(date, search_term)
+  def scrape_jobs(date, search_term, zip)
     # (1..10).each do |page_num|
       # print "Currently scraping page #{page_num}"
       page_num = 1
-      @page = @mech.get("https://www.dice.com/jobs/q-#{search_term}-limit-30-l-New_York%2C_NY-radius-30-startPage-#{page_num}-limit-30-jobs")
+      @page = @mech.get("https://www.dice.com/jobs?q=#{search_term}&l=#{zip}")
       results = @page.search('#search-results-control .col-md-9 #serp .serp-result-content')
-
       scrape_page(results, date)
     # end
     # puts "Scraping Complete!"
