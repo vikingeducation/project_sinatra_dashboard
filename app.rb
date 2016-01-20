@@ -12,22 +12,6 @@ require_relative 'helpers/scraper'
 set :servers, ["thin", "puma", "webrick"]
 
 
-
-
-# class MyApp < Sinatra::Base
-
-# helpers DiceScraper
-
-#   get '/' do
-#     erb :index
-#   end
-# end
-
-# MyApp.run!
-
-# helpers DiceScraper
-
-
 get '/' do
   erb :index
 end
