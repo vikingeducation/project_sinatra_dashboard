@@ -1,0 +1,259 @@
+---
+- !ruby/object:Job
+  title: Sr. Java Developer
+  company: NORTHROP GRUMMAN
+  link: https://www.dice.com/jobs/detail/Sr.-Java-Developer-NORTHROP-GRUMMAN-San-Mateo-CA-94401/ngitbot/15018170?icid=sr1-1p&q=java&l=San
+    Jose, CA
+  location: San Mateo, CA
+  date: 2016-01-19 22:26:09.409559000 -05:00
+  company_id: ngitbot
+  job_id: '15018170'
+- !ruby/object:Job
+  title: Senior Java Engineer - Identity Management
+  company: Oracle Corporation
+  link: https://www.dice.com/jobs/detail/Senior-Java-Engineer-%26%2345-Identity-Management-Oracle-Corporation-Belmont-CA-94002/10112602/289070?icid=sr2-1p&q=java&l=San
+    Jose, CA
+  location: Belmont, CA
+  date: 2016-01-06 20:26:09.417362000 -05:00
+  company_id: '10112602'
+  job_id: '289070'
+- !ruby/object:Job
+  title: Software Development Engineer Java Web Application
+  company: Dell
+  link: https://www.dice.com/jobs/detail/Software-Development-Engineer-Java-Web-Application-Dell-Santa-Clara-CA-95050/delliirc/B-1500158O?icid=sr3-1p&q=java&l=San
+    Jose, CA
+  location: Santa Clara, CA
+  date: 2016-01-20 05:26:09.421484000 -05:00
+  company_id: delliirc
+  job_id: B-1500158O
+- !ruby/object:Job
+  title: PLM Analyst (JAVA)
+  company: Accenture
+  link: https://www.dice.com/jobs/detail/PLM-Analyst-%28JAVA%29-Accenture-San-Jose-CA-95002/accco001/00355608?icid=sr4-1p&q=java&l=San
+    Jose, CA
+  location: San Jose, CA
+  date: 2016-01-06 20:26:09.425718000 -05:00
+  company_id: accco001
+  job_id: 00355608
+- !ruby/object:Job
+  title: Maps - Sr. Software Engineer - Java / Big Data
+  company: Apple Inc.
+  link: http://www.dice.com/job/result/applecup/45460486?icid=sr5-1p
+  location: Cupertino, CA
+  date: 2016-01-20 19:26:09.450713000 -05:00
+  company_id: applecup
+  job_id: '45460486'
+- !ruby/object:Job
+  title: Sr. Java Engineer (Data Platform)
+  company: Progreso Financiero
+  link: https://www.dice.com/jobs/detail/Sr.-Java-Engineer-%28Data-Platform%29-Progreso-Financiero-Redwood-City-CA-94063/RTX17b806/JavaEngSF?icid=sr6-1p&q=java&l=San
+    Jose, CA
+  location: Redwood City, CA
+  date: 2016-01-20 09:26:09.458817000 -05:00
+  company_id: RTX17b806
+  job_id: JavaEngSF
+- !ruby/object:Job
+  title: JAVA DEVELOPER
+  company: Hyades Technology
+  link: https://www.dice.com/jobs/detail/JAVA-DEVELOPER-Hyades-Technology-Santa-Clara-CA-95054/10445032/279689?icid=sr7-1p&q=java&l=San
+    Jose, CA
+  location: Santa Clara, CA
+  date: 2016-01-15 20:26:09.464029000 -05:00
+  company_id: '10445032'
+  job_id: '279689'
+- !ruby/object:Job
+  title: Java GUI Software Developer -- Server- or client-side
+  company: SpiderCloud Wireless
+  link: https://www.dice.com/jobs/detail/Java-GUI-Software-Developer-%26%2345%26%2345-Server%26%2345-or-client%26%2345side-SpiderCloud-Wireless-San-Jose-CA-95134/10338883/PM0010?icid=sr8-1p&q=java&l=San
+    Jose, CA
+  location: San Jose, CA
+  date: 2016-01-06 20:26:09.470075000 -05:00
+  company_id: '10338883'
+  job_id: PM0010
+- !ruby/object:Job
+  title: Java Developer (Back-End)
+  company: Cameo Global, Inc
+  link: https://www.dice.com/jobs/detail/Java-Developer-%28Back%26%2345End%29-Cameo-Global%2C-Inc-Pleasanton-CA-94588/RTL180882/349307?icid=sr9-1p&q=java&l=San
+    Jose, CA
+  location: Pleasanton, CA
+  date: 2016-01-19 20:26:09.476212000 -05:00
+  company_id: RTL180882
+  job_id: '349307'
+- !ruby/object:Job
+  title: Java Engineer
+  company: On Demand Agility Solutions, Inc.
+  link: http://www.dice.com/job/result/10521364/353453?icid=sr10-1p
+  location: Sunnyvale, CA
+  date: 2016-01-19 20:26:09.482105000 -05:00
+  company_id: '10521364'
+  job_id: '353453'
+- !ruby/object:Job
+  title: Sr. Solutions Architect (Java)
+  company: Saggezza
+  link: https://www.dice.com/jobs/detail/Sr.-Solutions-Architect-%28Java%29-Saggezza-Santa-Clara-CA-95054/10305652/341696?icid=sr11-1p&q=java&l=San
+    Jose, CA
+  location: Santa Clara, CA
+  date: 2016-01-13 20:26:09.487163000 -05:00
+  company_id: '10305652'
+  job_id: '341696'
+- !ruby/object:Job
+  title: Technical Lead - Java/Web
+  company: Cisco Systems Inc.
+  link: https://www.dice.com/jobs/detail/Technical-Lead-%26%2345-Java%26%2347Web-Cisco-Systems-Inc.-Milpitas-CA-95035/ciscobot/R1001531-en_US?icid=sr12-1p&q=java&l=San
+    Jose, CA
+  location: Milpitas, CA
+  date: 2016-01-20 09:26:09.491875000 -05:00
+  company_id: ciscobot
+  job_id: R1001531-en_US
+- !ruby/object:Job
+  title: Senior Software Engineer -Java (server side)
+  company: Cisco Systems Inc.
+  link: https://www.dice.com/jobs/detail/Senior-Software-Engineer-%26%2345Java-%28server-side%29-Cisco-Systems-Inc.-Milpitas-CA-95035/ciscobot/R1000463-en_US?icid=sr13-1p&q=java&l=San
+    Jose, CA
+  location: Milpitas, CA
+  date: 2016-01-20 09:26:09.497030000 -05:00
+  company_id: ciscobot
+  job_id: R1000463-en_US
+- !ruby/object:Job
+  title: Java Software Engineer, HPE Converged Systems OneView
+  company: Hewlett Packard Enterprise Company
+  link: https://www.dice.com/jobs/detail/Java-Software-Engineer%2C-HPE-Converged-Systems-OneView-Hewlett-Packard-Enterprise-Company-Palo-Alto-CA-94301/10109419/1491758?icid=sr14-1p&q=java&l=San
+    Jose, CA
+  location: Palo Alto, CA
+  date: 2016-01-20 16:26:09.502225000 -05:00
+  company_id: '10109419'
+  job_id: '1491758'
+- !ruby/object:Job
+  title: Front End Web Developer with java
+  company: Sairoop
+  link: https://www.dice.com/jobs/detail/Front-End-Web-Developer-with-java-Sairoop-Los-Gatos-CA-95030/10503893/265526?icid=sr15-1p&q=java&l=San
+    Jose, CA
+  location: Los Gatos, CA
+  date: 2016-01-20 16:26:09.509424000 -05:00
+  company_id: '10503893'
+  job_id: '265526'
+- !ruby/object:Job
+  title: Java / J2EE Software Engineer
+  company: Progreso Financiero
+  link: https://www.dice.com/jobs/detail/Java-%26%2347-J2EE-Software-Engineer-Progreso-Financiero-Redwood-City-CA-94063/RTX17b806/2507?icid=sr16-1p&q=java&l=San
+    Jose, CA
+  location: Redwood City, CA
+  date: 2016-01-20 09:26:09.515716000 -05:00
+  company_id: RTX17b806
+  job_id: '2507'
+- !ruby/object:Job
+  title: Principal Java Backend Engineering Lead for Large Consumer Electronic
+  company: OSI Engineering, Inc.
+  link: https://www.dice.com/jobs/detail/Principal-Java-Backend-Engineering-Lead-for-Large-Consumer-Electronic-OSI-Engineering%2C-Inc.-Santa-Clara-CA-95050/10365912/PrincipalJavaBa?icid=sr17-1p&q=java&l=San
+    Jose, CA
+  location: Santa Clara, CA
+  date: 2016-01-06 20:26:09.520608000 -05:00
+  company_id: '10365912'
+  job_id: PrincipalJavaBa
+- !ruby/object:Job
+  title: JAVA Developer
+  company: Wipro Ltd.
+  link: http://www.dice.com/job/result/10110759/364299?icid=sr18-1p
+  location: Sunnyvale, CA
+  date: 2016-01-20 09:26:09.525303000 -05:00
+  company_id: '10110759'
+  job_id: '364299'
+- !ruby/object:Job
+  title: Senior Java Engineer
+  company: Silver Spring Networks
+  link: http://www.dice.com/job/result/RTX14ae36/2041?icid=sr19-1p
+  location: Redwood City, CA
+  date: 2016-01-06 20:26:09.531049000 -05:00
+  company_id: RTX14ae36
+  job_id: '2041'
+- !ruby/object:Job
+  title: UI / Java full stack Engineer
+  company: 8x8, Inc.
+  link: http://www.dice.com/job/result/10135125/40001046?icid=sr20-1p
+  location: San Jose, CA
+  date: 2016-01-06 20:26:09.538006000 -05:00
+  company_id: '10135125'
+  job_id: '40001046'
+- !ruby/object:Job
+  title: Senior Java Engineer
+  company: comScore
+  link: http://www.dice.com/job/result/10117623/92641553?icid=sr21-1p
+  location: Menlo Park, CA
+  date: 2016-01-19 22:26:09.545039000 -05:00
+  company_id: '10117623'
+  job_id: '92641553'
+- !ruby/object:Job
+  title: Java with Hadoop developer
+  company: ScrumLink, Inc.
+  link: http://www.dice.com/job/result/10457621/361164?icid=sr22-1p
+  location: San Jose, CA
+  date: 2016-01-20 12:26:09.554214000 -05:00
+  company_id: '10457621'
+  job_id: '361164'
+- !ruby/object:Job
+  title: J316-Senior Java/J2EE Engineer
+  company: Integnology Corporation
+  link: http://www.dice.com/job/result/10101561/J316?icid=sr23-1p
+  location: Santa Clara, CA
+  date: 2016-01-20 15:26:09.561327000 -05:00
+  company_id: '10101561'
+  job_id: J316
+- !ruby/object:Job
+  title: Java Backend Developer
+  company: Cognate Inc
+  link: http://www.dice.com/job/result/10114372/JBD_1202?icid=sr24-1p
+  location: San Jose, CA
+  date: 2016-01-19 20:26:09.568386000 -05:00
+  company_id: '10114372'
+  job_id: JBD_1202
+- !ruby/object:Job
+  title: Core Java Engineer
+  company: aumkaara Inc.
+  link: http://www.dice.com/job/result/10328995/1CJE0701?icid=sr25-1p
+  location: Sunnyvale, CA
+  date: 2016-01-17 20:26:09.575569000 -05:00
+  company_id: '10328995'
+  job_id: 1CJE0701
+- !ruby/object:Job
+  title: Java Developer with Mongo DB
+  company: Quantum Integrators Group LLC
+  link: https://www.dice.com/jobs/detail/Java-Developer-with-Mongo-DB-Quantum-Integrators-Group-LLC-Sunnyvale-CA-94085/10122612/366805?icid=sr26-1p&q=java&l=San
+    Jose, CA
+  location: Sunnyvale, CA
+  date: 2016-01-20 12:26:09.580111000 -05:00
+  company_id: '10122612'
+  job_id: '366805'
+- !ruby/object:Job
+  title: Sr. Java/J2EE Developer
+  company: Opal Soft, Inc.
+  link: https://www.dice.com/jobs/detail/Sr.-Java%26%2347J2EE-Developer-Opal-Soft%2C-Inc.-Sunnyvale-CA-94085/opal/357685?icid=sr27-1p&q=java&l=San
+    Jose, CA
+  location: Sunnyvale, CA
+  date: 2016-01-18 20:26:09.584509000 -05:00
+  company_id: opal
+  job_id: '357685'
+- !ruby/object:Job
+  title: Java Engineer
+  company: Pozent
+  link: http://www.dice.com/job/result/10210856/350468?icid=sr28-1p
+  location: Sunnyvale, CA
+  date: 2016-01-19 20:26:09.589642000 -05:00
+  company_id: '10210856'
+  job_id: '350468'
+- !ruby/object:Job
+  title: Java Developer
+  company: Mumba Technologies
+  link: http://www.dice.com/job/result/10410924/295096?icid=sr29-1p
+  location: Sunnyvale, CA
+  date: 2016-01-13 20:26:09.594845000 -05:00
+  company_id: '10410924'
+  job_id: '295096'
+- !ruby/object:Job
+  title: Java Full stack Developer
+  company: Tad IT Solutions LLC
+  link: https://www.dice.com/jobs/detail/Java-Full-stack-Developer-Tad-IT-Solutions-LLC-San-Ramon-CA-94583/90884795/323064?icid=sr30-1p&q=java&l=San
+    Jose, CA
+  location: San Ramon, CA
+  date: 2016-01-18 20:26:09.599783000 -05:00
+  company_id: '90884795'
+  job_id: '323064'

@@ -2,17 +2,16 @@ require 'sinatra'
 require 'httparty'
 require 'thin'
 require 'mechanize'
-require 'byebug'
 require 'chronic'
 require 'csv'
-require 'sinatra/reloader' if development?
+# require 'sinatra/reloader' if development?
 require_relative 'figaro_setup' if development?
 require_relative 'lib/scraper'
 require_relative 'lib/location'
 require_relative 'lib/glass_door'
 require_relative 'lib/job_saver.rb'
 
-also_reload 'lib/*'
+# also_reload 'lib/*'
 
 enable :sessions
 
