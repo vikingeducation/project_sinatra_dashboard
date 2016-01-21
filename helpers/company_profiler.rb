@@ -1,6 +1,9 @@
 require 'httparty'
 require 'pp'
+require 'figaro'
 require_relative 'company'
+require_relative 'company_profiler_figaro'
+
 
 class CompanyProfiler
 
@@ -9,9 +12,14 @@ class CompanyProfiler
   include HTTParty
   base_uri 'http://api.glassdoor.com'
 
+  GLASSDOOR_TP = ENV['glassdoor_tp']
+  GLASSDOOR_TK = ENV['glassdoor_tk']
+
+
   def initialize(company_name)
     @company_name = company_name
-    @options = { :query => { :v => 1, :format => 'json', :"t.p" => 53055, :"t.k" => "iNUUCFXuQUM", :action => "employers", :q => @company_name }}
+    @options = { :query => { :v => 1, :format => 'json', :"t.p" => GLASSDOOR_TP, :"t.k" => GLASSDOOR_TK, :action => "employers", :q => @company_name }}
+
     company_ratings
   end
 
@@ -38,5 +46,5 @@ end
 
 
 # cp = CompanyProfiler.new("microsoft")
-# pp cp.company_ratings
-# pp cp.stuff_we_want
+# cp.company_ratings
+# pp cp.company

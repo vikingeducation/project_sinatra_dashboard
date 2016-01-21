@@ -5,6 +5,7 @@ require 'mechanize'
 require 'chronic'
 require 'byebug'
 require 'csv'
+require 'figaro'
 # require 'sinatra/reloader' if development?
 require_relative 'helpers/scraper'
 require_relative 'helpers/locator'
