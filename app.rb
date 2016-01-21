@@ -19,11 +19,11 @@ enable :sessions
 get '/' do
   if session['zip'].nil?
     locator = Locator.new
+    locator.get_api_location
     session['city'] = locator.city
     session['region'] = locator.region
     session['zip'] = locator.zip
   end
-
   erb :index, locals: {results: nil}
 end
 
@@ -32,7 +32,6 @@ post '/' do
   time = Time.now - 12 * 3600
 
   results = scraper_helper(time, search_term, session['zip'])
-
   erb :index, locals: {results: results, city: session['city'], region: session['region']}
 end
 
