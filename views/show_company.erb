@@ -1,15 +1,23 @@
 <div class="container">
 <% if company %>
-  <h1><%= company.name%></h1>
-  <p><%= company.website %></p>
-  <p><%= company.rating %></p>
-  <p><%= company.num_ratings %></p>
+  <div class="page-header">
+    <h1><a href="http://<%= company.website %>"><%=company.name%></a> <span class="label label-success"><%= company.rating %></span></h1>
+  </div>
 
   <% if company.review %>
-    <h2><%= company.review.job_title%></h2>
-    <p><%= company.review.rating%></p>
-    <p><%= company.review.pros%></p>
-    <p><%= company.review.cons%></p>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Featured Review</h3>
+      </div>
+      <div class="panel-body">
+        <h4><%= company.review.job_title%> <span class="label label-success"><%= company.review.rating%></span></h4>
+        <hr>
+        <h4>Pros</h4>
+        <p><%= company.review.pros%></p>
+        <h4>Cons</h4>
+        <p><%= company.review.cons%></p>
+      </div>
+    </div>
   <% end %>
 
 <% else %>
