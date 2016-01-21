@@ -14,6 +14,19 @@ get '/' do
   scraper = DiceScraper.new( "c++", visitor_info["city"] )
   scraper.scrape
   job_array = CSV.read("dice_job.csv")
+
+  companies = []
+  job_array.each do |row|
+    companies << row[2]
+  end
+
+  credentials = File.read("glassdoor_api.txt")
+  result = credentials.split("\n")
+  partner_id = result[0]
+
+  glassdoor = GlassdoorCompanyQuery.new()
+  key = result[1]
+
   erb :index, locals: { job_table: job_array}
 end
 

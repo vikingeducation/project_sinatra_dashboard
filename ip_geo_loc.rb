@@ -21,9 +21,6 @@ class IPGeoLocation
   def print
     pp @ip_response
   end
-
-
-
 end
 
 # my_ip = "71.32.162.164"
