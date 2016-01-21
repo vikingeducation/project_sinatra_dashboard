@@ -8,9 +8,24 @@ require 'csv'
 # require 'sinatra/reloader' if development?
 require_relative 'helpers/scraper'
 require_relative 'helpers/locator'
+require_relative 'helpers/company_profiler'
 
 enable :sessions
 set :servers, ["thin", "puma", "webrick"]
+
+
+helpers do 
+
+  def glassdoor_results(job_results)
+    companies = []
+    job_results.each do |job|
+      profiler = CompanyProfiler.new(job.company)
+      companies << profiler.company
+    end
+    companies
+  end
+
+end
 
 
 get '/' do
@@ -24,6 +39,7 @@ end
 post '/' do
   search_term = params[:search]
   job_results = DiceScraper.new(session['location']).run(search_term)
-  erb :dashboard, :locals => { :job_results => job_results, :location => session['location'] }
+  glassdoor_results = glassdoor_results(job_results)
+  erb :dashboard, :locals => { :job_results => job_results, :location => session['location'], :glassdoor_results => glassdoor_results }
 end
 
