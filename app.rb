@@ -18,9 +18,16 @@ helpers do
 
   def glassdoor_results(job_results)
     companies = []
+    checked_companies = []
     job_results.each do |job|
-      profiler = CompanyProfiler.new(job.company)
-      companies << profiler.company
+      if checked_companies.include?(job.company)
+        index = checked_companies.index(job.company)
+        companies << companies[index]
+      else
+        profiler = CompanyProfiler.new(job.company)
+        companies << profiler.company
+        checked_companies << job.company
+      end
     end
     companies
   end

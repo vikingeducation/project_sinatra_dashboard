@@ -1,17 +1,41 @@
 <table class='table table-striped'>
   <thead>
     <tr>Here are jobs for <%= location%>:  </tr>
+    <tr>
+      <th>Job Title</th>
+      <th>Company Name</th>
+      <th>Link to Job Posting</th>
+      <th>Location</th>
+      <th>Date of Posting</th>
+      <th>Overall Glassdoor Rating</th>
+      <th>Culture and Values Rating</th>
+      <th>Compensation and Benefits Rating</th>
+      <th>Pros</th>
+      <th>Cons</th>
+    </tr>
   </thead>
   <tbody>
-    <% job_results.each do |job| %>
+    <% job_results.each_with_index do |job, index| %>
       <tr>
         <td><%= job.title %></td>
         <td><%= job.company %></td>
         <td><%= job.link %></td>
         <td><%= job.location %></td>
         <td><%= job.date %></td>
+        <td><%= glassdoor_results[index].overallRating %></td>
+        <td><%= glassdoor_results[index].cultureAndValuesRating %></td>
+        <td><%= glassdoor_results[index].compensationAndBenefitsRating %></td>
+        <td><%= glassdoor_results[index].pros %></td>
+        <td><%= glassdoor_results[index].cons %></td>
       </tr>
     <% end %>
-    <%= glassdoor_results %>
+
+<!--     <% glassdoor_results.each do |result| %>
+      <h4><%= result.overallRating %></h4>
+      <h4><%= result.cultureAndValuesRating %></h4>
+      <h4><%= result.compensationAndBenefitsRating %></h4>
+      <h4><%= result.pros %></h4>
+      <h4><%= result.cons %></h4>
+    <% end %> -->
   </tbody>
 </table>
