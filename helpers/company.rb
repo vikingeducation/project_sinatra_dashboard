@@ -13,10 +13,5 @@ class Company
     @cons = cons # first 100 chars of ["featuredReview"]["cons"]
   end
 
-  # def to_a
-  #   [overallRating, cultureAndValuesRating, compensationAndBenefitsRating, pros, cons]
-  # end
-
-
 
 end

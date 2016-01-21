@@ -18,7 +18,7 @@ class CompanyProfiler
 
   def initialize(company_name)
     @company_name = company_name
-    @options = { :query => { :v => 1, :format => 'json', :"t.p" => GLASSDOOR_TP, :"t.k" => GLASSDOOR_TK, :action => "employers", :q => @company_name }}
+    @options = { :query => { :v => 1, :format => 'json', :"t.p" => 53055, :"t.k" => "iNUUCFXuQUM", :action => "employers", :q => @company_name }}
 
     company_ratings
   end
