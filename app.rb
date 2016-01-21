@@ -7,6 +7,8 @@ require 'csv'
 require 'sinatra'
 require "sinatra/reloader" if development?
 require './helpers/scraper_helper.rb'
+require './lib/locator.rb'
+require './lib/company_profiler.rb'
 require 'bootstrap'
 require 'httparty'
 require 'pry-byebug'
@@ -15,7 +17,13 @@ helpers ScraperHelper
 enable :sessions
 
 get '/' do
-  get_api_location if session['zip'].nil?
+  if session['zip'].nil?
+    locator = Locator.new
+    session['city'] = locator.city
+    session['region'] = locator.region
+    session['zip'] = locator.zip
+  end
+
   erb :index, locals: {results: nil}
 end
 
@@ -26,13 +34,6 @@ post '/' do
   results = scraper_helper(time, search_term, session['zip'])
 
   erb :index, locals: {results: results, city: session['city'], region: session['region']}
-end
-
-def get_api_location
-  response = HTTParty.get("https://freegeoip.net/json/108.185.219.255")
-  session['city'] = "#{response['city']}"
-  session['region'] = "#{response['region_code']}"
-  session['zip'] = "#{response['zip_code']}"
 end
 
 # country_code region_code city
