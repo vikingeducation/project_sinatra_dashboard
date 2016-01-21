@@ -5,6 +5,7 @@ require 'bundler/setup'
 require 'mechanize'
 require 'csv'
 require 'sinatra'
+require 'figaro'
 require "sinatra/reloader" if development?
 require './helpers/scraper_helper.rb'
 require './lib/locator.rb'
@@ -24,6 +25,9 @@ get '/' do
     session['region'] = locator.region
     session['zip'] = locator.zip
   end
+
+  ua = request.user_agent
+
   erb :index, locals: {results: nil}
 end
 
