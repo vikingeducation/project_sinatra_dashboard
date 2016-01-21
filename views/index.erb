@@ -33,6 +33,9 @@
           <th>Job Title</th>
           <th>Location</th>
           <th>Company</th>
+          <% if defined?(company_ratings) && company_ratings[1] %>
+            <th>Company Rating</th>
+          <% end %>
           <th>Post Date</th>
           <th>Company ID</th>
           <th>Job Id</th>
@@ -44,10 +47,16 @@
               <td><%="#{row[0]}"%></td>
               <td><%="#{row[1]}"%></td>
               <td><%="#{row[2]}"%></td>
+              <% if defined?(company_ratings)  && company_ratings[1] %>
+                <% if company_ratings[0] == row[2] %>
+                  <td>company_ratings[1]</td>
+                <% end %>
+              <% end %>
               <td><%="#{row[3]}"%></td>
               <td><%="#{row[4]}"%></td>
               <td><%="#{row[5]}"%></td>
-              <td><%="#{row[6]}"%></td>
+              <!--<td><a href=<%="#{row[6]}"%>><%= row[0] %></a></td>-->
+              <td><a href=<%="#{row[6]}"%>>Link </a></td>
             </tr>
           <% end %>
         <% end %>
