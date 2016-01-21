@@ -10,6 +10,7 @@ require_relative 'figaro_setup' if development?
 require_relative 'lib/scraper'
 require_relative 'lib/location'
 require_relative 'lib/glass_door'
+require_relative 'lib/job_saver.rb'
 
 also_reload 'lib/*'
 
@@ -26,10 +27,12 @@ helpers do
 end
 
 get '/' do
-  p session
   job_results = []
   if query = params[:job_query]
-    job_results = DiceScraper.new(user_location).scrape_jobs(query)
+    unless job_results = JobSaver.load(query, user_location['city'])
+      job_results = DiceScraper.new(user_location).scrape_jobs(query)
+      JobSaver.new(job_results).save(query, user_location['city'])
+    end
   end
   erb :job_search, locals: {job_results: job_results}
 end

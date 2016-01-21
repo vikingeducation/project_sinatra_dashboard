@@ -1,0 +1,266 @@
+---
+- !ruby/object:Job
+  title: Full Stack Developer (Ruby on Rails)
+  company: Brookdale Associates, LLC
+  link: https://www.dice.com/jobs/detail/Full-Stack-Developer-%28Ruby-on-Rails%29-Brookdale-Associates%2C-LLC-Los-Gatos-CA-95031/90756142/354636?icid=sr1-1p&q=rails&l=San
+    Jose, CA
+  location: Los Gatos, CA
+  date: 2016-01-13 20:18:00.555063000 -05:00
+  company_id: '90756142'
+  job_id: '354636'
+- !ruby/object:Job
+  title: Sr. Ruby on Rails Engineer
+  company: Mumba Technologies
+  link: http://www.dice.com/job/result/10410924/314792?icid=sr2-1p
+  location: Mountain View, CA
+  date: 2016-01-19 22:18:00.562382000 -05:00
+  company_id: '10410924'
+  job_id: '314792'
+- !ruby/object:Job
+  title: Senior Ruby on Rails Engineer-Home Buying SaaS Company
+  company: CyberCoders
+  link: https://www.dice.com/jobs/detail/Senior-Ruby-on-Rails-Engineer%26%2345Home-Buying-SaaS-Company-CyberCoders-Burlingame-CA-94010/cybercod/TC2-124292613?icid=sr3-1p&q=rails&l=San
+    Jose, CA
+  location: Burlingame, CA
+  date: 2016-01-20 08:18:00.567618000 -05:00
+  company_id: cybercod
+  job_id: TC2-124292613
+- !ruby/object:Job
+  title: Lead Ruby on Rails Engineer-Home Buying SaaS Company 200k+
+  company: CyberCoders
+  link: https://www.dice.com/jobs/detail/Lead-Ruby-on-Rails-Engineer%26%2345Home-Buying-SaaS-Company-200k%2B-CyberCoders-Burlingame-CA-94010/cybercod/TC2-124500611?icid=sr4-1p&q=rails&l=San
+    Jose, CA
+  location: Burlingame, CA
+  date: 2016-01-20 08:18:00.573535000 -05:00
+  company_id: cybercod
+  job_id: TC2-124500611
+- !ruby/object:Job
+  title: Senior Ruby on Rails Developer
+  company: CyberCoders
+  link: https://www.dice.com/jobs/detail/Senior-Ruby-on-Rails-Developer-CyberCoders-Menlo-Park-CA-94025/cybercod/KM7-12533385?icid=sr5-1p&q=rails&l=San
+    Jose, CA
+  location: Menlo Park, CA
+  date: 2016-01-20 08:18:00.579966000 -05:00
+  company_id: cybercod
+  job_id: KM7-12533385
+- !ruby/object:Job
+  title: Ruby On Rails
+  company: Innovative Intelligent Solutions
+  link: https://www.dice.com/jobs/detail/Ruby-On-Rails-Innovative-Intelligent-Solutions-Santa-Clara-CA-95050/10325805/191035?icid=sr6-1p&q=rails&l=San
+    Jose, CA
+  location: Santa Clara, CA
+  date: 2016-01-20 14:18:00.585024000 -05:00
+  company_id: '10325805'
+  job_id: '191035'
+- !ruby/object:Job
+  title: Ruby on Rails SW Developer
+  company: Analysts International
+  link: https://www.dice.com/jobs/detail/Ruby-on-Rails-SW-Developer-Analysts-International-San-Jose-CA-95101/CXAICBP/362325?icid=sr7-1p&q=rails&l=San
+    Jose, CA
+  location: San Jose, CA
+  date: 2016-01-15 20:18:00.589247000 -05:00
+  company_id: CXAICBP
+  job_id: '362325'
+- !ruby/object:Job
+  title: Ruby on Rails Developer
+  company: Intelliswift Software Inc
+  link: https://www.dice.com/jobs/detail/Ruby-on-Rails-Developer-Intelliswift-Software-Inc-Milpitas-CA-95035/10108150/470386?icid=sr8-1p&q=rails&l=San
+    Jose, CA
+  location: Milpitas, CA
+  date: 2016-01-20 12:18:00.595896000 -05:00
+  company_id: '10108150'
+  job_id: '470386'
+- !ruby/object:Job
+  title: Seeking a Senior Ruby on Rails Lead / Architect
+  company: OSI Engineering, Inc.
+  link: https://www.dice.com/jobs/detail/Seeking-a-Senior-Ruby-on-Rails-Lead-%26%2347-Architect-OSI-Engineering%2C-Inc.-San-Jose-CA-95131/10365912/RubyRailsFronte?icid=sr9-1p&q=rails&l=San
+    Jose, CA
+  location: San Jose, CA
+  date: 2016-01-06 20:18:00.601387000 -05:00
+  company_id: '10365912'
+  job_id: RubyRailsFronte
+- !ruby/object:Job
+  title: Ruby on Rails Software Developer - San Francisco
+  company: CyberCoders
+  link: https://www.dice.com/jobs/detail/Ruby-on-Rails-Software-Developer-%26%2345-San-Francisco-CyberCoders-South-San-Francisco-CA-94080/cybercod/RS2-124355712?icid=sr10-1p&q=rails&l=San
+    Jose, CA
+  location: South San Francisco, CA
+  date: 2016-01-20 08:18:00.605773000 -05:00
+  company_id: cybercod
+  job_id: RS2-124355712
+- !ruby/object:Job
+  title: Ruby Developer / Ruby on Rails Developer
+  company: Quality IT Source
+  link: https://www.dice.com/jobs/detail/Ruby-Developer-%26%2347-Ruby-on-Rails-Developer-Quality-IT-Source-San-Jose-CA-95101/10122314/RORDEV1?icid=sr11-1p&q=rails&l=San
+    Jose, CA
+  location: San Jose, CA
+  date: 2015-12-30 20:18:00.611690000 -05:00
+  company_id: '10122314'
+  job_id: RORDEV1
+- !ruby/object:Job
+  title: Ruby on Rails Developer - San Carlos, CA
+  company: Indus Valley
+  link: https://www.dice.com/jobs/detail/Ruby-on-Rails-Developer-%26%2345-San-Carlos%2C-CA-Indus-Valley-San-Carlos-CA-94070/10225683/355854?icid=sr12-1p&q=rails&l=San
+    Jose, CA
+  location: San Carlos, CA
+  date: 2016-01-19 20:18:00.617316000 -05:00
+  company_id: '10225683'
+  job_id: '355854'
+- !ruby/object:Job
+  title: Ruby on Rails Software Engineer / Developer (up to $180k)
+  company: Skyrocket Ventures
+  link: http://www.dice.com/job/result/10366547/174720?icid=sr13-1p
+  location: Sunnyvale, CA
+  date: 2016-01-13 20:18:00.622875000 -05:00
+  company_id: '10366547'
+  job_id: '174720'
+- !ruby/object:Job
+  title: Senior Web Developer, RoR
+  company: Move, Inc.
+  link: http://www.dice.com/job/result/homestor/4692?icid=sr14-1p
+  location: San Jose, CA
+  date: 2016-01-20 19:18:00.629126000 -05:00
+  company_id: homestor
+  job_id: '4692'
+- !ruby/object:Job
+  title: Ruby Software Engineer (Remote or Relocation Paid)
+  company: CyberCoders
+  link: https://www.dice.com/jobs/detail/Ruby-Software-Engineer-%28Remote-or-Relocation-Paid%29-CyberCoders-San-Jose-CA-95101/cybercod/DN2-12572411?icid=sr15-1p&q=rails&l=San
+    Jose, CA
+  location: San Jose, CA
+  date: 2016-01-20 08:18:00.634438000 -05:00
+  company_id: cybercod
+  job_id: DN2-12572411
+- !ruby/object:Job
+  title: Back End Developer - For the digital health market *STARTUP*
+  company: CyberCoders
+  link: https://www.dice.com/jobs/detail/Back-End-Developer-%26%2345-For-the-digital-health-market-*STARTUP*-CyberCoders-Palo-Alto-CA-94301/cybercod/KC1-12572811?icid=sr16-1p&q=rails&l=San
+    Jose, CA
+  location: Palo Alto, CA
+  date: 2016-01-20 08:18:00.640302000 -05:00
+  company_id: cybercod
+  job_id: KC1-12572811
+- !ruby/object:Job
+  title: Software Engineer
+  company: CyberCoders
+  link: https://www.dice.com/jobs/detail/Software-Engineer-CyberCoders-Oakland-CA-94601/cybercod/KM7-124226613?icid=sr17-1p&q=rails&l=San
+    Jose, CA
+  location: Oakland, CA
+  date: 2016-01-20 08:18:00.645258000 -05:00
+  company_id: cybercod
+  job_id: KM7-124226613
+- !ruby/object:Job
+  title: Full Stack Developer - Fast-Growing Dinner Delivery Service
+  company: CyberCoders
+  link: https://www.dice.com/jobs/detail/Full-Stack-Developer-%26%2345-Fast%26%2345Growing-Dinner-Delivery-Service-CyberCoders-Palo-Alto-CA-94301/cybercod/DM2-12503756?icid=sr18-1p&q=rails&l=San
+    Jose, CA
+  location: Palo Alto, CA
+  date: 2016-01-20 08:18:00.650085000 -05:00
+  company_id: cybercod
+  job_id: DM2-12503756
+- !ruby/object:Job
+  title: Front-end Engineer
+  company: "@tech Consulting Group"
+  link: https://www.dice.com/jobs/detail/Front%26%2345end-Engineer-%40tech-Consulting-Group-Palo-Alto-CA-94301/techa001/341335?icid=sr19-1p&q=rails&l=San
+    Jose, CA
+  location: Palo Alto, CA
+  date: 2015-12-30 20:18:00.658348000 -05:00
+  company_id: techa001
+  job_id: '341335'
+- !ruby/object:Job
+  title: Ruby full-stack developer
+  company: Intelliswift Software Inc
+  link: https://www.dice.com/jobs/detail/Ruby-full%26%2345stack-developer-Intelliswift-Software-Inc-Milpitas-CA-95035/10108150/RFSD?icid=sr20-1p&q=rails&l=San
+    Jose, CA
+  location: Milpitas, CA
+  date: 2016-01-17 20:18:00.669518000 -05:00
+  company_id: '10108150'
+  job_id: RFSD
+- !ruby/object:Job
+  title: Ruby Developer
+  company: Amtex Enterprises
+  link: https://www.dice.com/jobs/detail/Ruby-Developer-Amtex-Enterprises-Milpitas-CA-95035/10113037/366932?icid=sr21-1p&q=rails&l=San
+    Jose, CA
+  location: Milpitas, CA
+  date: 2016-01-20 13:18:00.675725000 -05:00
+  company_id: '10113037'
+  job_id: '366932'
+- !ruby/object:Job
+  title: Web Developer
+  company: Softworld Inc
+  link: https://www.dice.com/jobs/detail/Web-Developer-Softworld-Inc-Newark-CA-94560/softwinc/Softworld_2205-19?icid=sr22-1p&q=rails&l=San
+    Jose, CA
+  location: Newark, CA
+  date: 2016-01-20 19:44:00.688036000 -05:00
+  company_id: softwinc
+  job_id: Softworld_2205-19
+- !ruby/object:Job
+  title: Dark Roast Java Developer
+  company: API Test Account
+  link: https://www.dice.com/jobs/detail/Dark-Roast-Java-Developer-API-Test-Account-San-Jose-CA-95110/apiusers/187441?icid=sr23-1p&q=rails&l=San
+    Jose, CA
+  location: San Jose, CA
+  date: 2016-01-19 20:18:00.697929000 -05:00
+  company_id: apiusers
+  job_id: '187441'
+- !ruby/object:Job
+  title: J322-Senior UI/UX Designer/Engineer
+  company: Integnology Corporation
+  link: http://www.dice.com/job/result/10101561/J322?icid=sr24-1p
+  location: Santa Clara, CA
+  date: 2016-01-20 16:18:00.709412000 -05:00
+  company_id: '10101561'
+  job_id: J322
+- !ruby/object:Job
+  title: Senior ROR Developer needed for strong Pre-IPO start up in San Mateo
+  company: Nelson Technology
+  link: https://www.dice.com/jobs/detail/Senior-ROR-Developer-needed-for-strong-Pre%26%2345IPO-start-up-in-San-Mateo-Nelson-Technology-Mountain-View-CA-94043/cxtechsj/506709?icid=sr25-1p&q=rails&l=San
+    Jose, CA
+  location: Mountain View, CA
+  date: 2016-01-13 20:18:00.721578000 -05:00
+  company_id: cxtechsj
+  job_id: '506709'
+- !ruby/object:Job
+  title: Full Stack Developer - Best opportunity!
+  company: CyberCoders
+  link: https://www.dice.com/jobs/detail/Full-Stack-Developer-%26%2345-Best-opportunity%21-CyberCoders-Redwood-City-CA-94061/cybercod/JY1-12542224?icid=sr26-1p&q=rails&l=San
+    Jose, CA
+  location: Redwood City, CA
+  date: 2016-01-20 08:18:00.729626000 -05:00
+  company_id: cybercod
+  job_id: JY1-12542224
+- !ruby/object:Job
+  title: Full Stack Engineer - Help Make People Safer!
+  company: CyberCoders
+  link: https://www.dice.com/jobs/detail/Full-Stack-Engineer-%26%2345-Help-Make-People-Safer%21-CyberCoders-Palo-Alto-CA-94301/cybercod/DM2-122972113?icid=sr27-1p&q=rails&l=San
+    Jose, CA
+  location: Palo Alto, CA
+  date: 2016-01-20 08:18:00.738260000 -05:00
+  company_id: cybercod
+  job_id: DM2-122972113
+- !ruby/object:Job
+  title: Senior SDET's needed for strong pre-IPO company in peninsula area
+  company: Nelson Technology
+  link: https://www.dice.com/jobs/detail/Senior-SDET%27s-needed-for-strong-pre%26%2345IPO-company-in-peninsula-area-Nelson-Technology-San-Mateo-CA-94401/cxtechsj/153688?icid=sr28-1p&q=rails&l=San
+    Jose, CA
+  location: San Mateo, CA
+  date: 2016-01-13 20:18:00.744292000 -05:00
+  company_id: cxtechsj
+  job_id: '153688'
+- !ruby/object:Job
+  title: Senior SW Engineer / Developer (Full Stack)
+  company: U.S. Tech Solutions Inc.
+  link: http://www.dice.com/job/result/usts/15-11169?icid=sr29-1p
+  location: San Bruno, CA
+  date: 2016-01-20 18:18:00.748838000 -05:00
+  company_id: usts
+  job_id: 15-11169
+- !ruby/object:Job
+  title: Python Developer Needed
+  company: dotSolved
+  link: https://www.dice.com/jobs/detail/Python-Developer-Needed-dotSolved-Santa-Clara-CA-95052/10114122/PD-CA?icid=sr30-1p&q=rails&l=San
+    Jose, CA
+  location: Santa Clara, CA
+  date: 2016-01-19 20:18:00.753938000 -05:00
+  company_id: '10114122'
+  job_id: PD-CA
