@@ -30,11 +30,7 @@ post '/' do
   time = Time.now - 12 * 3600
 
   results = scraper_helper(time, search_term, session['zip'])
-  results.each do |result|
-    company = result[2]
-    location = result[3]
-    set_profiler(company,location)
-  end
+  set_profiler(results)
 
   erb :index, locals: {results: results, city: session['city'], region: session['region']}
 end
@@ -49,9 +45,9 @@ def set_session
   end
 end
 
-def set_profiler(company,location)
+def set_profiler(results)
   profiler = CompanyProfiler.new
-  profiler.create_uri(company,location)
+  profiler.get_profiles(results)
 end
 
 # country_code region_code city
