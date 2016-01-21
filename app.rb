@@ -26,6 +26,7 @@ helpers do
 end
 
 get '/' do
+  p session
   job_results = []
   if query = params[:job_query]
     job_results = DiceScraper.new(user_location).scrape_jobs(query)
