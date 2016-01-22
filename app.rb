@@ -14,7 +14,6 @@ require_relative 'helpers/company_profiler'
 enable :sessions
 set :servers, ["thin", "puma", "webrick"]
 
-
 helpers do 
 
   def glassdoor_results(job_results)
@@ -35,9 +34,8 @@ helpers do
 
 end
 
-
 get '/' do
-  locator = Locator.new #(request.ip)
+  locator = Locator.new(request.ip)
   location = locator.readable_location
   session['location'] = location
   erb :index, :locals => { :location => location }
