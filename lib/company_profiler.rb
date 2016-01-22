@@ -2,7 +2,7 @@ require 'figaro'
 
 
 class CompanyProfiler
-  
+
   attr_accessor :uri
 
   Figaro.application = Figaro::Application.new(
@@ -35,7 +35,6 @@ class CompanyProfiler
     uri << "&userip=108.185.219.255&useragent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.111 Safari/537.36" # ip and user agent
 
     @profiles << HTTParty.get(uri)
-    binding.pry
   end
 
 end

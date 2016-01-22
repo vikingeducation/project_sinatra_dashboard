@@ -8,13 +8,14 @@ require 'sinatra'
 require 'figaro'
 require "sinatra/reloader" if development?
 require './helpers/scraper_helper.rb'
+require './helpers/session_helper.rb'
 require './lib/locator.rb'
 require './lib/company_profiler.rb'
 require 'bootstrap'
 require 'httparty'
 require 'pry-byebug'
 
-helpers ScraperHelper
+helpers ScraperHelper, SessionHelper
 enable :sessions
 
 get '/' do
@@ -29,25 +30,9 @@ post '/' do
   search_term = params[:search_term]
   time = Time.now - 12 * 3600
 
-  results = scraper_helper(time, search_term, session['zip'])
+  zip = session['zip']
+  results = scraper_helper(time, search_term, zip)
   set_profiler(results)
 
   erb :index, locals: {results: results, city: session['city'], region: session['region']}
 end
-
-def set_session
-  if session['zip'].nil?
-    locator = Locator.new
-    locator.get_api_location
-    session['city'] = locator.city
-    session['region'] = locator.region
-    session['zip'] = locator.zip
-  end
-end
-
-def set_profiler(results)
-  profiler = CompanyProfiler.new
-  profiler.get_profiles(results)
-end
-
-# country_code region_code city

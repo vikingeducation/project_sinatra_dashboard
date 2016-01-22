@@ -4,8 +4,8 @@ class Locator
   def initialize
   end
 
-  def get_api_location
-    response = HTTParty.get("https://freegeoip.net/json/108.185.219.255")
+  def get_api_location(ip)
+    response = HTTParty.get("https://freegeoip.net/json/#{ip}")
     @city = "#{response['city']}"
     @region = "#{response['region_code']}"
     @zip = "#{response['zip_code']}"
