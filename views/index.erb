@@ -1,0 +1,31 @@
+<h1>
+	Dice Scraper
+</h1>
+<h3>search by job title, skills, keywords or company name</h3>
+
+<form action="/index" method="post">
+	<textarea type="text" name ="sarch_topic" placeholder="search keywords"></textarea>
+	<br>
+	<input type="submit" value="Scrape">
+</form>
+<br>
+<%if searched%>
+	<table class="table table-condensed">
+	<tr>
+		<td>Title</td>
+		<td>Company</td>
+		<td>Link</td>
+		<td>Location</td>
+		<td>Posting Date</td>
+		<td>Company ID</td>
+		<td>Job ID</td>
+	</tr>
+  <%results.each do |result|%>
+    <tr>
+      <%result.each do |detail|%>
+        <td><%=detail%></td>
+      <%end%>
+    </tr>
+  <%end%>
+</table>
+<%end%>
