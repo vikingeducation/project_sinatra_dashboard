@@ -48,25 +48,13 @@ get '/index' do
 end
 
 post '/index' do
-  company_hash={}
   search_topic = params[:search_topic]
+  # Getting our Dicescrape results to display in the table
   results = DiceScraper.new(search_topic, session["zip_code"]).get_results_array
-  results.each do |result|
-    company_details = Glassdoor.new.get_employer_details(session["ip"], session["user_agent"], result[1], session["country"])
-    company_details["response"]["employers"].each do |company|
-      if company["name"].upcase == result[1].upcase && company_hash[result[-2]] == nil
-        company_hash[result[-2]] = {
-          "id" => company["id"],
-          "name" => company["name"],
-          "numberOfRatings" => company["numberOfRatings"],
-          "overallRating" => company["overallRating"],
-          "cultureAndValuesRating" => company["cultureAndValuesRating"],
-          "workLifeBalanceRating" => company["workLifeBalanceRating"],
-          "recommendToFriendRating" => company["recommendToFriendRating"]
-        }
-      end
-    end
-  end
-  company_hash
+
+  # Need to get a hash full of company reviews from glassdoor. That way we can use logic in the erb page to display those columns in the table as well.
+  # It'd be good if we can just send all the info we have to the glassdoor class and get them to sort it all out for us.
+  company_hash=Glassdoor.new.get_company_hash(results, session["ip"], session["user_agent"])
+
   erb :index, locals: {searched: true, results: results, zip: session["zip_code"], city: session["city"], state: session["state"], country: session["country"], company_hash: company_hash}
 end

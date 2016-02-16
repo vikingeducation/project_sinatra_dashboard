@@ -30,14 +30,41 @@ class Glassdoor
   BASE_URI = "http://api.glassdoor.com/api/api.htm?"
 
   # Construct and initiate the new request
-  def get_employer_details(user_ip, user_agent, company_name, country)
+  def get_employer_details(user_ip, user_agent, company_name)
 
     # Build our URL
-    uri = "#{BASE_URI}t.p=55204&t.k=#{API_KEY}&userip=#{user_ip}&useragent=#{user_agent}&format=json&v=1&action=employers&q=#{company_name}&l=#{country}"
+    uri = "#{BASE_URI}t.p=55204&t.k=#{API_KEY}&userip=#{user_ip}&useragent=#{user_agent}&format=json&v=1&action=employers&q=#{company_name}"
 
     # Build the request
     request = HTTParty.get(uri)
   end
+
+  def get_company_hash(results, user_ip, user_agent)
+    company_hash = {}
+    results.each do |result|
+      company_details = get_employer_details(user_ip, user_agent, result[1])
+
+      company_details["response"]["employers"].each do |company|
+        if company["name"].upcase == result[1].upcase && company_hash[result[-2]] == nil
+          company_hash[result[-2]] = set_company_hash(company)
+        end
+      end
+    end
+    company_hash
+  end
+
+  def set_company_hash(company)
+    {
+      "id" => company["id"],
+      "name" => company["name"],
+      "numberOfRatings" => company["numberOfRatings"],
+      "overallRating" => company["overallRating"],
+      "cultureAndValuesRating" => company["cultureAndValuesRating"],
+      "workLifeBalanceRating" => company["workLifeBalanceRating"],
+      "recommendToFriendRating" => company["recommendToFriendRating"],
+      "featuredReview" => company["featuredReview"]
+    }
+  end
 end
 
-pp Glassdoor.new.get_employer_details("136.0.16.217", "mozilla", "A Search", "USA")
+# pp Glassdoor.new.get_employer_details("136.0.16.217", "mozilla", "A Search", "USA")
