@@ -39,3 +39,5 @@ class Glassdoor
     request = HTTParty.get(uri)
   end
 end
+
+pp Glassdoor.new.get_employer_details("136.0.16.217", "mozilla", "A Search", "USA")
