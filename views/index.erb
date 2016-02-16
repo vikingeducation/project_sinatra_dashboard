@@ -10,7 +10,6 @@
 </form>
 <br>
 <%if searched%>
-	<%=company_hash%>
 	<h3>
 		Jobs in <%=city%>, <%=state%>, <%=country%>
 	</h3>
@@ -33,6 +32,13 @@
     <tr>
       <%result.each do |detail|%>
         <td><%=detail%></td>
+      <%end%>
+      <%if company_hash["#{result[-2]}"]%>
+      	<td><%=company_hash["#{result[-2]}"]["numberOfRatings"]%></td>
+      	<td><%=company_hash["#{result[-2]}"]["overallRating"]%></td>
+      	<td><%=company_hash["#{result[-2]}"]["cultureAndValuesRating"]%></td>
+      	<td><%=company_hash["#{result[-2]}"]["workLifeBalanceRating"]%></td>
+      	<td><%=company_hash["#{result[-2]}"]["recommendToFriendRating"]%></td>
       <%end%>
     </tr>
   <%end%>
