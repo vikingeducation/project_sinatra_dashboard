@@ -30,6 +30,7 @@ get '/index' do
 end
 
 post '/index' do
-  results = DiceScraper.new('ruby junior').get_results_array
+  search_topic = params[:search_topic]
+  results = DiceScraper.new(search_topic).get_results_array
   erb :index, locals: {searched: true, results: results}
 end
