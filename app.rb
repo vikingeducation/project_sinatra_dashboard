@@ -23,10 +23,38 @@
 require 'rubygems'
 require 'bundler/setup'
 require './assignment_web_scraper/lib/dice_scraper'
+require './free_geo/free_geo_ip.rb'
 Bundler.require(:default)
 
+helpers do
+
+  def get_ip
+    if Sinatra::Base::development?
+      session["ip"] = "202.86.32.122"
+    else
+      session["ip"] =  request.ip
+    end
+  end
+
+end
+
+enable :sessions
+
+get '/' do
+  get_ip if session["ip"] == nil
+  redirect '/index'
+end
+
 get '/index' do
-  erb :index, locals: {searched: false}
+  get_ip if session["ip"] == nil
+  if session["country"] == nil
+    location = IPLocator.new.get_user_location_details(session["ip"])
+    session["zip_code"] = location["zip_code"]
+    session["city"] = location["city"]
+    session["state"] = location["region_code"]
+    session["country"] = location["country_name"]
+  end
+  erb :index, locals: {searched: false, zip: session["zip_code"], city: session["city"], state: session["state"], country: session["country"]}
 end
 
 post '/index' do
