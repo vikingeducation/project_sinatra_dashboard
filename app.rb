@@ -1,7 +1,3 @@
-=begin
-
-=end
-
 # 3. Refreshing the page should kick off scraping operations.
 # IT works but because the scraping takes so long, the page doesn't load, do you need to have the erb on the bottom?
 
@@ -18,6 +14,7 @@ helpers do
   # If in development mode, we just set it to a static San Francisco IP
   # Else we get the user's ip
   # Stored in session
+  # I put this in a helper because I thought it might be needed on other pages depending on where the user comes from.
   def get_ip
     if Sinatra::Base::development?
       session["ip"] = "136.0.16.217"
@@ -48,12 +45,10 @@ get '/index' do
 end
 
 post '/index' do
-  search_topic = params[:search_topic]
-  # Getting our Dicescrape results to display in the table
-  results = DiceScraper.new(search_topic, session["zip_code"]).get_results_array
+  # Getting our Dicescrape results for display on page and also for Glassdoor to use.
+  results = DiceScraper.new(params[:search_topic], session["zip_code"]).get_results_array
 
   # Need to get a hash full of company reviews from glassdoor. That way we can use logic in the erb page to display those columns in the table as well.
-  # It'd be good if we can just send all the info we have to the glassdoor class and get them to sort it all out for us.
   company_hash=Glassdoor.new.get_company_hash(results, session["ip"], session["user_agent"])
 
   erb :index, locals: {searched: true, results: results, zip: session["zip_code"], city: session["city"], state: session["state"], country: session["country"], company_hash: company_hash}
