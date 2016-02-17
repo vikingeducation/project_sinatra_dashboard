@@ -1,0 +1,5 @@
+Tips and Tricks
+
+1. The glassdoor company API uses IDs not company names. You'll need to use your ingenuity to figure out a way around that by utilizing different API methods and strategies.
+
+2. When making requests, pay attention to all the required parameters. For some reason, they require things like the useragent parameter.

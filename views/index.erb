@@ -1,0 +1,45 @@
+<h1>Dice Scraper</h1>
+<h5>search by job title, skills, keywords or company name</h5>
+
+<form action="/index" method="post">
+	<input type = "text" name = "search_topic">
+	<input type="submit" value="Scrape">
+</form>
+<br>
+<%if searched%>
+	<h3>Jobs in <%=city%>, <%=state%>, <%=country%></h3>
+	<table class="table table-bordered">
+		<tr>
+			<td>Title</td>
+			<td>Company</td>
+			<td>Link</td>
+			<td>Location</td>
+			<td>Posting Date</td>
+			<td>Company ID</td>
+			<td>Job ID</td>
+			<td>Number of Ratings</td>
+			<td>Overall Rating</td>
+			<td>Culture and Values Rating</td>
+			<td>Word Life Balance Rating</td>
+			<td>Recommend To Friend Rating</td>
+		</tr>
+	  <%results.each do |result|%>
+	    <tr>
+	      <%result.each do |detail|%>
+	        <td><%=detail%></td>
+	      <%end%>
+	      <%if company_hash["#{result[-2]}"]%>
+	      	<td><%=company_hash["#{result[-2]}"]["numberOfRatings"]%></td>
+	      	<td><%=company_hash["#{result[-2]}"]["overallRating"]%></td>
+	      	<td><%=company_hash["#{result[-2]}"]["cultureAndValuesRating"]%></td>
+	      	<td><%=company_hash["#{result[-2]}"]["workLifeBalanceRating"]%></td>
+	      	<td><%=company_hash["#{result[-2]}"]["recommendToFriendRating"]%></td>
+	      <%else%>
+	      	<%5.times do%>
+	      		<td> </td>
+	      	<%end%>
+	      <%end%>
+	    </tr>
+	  <%end%>
+	</table>
+<%end%>
