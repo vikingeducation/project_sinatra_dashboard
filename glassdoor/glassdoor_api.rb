@@ -1,11 +1,3 @@
-require 'httparty'
-require 'json'
-
-# For better debugging
-require 'pp'
-
-class Glassdoor
-  API_KEY = ENV["API_KEY"]
 =begin
   Parameters
 
@@ -27,7 +19,36 @@ class Glassdoor
   14. ps  Page size, i.e. the number of jobs returned on each page of results. Default is 20. No (DONE)
 =end
 
+require 'httparty'
+require 'json'
+
+# For better debugging
+require 'pp'
+
+class Glassdoor
+  API_KEY = ENV["API_KEY"]
+
   BASE_URI = "http://api.glassdoor.com/api/api.htm?"
+
+  def get_company_hash(results, user_ip, user_agent)
+    company_hash = {}
+    # Going through the results from web scrape
+    results.each do |result|
+      # Getting results from glassdoor api based on company name from scrape
+      company_details = get_employer_details(user_ip, user_agent, result[1])
+
+      # Going through each employer from search results from glassdoor
+      company_details["response"]["employers"].each do |company|
+        # If the company name from glass door and dice are the exact same and company info isn't already in our company_hash...
+        if company["name"].upcase == result[1].upcase && company_hash[result[-2]] == nil
+          company_hash[result[-2]] = set_company_hash(company)
+        end
+      end
+    end
+    company_hash
+  end
+
+  private
 
   # Construct and initiate the new request
   def get_employer_details(user_ip, user_agent, company_name)
@@ -36,21 +57,7 @@ class Glassdoor
     uri = "#{BASE_URI}t.p=55204&t.k=#{API_KEY}&userip=#{user_ip}&useragent=#{user_agent}&format=json&v=1&action=employers&q=#{company_name}"
 
     # Build the request
-    request = HTTParty.get(uri)
-  end
-
-  def get_company_hash(results, user_ip, user_agent)
-    company_hash = {}
-    results.each do |result|
-      company_details = get_employer_details(user_ip, user_agent, result[1])
-
-      company_details["response"]["employers"].each do |company|
-        if company["name"].upcase == result[1].upcase && company_hash[result[-2]] == nil
-          company_hash[result[-2]] = set_company_hash(company)
-        end
-      end
-    end
-    company_hash
+    HTTParty.get(uri)
   end
 
   def set_company_hash(company)
