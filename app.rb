@@ -7,7 +7,7 @@
 
 require 'rubygems'
 require 'bundler/setup'
-require './assignment_web_scraper/lib/dice_scraper'
+require './web_scraper/dice_scraper.rb'
 require './free_geo/free_geo_ip.rb'
 require './glassdoor/glassdoor_api.rb'
 Bundler.require(:default)
