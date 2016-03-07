@@ -8,8 +8,8 @@ require_relative 'lib/company_profiler.rb'
 enable :sessions
 
 #environment variables for glassdoor
-gd_id = 44526#ENV["GLASSDOOR_ID"]
-gd_key = "iLqhfsy2zw7"#ENV["GLASSDOOR_KEY"]
+gd_id = #ENV["GLASSDOOR_ID"]
+gd_key = #ENV["GLASSDOOR_KEY"]
 
 get '/' do
   #get location of client (hit api only once per session)
