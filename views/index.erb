@@ -1,0 +1,38 @@
+<form class = "form-inline form-group" style = "width:100%; margin:20px 0 0 30%;" action = "/" method = "post">
+	<input class = "form-control" style="width: 400px;" type = "text" name = "search">
+	<input class="btn btn-default" type = "submit" value = "Search!">
+</form>
+
+<h1 style = "margin:30px 20px;">Your Dashboard :</h1>
+<h2 style = "margin:30px 20px;">Jobs in <%= @city %>, <%= @country_code %> :</h2>
+
+<% if @results %>
+<table class = "table">
+	<tr>
+		<th>#</th>
+		<th>Title</th>
+		<th>Location</th>
+		<th>Post Date</th>
+		<th>Company</th>
+		<th>Link</th>
+		<th>culture and values</th>
+		<th>compensation and benefits</th>
+		<th>work life balance</th>
+	</tr>
+	<% @results.each_with_index do |job, index| %>
+	<tr>
+		<td><%= index + 1 %></td>
+		<td><%= job.title %></td>
+		<td><%= job.location %></td>
+		<td><%= job.date %></td>
+		<td><%= job.company %></td>
+		<td><a href="<%= job.link %>"> See the Job</a></td>
+		<% if job.company_data %>
+			<td><%= job.company_data.cultureAndValuesRating %></td>
+			<td><%= job.company_data.compensationAndBenefitsRating %></td>
+			<td><%= job.company_data.workLifeBalanceRating %></td>
+		<% end %>
+	</tr>
+	<% end %>
+</table>
+<% end %>	
