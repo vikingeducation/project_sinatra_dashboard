@@ -1,3 +1,27 @@
+# GET "/"
+# Find Ip
+#   if local ip, put hard-coded one
+# Check Api Locator to find the city
+# Save city, and Country
+#
+# Find User_Agent
+# Save User_Agent
+
+# POST "/"
+# Take The Search Param
+# New Parser With Search param and City
+#
+# For Each Job Post
+#   Check the company
+#   Check if we already looks the company
+#   Create a new Struct with the information
+
+# Save In session :
+#   Ip, and User_agent
+#   The city, Country_code
+#   The Jobs results
+
+
 require 'sinatra'
 require 'sinatra/reloader' if development?
 require './web_scraper/parser'
@@ -12,33 +36,35 @@ require './helpers/save_helper'
 
 helpers SearchHelper, SaveHelper
 
+enable :sessions
+
 # How to use the development? to know assign fake ip if develop
 
 get "/" do
-  user_variables = find_ip
-  save_ip( user_variables )
-  erb :'index'
+  if session[:ip].nil?
+    user = find_information
+    save_ip( user )
+  end
+  erb :'index', locals: { city: session[:city], 
+                          country_code: session[:country_code] }
 end
 
 post "/" do
-  search = params["search"].split(" ").join("_")
-  # request.cookies["city"] ? ( city = request.cookies["city"].split(" ").join("_") ) : ( city = "New_york" )
+  search = params["search"].gsub!(" ", "_")
   parser = Parser.new
-  @city, @country_code = request.cookies["city"], request.cookies["country_code"]
-  @results = parser.parsing_html( "https://www.dice.com/jobs/sort-date-q-#{search}-limit-30-l-#{@city}-radius-El-jobs.html?searchid=3223042923491" )
+  results = parser.parsing_html( "https://www.dice.com/jobs/sort-date-q-#{search}-limit-30-l-#{session[:city]}-radius-El-jobs.html?searchid=3223042923491" )
   
-  @results.each do |job|
-
-    if company = job.company
-
-      company_info = CompanyProfiler.search( company, request )
-      company_info = company_info["response"]["employers"][0]
-      new_company = CompanyData.new( company_info["cultureAndValuesRating"], 
-                                     company_info["compensationAndBenefitsRating"], 
-                                     company_info["workLifeBalanceRating"])
-      job.company_data = new_company
-    end
-  end
-
-  erb :'index'
+  @results = get_company_info( results )
+  erb :'index', locals: { city: session[:city], 
+                          country_code: session[:country_code] }
 end
+
+
+
+
+
+
+
+
+
+
