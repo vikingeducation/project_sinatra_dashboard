@@ -1,13 +1,21 @@
 <h1>Scrape</h1>
+
 <form action="/scrape" method="post">
 	<div class="form-group">
 		<label for="q">Job</label>
 		<input class="form-control" type="text" name="q" placeholder="Jobs, Companies, Keywords"/>
 		<label for="location">Location</label>
-		<input class="form-control" type="text" name="location" placeholder="Location, City, State, Zip" value="<%= location.city + ', ' + location.region_code %>"/>
+    
+    <% if defined?(location) && location.city && location.region_code %>
+		  <input class="form-control" type="text" name="location" placeholder="Location, City, State, Zip" value="<%= location.city + ', ' + location.region_code %>"/>
+    <% end %>
+
 	</div>
 	<button class="btn btn-primary" type="submit">Scrape</button>
 </form>
+
+<pre><%= CGI.escapeHTML(location.inspect) %></pre>
+
 <% unless data.empty? %>
 	<table class="table table-striped">
 		<thead>

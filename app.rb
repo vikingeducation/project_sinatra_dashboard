@@ -2,6 +2,8 @@ require 'sinatra'
 require 'erb'
 require 'mechanize'
 require 'uri'
+require 'thin'
+require 'cgi'
 
 require_relative 'lib/csv_loader.rb'
 require_relative 'lib/csv_saver.rb'
@@ -82,7 +84,7 @@ post '/scrape' do
 	query = params['q']
 	location = params['location']
 
-	unless query.empty? || location.empty?
+	unless query.empty? || location
 		dice_task = DiceTask.new(
 			:query => query,
 			:location => location
@@ -107,3 +109,6 @@ post '/scrape' do
 		redirect "/?error=#{message}"
 	end
 end
+
+
+
