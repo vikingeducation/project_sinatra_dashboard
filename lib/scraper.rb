@@ -8,21 +8,21 @@ class SearchJobs
   end
 
   def get_jobs(term)
-    @agent.get(@address) do |page|
+    @agent.get(@base_uri) do |page|
 
       search_form = page.form_with(:action => '/jobs') do |search|
         search.q = term
         search.l = "Austin, TX"
       end.submit
 
-      results = search_form.search('div.serp-result-content')
+      results = search_form.search('div#search-results-control div.serp-result-content')
 
       results.each do |result|
         parsed = parse_job(result)
         @result << parsed
       end
     end
-    return parsed
+    return @result
   end
 
   def parse_job(result)

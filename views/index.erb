@@ -20,7 +20,7 @@
       <tbody>
         <% results.each do |result| %>
           <tr>
-            <td><a href="<%=#{result[:link]}%>"><%=result[:title]%></a></td>
+            <td><a href="<%=result[:link]%>" target="_blank"><%=result[:title]%></a></td>
             <td><%=result[:employer]%></td>
             <td><%=result[:location]%></td>
           </tr>

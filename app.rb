@@ -15,7 +15,7 @@ set :session_secret, '*&(^B234'
 # helpers
 
 get '/' do
-  erb :index
+  erb :index, locals: { results: nil }
 end
 
 post '/jobs' do
