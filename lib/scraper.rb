@@ -7,12 +7,12 @@ class SearchJobs
     @result = []
   end
 
-  def get_jobs(term)
+  def get_jobs(term, location)
     @agent.get(@base_uri) do |page|
 
       search_form = page.form_with(:action => '/jobs') do |search|
         search.q = term
-        search.l = "Austin, TX"
+        search.l = location
       end.submit
 
       results = search_form.search('div#search-results-control div.serp-result-content')
