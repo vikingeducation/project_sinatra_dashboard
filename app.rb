@@ -1,5 +1,5 @@
 require 'sinatra'
-require 'sinatra/reloader'
+require 'sinatra/reloader' if development?
 require 'thin'
 require 'rubygems'
 require 'bundler/setup'
@@ -14,5 +14,9 @@ set :session_secret, '*&(^B234'
 # helpers
 
 get '/' do
-  "<h1>Hello, Stephen</h1>"
+  erb :index
+end
+
+post '/jobs' do
+  "these are #{params[:searchTerms]}"
 end
