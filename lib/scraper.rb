@@ -27,7 +27,7 @@ class SearchJobs
 
   def parse_job(result)
     title = result.search('a.dice-btn-link')[0].text.strip
-    employer = result.search('li.employer').text.strip
+    employer = result.search('li.employer span.hidden-xs')[0].attributes['title'].value
     location = result.search('li.location').text.strip
     link = result.search('a.dice-btn-link')[0].attributes['href'].value
     return { title: title, employer: employer, location: location, link: link }
