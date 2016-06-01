@@ -7,6 +7,7 @@ require 'mechanize'
 require 'erb'
 require 'json'
 require 'pry-byebug'
+require './lib/scraper'
 
 enable :sessions
 set :session_secret, '*&(^B234'
@@ -18,5 +19,7 @@ get '/' do
 end
 
 post '/jobs' do
-  "these are #{params[:searchTerms]}"
+  scraper = SearchJobs.new
+  results = scraper.get_jobs(params[:searchTerms])
+  erb :index, locals: { results: results }
 end
