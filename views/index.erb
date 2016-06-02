@@ -17,6 +17,7 @@
           <th>Title</th>
           <th>Employer</th>
           <th>Location</th>
+          <th>Glassdoor Rating</th>
         </tr>
       </thead>
       <tbody>
@@ -25,6 +26,7 @@
             <td><a href="<%=result[:link]%>" target="_blank"><%=result[:title]%></a></td>
             <td><%=result[:employer]%></td>
             <td><%=result[:location]%></td>
+            <td><%=result[:rating]%></td>
           </tr>
         <% end %>
       </tbody>
