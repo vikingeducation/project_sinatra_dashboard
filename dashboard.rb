@@ -23,7 +23,6 @@ get "/jobs_list" do
 
   unless Pathname.new("csv_file.csv").exist?
     searcher = Scraper.new(params[:q], params[:l])
-    searcher.submit_form
     searcher.write_to_csv(searcher.build_job_hash)
   end
 
@@ -31,4 +30,3 @@ get "/jobs_list" do
 
   erb :jobs_list, :locals => { :jobs => jobs }
 end
-
