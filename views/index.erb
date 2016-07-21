@@ -8,12 +8,23 @@
 
 <table>
   <tr>
-    <th>
       <% unless jobs.nil? %> 
-        <% jobs[0].keys.each do |k| %>  
+        <% jobs[0].keys.each do |k| %> 
+        <th> 
           <%= k %> 
+        </th>
         <% end %>
       <% end %>  
-    </th>
   </tr>
+  <% unless jobs.nil? %> 
+  <% jobs.each do |job_hash| %>
+  <tr>
+    <%    job_hash.values.each do|value| %>
+    <td>
+    <%=        value %>
+    </td>
+    <%     end %> 
+  </tr>
+  <%  end %>
+<% end %>
 </table>
