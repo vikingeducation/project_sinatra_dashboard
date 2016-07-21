@@ -34,12 +34,26 @@
       <th>Location</th>
       <th>Employer_ID</th>
       <th>Job ID</th>
+      <th>Rating</th>
     </tr>
   <% data.each do |position| %>
+    
     <tr>
+    <% profiler = ProfilerHelper::CompanyProfiler.new(position[4]) %>
+    
     <% position.each do |data| %>
+      
       <td><%= data %></td>
+    
     <% end %>
+    
+    <td>
+    <% profiler.ratings.each do |description, rating| %>
+        <%="#{description}: #{rating}\n" %>
+    
+    <% end %>
+    </td>
+
     </tr>
   <% end %>
 

@@ -2,12 +2,14 @@ require 'sinatra'
 require 'sinatra/reloader' if development?
 require './assignment_web_scraper/lib/scraper.rb'
 require './helpers/locator_helper.rb'
+require './helpers/profile_helper.rb'
 
 puts "This is process #{Process.pid}"
 
 enable :sessions
 
-helpers LocatorHelper
+helpers LocatorHelper, ProfilerHelper
+
 
 get '/' do
   session[:json] ||= LocatorHelper::Locator.send_request("108.51.25.16").run.response_body
