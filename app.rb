@@ -2,6 +2,7 @@ require 'sinatra'
 require 'sinatra/reloader' if development?
 require './helpers/job_helpers'
 require './helpers/locator_helper'
+require './helpers/company_profiler_helper'
 
 helpers JobHelpers
 helpers Locator
@@ -16,5 +17,7 @@ end
 post '/' do
   ip = '75.37.48.0'
   @client = Locator::Locator.new(ip)
-  erb :search_results, { locals: { q: params[:q], l: params[:l], city: @client.city, region: @client.region } }
+  profiler = CompanyProfiler::CompanyProfiler.new
+  rating = profiler.make_request("Nike")["response"]["employers"]["overallRating"]
+  erb :search_results, { locals: { q: params[:q], l: params[:l], city: @client.city, region: @client.region, rating: rating} }
 end
