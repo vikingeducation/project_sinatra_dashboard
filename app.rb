@@ -6,8 +6,12 @@ require_relative './web_scraper'
 
 
 get "/" do
-  puts "Your IP address is #{request.ip}"
-  erb :index, locals: { data: nil }
+
+  mech = Mechanize.new
+  ip = request.ip
+  mech_object = JSON.parse(mech.get("https://www.freegeoip.net/json/173.169.240.17").body)["zip_code"]
+
+  erb :index, locals: { data: nil, mech_object: mech_object }
 end
 
 
