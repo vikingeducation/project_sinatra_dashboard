@@ -3,12 +3,14 @@ require 'erb'
 require './helpers/script.rb'
 require './helpers/view_helpers.rb'
 require './helpers/locator.rb'
+require './helpers/company_profiler.rb'
 
 enable :sessions
 
 helpers ScraperHelper
 helpers ViewHelpers
 helpers LocatorHelper
+helpers CompanyProfileHelper
 
 get '/' do
   # unless session["loc-data"]
@@ -37,4 +39,12 @@ post '/scraper' do
   jobs = scraper.run
 
   erb :index, locals: { jobs: jobs }
+end
+
+get '/glassdoorapi' do
+  query = "CyberCoders"#params[:keyword]
+  profiler = CompanyProfileHelper::CompanyProfiler.new(request)
+  profiler.build_url(query)
+  results = profiler.get_request
+  erb :glassdoorapi, locals: { results: results }
 end
