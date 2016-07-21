@@ -21,9 +21,9 @@
 <% if position && location %>
   <% data = WebScraperProject::WebScraper.run({q: position, l: location, limit: limit}) %>
 
-<h3><%=location%></h3>
 
 <div class="container">
+  <h3><%=location%></h3>
   <table class="table table-striped">
     <tr>
       <th>Position</th>
