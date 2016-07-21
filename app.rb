@@ -8,11 +8,13 @@ helpers Locator
 
 get '/' do
   ip = request.ip
-  zip = Locator::Locator.new(request.ip).zip
-
-  erb :index, { locals: { zip: ip } }
+  ip = '75.37.48.0'
+  @client = Locator::Locator.new(ip)
+  erb :index, { locals: { zip: @client.zip } }
 end
 
 post '/' do
-  erb :search_results, { locals: { q: params[:q], l: params[:l] } }
+  ip = '75.37.48.0'
+  @client = Locator::Locator.new(ip)
+  erb :search_results, { locals: { q: params[:q], l: params[:l], city: @client.city, region: @client.region } }
 end
