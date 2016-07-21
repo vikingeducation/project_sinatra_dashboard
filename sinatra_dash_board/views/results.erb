@@ -22,8 +22,10 @@
         <th>Company</th>
         <th>Location</th>
         <th>Date Posted</th>
-        <th>Company ID</th>
-        <th>Position ID</th>
+        <th>Culture and Values Rating</th>
+        <th>Compensation and Benefits Rating</th>
+        <th>Featured Review Pros</th>
+        <th>Featured Review Cons</th>
       </tr>
       <% jobs.each do |hash| %> 
         <tr>
@@ -31,8 +33,10 @@
           <td><%= hash[:company] %> </td>
           <td><%= hash[:location] %> </td>
           <td><%= hash[:date] %> </td>
-          <td><%= hash[:company_id] %> </td>
-          <td><%= hash[:position_id] %> </td>
+          <td><%= hash[:c_v] %> </td>
+          <td><%= hash[:c_b] %> </td>
+          <td><%= hash[:pros] %> </td>
+          <td><%= hash[:cons] %> </td>
         </tr>
       <% end %>
     </table>
