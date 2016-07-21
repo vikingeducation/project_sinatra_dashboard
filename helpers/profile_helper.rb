@@ -7,15 +7,13 @@ module ProfilerHelper
   class CompanyProfiler
 
     def initialize(query)
-      @query = query
+      @query = query.gsub(' ','+')
       @request = send_request
     end
 
     def send_request
       request = Typhoeus::Request.new(build_uri, :method => :get)
-      binding.pry
-      JSON.parse(request.run.response_body)
-
+      request.run.response_body.length > 0 ? JSON.parse(request.run.response_body) : nil
     end
 
     def build_uri
@@ -23,22 +21,26 @@ module ProfilerHelper
     end
 
     def find_job
-      @request["response"]["employers"].first
+      @request["response"]["employers"].first if @request
     end
 
     def featured_review
-      review = find_job["featuredReview"] if find_job["featuredReview"]
-      review
+      if @request
+        review = find_job["featuredReview"] if find_job["featuredReview"]
+        review
+      end
     end
 
     def ratings
-      job = find_job
-      ratings = {}
-      ratings["overall"] = job["overallRating"].to_s
-      ratings["culture_values"] = job["cultureAndValuesRating"]
-      ratings["compensation"] = job["compensationAndBenefitsRating"]
-      ratings["worklife"] = job["workLifeBalanceRating"]
-      ratings
+      if @request
+        job = find_job
+        ratings = {}
+        ratings["overall"] = job["overallRating"].to_s
+        ratings["culture_values"] = job["cultureAndValuesRating"]
+        ratings["compensation"] = job["compensationAndBenefitsRating"]
+        ratings["worklife"] = job["workLifeBalanceRating"]
+        ratings
+      end
     end
   end
 

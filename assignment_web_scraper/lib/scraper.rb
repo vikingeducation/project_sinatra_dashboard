@@ -17,7 +17,7 @@ module WebScraperProject
       def run(options={},ref=nil)
         @agent = Mechanize.new
         uri = build_uri(options)
-        
+
         results = get_results(uri)
         build_results(results,ref)
       end
@@ -70,7 +70,7 @@ module WebScraperProject
         def get_details(result)
           job_page = result.at('h3').at('a')
           page_click = @agent.click(job_page)
-          employer = page_click.at('li.employer').text.strip
+          employer = page_click.at('li.employer').text.strip[0..-2]
           employer_id = page_click.at('div.company-header-info').css('div')[1].text.strip
           job_id = page_click.at('div.company-header-info').css('div')[2].text.strip
           location = result.css('ul').css('li.location').text.strip

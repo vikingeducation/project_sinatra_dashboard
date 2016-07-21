@@ -9,7 +9,7 @@
 </head>
 <div class="container">
   <h1>Job Search</h1>
-  <form action="index"  method="post">
+  <form action="/"  method="post">
     <input type="text" name="position" placeholder="Job">
     <input type="text" name="location" value="<%=default_location%>">
     <input type="text" name="limit" placeholder="# of results">
@@ -37,20 +37,23 @@
       <th>Rating</th>
     </tr>
   <% data.each do |position| %>
-    
+
     <tr>
     <% profiler = ProfilerHelper::CompanyProfiler.new(position[4]) %>
-    
+
     <% position.each do |data| %>
-      
+
       <td><%= data %></td>
-    
+
     <% end %>
-    
+
     <td>
-    <% profiler.ratings.each do |description, rating| %>
-        <%="#{description}: #{rating}\n" %>
-    
+
+    <% if profiler.find_job %>
+      <% profiler.ratings.each do |description, rating| %>
+          <%="#{description}: #{rating}\n" %>
+
+      <% end %>
     <% end %>
     </td>
 

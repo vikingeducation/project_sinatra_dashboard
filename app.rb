@@ -17,7 +17,7 @@ get '/' do
 
 end
 
-post '/index' do
+post '/' do
   position = params[:position]
   location = params[:location]
   limit = params[:limit]
