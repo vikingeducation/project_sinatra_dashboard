@@ -7,7 +7,7 @@ get '/index' do
   erb :index
 end
 
-post '/index'
+post '/index' do 
   position = params[:position]
   location = params[:location]
   erb :index, locals: {position: position, location: location}

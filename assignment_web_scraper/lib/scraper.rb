@@ -39,7 +39,7 @@ module WebScraperProject
       def build_uri(params)
         uri = BASE_URI
         uri += build_query_string(params)
-        binding.pry
+        
         uri
       end
 
@@ -128,7 +128,7 @@ end
 
 # results = WebScraperProject::WebScraper.run('https://www.dice.com/jobs?q=web+developer&l=San+Jose&limit=5',Time.new)
 
-results = WebScraperProject::WebScraper.run({q: "developer", l: "Washington+DC"})
+results = WebScraperProject::WebScraper.run({q: "developer", l: "San+Jose"})
 p results
 
 # WebScraperProject::WebScraper.to_csv(results)

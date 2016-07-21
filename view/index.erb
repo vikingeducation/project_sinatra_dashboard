@@ -6,11 +6,30 @@
 
 
 <% if position && location %>
+  data = WebScraperProject::WebScraper.run({q: position, l: location})
+  
 
-
-
-
+  
   <table>
+  <%# position-title = 0, link = 1, date = 2  %> summary,employer,location,employer_id,job_id
+    <tr>
+      <th>Position</th>
+      <th>Job Link</th>
+      <th>Date</th>
+      <th>Summary</th>
+      <th>Employer</th>
+      <th>Location</th>
+      <th>Employer_ID</th>
+      <th>Job ID</th>
+    </tr>
+  <% data.each do |position| %>
+    
+    <tr>
+    <% position.each do |data| %>
+      <td><%= data %></td>
+    <% end %>
+    </tr>
+  <% end %>
   <!-- generate table rows and cells in a loop  -->
   </table>
 <% end %>
