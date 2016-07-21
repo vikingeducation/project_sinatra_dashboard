@@ -5,3 +5,15 @@
   <input type = "test" name = "location">
   <input type = "submit" value = "Find jobs!">
 </form>
+
+<table>
+  <tr>
+    <th>
+      <% unless jobs.nil? %> 
+        <% jobs[0].keys.each do |k| %>  
+          <%= k %> 
+        <% end %>
+      <% end %>  
+    </th>
+  </tr>
+</table>

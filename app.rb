@@ -1,16 +1,20 @@
 require 'sinatra'
 require 'erb'
 require './helpers/script.rb'
+require './helpers/view_helpers.rb'
 
 helpers ScraperHelper
+helpers ViewHelpers
 
 get '/' do
-  erb :index
+  erb :index, locals: { jobs: nil }
 end
 
-post '/' do
+post '/scraper' do
   query = params[:keyword]
   location = params[:location]
   scraper = DiceScraper.new(query, location)
-  job_hash = scraper.run
+  jobs = scraper.run
+
+  erb :index, locals: { jobs: jobs }
 end
