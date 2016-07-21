@@ -6,14 +6,14 @@ module CompanyProfiler
     include JobHelpers
 
     def initialize()
-      
+
     end
 
     def get_url(parameters)
       build_url("http://api.glassdoor.com/api/api.htm?", parameters)
     end
 
-    def make_request(company)
+    def get_request(company)
       parameters =
       {
         'v' => '1',
@@ -23,9 +23,34 @@ module CompanyProfiler
         'action' => 'employers',
         'q' => "#{company}"
       }
-      
-      HTTParty.get(get_url(parameters))
+
+      @request = HTTParty.get(get_url(parameters))["response"]["employers"].first
+
     end
 
+    def overall_rating
+      @request["overallRating"]
+    end
+
+    def culture_rating
+      @request["cultureAndValuesRating"]
+    end
+
+    def leadership_rating
+      @request["seniorLeadershipRating"]
+    end
+
+    def compensation_rating
+      @request["compensationAndBenefitsRating"]
+    end
+
+    def career_ops_rating
+      @request["careerOpportunitiesRating"]
+    end
+
+    def balance_rating
+      @request["workLifeBalanceRating"]
+    end
   end
 end
+

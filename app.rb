@@ -18,6 +18,6 @@ post '/' do
   ip = '75.37.48.0'
   @client = Locator::Locator.new(ip)
   profiler = CompanyProfiler::CompanyProfiler.new
-  rating = profiler.make_request("Nike")["response"]["employers"]["overallRating"]
-  erb :search_results, { locals: { q: params[:q], l: params[:l], city: @client.city, region: @client.region, rating: rating} }
+
+  erb :search_results, { locals: { q: params[:q], l: params[:l], city: @client.city, region: @client.region } }
 end

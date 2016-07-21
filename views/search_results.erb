@@ -1,4 +1,4 @@
-<h1>Your Results for <%= city%>, <%= region %> <%= rating %></h1>
+<h1>Your Results for <%= city%>, <%= region %></h1>
 <table class="table table-hover">
   <tr>
     <th>Title</th>
@@ -8,6 +8,8 @@
     <th>Posting Date</th>
     <th>Dice ID</th>
     <th>Position ID</th>
+    <th>Overall</th>
+    <th>Compensation</th>
   </tr>
   <tbody>
     <% get_results(q, l).each do |result| %>
@@ -18,7 +20,14 @@
                 <% else %>
                     <a href="<%= result[2] %>" target="_blank"><td><%= value %></td></a>
                 <% end %>
+
+
+
             <% end %>
+            <% company = CompanyProfiler::CompanyProfiler.new %>
+            <% company.get_request(result[1])%>
+            <td><%= company.overall_rating %></td>
+            <td><%= company.compensation_rating %></td>
         </tr>
     <% end %>
   </tbody>
