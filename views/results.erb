@@ -1,0 +1,18 @@
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Company</th>
+    <th>Link</th>
+    <th>Location</th>
+    <th>Date</th>
+    <th>Dice</th>
+    <th>Position</th>
+  <tr>
+<% result_array.each do |job| %>
+  <tr>
+  <% job.each do |stat| %>
+    <th><%= stat %><th>
+  <% end %>
+  </tr>
+<%end%>
+</table>

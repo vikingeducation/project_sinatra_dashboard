@@ -12,5 +12,4 @@ post '/' do
   scraper = DiceScraper.new(job_title, location)
   result_array = scraper.create_listings_array
   erb :results, locals: {:result_array => result_array}
-
 end
