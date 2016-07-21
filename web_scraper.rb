@@ -65,28 +65,38 @@ class WebScraper
       @job_id << object_page.at('meta[name="jobId"]')[:content]
       @company_id << object_page.at('meta[name="groupId"]')[:content]
       @url << object_page.at('meta[property="og:url"]')[:content]
-      @location << object_page.search(".location").text
-      @employer_name << object_page.search(".employer").text.strip
-      @time_ago << object_page.search(".posted").text
+      @location << object_page.search(".location").text[0..-1]
+      @employer_name << object_page.search(".employer").text.strip[0..-2]
+      @time_ago << date_parser(object_page.search(".posted").text)
     end
-  end
-
-
-  def details_of_job_test
-    p job_title = @mech.get(job_links[2].href).search(".jobTitle").text
-    p job_id = @mech.get(job_links[2].href).at('meta[name="jobId"]')[:content]
-    p company_id = @mech.get(job_links[2].href).at('meta[name="groupId"]')[:content]
-    p url = @mech.get(job_links[2].href).at('meta[property="og:url"]')[:content]
-    p location = @mech.get(job_links[2].href).search(".location").text
-    p employer_name = @mech.get(job_links[2].href).search(".employer").text.strip
-    p time_ago = @mech.get(job_links[2].href).search(".posted").text
   end
 
   def all_data 
     @data = [@job_title, @job_id, @company_id, @url, @location, @employer_name, @time_ago]
   end
 
-def write_csv
+  def date_parser(date)
+    units = date.match(/(moment|minute|hour|day|week|month)/)[0]
+    number = date.match(/\d+/)[0].to_i
+    result = case units
+    when "moment"
+      0
+    when "minute"
+      number * 60
+    when "hour"
+      number * 3600
+    when "day"
+      number * 86_400
+    when "week"
+      number * 86_400 * 7
+    when "month"
+      number * 86_400 * 30
+    end
+
+    "Posted around #{Time.now - result}"
+  end
+
+  def write_csv
     CSV.open("text.csv", "w") do |csv|
       all_data.transpose.each do |posting|
         csv << posting
@@ -104,36 +114,3 @@ web_scraper.write_csv
 # results =  web_scraper.get_results.links_with(:href => %r{/jobs/})
 
 
-
-#jobs = web_scraper.get_results.links.select do |link|
-#  /https:\/\/www.dice.com\/jobs\/detail/.match(link.href)
-#end
-
-
-
-#jobs_links = jobs.map { |job| job.href }
-#p jobs_links.length
-
-  # results.each do |result|
-  #   puts result.strip
-  # end
-# puts results
-# links = results
-# relevant_jobs = links.select do |link|
-#   link.href.include?("jobs")
-# end
-# relevant_jobs.each do |job|
-#   puts job
-# end
-# p links
-
-#agent.history_added = Proc.new { sleep 3.0 }
-#agent.user_agent_alias = 'Mac Safari'
-
-#page = agent.get("https://www.dice.com#{search_query}")
-#puts page
-# search_form = page.form_with :name => "f"
-# search_form.field_with(:name => "q").value = "Hello"
-
-# search_results = agent.submit search_form
-# puts search_results.body # =>
