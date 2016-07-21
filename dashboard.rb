@@ -7,14 +7,28 @@ require "thin"
 require "mechanize"
 require_relative 'dice_scraper'
 
+helpers do
+
+  def read_file
+    File.readlines("csv_file.csv")
+  end
+
+end
 
 get "/" do
-  
-  unless Pathname.new("csv_file.csv").exists?
-    searcher = Scraper.new("developer", "raleigh, nc")
+  erb :index
+end
+
+get "/jobs_list" do
+
+  unless Pathname.new("csv_file.csv").exist?
+    searcher = Scraper.new(params[:q], params[:l])
     searcher.submit_form
     searcher.write_to_csv(searcher.build_job_hash)
   end
 
-  erb :index
+  jobs = read_file
+
+  erb :jobs_list, :locals => { :jobs => jobs }
 end
+
