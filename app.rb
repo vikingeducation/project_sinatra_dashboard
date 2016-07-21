@@ -3,9 +3,9 @@ require './dice_scraper.rb'
 require 'httparty'
 require 'pry-byebug'
 
-helpers do
-  @fake_ip = '40.138.174.92'
+enable :sessions
 
+helpers do
   def make_free_geo_url(ip)
     "http://freegeoip.net/json/#{ip}"
   end
@@ -17,15 +17,16 @@ helpers do
 end
 
 get '/' do
+  session['ip_addr'] ||= '40.138.174.92'
   erb :index
 end
 
 post '/' do
   job_title = params[:job_title]
-  location = params[:location]
-  loc_data = get_loc_data('40.138.174.92')
-
-  scraper = DiceScraper.new(job_title, loc_data)
+  location = params[:location].capitalize
+  loc_data = get_loc_data(session['ip_addr'])
+  location = loc_data['city'].capitalize + ", " + loc_data['region_name'].capitalize if params[:location].empty?
+  scraper = DiceScraper.new(job_title, location)
   result_array = scraper.create_listings_array.compact
-  erb :results, locals: {:result_array => result_array, :city => loc_data['city'], :state => loc_data['state']}
+  erb :results, locals: {:result_array => result_array, :location => location}
 end
