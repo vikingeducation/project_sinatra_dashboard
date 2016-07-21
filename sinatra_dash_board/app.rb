@@ -3,18 +3,8 @@
 require 'sinatra'
 require 'pry-byebug'
 require 'httparty'
+require_relative  'helpers'
 require_relative '../dice_scraper/script'
-
-
-class Locator
-
-  attr_reader :location
-
-  def initialize(ip="173.68.17.225")
-    @location = HTTParty.get("https://freegeoip.net/json/#{ip}")
-  end
-end
-
 
 get '/index' do
   location = (request.ip.to_s.length < 4) ? Locator.new.location : Locator.new(request.ip).location
