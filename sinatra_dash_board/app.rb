@@ -2,13 +2,24 @@
 
 require 'sinatra'
 require 'pry-byebug'
+require 'httparty'
 require_relative '../dice_scraper/script'
 
 
+class Locator
+
+  attr_reader :location
+
+  def initialize(ip="173.68.17.225")
+    @location = HTTParty.get("https://freegeoip.net/json/#{ip}")
+  end
+end
+
 
 get '/index' do
-  request.ip
-  erb :index, locals: {geo_loc: "#{request.ip}"}
+  location = (request.ip.to_s.length < 4) ? Locator.new.location : Locator.new(request.ip).location
+  erb :index, locals: {geo_city: "#{location["city"]}", 
+  geo_state: "#{location["region_code"]}"}
 end
 
 post '/search' do
