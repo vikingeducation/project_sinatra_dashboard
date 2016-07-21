@@ -3,12 +3,11 @@
 require 'rubygems'
 require 'mechanize'
 require 'csv'
+require 'uri'
 
 class WebScraper
 
-  attr_reader :mech, :job_title, :job_id, :company_id, :url, :location, :employer_name, :time_ago, :data
-
-  def initialize
+  def initialize(job, city, type)
     @mech = Mechanize.new
     @mech.history_added = Proc.new {sleep 0.5}
     @job_title = []
@@ -19,32 +18,17 @@ class WebScraper
     @time_ago = []
     @company_id = []
     @data = nil
-  end
-
-  def get_job
-    job = gets.chomp
-    job.split(" ").join("+")
-  end
-
-  def get_location
-    location = gets.chomp
-    location.split(" ").join("+")
-  end
-
-  def get_job_type
-    job_type = gets.chomp
-    job_type.split(" ").join("+")
+    @job = job
+    @city = city
+    @type = type
   end
 
   def search_query
-    jobs = ["Javascript", "Ruby", "Bartender"]
-    cities = ["New+York%2C+NY", "San+Francisco%2C+CA", "Miami%2C+FL"]
-    job_types = ["Full+Time", "Part+Time", "Contracts"]
     search_string = ""
     search_string << "/jobs?"
-    search_string << "q=" + jobs[0]
-    search_string << "&l=" + cities[0]
-    search_string << "&=djtype" + job_types[0]
+    search_string << "q=" + @job.split(' ').join('+')
+    search_string << "&l=" + @city.split(' ').join('+')
+    search_string << "&=djtype" + @type.split(' ').join('+')
     search_string
   end
 
@@ -106,8 +90,7 @@ class WebScraper
   end
 
 end
-
-web_scraper = WebScraper.new
+web_scraper = WebScraper.new("ruby", "new york", "full time")
 web_scraper.loop_through_job_links
 web_scraper.write_csv
 # web_scraper = WebScraper.new
