@@ -5,6 +5,10 @@ GEM
       unf (>= 0.0.5, < 1.0.0)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
+    httparty (0.13.7)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
+    json (1.8.3)
     mechanize (2.7.2)
       domain_name (~> 0.5, >= 0.5.1)
       http-cookie (~> 1.0.0)
@@ -16,6 +20,7 @@ GEM
       webrobots (>= 0.0.9, < 0.2)
     mime-types (1.25.1)
     mini_portile2 (2.1.0)
+    multi_xml (0.5.5)
     net-http-digest_auth (1.4)
     net-http-persistent (2.9.4)
     nokogiri (1.6.8)
@@ -40,6 +45,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  httparty
   mechanize (~> 2.7.2, < 2.7.3)
   sinatra
 
