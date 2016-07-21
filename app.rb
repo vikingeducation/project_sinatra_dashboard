@@ -4,11 +4,12 @@ require './assignment_web_scraper/lib/scraper.rb'
 
 
 get '/index' do
-  erb :index
+  erb :index, locals: {position: nil, location: nil}
 end
 
-post '/index' do 
+post '/index' do
   position = params[:position]
   location = params[:location]
-  erb :index, locals: {position: position, location: location}
+  limit = params[:limit]
+  erb :index, locals: {position: position, location: location, limit: limit}
 end

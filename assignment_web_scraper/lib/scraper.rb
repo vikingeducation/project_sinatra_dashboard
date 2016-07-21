@@ -17,6 +17,7 @@ module WebScraperProject
       def run(options={},ref=nil)
         @agent = Mechanize.new
         uri = build_uri(options)
+        binding.pry
         results = get_results(uri)
         build_results(results,ref)
       end
@@ -39,7 +40,6 @@ module WebScraperProject
       def build_uri(params)
         uri = BASE_URI
         uri += build_query_string(params)
-        
         uri
       end
 
@@ -128,10 +128,5 @@ end
 
 # results = WebScraperProject::WebScraper.run('https://www.dice.com/jobs?q=web+developer&l=San+Jose&limit=5',Time.new)
 
-results = WebScraperProject::WebScraper.run({q: "developer", l: "San+Jose"})
-p results
-
-# WebScraperProject::WebScraper.to_csv(results)
-# h3 includes a link that has the job title
-# div class "shortdesc" contains a short description
-# ul class "list-inline details" contains li's "employer", "location", "posted"
+# results = WebScraperProject::WebScraper.run({q: "developer", l: "San+Jose"})
+# p results
