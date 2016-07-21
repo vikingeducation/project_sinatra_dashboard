@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 
-require "bundler/setup"
 require "pry"
 require "sinatra"
 require "sinatra/reloader" if development?
@@ -10,7 +9,7 @@ require_relative 'dice_scraper'
 
 
 get "/" do
-
+  
   unless Pathname.new("csv_file.csv").exists?
     searcher = Scraper.new("developer", "raleigh, nc")
     searcher.submit_form
