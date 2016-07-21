@@ -1,4 +1,6 @@
-source "http://www.rubygems.org"
+source 'https://rubygems.org'
 
-gem 'pry'
 gem 'sinatra'
+gem 'pry-byebug'
+gem 'thin'
+gem 'mechanize'
