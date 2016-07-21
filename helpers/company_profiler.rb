@@ -6,18 +6,16 @@ module CompanyProfileHelper
   API_KEY = ENV["API_KEY"]
 
   class CompanyProfiler
-    #@response = HTTPParty.class.get("#{VERSION}", options)
+    
     def initialize(request)
       @query_params = {
                       "t.p" => '80567',
                       "t.k" => 'hpTny2kiC7E',
-                      "userip" => '2601:602:9200:cbf0:8d07:e947:5836:a41e',
+                      "userip" => request.ip,
                       "useragent" => request.user_agent,
                       "format" => "json",
                       "v" => '1',  
-                      "action" => "employers"
-                      #ENV["GLASSDOOR_ID"], 
-                      #ENV["GLASSDOOR_KEY"], 
+                      "action" => "employers" 
                       }
     end
 
@@ -34,6 +32,7 @@ module CompanyProfileHelper
 
     def get_company_info(results)
       company_info = {}
+      company_info[:name] = get_company_name(results)
       company_info[:rating] = get_rating(results)
       company_info[:website] = get_website(results)  
       company_info[:industry] = get_industry(results)
@@ -48,6 +47,10 @@ module CompanyProfileHelper
 
     def get_request
       @response = HTTParty.get(@base_uri,:headers=>{"User-Agent" => @query_params["useragent"]})
+    end
+
+    def get_company_name(results)
+      results["response"]["employers"][0]["name"]
     end
 
     def get_rating(results)
@@ -67,20 +70,13 @@ module CompanyProfileHelper
     end
 
     def get_cons(results)
-      featured review cons: results["response"]["employers"][0]["featuredReview"]["cons"]
+      results["response"]["employers"][0]["featuredReview"]["cons"]
     end
 
   end
 
 
 end
-
-#overall rating: results["response"]["employers"][0]["overallRating"]
-#website: results["response"]["employers"][0]["website"]
-#industry: results["response"]["employers"][0]["industry"]
-#featured review pros: results["response"]["employers"][0]["featuredReview"]["pros"]
-#featured review cons: results["response"]["employers"][0]["featuredReview"]["cons"]
-
 
 
 

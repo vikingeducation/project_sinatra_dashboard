@@ -17,13 +17,19 @@
       <% end %>  
   </tr>
   <% unless jobs.nil? %> 
-  <% jobs.each do |job_hash| %>
+    <% jobs.each do |job_hash| %>
   <tr>
-    <%    job_hash.values.each do|value| %>
+    <%    job_hash.each do |pair| %>
     <td>
-    <%=        value %>
+      <% if pair[0] == :company %>
+        <a href="/glassdoorapi/<%= pair[1] %>">
+          <%= pair[1] %>
+        </a>
+      <% else %>
+          <%= pair[1] %>
+      <% end %>
     </td>
-    <%     end %> 
+    <% end %> 
   </tr>
   <%  end %>
 <% end %>

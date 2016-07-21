@@ -45,7 +45,6 @@ class DiceScraper
 
   def set_up_page(page)
     job_form = page.form_with(:action => "/jobs")
-    #input fields
   end
 
   def set_up_form(form,query,location)
@@ -54,7 +53,6 @@ class DiceScraper
   end
 
   def submit_form(form)
-    #returns first page of search results
     @agent.submit(form,form.buttons.first)
   end
 
@@ -78,7 +76,6 @@ class DiceScraper
   def get_elements(page, element)
     elements = page.css(element)
   end
-
 
   def get_job_title(page)
     noko_job = get_elements(page, ".jobTitle").children.to_s
@@ -105,7 +102,7 @@ class DiceScraper
     all_info = get_elements(page, "title").children.to_s
     date = all_info.match(/\d\d-\d\d-\d\d\d\d/)[0]
   end
-  #inputs a link and outputs company_arr
+
   def get_company_info(link)
     info = {}
     company_page =  parse_page(@agent.get(link))
