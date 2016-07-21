@@ -1,7 +1,7 @@
 require 'sinatra'
 require './dice_scraper.rb'
 require 'httparty'
-# require 'pry-byebug'
+require 'pry-byebug'
 
 helpers do
   @fake_ip = '40.138.174.92'
@@ -12,7 +12,7 @@ helpers do
 
   def get_loc_data(ip)
     url = make_free_geo_url(ip)
-    JSON.parse(HTTParty.get(url))['zip_code']
+    result = HTTParty.get(url)
   end
 end
 
@@ -23,9 +23,9 @@ end
 post '/' do
   job_title = params[:job_title]
   location = params[:location]
-  scraper = DiceScraper.new(job_title, location)
+  loc_data = get_loc_data('40.138.174.92')
+
+  scraper = DiceScraper.new(job_title, loc_data)
   result_array = scraper.create_listings_array.compact
-  loc_data = get_loc_data(@fake_ip)
-  # binding.pry
-  erb :results, locals: {:result_array => result_array, :loc_data => loc_data}
+  erb :results, locals: {:result_array => result_array, :city => loc_data['city'], :state => loc_data['state']}
 end
