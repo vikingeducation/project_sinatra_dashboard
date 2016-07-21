@@ -7,6 +7,8 @@ require 'uri'
 
 class WebScraper
 
+  attr_reader :data
+
   def initialize(job, city, type)
     @mech = Mechanize.new
     @mech.history_added = Proc.new {sleep 0.5}
@@ -56,7 +58,7 @@ class WebScraper
   end
 
   def all_data 
-    @data = [@job_title, @job_id, @company_id, @url, @location, @employer_name, @time_ago]
+    @data = [@job_title, @employer_name, @location, @url,  @time_ago, @job_id, @company_id].transpose
   end
 
   def date_parser(date)

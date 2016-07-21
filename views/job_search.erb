@@ -2,28 +2,23 @@
   <thead>
     <tr>
       <th>#</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Username</th>
+      <th>Position</th>
+      <th>Company</th>
+      <th>Location</th>
+      <th>Link</th>
+      <th>Posted</th>
+      <th>Job ID</th>
+      <th>Company ID</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
+    <% all_data.each do |job| %>
+      <tr>
+      <% job.each_with_index do |detail, index| %>
+        <th scope="row"><%=index + 1%></th>
+        <td><%= detail %></td>
+      <% end %>
+      </tr>
+    <% end %>  
   </tbody>
 </table>

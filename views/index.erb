@@ -1,9 +1,19 @@
 <form action="job_search" method="post">
-  <label for="job">Search for a job:</label>
-  <input type="text" id="job" name="job"></br>
-  <label for="location">Search for a location:</label>
-  <input type="text" id="location" name="location"></br>
-  <label for="type">Full-time? Part-time? Contract?:</label>
-  <input type="text" id="type" name="type">
-  <input type="submit" value="Search!">
+  <fieldset class="form-group">
+    <label for="job">Search for a job:</label>
+    <input type="text" id="job" name="job">
+    <label for="location">Search for a location:</label>
+    <input type="text" id="location" name="location">
+
+    <fieldset class="form-group">
+    <label for="type">Search by type:</label>
+      <select class="form-control" id="type" name="type">
+        <option value="full-time">Full-time</option>
+        <option value="part-time">Part-time</option>
+        <option value="remote">Remote</option>
+      </select>
+    </fieldset>
+
+    <input type="submit" value="Search!" class="btn btn-primary">
+  </fieldset>
 </form>
