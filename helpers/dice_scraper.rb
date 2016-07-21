@@ -32,6 +32,22 @@ class DiceScraper
     puts "Your csv has been saved to #{file_name}."
   end
 
+
+  def create_listings_array
+    listings_array = []
+    get_all_links.each_with_index do |link, i|
+      current_page = link.click
+      listings_array << [ title(current_page),
+                          company(current_page),
+                          link(current_page),
+                          location(current_page),
+                          date(current_page),
+                          id(current_page, "Dice"),
+                          id(current_page, "Position")]
+    end
+    listings_array
+  end
+
   private
 
   def query_to_url
@@ -56,22 +72,6 @@ class DiceScraper
 
   def get_other_pages(page_number)
     url = @job_page.uri.to_s + "&startPage=#{page_number}"
-  end
-
-  def create_listings_array
-    listings_array = []
-    get_all_links.each_with_index do |link, i|
-      puts "Scraped #{i + 1} link(s)"
-      current_page = link.click
-      listings_array << [ title(current_page),
-                          company(current_page),
-                          link(current_page),
-                          location(current_page),
-                          date(current_page),
-                          id(current_page, "Dice"),
-                          id(current_page, "Position")]
-    end
-    listings_array
   end
 
   def title(page)
