@@ -9,9 +9,9 @@ get "/" do
 
   mech = Mechanize.new
   ip = request.ip
-  mech_object = JSON.parse(mech.get("https://www.freegeoip.net/json/173.169.240.17").body)["zip_code"]
+  zip = JSON.parse(mech.get("https://www.freegeoip.net/json/173.169.240.17").body)["zip_code"]
 
-  erb :index, locals: { data: nil, mech_object: mech_object }
+  erb :index, locals: { data: nil, zip_code: zip }
 end
 
 

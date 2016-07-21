@@ -3,8 +3,8 @@
     <label for="job">Search for a job:</label>
     <input type="text" id="job" name="job">
     <label for="location">Search for a location:</label>
-    <input type="text" id="location" name="location">
-    <p><%= mech_object %></p>
+    <% zip_code ||= nil %>
+    <input type="text" id="location" name="location" value="<%= zip_code if zip_code %>" >
     <fieldset class="form-group">
     <label for="type">Search by type:</label>
       <select class="form-control" id="type" name="type">

@@ -10,6 +10,8 @@
       <div class="cont-xs-12">
       <%= yield %>
       <% if data %>
+        <% zip_code ||= nil %>
+        <h1>Local job listings for <%= zip_code if zip_code %> </h1>
         <%= erb :"job_search", :locals => { data: data } %>
       <% end %>
       </div>
