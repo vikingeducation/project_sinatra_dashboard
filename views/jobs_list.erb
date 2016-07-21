@@ -1,6 +1,16 @@
 <h1>Here are all the jobs available for you</h1>
-<ul>
+<table class="table table-striped">
   <% jobs.each do |job_line| %>
-    <li><%= job_line %></li>
+    <tr>
+      <% job_columns = job_line.split(",") %>
+      <% if job_columns.length > 8%>
+        <% job_columns[0] << job_columns[1] %>
+        <% job_columns[1] = nil %>
+        <% job_columns.compact! %>
+      <% end %>
+      <% job_columns.each do |column| %>
+        <td><%= column %></td>
+      <% end %>
+    </tr>
   <% end %>
-</ul>
+</table>
