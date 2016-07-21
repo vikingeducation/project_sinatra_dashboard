@@ -35,10 +35,10 @@ module ProfilerHelper
       if @request
         job = find_job
         ratings = {}
-        ratings["overall"] = job["overallRating"].to_s
-        ratings["culture_values"] = job["cultureAndValuesRating"]
-        ratings["compensation"] = job["compensationAndBenefitsRating"]
-        ratings["worklife"] = job["workLifeBalanceRating"]
+        ratings["Overall"] = job["overallRating"].to_s
+        ratings["Culture"] = job["cultureAndValuesRating"]
+        ratings["Compensation"] = job["compensationAndBenefitsRating"]
+        ratings["Worklife"] = job["workLifeBalanceRating"]
         ratings
       end
     end

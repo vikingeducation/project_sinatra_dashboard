@@ -51,8 +51,8 @@
 
     <% if profiler.find_job %>
       <% profiler.ratings.each do |description, rating| %>
-          <%="#{description}: #{rating}\n" %>
-
+          <%="#{description}: #{rating}" %>
+          <br>
       <% end %>
     <% end %>
     </td>
