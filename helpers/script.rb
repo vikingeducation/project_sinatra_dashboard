@@ -122,6 +122,7 @@ class DiceScraper
     link_array.each do |link|
       @jobs << get_company_info(link)
     end
+    @jobs
   end
 
 end

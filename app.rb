@@ -3,6 +3,8 @@ require 'erb'
 require './helpers/script.rb'
 require './helpers/view_helpers.rb'
 
+enable :sessions
+
 helpers ScraperHelper
 helpers ViewHelpers
 
@@ -13,7 +15,7 @@ end
 post '/scraper' do
   query = params[:keyword]
   location = params[:location]
-  scraper = DiceScraper.new(query, location)
+  scraper = ScraperHelper::DiceScraper.new(query, location)
   jobs = scraper.run
 
   erb :index, locals: { jobs: jobs }
