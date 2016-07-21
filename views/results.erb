@@ -1,13 +1,28 @@
-<table>
-<% result_array.unshift(['title', 'company', 'link', 'location', 'date', 'dice id', 'position id']) %>
-<% result_array.each do |job| %>
-  <tr>
-  <% job.each_with_index do |stat, index| %>
-    <td><%= stat unless index == 2  && stat != 'link'%><td>
-    <% if index == 2 && stat != 'link'%>
-        <td><a href="<%= stat %>"><%= stat %></a></td>
-    <% end %>
-  <% end %>
-  </tr>
-<%end%>
+<% headers = ['title', 'company', 'link', 'location', 'date', 'dice id', 'position id'] %>
+
+<table class='table' >
+  <thead>
+    <tr>
+    <% headers.each do |header| %>
+      <th>
+        <%= header %>
+      </th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+
+    <% result_array.each do |job| %>
+      <tr>
+      <% job.each_with_index do |stat, index| %>
+        
+        <% if index == 2 %>
+          <td><a href="<%= stat %>">Link to Job</a></td>
+        <% else %>
+          <td><%= stat %><td>
+        <% end %>
+      <% end %>
+      </tr>
+    <%end%>
+  </tbody>
 </table>
