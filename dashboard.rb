@@ -6,6 +6,7 @@ require "sinatra/reloader" if development?
 require "thin"
 require "mechanize"
 require_relative 'dice_scraper'
+require "httparty"
 
 helpers do
 
@@ -13,10 +14,16 @@ helpers do
     File.readlines("csv_file.csv")
   end
 
+  def my_response
+    return HTTParty.get("http://freegeoip.net/json/99.3.66.230")["zip_code"] if Sinatra::Base.development?
+    HTTParty.get("http://freegeoip.net/json/#{request.ip}")["zip_code"]
+  end
+
 end
 
 get "/" do
-  erb :index
+  zip_code = my_response unless my_response.nil?
+  erb :index, :locals => { zip_code: zip_code }
 end
 
 get "/jobs_list" do
