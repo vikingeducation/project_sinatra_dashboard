@@ -11,9 +11,13 @@ module WebScraperProject
 
     class << self
 
-      def run(url,ref=nil)
+      BASE_URI = "https://www.dice.com/jobs?"
+
+
+      def run(options={},ref=nil)
         @agent = Mechanize.new
-        results = get_results(url)
+        uri = build_uri(options)
+        results = get_results(uri)
         build_results(results,ref)
       end
 
@@ -23,6 +27,20 @@ module WebScraperProject
             csv << result
           end
         end
+      end
+
+      def build_query_string(params)
+        params.map do |key, value|
+          value = URI.encode(value)
+          "#{key}=#{value}"
+        end.join("&")
+      end
+
+      def build_uri(params)
+        uri = BASE_URI
+        uri += build_query_string(params)
+        binding.pry
+        uri
       end
 
       private
@@ -37,7 +55,6 @@ module WebScraperProject
           ans = []
           results.each do |outer_div|
             given_date = get_date(outer_div)
-            # binding.pry
             if reference.nil? || (reference >= given_date)
               title = get_title(outer_div)
               details = get_details(outer_div)
@@ -52,9 +69,10 @@ module WebScraperProject
 
         def get_details(result)
           job_page = result.at('h3').at('a')
-          employer = @agent.click(job_page).at('li.employer').text.strip
-          employer_id = @agent.click(job_page).at('div.company-header-info').css('div')[1].text.strip
-          job_id = @agent.click(job_page).at('div.company-header-info').css('div')[2].text.strip
+          page_click = @agent.click(job_page)
+          employer = page_click.at('li.employer').text.strip
+          employer_id = page_click.at('div.company-header-info').css('div')[1].text.strip
+          job_id = page_click.at('div.company-header-info').css('div')[2].text.strip
           location = result.css('ul').css('li.location').text.strip
           [employer,location,employer_id,job_id]
         end
@@ -104,21 +122,16 @@ module WebScraperProject
             0
           end
         end
-
     end
-
   end
-
 end
 
-results = WebScraperProject::WebScraper.run('https://www.dice.com/jobs?q=web+developer&l=San+Jose&limit=5',Time.new)
-WebScraperProject::WebScraper.to_csv(results)
+# results = WebScraperProject::WebScraper.run('https://www.dice.com/jobs?q=web+developer&l=San+Jose&limit=5',Time.new)
 
+results = WebScraperProject::WebScraper.run({q: "developer", l: "Washington+DC"})
+p results
 
+# WebScraperProject::WebScraper.to_csv(results)
 # h3 includes a link that has the job title
 # div class "shortdesc" contains a short description
 # ul class "list-inline details" contains li's "employer", "location", "posted"
-
-
-
-#
