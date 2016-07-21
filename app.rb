@@ -5,6 +5,7 @@ require './helpers/job_helpers'
 helpers JobHelpers
 
 get '/' do
+  @ip = request.ip
   erb :index
 end
 
