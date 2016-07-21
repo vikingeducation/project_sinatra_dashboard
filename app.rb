@@ -46,5 +46,6 @@ get '/glassdoorapi' do
   profiler = CompanyProfileHelper::CompanyProfiler.new(request)
   profiler.build_url(query)
   results = profiler.get_request
-  erb :glassdoorapi, locals: { results: results }
+  binding.pry
+  #erb :glassdoorapi, locals: { results: results }
 end

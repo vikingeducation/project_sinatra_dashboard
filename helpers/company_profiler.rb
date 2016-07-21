@@ -8,11 +8,10 @@ module CompanyProfileHelper
   class CompanyProfiler
     #@response = HTTPParty.class.get("#{VERSION}", options)
     def initialize(request)
-      @base_uri = "http://api.glassdoor.com/api/api.htm"
       @query_params = {
                       "t.p" => '80567',
                       "t.k" => 'hpTny2kiC7E',
-                      "userip" => request.ip,
+                      "userip" => '2601:602:9200:cbf0:8d07:e947:5836:a41e',
                       "useragent" => request.user_agent,
                       "format" => "json",
                       "v" => '1',  
@@ -22,19 +21,70 @@ module CompanyProfileHelper
                       }
     end
 
-    def build_url(query)
+    def get_all_info(query)
+      @base_uri = "http://api.glassdoor.com/api/api.htm?"
       @query_params.keys.each do |k|
         @base_uri += "#{k}=#{@query_params[k]}&"
       end
-      @base_uri = @base_uri[0..-2] + "q=#{query}"
-      binding.pry
+      build_url(query)
+      results = get_request
+      get_company_info(results)
+      
+    end
+
+    def get_company_info(results)
+      company_info = {}
+      company_info[:rating] = get_rating(results)
+      company_info[:website] = get_website(results)  
+      company_info[:industry] = get_industry(results)
+      company_info[:pros] = get_pros(results)
+      company_info[:cons] = get_cons(results)
+      company_info
+    end  
+
+    def build_url(query)
+      @base_uri = @base_uri[0..-2] + "&q=#{query}"
     end
 
     def get_request
-      HTTParty.get(@base_uri)
+      @response = HTTParty.get(@base_uri,:headers=>{"User-Agent" => @query_params["useragent"]})
+    end
+
+    def get_rating(results)
+      results["response"]["employers"][0]["overallRating"]
+    end
+
+    def get_website(results)
+      results["response"]["employers"][0]["website"]
+    end
+
+    def get_industry(results)
+      results["response"]["employers"][0]["industry"]
+    end
+
+    def get_pros(results)
+      results["response"]["employers"][0]["featuredReview"]["pros"]
+    end
+
+    def get_cons(results)
+      featured review cons: results["response"]["employers"][0]["featuredReview"]["cons"]
     end
 
   end
 
 
 end
+
+#overall rating: results["response"]["employers"][0]["overallRating"]
+#website: results["response"]["employers"][0]["website"]
+#industry: results["response"]["employers"][0]["industry"]
+#featured review pros: results["response"]["employers"][0]["featuredReview"]["pros"]
+#featured review cons: results["response"]["employers"][0]["featuredReview"]["cons"]
+
+
+
+
+
+
+
+
