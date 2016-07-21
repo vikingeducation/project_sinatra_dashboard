@@ -1,5 +1,5 @@
 <h1>Your Results</h1>
-<table>
+<table class="table table-striped">
   <tr>
     <th>Title</th>
     <th>Company</th>
@@ -11,13 +11,16 @@
   </tr>
 
     <% get_results(q, l).each do |result| %>
-    <tr>
-    <td>result</td>
-    <td>Smith</td>
-    <td>50</td>
-  <%=
-
+        <tr>
+            <% result.each_with_index do |value, index| %>
+                <% if index == 2%>
+                    <td><a href="<%= value %>" target="_blank">Job Link</a></td>
+                <% else %>
+                    <td><%= value %></td>
+                <% end %>
+            <% end %>   
+        </tr>
+    <% end %>
 
 </table>
 
-<% end %>

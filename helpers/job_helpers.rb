@@ -1,4 +1,4 @@
-require './dice_scraper'
+require_relative './dice_scraper'
 
 module JobHelpers
   def get_results(q, l)
