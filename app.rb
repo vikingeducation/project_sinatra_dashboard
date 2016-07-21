@@ -6,13 +6,12 @@ require_relative './web_scraper'
 
 
 get "/" do
-
-  erb :index
-
+  puts "Your IP address is #{request.ip}"
+  erb :index, locals: { data: nil }
 end
 
 
-post '/job_search' do
+post '/' do
 
   job_keyword = params[:job]
   job_location = params[:location]
@@ -23,7 +22,7 @@ post '/job_search' do
   web_scraper.all_data
   all_data = web_scraper.data
 
-  erb :job_search, locals: {
+  erb :index, locals: {
     data: all_data
   }
 
