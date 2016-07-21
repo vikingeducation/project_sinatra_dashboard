@@ -17,7 +17,7 @@ module WebScraperProject
       def run(options={},ref=nil)
         @agent = Mechanize.new
         uri = build_uri(options)
-        binding.pry
+        
         results = get_results(uri)
         build_results(results,ref)
       end

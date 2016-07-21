@@ -2,12 +2,18 @@ require 'sinatra'
 require 'sinatra/reloader' if development?
 require './assignment_web_scraper/lib/scraper.rb'
 
+enable :sessions
 
-get '/index' do
-  erb :index, locals: {position: nil, location: nil}
+
+helpers Locator
+
+get '/' do 
+  session[:json] ||= Locator.new("108.51.25.16")
+  erb :index, locals: {position: nil, location: nil, json: session[:json]}
+
 end
 
-post '/index' do
+post '/' do
   position = params[:position]
   location = params[:location]
   limit = params[:limit]
