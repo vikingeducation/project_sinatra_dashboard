@@ -7,7 +7,8 @@ require_relative '../dice_scraper/script'
 
 
 get '/index' do
-  erb :index
+  request.ip
+  erb :index, locals: {geo_loc: "#{request.ip}"}
 end
 
 post '/search' do
