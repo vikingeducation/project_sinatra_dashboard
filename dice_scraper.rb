@@ -102,6 +102,6 @@ class Scraper
   end
 
 end
-searcher = Scraper.new("developer", "raleigh, nc")
-searcher.submit_form
-searcher.write_to_csv(searcher.build_job_hash)
+# searcher = Scraper.new("developer", "raleigh, nc")
+# searcher.submit_form
+# searcher.write_to_csv(searcher.build_job_hash)
