@@ -11,7 +11,7 @@ class WebScraper
 
   def initialize(job, city, type)
     @mech = Mechanize.new
-    @mech.history_added = Proc.new {sleep 0.5}
+    @mech.history_added = Proc.new {sleep 0.1}
     @job_title = []
     @job_id = []
     @url = []
@@ -31,7 +31,7 @@ class WebScraper
     search_string << "q=" + @job.split(' ').join('+')
     search_string << "&l=" + @city.split(' ').join('+')
     search_string << "&=djtype" + @type.split(' ').join('+')
-    search_string
+    search_string << "&limit=10"
   end
 
   def get_results
@@ -92,9 +92,9 @@ class WebScraper
   end
 
 end
-web_scraper = WebScraper.new("ruby", "new york", "full time")
-web_scraper.loop_through_job_links
-web_scraper.write_csv
+#web_scraper = WebScraper.new("ruby", "new york", "full time")
+#web_scraper.loop_through_job_links
+#web_scraper.write_csv
 # web_scraper = WebScraper.new
 # results =  web_scraper.get_results.links_with(:href => %r{/jobs/})
 

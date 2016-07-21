@@ -18,7 +18,7 @@ post '/job_search' do
   job_location = params[:location]
   job_type = params[:type]
 
-  web_scraper = WebScraper.new.search_query(job_keyword, job_location, job_type)
+  web_scraper = WebScraper.new(job_keyword, job_location, job_type)
   web_scraper.loop_through_job_links
   web_scraper.all_data
   all_data = web_scraper.data
