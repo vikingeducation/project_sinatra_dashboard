@@ -28,12 +28,21 @@ class CompanyProfiler
   end
 
   def get_company_info
-    binding.pry
-    start = @response["response"]["employers"][0]
-    c_v_rating = start["cultureAndValuesRating"] || "N/A"
-    c_b_rating = start["compensationAndBenefitsRating"] || "N/A"
-    featured_pros = start["featuredReview"] || "N/A"
-    featured_cons = @response["response"]["employers"][0]["featuredReview"] || "N/A"
+    c_v_rating = "N/A"
+    c_b_rating = "N/A"
+    featured_pros = "N/A"
+    featured_cons = "N/A"
+
+    if start = @response["response"]["employers"][0]
+      c_v_rating = start["cultureAndValuesRating"] 
+      c_b_rating = start["compensationAndBenefitsRating"] 
+      if start["featuredReview"]
+         featured_pros = start["featuredReview"]["pros"].nil? ? "N/A" : start["featuredReview"]["pros"]
+         featured_cons = start["featuredReview"]["cons"].nil? ? "N/A" : start["featuredReview"]["cons"]
+      end
+    end
+  
+    
     [c_v_rating, c_b_rating, featured_pros, featured_cons]
   end
 
