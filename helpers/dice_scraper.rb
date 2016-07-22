@@ -41,9 +41,7 @@ class DiceScraper
                           company(current_page),
                           link(current_page),
                           location(current_page),
-                          date(current_page),
-                          id(current_page, "Dice"),
-                          id(current_page, "Position")]
+                          date(current_page)]
     end
     listings_array
   end

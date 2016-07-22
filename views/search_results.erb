@@ -1,3 +1,4 @@
+<div class="container" style="margin-top:50px">
 <h1>Your Results for <%= city%>, <%= region %></h1>
 <table class="table table-hover">
   <tr>
@@ -6,9 +7,11 @@
     <th>Link</th>
     <th>Location</th>
     <th>Posting Date</th>
-    <th>Dice ID</th>
-    <th>Position ID</th>
     <th>Overall</th>
+    <th>Culture</th>
+    <th>Balance</th>
+    <th>Opportunities</th>
+    <th>Leadership</th>
     <th>Compensation</th>
   </tr>
   <tbody>
@@ -27,9 +30,14 @@
             <% company = CompanyProfiler::CompanyProfiler.new %>
             <% company.get_request(result[1])%>
             <td><%= company.overall_rating %></td>
+            <td><%= company.culture_rating %></td>
+            <td><%= company.balance_rating %></td>
+            <td><%= company.career_ops_rating %></td>
+            <td><%= company.leadership_rating %></td>
             <td><%= company.compensation_rating %></td>
         </tr>
     <% end %>
   </tbody>
 </table>
+</div>
 
