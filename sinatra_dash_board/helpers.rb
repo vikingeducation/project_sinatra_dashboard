@@ -46,7 +46,7 @@ class CompanyProfiler
     [c_v_rating, c_b_rating, featured_pros, featured_cons]
   end
 
-  
+
 
 
 end
