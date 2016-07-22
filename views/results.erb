@@ -1,0 +1,24 @@
+<h1>Jobs in <%= location %></h1>
+
+
+<% headers = ['Title', 'Company', 'Link', 'Location', 'Date', 'Dice ID', 'Position ID'] %>
+<% result_array.unshift headers %>
+
+<table class='table' >
+
+    <% result_array.each do |job| %>
+      <tr>
+      <% job.each_with_index do |stat, index| %>
+        <td>
+        <% if index == 2 && stat != 'Link' %>
+          <a href="<%= stat %>">Link to Job</a>
+        <% else %>
+          <%= stat %>
+        <% end %>
+      </td>
+      <% end %>
+      </tr>
+    <%end%>
+  </tbody>
+</table>
+
