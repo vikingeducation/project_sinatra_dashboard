@@ -1,14 +1,12 @@
 require 'sinatra'
 require 'erb'
 require './helpers/script.rb'
-require './helpers/view_helpers.rb'
 require './helpers/locator.rb'
 require './helpers/company_profiler.rb'
 
 enable :sessions
 
 helpers ScraperHelper
-helpers ViewHelpers
 helpers LocatorHelper
 helpers CompanyProfileHelper
 
@@ -17,7 +15,7 @@ get '/' do
 end
 
 post '/scraper' do
-  query = "CyberCoders" #params[:keyword]
+  query = params[:keyword]
   loc_data = session["loc-data"]
   location = nil
   if params[:location]
@@ -34,6 +32,5 @@ get '/glassdoorapi/:name' do |n|
   query = "#{n}" #"#{:name}"
   profiler = CompanyProfileHelper::CompanyProfiler.new(request)
   results = profiler.get_all_info(query)
-  binding.pry
   erb :company_profile, locals: { results: results }
 end
