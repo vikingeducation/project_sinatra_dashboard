@@ -17,7 +17,7 @@ class CompanyInfo
 
     company_info.map do |company|
       uri_name = URI.encode(company)
-      HTTParty.get("http://api.glassdoor.com/api/api.htm?t.p=80602&t.k=gYfLHpPZ7ua&userip=96.60.200.208&useragent=mozilla/%2f4.0&format=json&v=1&action=employers&q=#{uri_name}")
+      HTTParty.get("http://api.glassdoor.com/api/api.htm?t.p=11111&t.k=abcdefua&userip=96.60.200.208&useragent=mozilla/%2f4.0&format=json&v=1&action=employers&q=#{uri_name}")
     end
   end
 
