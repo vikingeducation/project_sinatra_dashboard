@@ -6,3 +6,5 @@ gem "pry-byebug"
 gem "mechanize"
 gem "thin"
 gem "httparty"
+gem "json", "~> 1.8"
+
