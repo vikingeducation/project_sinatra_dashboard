@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+  <title>Sinatra Job Search</title>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="cont-xs-12">
+      <%= yield %>
+      <% if data %>
+        <% zip_code ||= nil %>
+        <h1>Local job listings for <%= zip_code if zip_code %> </h1>
+        <%= erb :"job_search", :locals => { data: data } %>
+      <% end %>
+      </div>
+    </div>
+  </div>
+  <footer class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+     You are in the default layout.
+    </div>
+  </footer>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+</body>
+</html>

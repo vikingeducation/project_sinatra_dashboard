@@ -1,0 +1,19 @@
+<form style = "margin-top:3em" action="/" method="post">
+  <fieldset class="form-group">
+    <label for="job">Search for a job:</label>
+    <input type="text" id="job" name="job">
+    <% zip_code ||= nil %>
+    <input style="float:right"  type="text" id="location" name="location" value="<%= zip_code if zip_code %>" >
+    <label style="float:right; margin-right:5px; margin-top:3px"  for="location">Search for a location:</label>
+    <fieldset style= "margin-top:20px" class="form-group">
+    <label  for="type">Search by type:</label>
+      <select class="form-control" id="type" name="type">
+        <option value="full time">Full-time</option>
+        <option value="part time">Part-time</option>
+        <option value="remote">Remote</option>
+      </select>
+    </fieldset>
+
+    <input type="submit" value="Search!" class="btn btn-primary">
+  </fieldset>
+</form>
