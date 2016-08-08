@@ -4,7 +4,7 @@ class ScraperUI
   attr_reader :url, :cutoff_date
   def initialize
     @url = nil
-    @search_params = {q: nil, jtype: 'Full_Time', l: 94043, radius: 5}
+    @search_params = {q: nil, jtype: 'Full_Time', l: "Campbell%2C+CA", radius: 5}
     @page_params = {sort: 'date', limit: '30', startPage: '1'}
     @cutoff_date = nil
   end

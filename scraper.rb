@@ -15,6 +15,7 @@ end
 class Scraper
   def initialize(scraper_ui)
     @url = scraper_ui.url
+    puts "url :#{@url}"
     @agent = Mechanize.new
     @agent.history_added = Proc.new { sleep 0.5 }
     @cutoff_date = scraper_ui.cutoff_date
