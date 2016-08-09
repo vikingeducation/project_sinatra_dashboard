@@ -8,6 +8,7 @@
   </form>
 </div>
 <% unless @jobs.nil? %>
+<h4 class="text-center">Search results for "<%= @search_text %>" near <%= session[:city].gsub("+", " ").gsub("%2C", ",") %></h4>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -15,7 +16,9 @@
       <th>Title</th>
       <th>Company</th>
       <th>Location</th>
-      <th>Posted On</th>
+      <th>Overall Rating</th>
+      <th>Culture Rating</th>
+      <th>Compensation Rating</th>
     </tr>
   </thead>
   <tbody>
@@ -25,7 +28,9 @@
         <td><%= job["title"] %></td>
         <td><%= job["company"] %></td>
         <td><%= job["location"] %></td>
-        <td><%= job["date"] %></td>
+        <td><%= @reviews[job["company"]]["overallRating"] %></td>
+        <td><%= @reviews[job["company"]]["cultureAndValuesRating"] %></td>
+        <td><%= @reviews[job["company"]]["compensationAndBenefitsRating"] %></td>
       </tr>
     <% end %>
   <tbody>

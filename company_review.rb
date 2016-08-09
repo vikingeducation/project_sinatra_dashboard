@@ -23,14 +23,10 @@ class CompanyReview
     trim_response(response)
   end
 
-  private:
+  private
   def trim_response(response)
     if response["success"] == true && response["status"] == "OK"
       op = response["response"]["employers"].first
-      name = op["name"]
-      hash = {}
-      hash[name] = op
-      hash
     end
   end
 end

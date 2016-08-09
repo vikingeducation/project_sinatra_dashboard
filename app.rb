@@ -5,6 +5,7 @@ require './helpers/jobs_helper.rb'
 require 'json'
 helpers JobHelper
 helpers GeoLocation
+helpers CompanyHelper
 enable :sessions
 
 get '/' do
@@ -20,10 +21,10 @@ get '/' do
 end
 
 post '/search' do
-  search_text = params[:search_text]
-  puts params[:search_text]
+  @search_text = params[:search_text]
   if @jobs == nil
-    @jobs = get_jobs(search_text, 3)
+    @jobs = get_jobs(@search_text, 3)
+    @reviews = get_reviews(@jobs)
   end
   erb :index
 end
