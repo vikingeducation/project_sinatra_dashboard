@@ -3,10 +3,44 @@ body {
 }
 
 .footer {
+  color: #333;
   position: absolute;
   bottom: 0px;
   padding-top: 40px;
   padding-bottom: 40px;
   margin-top: 40px;
-  border-top: 1px solid #eee;
+  /*border-top: 1px solid #eee;*/
+}
+
+.search-bar {
+  margin-top: 100px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: none;
+  color: white;
+}
+
+.search-btn {
+  display: block;
+  width: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.index-bg {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: url("/img/bg.jpg") no-repeat center center;
+}
+
+@media(min-width:768px){
+  .search-bar {
+    width: 500px;
+    margin-top: 250px;
+  }
 }
