@@ -1,4 +1,6 @@
 require 'sinatra'
+require 'mechanize'
+require "sinatra/reloader" if development?
 require 'pry-byebug'
 require './helpers/app_helper.rb'
 
