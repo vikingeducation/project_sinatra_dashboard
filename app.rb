@@ -16,7 +16,9 @@ end
 post '/search' do
 
   key = params[:key]
-  result_liebao = liebao key
+
+  liebao key
+  result_liebao = CSV.open("result_liebao.csv")
 
   erb :result, :locals => { key: key, result_liebao: result_liebao }
 end
