@@ -1,7 +1,6 @@
 require 'rubygems'
 require 'mechanize'
 require 'csv'
-require 'uri'
 
 class WebScraper
 
