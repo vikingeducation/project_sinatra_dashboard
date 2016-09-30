@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+  <head>
+    <title>
+      Job Search Result
+    </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+
+  <body>
+    <form action='search' method='post' class='form-group'>
+      <input class='form-control input-lg search-bar' type='text' name='job' placeholder='What would you like to search for?'>
+      <input class='form-control input-lg search-bar' type='text' name='location' placeholder='Where would you like to search?'>
+      <button type='submit' class='btn btn-default'>Search</button>
+    </form>
+    <br>
+    <table class='table table-striped'>
+      <thead>
+        <tr>
+          <th>Position</th>
+          <th>Job Title</th>
+          <th>Company</th>
+          <th>Location</th>
+          <th>Link</th>
+          <th>Posted</th>
+          <th>Job ID</th>
+          <th>Company ID</th>v
+        </tr>
+      </thead>
+      <tbody>
+        <% data[0..data.length / 2 - 1].each_with_index do |job, index| %>
+          <tr>
+          <th scope='row'><%= index + 1 %></th>
+            <% job.each do |element| %>
+              <td><%= element %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </body>
+
+</html>
