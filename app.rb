@@ -9,3 +9,9 @@ require 'pry-byebug'
 	# job
 # job data to be displayed on table in page
 # use bootstrap
+
+get '/' do
+
+	erb :layout
+
+end
