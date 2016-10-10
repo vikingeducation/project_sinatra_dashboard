@@ -1,15 +1,20 @@
-require 'sinatra'
+require 'sinatra/base'
 require 'nokogiri'
 require 'json'
 require 'pry-byebug'
 require './helpers.rb'
 require './job_scraper.rb'
 require 'haml'
+require './geo_location.rb'
+
+
+
+class App < Sinatra::Base
+
+set :server, ['thin']
+set :environment, :development
 
 enable :sessions
-
-set :server, 'thin'
-
 
 include Helper
 
@@ -26,7 +31,7 @@ binding.pry
 end
 
 post '/search' do
-binding.pry
+
 	job      = params[ :job ]
 	location = params[ :location ]
 
@@ -35,5 +40,9 @@ binding.pry
 	save_session
 
 	erb :layout, locals: { csv: @csv }
+
+end
+
+	run! if app_file == $0
 
 end

@@ -6,6 +6,11 @@ GEM
     domain_name (0.5.20160826)
       unf (>= 0.0.5, < 1.0.0)
     eventmachine (1.2.0.1)
+    faraday (0.8.0.rc2)
+      multipart-post (~> 1.1)
+    freegeoip (0.1.0)
+      faraday (= 0.8.0.rc2)
+      multi_json (= 1.2.0)
     haml (4.0.7)
       tilt
     http-cookie (1.0.3)
@@ -22,6 +27,8 @@ GEM
     method_source (0.8.2)
     mime-types (1.25.1)
     mini_portile2 (2.1.0)
+    multi_json (1.2.0)
+    multipart-post (1.2.0)
     net-http-digest_auth (1.4)
     net-http-persistent (2.9.4)
     nokogiri (1.6.8.1)
@@ -53,6 +60,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  freegeoip
   haml
   mechanize (~> 2.7.2, < 2.7.3)
   nokogiri

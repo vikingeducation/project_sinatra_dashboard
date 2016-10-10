@@ -6,6 +6,7 @@ gem 'pry'
 gem 'thin'
 gem 'haml'
 gem 'nokogiri'
+gem 'freegeoip'
 
 
 
