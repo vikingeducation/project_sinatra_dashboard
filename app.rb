@@ -11,9 +11,6 @@ include Helper
 get '/' do
 
 	session.clear
-	#new_job_search
-
-	#save_session
 
 	erb :layout
 
