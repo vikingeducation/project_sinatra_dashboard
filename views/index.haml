@@ -1,0 +1,14 @@
+!!! Strict
+%html
+  %head
+    %title
+      Your IP is
+      = @ip
+    %link{:rel => "shortcut icon", :type => "image/png", :href => "/favicon.png"}/
+    %link{:rel => "stylesheet", :type => "text/css", :href => "/stylesheets/application.css"}/
+
+  %body
+    %h1
+      Your IP is
+      %em
+        = @ip

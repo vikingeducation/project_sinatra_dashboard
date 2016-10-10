@@ -12,6 +12,11 @@ module Helper
 
 	end
 
+	def save_ip
+
+		session[ :ip ] = @ip
+
+	end
 
 	def save_session
 

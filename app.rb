@@ -3,6 +3,7 @@ require 'json'
 require 'pry-byebug'
 require './helpers.rb'
 require './job_scraper.rb'
+require 'haml'
 
 enable :sessions
 
@@ -12,6 +13,11 @@ get '/' do
 
 	session.clear
 
+	@ip = request.env[ 'REMOTE_ADDR' ].split(',').first
+	#haml :index
+
+	save_ip
+binding.pry
 	erb :layout
 
 end
