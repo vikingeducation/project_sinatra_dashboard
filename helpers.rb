@@ -10,7 +10,6 @@ module Helper
 
 		@csv = @job_scraper.create_csv
 
-
 	end
 
 

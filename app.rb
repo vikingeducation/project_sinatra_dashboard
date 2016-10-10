@@ -24,12 +24,10 @@ post '/search' do
 	job      = params[ :job ]
 	location = params[ :location ]
 
-	binding.pry
-
 	parse_job( job, location )
 
 	save_session
 
-	erb :layout
+	erb :layout, locals: { csv: @csv }
 
 end

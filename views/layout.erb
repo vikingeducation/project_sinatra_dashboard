@@ -11,11 +11,16 @@
 
     <br>
 
-    <% CSV.foreach('data.csv') do |x| %>
+    <% if !@csv.nil? %>
 
-    	<li><%= x %></li>
+    	<% @csv.each do |x| %>
 
-    <% end %>
+	    	<p><%= x.company %></p>
+  	  	<p><%= x.title   %></p>
+
+   	  <% end %>
+
+   	<% end %>
 
 	</form>
 
