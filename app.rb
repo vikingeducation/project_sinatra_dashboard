@@ -8,14 +8,16 @@ require 'haml'
 
 enable :sessions
 
+set :server, 'thin'
+
+
 include Helper
 
 get '/' do
 
 	session.clear
 
-	@ip = request.env[ 'REMOTE_ADDR' ].split(',').first
-	#haml :index
+	@ip = request.ip
 
 	save_ip
 binding.pry
