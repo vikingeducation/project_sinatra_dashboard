@@ -6,6 +6,8 @@
 			Job Searcher
 		</title>
 
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
 		<link href="assets/styles.css" rel="stylesheet">
@@ -16,34 +18,46 @@
 
 	</head>
 
+<body>
+
+	<div class="container">
+
+		<div class="row">
+			<h1>Job Search Dashboard</h1>
+		</div>
+
+		<div class="row">
+			<form action="/search" method="post">
+			  <br>
+
+			  <input type="text" name="job" placeholder="job">
+
+		    <input type="text" name="location" placeholder="location">
+
+		    <input type="submit" name="search" value="Search">
+
+			</form>
+
+		</div>
+
+		    <br>
+
+		    <% if !@csv.nil? %>
+
+		    	<% @csv.each do |x| %>
+
+			    	<p><%= x.company %></p>
+		  	  	<p><%= x.title   %></p>
+
+		   	  <% end %>
+
+		   	<% end %>
 
 
 
-<h1>Job Search Dashboard</h1>
 
-	<form action="/search" method="post">
-	  <br>
 
-	  <input type="text" name="job" placeholder="job">
-
-    <input type="text" name="location" placeholder="location">
-
-    <input type="submit" name="search" value="Search">
-
-    <br>
-
-    <% if !@csv.nil? %>
-
-    	<% @csv.each do |x| %>
-
-	    	<p><%= x.company %></p>
-  	  	<p><%= x.title   %></p>
-
-   	  <% end %>
-
-   	<% end %>
-
-	</form>
+		</div> <!--container-->
 
 
 
