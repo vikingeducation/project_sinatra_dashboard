@@ -1,10 +1,10 @@
 module Helper
 
-	def new_job_search
+	def new_job_search( job, location )
 
 		@job_scraper = Dice.new
 
-		@job_scraper.search( 'ruby', 'Chicago, IL' )
+		@job_scraper.search( job, location )
 
 		@job_scraper.pull_job_list
 
@@ -20,6 +20,21 @@ module Helper
 
 	end
 
+
+	def parse_job( job, location )
+
+		if @job_scraper.nil?
+
+			new_job_search( job, location )
+
+		else
+
+			@job_scraper = JSON.parse( session[ :job ])
+
+		end
+
+
+	end
 
 
 end

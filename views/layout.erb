@@ -5,9 +5,11 @@
 
 	  <input type="text" name="job" placeholder="job">
 
-    <input type="text" name="state" placeholder="State">
+    <input type="text" name="location" placeholder="location">
 
     <input type="submit" name="search" value="Search">
+
+    <br>
 
     <% CSV.foreach('data.csv') do |x| %>
 
