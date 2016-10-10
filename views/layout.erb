@@ -9,12 +9,13 @@
 
     <input type="submit" name="search" value="Search">
 
-    <% @csv.each { |x| puts x } %>
+    <% CSV.foreach('data.csv') do |x| %>
+
+    	<li><%= x %></li>
+
+    <% end %>
 
 	</form>
-
-
-
 
 
 

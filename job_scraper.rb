@@ -142,7 +142,7 @@ class Dice
 
 		column_header = [ "Title", "Company", "Link", "Location", "Post Date", "Company ID", "Position ID"]
 
-		CSV.open('dice_job.csv', 'a', :write_headers => true, :headers => column_header ) do | csv |
+		CSV.open('data.csv', 'a', :write_headers => true, :headers => column_header ) do | csv |
 
 			@jobs_array.each do | job |
 
@@ -154,14 +154,11 @@ class Dice
 
 	end
 
-
-
 	def render_results
 
 		pp @results
 
 	end
-
 
 	def render_page
 
@@ -169,21 +166,8 @@ class Dice
 
 	end
 
-
-
 end
 
-#dice = Dice.new
-
-#dice.search( 'Ruby', 'Chicago, IL')
-
-#dice.render_results
-
-#dice.render_page
-
-#dice.pull_job_list
-
-#dice.create_csv
 
 
 

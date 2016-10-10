@@ -13,7 +13,7 @@ get '/' do
 	new_job_search
 
 	save_session
-binding.pry
-	erb :layout, locals: { job_csv: @csv }
+
+	erb :layout
 
 end
