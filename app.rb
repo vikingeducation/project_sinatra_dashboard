@@ -1,17 +1,19 @@
 require 'sinatra'
 require 'json'
 require 'pry-byebug'
+require './helpers.rb'
+require './job_scraper.rb'
 
-# the core view layout shows the job listings in a table  (index.erb)
-# refreshing page starts job search
-# form for search query
-	# location ( city, state )
-	# job
-# job data to be displayed on table in page
-# use bootstrap
+enable :sessions
+
+include Helper
 
 get '/' do
 
-	erb :layout
+	new_job_search
+
+	save_session
+binding.pry
+	erb :layout, locals: { job_csv: @csv }
 
 end
