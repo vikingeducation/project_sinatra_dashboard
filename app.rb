@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'nokogiri'
 require 'json'
 require 'pry-byebug'
 require './helpers.rb'
@@ -23,7 +24,7 @@ binding.pry
 end
 
 post '/search' do
-
+binding.pry
 	job      = params[ :job ]
 	location = params[ :location ]
 
