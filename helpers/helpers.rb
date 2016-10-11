@@ -45,8 +45,14 @@ module Helper
 
 	def get_location
 
-		location = GeoLocation.new
-binding.pry
+		geo = GeoLocation.new
+
+		location = JSON.parse( geo.loc_string )
+
+		@city = location[ "city" ]
+		@state = location[ "region_code" ]
+
+		binding.pry
 
 	end
 
