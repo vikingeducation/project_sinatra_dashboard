@@ -24,7 +24,9 @@ get '/' do
 
 	session.clear
 
-	@ip = request.ip
+	#@ip = request.ip
+
+	ip = get_location
 
 	save_ip
 

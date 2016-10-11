@@ -43,4 +43,11 @@ module Helper
 	end
 
 
+	def get_location
+
+		location = GeoLocation.new
+binding.pry
+
+	end
+
 end

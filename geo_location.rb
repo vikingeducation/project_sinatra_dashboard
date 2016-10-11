@@ -1,5 +1,6 @@
 require 'mechanize'
 require 'pry-byebug'
+require 'open-uri'
 require 'json'
 
 
@@ -10,14 +11,11 @@ class GeoLocation
 
 	def initialize
 
-		location = Mechanize.new { |agent|
-		    agent.user_agent_alias = 'Mac Safari' }
+		url = "https://www.freegeoip.net/json/"
 
-		location.history_added = Proc.new { sleep 0.5 }
+		loc_string = open("https://www.freegeoip.net/json/").read
 
-		url = 'https://www.freegeoip.net/json/'
-
-		@location = location.get( url )
+		binding.pry
 
 	end
 
