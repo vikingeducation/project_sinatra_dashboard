@@ -9,13 +9,14 @@ require 'haml'
 require './geo_location.rb'
 
 
-
 class App < Sinatra::Base
 
-set :server, ['thin']
-set :environment, :development
+
 
 enable :sessions
+set :server, 'thin'
+set :environment, :development
+
 
 helpers Helper
 
@@ -26,7 +27,7 @@ get '/' do
 	@ip = request.ip
 
 	save_ip
-binding.pry
+
 	erb :layout
 
 end

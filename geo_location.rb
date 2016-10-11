@@ -2,6 +2,7 @@ require 'mechanize'
 require 'pry-byebug'
 require 'json'
 
+
 class GeoLocation
 
 
@@ -19,7 +20,6 @@ class GeoLocation
 		@location = location.get( url )
 
 	end
-
 
 
 
