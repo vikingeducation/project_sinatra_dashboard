@@ -1,3 +1,5 @@
+
+
 module Helper
 
 	def new_job_search( job, location )

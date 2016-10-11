@@ -1,8 +1,9 @@
 require 'sinatra/base'
 require 'nokogiri'
+require 'csv'
 require 'json'
 require 'pry-byebug'
-require './helpers.rb'
+require './helpers/helpers.rb'
 require './job_scraper.rb'
 require 'haml'
 require './geo_location.rb'
@@ -16,7 +17,7 @@ set :environment, :development
 
 enable :sessions
 
-include Helper
+helpers Helper
 
 get '/' do
 
