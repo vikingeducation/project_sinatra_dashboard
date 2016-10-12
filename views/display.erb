@@ -1,0 +1,48 @@
+
+		<div class="row">
+
+
+
+		    <% if !@csv.nil? %>
+
+					<div class="col-sm-4">
+						Company
+					</div>
+					<div class="col-sm-8">
+						Job Description
+					</div>
+
+			    <% @csv.each do |x| %>
+
+		    	<div class="col-sm-4">
+			    	<p><%= x.company %></p>
+			    </div>
+
+			    <div class="col-sm-8">
+		  	  	<p><%= x.title   %></p>
+		  	  </div>
+		   	  <% end %>
+
+		   	<% end %>
+
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -40,8 +40,8 @@ post '/search' do
 	parse_job( job, location )
 
 	save_session
-
-	erb :layout, locals: { csv: @csv }
+binding.pry
+	erb :display, locals: { csv: @csv, city: "", state: "" }
 
 end
 
