@@ -27,8 +27,8 @@ get '/' do
 	get_location
 
 	save_ip
-
-	erb :layout
+binding.pry
+	erb :layout, locals: { city: @location["city"], state: @location["region_code"]}
 
 end
 
