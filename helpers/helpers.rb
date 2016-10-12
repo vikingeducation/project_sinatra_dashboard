@@ -16,7 +16,7 @@ module Helper
 
 	def save_ip
 
-		session[ :ip ] = @ip
+		session[ :ip ] = @location["ip"]
 
 	end
 
@@ -47,12 +47,8 @@ module Helper
 
 		geo = GeoLocation.new
 
-		location = JSON.parse( geo.loc_string )
+		@location = JSON.parse( geo.loc_string )
 
-		@city = location[ "city" ]
-		@state = location[ "region_code" ]
-
-		binding.pry
 
 	end
 
