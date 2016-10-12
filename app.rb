@@ -7,6 +7,7 @@ require './helpers/helpers.rb'
 require './job_scraper.rb'
 require 'haml'
 require './geo_location.rb'
+require './glass_door.rb'
 
 
 class App < Sinatra::Base
