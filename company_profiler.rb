@@ -37,38 +37,5 @@ binding.pry
 	end
 
 
-	def print_highs
-
-		puts "Daily highs for #{ @city_render }"
-		day = 0
-
-		@output["list"].each { |s| puts "Day #{day += 1} : #{s["temp"]["max"]}" }
-
-	end
-
-
-	def get_description
-
-		puts "Daily description for Chicago, IL"
-		day = 0
-
-		 @output["list"].each do |s|
-
-		 	s["weather"].each do | w |
-
-		 		puts "Day #{day += 1} : #{w["description"]}"
-
-		 	end
-		 end
-	end
 
 end
-
-#weather_forecast = WeatherForecast.new("Chicago, IL", 8 )
-#weather_forecast.get_forecast
-#puts ""
-#weather_forecast.print_daily
-#puts ""
-#weather_forecast.print_highs
-#puts ""
-#weather_forecast.get_description
