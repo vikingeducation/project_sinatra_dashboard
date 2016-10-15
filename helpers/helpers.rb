@@ -48,7 +48,7 @@ module Helper
 		geo = GeoLocation.new
 
 		@location = JSON.parse( geo.loc_string )
-
+binding.pry
 
 	end
 
