@@ -1,54 +1,43 @@
 require 'httparty'
 require 'pry-byebug'
 
+
 class GlassDoor
 
 	include HTTParty
 
-	base_uri "http://api.glassdoor.com/api/api.htm?v=1&format=xml"
+	ID = ENV["GLASS_ID"]
+	KEY = ENV["GLASS_KEY"]
+	IP = "209.37.67.195"
 
-	# example API call
-	# http://api.glassdoor.com/api/api.htm?v=1&format=json&t.p=120&t.k=fz6JLNDfgVs&action=employers&q=pharmaceuticals&userip=127.168.0.1&useragent=Mozilla/%2F4.0
-
-		# require parameters
-			# v - version is 1 except for jobs @ 1.1
-			# format
-			# t.p partner ID
-			# t.k key
-			# userip - IP address of end user
-			# useragent - browser
-			# action - API call - jobs, reviews, etc.
-			# other - parameters for each API call
 
 	def initialize
+binding.pry
+		@url = 	"http://api.glassdoor.com/api/api.htm?v=1&format=json&t.p=#{ID}&t.k=#{KEY}&action=employers&q=Lowes&city=Concord&state=NC&userip=#{IP}&useragent=Chrome/%2F4.0"
 
-			@options = { query:
 
-										{ "t.p"  => ENV["GLASSDOORID"],
-											"t.k"     => ENV["GLASSDOOR_KEY"],
-											"userip"   => "127.168.0.1",
-											"useragent" => "Chrome",
-											"action" => "employers",
-											"other" => "pharmaceuticals"
-										}
-
-								 }
+#"http://api.glassdoor.com/api/api.htm?v=1&format=json&t.p=#{ID}&t.k=#{KEY}&action=employers&q=pharmaceuticals&userip=#{IP}&useragent=Chrome/%2F4.0"
 
 	end
 
 
-	def open_door
+	def get_forecast
 
-		@output = self.class.get( "127.168.0.1", @options )
+		@output = self.class.get( @url )
 		binding.pry
+
+	end
+
+
+	def print_daily
+
+		 puts "Daily average for #{ @city_render }"
+		 day = 0
+
+		 @output["list"].each { |s| puts "Day #{day += 1} : #{s["temp"]["day"]}" }
 
 	end
 
 
 
 end
-
-knob = GlassDoor.new
-
-knob.open_door
-
