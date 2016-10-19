@@ -7,8 +7,6 @@ Job = Struct.new( :title, :company, :link, :location, :post_date, :company_id, :
 
 class Dice
 
-
-
 	def initialize
 
 		@results = nil
@@ -28,7 +26,7 @@ class Dice
 
 
 	def search( job, location )
-
+binding.pry
 		search = @page.forms.first
 
 		search.q = job
@@ -41,6 +39,7 @@ class Dice
 
 	def pull_job_list
 
+		# pulls all results from page
 		job_list = @results.search("div.serp-result-content")
 
 		parse( job_list )
@@ -62,6 +61,7 @@ class Dice
 
 			company_id = company_id( job )
 
+			# check the link var for the position id using the company id as reference
 			job_id = job_id( link, company_id )
 
 			post_date = calc_post_date( job.css( 'ul li' )[ 2 ].text )
@@ -112,7 +112,7 @@ class Dice
 	def calc_post_date( text )
 
 		current_time = Time.now
-
+		# takes string '4 hours ago' and pulls the number
 		time_to_subtract = text.scan(/\d/).join.to_i
 
 		if text.include?('hour')
@@ -124,7 +124,7 @@ class Dice
 			 ( current_time - ( 360 * 24 * 7 * time_to_subtract ) ).asctime
 
 		elsif text.include?('month')
-
+			 # what would be the way to get the right days in the month?
 			 ( current_time - ( 360 * 30 * 24 * time_to_subtract ) ).asctime
 
 		elsif text.include?('year')
@@ -140,7 +140,7 @@ class Dice
 
 		column_header = [ "Title", "Company", "Link", "Location", "Post Date", "Company ID", "Position ID"]
 
-		CSV.open('data.csv', 'a', :write_headers => true, :headers => column_header ) do | csv |
+		CSV.open('dice_job.csv', 'a', :write_headers => true, :headers => column_header ) do | csv |
 
 			@jobs_array.each do | job |
 
@@ -152,11 +152,14 @@ class Dice
 
 	end
 
+
+
 	def render_results
 
 		pp @results
 
 	end
+
 
 	def render_page
 
@@ -164,8 +167,9 @@ class Dice
 
 	end
 
-end
 
+
+end
 
 
 

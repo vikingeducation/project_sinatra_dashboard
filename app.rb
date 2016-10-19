@@ -27,7 +27,7 @@ get '/' do
 	get_location
 
 	save_ip
-binding.pry
+
 	erb :layout, locals: { city: @location["city"], state: @location["region_code"]}
 
 end
@@ -36,11 +36,11 @@ post '/search' do
 
 	job      = params[ :job ]
 	location = params[ :location ]
-
+binding.pry
 	parse_job( job, location )
 
 	save_session
-binding.pry
+
 	erb :display, locals: { csv: @csv, city: "", state: "" }
 
 end
