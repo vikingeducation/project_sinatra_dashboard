@@ -4,6 +4,8 @@ require 'pry-byebug'
 
 class GlassDoor
 
+	attr_reader :company
+
 	include HTTParty
 
 	ID = ENV["GLASS_ID"]

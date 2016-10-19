@@ -15,7 +15,7 @@ module Helper
 	end
 
 	def save_ip
-
+binding.pry
 		session[ :ip ] = @location["ip"]
 
 	end
