@@ -15,8 +15,6 @@ class GlassDoor
 
 	def initialize( company, city, state )
 
-		#@url = 	"http://api.glassdoor.com/api/api.htm?v=1&format=json&t.p=#{ID}&t.k=#{KEY}&action=employers&q=Lowes&city=Concord&state=NC&userip=#{IP}&useragent=Chrome/%2F4.0"
-
 		@options = { query:
 
 									{ "t.p"    		=> ID,
@@ -31,8 +29,9 @@ class GlassDoor
 									 }
 							 }
 
+		@company = get_reviews
 
-#"http://api.glassdoor.com/api/api.htm?v=1&format=json&t.p=#{ID}&t.k=#{KEY}&action=employers&q=pharmaceuticals&userip=#{IP}&useragent=Chrome/%2F4.0"
+		binding.pry
 
 	end
 
@@ -67,7 +66,7 @@ class GlassDoor
 		  {"attributionURL"=>
 		    "http://www.glassdoor.com/Reviews/Employee-Review-CDW-RVW12053166.htm",
 =end
-		binding.pry
+
 
 	end
 
