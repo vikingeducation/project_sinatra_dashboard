@@ -3,22 +3,19 @@
 
 		    <% if !@csv.nil? %>
 
-					<div class="col-sm-4">
-						Company
-					</div>
-					<div class="col-sm-8">
-						Job Description
-					</div>
+		    	<table border = "1">
+		    		<tr>
+		    			<th>Company</th>
+		    			<th>Job Description</th>
+		    		</tr>
 
 			    <% @csv.each do |x| %>
+			    <tr>
+			    	<td><%= x.company %></td>
 
-		    	<div class="col-sm-4">
-			    	<p><%= x.company %></p>
-			    </div>
+		  	  	<td><%= x.title   %></td>
 
-			    <div class="col-sm-8">
-		  	  	<p><%= x.title   %></p>
-		  	  </div>
+					</tr>
 		   	  <% end %>
 
 		   	<% end %>
