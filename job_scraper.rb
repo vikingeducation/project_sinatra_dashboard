@@ -142,7 +142,7 @@ class Dice
 
 		CSV.open('dice_job.csv', 'a', :write_headers => true, :headers => column_header ) do | csv |
 binding.pry
-			@jobs_array.each do | job |
+			@jobs_array[1..20].each do | job |
 
 				csv << job
 
