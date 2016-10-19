@@ -51,9 +51,8 @@ module Helper
 
 	def get_location
 
-		geo = GeoLocation.new
-
-		@location = JSON.parse( geo.loc_string )
+				@location = HTTParty.get("https://www.freegeoip.net/json/")
+				binding.pry
 
 	end
 
