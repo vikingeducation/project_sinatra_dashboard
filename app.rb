@@ -37,7 +37,7 @@ post '/search' do
 	location = params[ :location ]
 
 	parse_job( job, location )
-
+	add_review
 	save_session
 
 	erb :display, locals: { csv: @csv, city: "", state: "" }

@@ -48,6 +48,21 @@ binding.pry
 
 
 
+	def add_review
+
+
+		@csv.each do | job |
+
+			company = GlassDoor.new( job["company"], "Chicago", "IL" )
+			review = company.get_reviews
+
+
+			job["review"] = review["cultureAndValuesRating"]
+
+		end
+
+	end
+
 
 	def get_location
 

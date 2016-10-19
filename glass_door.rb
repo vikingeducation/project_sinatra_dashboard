@@ -8,8 +8,8 @@ class GlassDoor
 
 	include HTTParty
 
-	ID = ENV["GLASS_ID"]
-	KEY = ENV["GLASS_KEY"]
+	ID = ENV["GLASSID"]
+	KEY = ENV["GLASSKEY"]
 	IP = "67.235.56.2"
 
 
@@ -31,12 +31,12 @@ class GlassDoor
 									 }
 							 }
 
-		@company = get_reviews
+
 
 	end
 
 	def get_reviews
-
+binding.pry
 		company = self.class.get( "", @options )
 
 		company['response']['employers'][0]
@@ -67,5 +67,6 @@ class GlassDoor
 =end
 
 	end
+
 
 end
