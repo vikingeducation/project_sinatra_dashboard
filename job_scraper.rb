@@ -3,7 +3,7 @@ require 'nokogiri'
 require 'csv'
 
 
-Job = Struct.new( :title, :company, :link, :location, :post_date, :company_id, :job_id )
+Job = Struct.new( :title, :company, :link, :location, :post_date, :company_id, :job_id, :review )
 
 class Dice
 
@@ -137,7 +137,7 @@ class Dice
 
 
 	def create_csv
-binding.pry
+
 		return if @jobs_array == []
 
 		column_header = [ "Title", "Company", "Link", "Location", "Post Date", "Company ID", "Position ID", "Review"]
@@ -153,6 +153,7 @@ binding.pry
 		end
 
 	end
+
 
 
 
