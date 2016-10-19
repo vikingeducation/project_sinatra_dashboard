@@ -1,7 +1,6 @@
 require 'mechanize'
-require 'pry-byebug'
 require 'open-uri'
-require 'json'
+
 
 
 class GeoLocation
@@ -11,9 +10,7 @@ class GeoLocation
 
 	def initialize
 
-		url = "https://www.freegeoip.net/json/"
-
-		@loc_string = open("https://www.freegeoip.net/json/").read
+		@loc_string = open( "https://www.freegeoip.net/json/" ).read
 
 	end
 

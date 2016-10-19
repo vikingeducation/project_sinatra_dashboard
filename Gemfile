@@ -6,7 +6,7 @@ gem 'pry'
 gem 'thin'
 gem 'nokogiri'
 gem 'geocoder'
-gem 'open-uri'
+gem 'httparty'
 
 group :development do
 
