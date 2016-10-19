@@ -52,7 +52,6 @@ module Helper
 	def get_location
 
 				@location = HTTParty.get("https://www.freegeoip.net/json/")
-				binding.pry
 
 	end
 
