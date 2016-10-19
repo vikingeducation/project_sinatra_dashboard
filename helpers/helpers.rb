@@ -43,7 +43,7 @@ IP = "67.235.56.2"
 		@job_scraper.pull_job_list
 
 		@csv = @job_scraper.create_csv
-binding.pry
+
 	end
 
 

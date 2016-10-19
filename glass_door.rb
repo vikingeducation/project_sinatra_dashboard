@@ -36,7 +36,7 @@ class GlassDoor
 	end
 
 	def get_reviews
-binding.pry
+
 		company = self.class.get( "", @options )
 
 		company['response']['employers'][0]
