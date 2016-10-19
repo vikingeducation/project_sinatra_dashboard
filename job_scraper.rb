@@ -140,7 +140,7 @@ class Dice
 binding.pry
 		return if @jobs_array == []
 
-		column_header = [ "Title", "Company", "Link", "Location", "Post Date", "Company ID", "Position ID"]
+		column_header = [ "Title", "Company", "Link", "Location", "Post Date", "Company ID", "Position ID", "Review"]
 
 		CSV.open('dice_job.csv', 'a', :write_headers => true, :headers => column_header ) do | csv |
 
