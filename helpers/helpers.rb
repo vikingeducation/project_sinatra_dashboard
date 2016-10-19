@@ -19,7 +19,7 @@ module Helper
 
 
 	def parse_job( job, location )
-binding.pry
+
 		if @job_scraper.nil?
 
 			new_job_search( job, location )
@@ -35,13 +35,13 @@ binding.pry
 
 
 	def new_job_search( job, location )
-binding.pry
+
 		@job_scraper = Dice.new
 
 		@job_scraper.search( job, location )
 
 		@job_scraper.pull_job_list
-binding.pry
+
 		@csv = @job_scraper.create_csv
 
 	end
@@ -54,7 +54,6 @@ binding.pry
 		geo = GeoLocation.new
 
 		@location = JSON.parse( geo.loc_string )
-
 
 	end
 

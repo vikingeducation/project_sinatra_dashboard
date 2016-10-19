@@ -26,7 +26,7 @@ class Dice
 
 
 	def search( job, location )
-binding.pry
+
 		search = @page.forms.first
 
 		search.q = job
@@ -141,7 +141,7 @@ binding.pry
 		column_header = [ "Title", "Company", "Link", "Location", "Post Date", "Company ID", "Position ID"]
 
 		CSV.open('dice_job.csv', 'a', :write_headers => true, :headers => column_header ) do | csv |
-
+binding.pry
 			@jobs_array.each do | job |
 
 				csv << job
