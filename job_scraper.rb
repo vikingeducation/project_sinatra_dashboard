@@ -137,11 +137,13 @@ class Dice
 
 
 	def create_csv
+binding.pry
+		return if @jobs_array == []
 
 		column_header = [ "Title", "Company", "Link", "Location", "Post Date", "Company ID", "Position ID"]
 
 		CSV.open('dice_job.csv', 'a', :write_headers => true, :headers => column_header ) do | csv |
-binding.pry
+
 			@jobs_array[1..20].each do | job |
 
 				csv << job

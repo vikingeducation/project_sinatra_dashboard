@@ -2,7 +2,7 @@
 
 module Helper
 
-
+IP = "67.235.56.2"
 
 	def save_ip
 
@@ -51,7 +51,7 @@ module Helper
 
 	def get_location
 
-				@location = HTTParty.get("https://www.freegeoip.net/json/")
+				@location = HTTParty.get("https://www.freegeoip.net/json/#{IP}")
 
 	end
 
