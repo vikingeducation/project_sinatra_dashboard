@@ -62,9 +62,6 @@ module Helper
 			job["leader"] = review["seniorLeadershipRating"]
 			job["recommend"] = review["recommendToFriendRating"]
 
-
-
-
 		end
 
 	end

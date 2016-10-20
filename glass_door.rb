@@ -41,31 +41,6 @@ class GlassDoor
 
 		company['response']['employers'][0]
 
-=begin		{"id"=>2347,
-		 "name"=>"CDW",
-		 "website"=>"www.cdw.com",
-		 "isEEP"=>true,
-		 "exactMatch"=>true,
-		 "industry"=>"Computer Hardware & Software",
-		 "numberOfRatings"=>1250,
-		 "squareLogo"=>"https://media.glassdoor.com/sqll/2347/cdw-squarelogo.png",
-		 "overallRating"=>"3.9",
-		 "ratingDescription"=>"Satisfied",
-		 "cultureAndValuesRating"=>"4.2",
-		 "seniorLeadershipRating"=>"3.8",
-		 "compensationAndBenefitsRating"=>"3.4",
-		 "careerOpportunitiesRating"=>"3.8",
-		 "workLifeBalanceRating"=>"3.8",
-		 "recommendToFriendRating"=>82,
-		 "sectorId"=>10013,
-		 "sectorName"=>"Information Technology",
-		 "industryId"=>200060,
-		 "industryName"=>"Computer Hardware & Software",
-		 "featuredReview"=>
-		  {"attributionURL"=>
-		    "http://www.glassdoor.com/Reviews/Employee-Review-CDW-RVW12053166.htm",
-=end
-
 	end
 
 
