@@ -3,7 +3,7 @@ require 'nokogiri'
 require 'csv'
 
 
-Job = Struct.new( :title, :company, :link, :location, :post_date, :company_id, :job_id, :review )
+Job = Struct.new( :title, :company, :link, :location, :post_date, :company_id, :job_id, :culture, :leader, :recommend )
 
 class Dice
 

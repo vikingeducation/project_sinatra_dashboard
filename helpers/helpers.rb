@@ -58,7 +58,12 @@ module Helper
 			review = company.get_reviews
 
 
-			job["review"] = review["cultureAndValuesRating"]
+			job["culture"] = review["cultureAndValuesRating"]
+			job["leader"] = review["seniorLeadershipRating"]
+			job["recommend"] = review["recommendToFriendRating"]
+
+
+
 
 		end
 
