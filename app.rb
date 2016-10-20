@@ -1,5 +1,4 @@
 require 'sinatra/base'
-require 'sinatra/reloader' if development?
 require 'nokogiri'
 require 'csv'
 require 'json'

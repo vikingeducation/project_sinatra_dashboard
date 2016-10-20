@@ -2,7 +2,7 @@
 
 module Helper
 
-IP = "67.235.56.2"
+
 
 	def save_ip
 
@@ -50,6 +50,7 @@ IP = "67.235.56.2"
 
 	def add_review
 
+		return if !@csv
 
 		@csv.each do | job |
 
@@ -66,7 +67,7 @@ IP = "67.235.56.2"
 
 	def get_location
 
-				@location = HTTParty.get("https://www.freegeoip.net/json/#{IP}")
+				@location = HTTParty.get("https://www.freegeoip.net/json/")
 
 	end
 
