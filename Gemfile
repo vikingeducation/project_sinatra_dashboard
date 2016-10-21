@@ -8,6 +8,7 @@ gem 'nokogiri'
 gem 'geocoder'
 gem 'httparty'
 
+
 group :development do
 
 	gem 'pry-byebug'
