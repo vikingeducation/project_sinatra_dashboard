@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>
+			Job Searcher
+		</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+		<link href="/assets/styles.css" rel="stylesheet">
+
+	</head>
+
+<body>
+
+
+	<div class="container">
+
+		<div class="row">
+			<h1>Job Search Dashboard</h1>
+		</div>
+
+		<div class="row">
+
+			<form class="form-group" action="/search" method="post">
+
+				<label for="job">Job:</label>
+
+				<input type="text" class="form-control" name="job" placeholder="job">
+
+				<label for="location">Location:</label>
+
+				<% location = defined?(city) && defined?(state) ? "#{city} #{state}" : "" %>
+
+				<input type="text" class="form-control" name="location" placeholder="location" value= "<%= location %>" >
+
+		    <button type="submit" class="btn btn-default btn-lg">Search</button>
+
+		  </form>
+
+	  <%= erb :display %>
+
+		</div>
+
+<a href='https://www.glassdoor.com/index.htm'>powered by <img src='https://www.glassdoor.com/static/img/api/glassdoor_logo_80.png' title='Job Search' /></a>
+		</div> <!--container-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

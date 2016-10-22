@@ -1,0 +1,53 @@
+
+		<div class="row">
+
+		    <% if !@csv.nil? %>
+
+		    	<table border = "1">
+		    		<tr>
+		    			<th>Company</th>
+		    			<th>Job Description</th>
+		    			<th>Cultures Rating</th>
+		    			<th>Leader Rating</th>
+		    			<th>Recommend Rating</th>
+
+		    		</tr>
+
+			    <% @csv.each do |x| %>
+			    <tr>
+			    	<td><%= x.company %></td>
+
+		  	  	<td><%= x.title   %></td>
+
+		  	  	<td><%= x.culture   %></td>
+
+		  	  	<td><%= x.leader   %></td>
+
+		  	  	<td><%= x.recommend   %></td>
+
+					</tr>
+		   	  <% end %>
+
+		   	<% end %>
+
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

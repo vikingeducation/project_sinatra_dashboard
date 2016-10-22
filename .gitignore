@@ -1,0 +1,4 @@
+*.csv
+/Gemfile
+/Gemfile.lock
+/config/application.yml
