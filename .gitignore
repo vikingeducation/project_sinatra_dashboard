@@ -1,4 +1,4 @@
 *.csv
 /Gemfile
 /Gemfile.lock
-/config
+/config/application.yml
