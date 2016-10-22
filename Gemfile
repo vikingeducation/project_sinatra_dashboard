@@ -7,6 +7,7 @@ gem 'thin'
 gem 'nokogiri'
 gem 'geocoder'
 gem 'httparty'
+gem 'webrick'
 
 
 group :development do

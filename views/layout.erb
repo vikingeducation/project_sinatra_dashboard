@@ -33,7 +33,9 @@
 
 				<label for="location">Location:</label>
 
-				<input type="text" class="form-control" name="location" placeholder="location" value= "<%= city %> <%= state %>" >
+				<% location = defined?(city) && defined?(state) ? "#{city} #{state}" : "" %>
+
+				<input type="text" class="form-control" name="location" placeholder="location" value= "<%= location %>" >
 
 		    <button type="submit" class="btn btn-default btn-lg">Search</button>
 

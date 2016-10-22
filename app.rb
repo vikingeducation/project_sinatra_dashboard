@@ -13,7 +13,7 @@ class App < Sinatra::Base
 
 
 enable :sessions
-set :server, 'thin'
+set :server, 'webrick'
 set :environment, :development
 
 
@@ -41,7 +41,7 @@ post '/search' do
 	add_review
 	save_session
 
-	erb :display, locals: { csv: @csv, city: "", state: "" }
+	erb :display, locals: { csv: @csv }
 
 end
 

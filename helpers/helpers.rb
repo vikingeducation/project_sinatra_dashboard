@@ -30,7 +30,6 @@ module Helper
 
 		end
 
-
 	end
 
 
@@ -55,9 +54,10 @@ module Helper
 		@csv.each do | job |
 
 			company = GlassDoor.new( job["company"], "Chicago", "IL" )
+
 			review = company.get_reviews
 
-binding.pry
+
 			job["culture"] = review["cultureAndValuesRating"]
 			job["leader"] = review["seniorLeadershipRating"]
 			job["recommend"] = review["recommendToFriendRating"]
