@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'erb'
+require 'figaro'
 require 'sinatra'
 require 'sinatra/reloader'
 require_relative './dice_scraper/lib/dice_scraper_controller'
