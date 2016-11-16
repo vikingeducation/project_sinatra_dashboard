@@ -4,6 +4,14 @@ Job =  Struct.new( :title, :company, :link, :location,
                         [ title, company, link, location,
                           post_date, comp_id, job_id ]
                       end
+
+                      def to_hash
+                        { title: title, company: compant,
+                          location: location, post_date: post_date,
+                          comp_id: comp_id, job_id: job_id, link: link }
+                      end
+
+
                     end
 
 class DiceJobsPageParser

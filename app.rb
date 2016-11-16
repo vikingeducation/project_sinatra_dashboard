@@ -6,5 +6,9 @@ require_relative 'helpers/dice_scraper_helper'
 helpers DiceScraperHelper
 
 get '/' do
-  "Welcome to our scraper! :D"
+  terms = params[:terms]
+  location = params[:location]
+
+  # run helper stuff and create a CSV
+  erb :index
 end
