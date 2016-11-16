@@ -56,9 +56,10 @@ PLATFORMS
 
 DEPENDENCIES
   mechanize (~> 2.7.2, < 2.7.3)
+  mini_portile2 (= 2.0.0)
   sinatra
   sinatra-contrib
   thin
 
 BUNDLED WITH
-   1.12.5
+   1.13.6
