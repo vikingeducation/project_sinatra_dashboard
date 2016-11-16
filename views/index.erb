@@ -7,10 +7,10 @@
   <input type='submit' value='Search'>
 </form>
 
-<% if terms = params[:terms] && location = params[:location] %>
+<% if locals[:terms] && locals[:location] %>
 
-   <%= erb :search_results, locals: { jobs:     jobs,
-                                      terms:    terms,
-                                      location: location } %>
+   <%= erb :search_results, locals: { jobs:     locals[:jobs],
+                                      terms:    locals[:terms],
+                                      location: locals[:location] } %>
 
 <% end %>
