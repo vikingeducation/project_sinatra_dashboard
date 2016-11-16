@@ -1,4 +1,18 @@
-<%= search_terms %>
-<%= location %>
-</br>
-<%= jobs %>
+<p>
+Search Terms:
+<%= locals[:search_terms] %>
+</p>
+
+<p>
+Locaiton:
+<%= locals[:location] %>
+</p>
+
+<p>
+  Results:
+  <ul>
+    <% locals[:jobs].each do |job| %>
+      <li><%= job.title %> | <%= job.company %></li>
+    <% end %>
+  </ul>
+</p>

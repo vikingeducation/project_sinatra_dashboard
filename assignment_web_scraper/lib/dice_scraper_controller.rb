@@ -1,5 +1,8 @@
-# require './scraper'
-# require 'dice_jobs_page_parser'
+
+file_directory = File.dirname(__FILE__)
+
+require File.expand_path('scraper', file_directory)
+require File.expand_path('dice_jobs_page_parser', file_directory)
 
 class DiceScraperController
 
