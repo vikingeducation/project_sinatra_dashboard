@@ -1,3 +1,6 @@
+# require './scraper'
+# require 'dice_jobs_page_parser'
+
 class DiceScraperController
 
   def initialize
