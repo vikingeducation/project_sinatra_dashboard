@@ -6,7 +6,7 @@ Job =  Struct.new( :title, :company, :link, :location,
                       end
 
                       def to_hash
-                        { title: title, company: compant,
+                        { title: title, company: company,
                           location: location, post_date: post_date,
                           comp_id: comp_id, job_id: job_id, link: link }
                       end

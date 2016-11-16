@@ -1,0 +1,21 @@
+<table>
+  <tr>
+    <% headers = jobs[0].keys %>
+    <% headers.each do |header| %>
+    <th><%= header %></th>
+    <% end %>
+  </tr>
+
+  <% jobs.each do |row| %>
+  <tr>
+    <% row.values.each do |value| %>
+      <td><%= value %></td>
+    <% end %>
+  </tr>
+  <% end %>
+</table>
+<!-- <%= row
+
+<table>
+<tr>
+<td> -->

@@ -10,4 +10,8 @@ module DiceScraperHelper
     jobs.map { |job| job.to_hash }
   end
 
+  def search(terms, location)
+    DiceScraperController.new.search(terms, location)
+  end
+
 end
