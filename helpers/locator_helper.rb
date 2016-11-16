@@ -1,4 +1,4 @@
-
+require 'json'
 module LocatorHelper
 
   def get_IP_location(ip_address)
@@ -6,6 +6,8 @@ module LocatorHelper
 
     response = Net::HTTP.get("freegeoip.net", "/json/#{ip_address}")
 
-    response['city']
+    json = JSON.parse(response)
+
+    json['city']
   end
 end

@@ -11,7 +11,6 @@ helpers DiceScraperHelper, LocatorHelper
 
 get '/' do
   session[:location] ||= get_IP_location(request.ip)
-
   erb :index
 end
 
