@@ -3,7 +3,8 @@
 
 <form action='/' method='get'>
   <input type='text' name='terms' placeholder='Search Terms'>
-  <input type='text' name='location' placeholder='Location'>
+  <input type='text' name='location' placeholder='Location'
+         value='<%= locals[:location] %>'>
   <input type='submit' value='Search'>
 </form>
 

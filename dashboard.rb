@@ -3,12 +3,14 @@
 require 'erb'
 require 'sinatra'
 require 'sinatra/reloader'
+require_relative './locator/locator'
 require_relative 'figaro_file'
-require_relative './assignment_web_scraper/lib/dice_scraper_controller'
+require_relative './dice_scraper/lib/dice_scraper_controller'
 
 get '/' do
+
   terms    = params[:terms]
-  location = params[:location]
+  location = params[:location] || Locator.get_location#(request.ip)
 
   if terms && location
     jobs = DiceScraperController.new.search(terms, location)
