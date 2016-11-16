@@ -2,6 +2,8 @@
 source "https://rubygems.org"
 
 # gem "rails"
-gem 'sinatra'
-gem 'thin'
+gem 'erb'
 gem 'mechanize'
+gem 'sinatra'
+gem 'sinatra-reloader'
+gem 'thin'
