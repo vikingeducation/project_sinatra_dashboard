@@ -76,12 +76,12 @@ class Dice < Mechanize
 
   def csv_writer(results)
     input = convert_struct(results)
-    unless FileTest.exist?('jobs.csv')
-      CSV.open('jobs.csv', 'w+') do |csv|
-        csv << ["Job Title", "Company", "Location", "Date Posted", "Company ID", "Post ID", "URL"]
-      end
-    end
-    CSV.open('jobs.csv', 'a+') do |csv|
+    # unless FileTest.exist?('jobs.csv')
+    #   CSV.open('jobs.csv', 'w+') do |csv|
+    #     csv << ["Job Title", "Company", "Location", "Date Posted", "Company ID", "Post ID", "URL"]
+    #   end
+    # end
+    CSV.open('jobs.csv', 'w') do |csv|
       input.each do |row|
         csv << row
       end
