@@ -1,10 +1,10 @@
 <p>
 Search Terms:
-<%= locals[:search_terms] %>
+<%= locals[:terms] %>
 </p>
 
 <p>
-Locaiton:
+Location:
 <%= locals[:location] %>
 </p>
 
@@ -12,7 +12,7 @@ Locaiton:
   Results:
   <ul>
     <% locals[:jobs].each do |job| %>
-      <li><%= job.title %> | <%= job.company %></li>
+      <li><a href="<%= job.link %>"><%= job.title %></a> | <%= job.company %></li>
     <% end %>
   </ul>
 </p>

@@ -7,15 +7,15 @@ require_relative 'figaro_file'
 require_relative './assignment_web_scraper/lib/dice_scraper_controller'
 
 get '/' do
-  erb :index
-end
 
-get '/search_results' do
-  search_terms = params[:search_terms]
-  location     = params[:location]
-  jobs = DiceScraperController.new.search(search_terms, location)
+  terms    = params[:terms]
+  location = params[:location]
 
-  erb :search_results, locals: { jobs:     jobs,
-                                 search_terms:    search_terms,
-                                 location: location }
+  if terms && location
+    jobs = DiceScraperController.new.search(terms, location)
+  end
+
+  erb :index, locals: { jobs: jobs,
+                              terms:    terms,
+                              location: location }
 end

@@ -1,9 +1,16 @@
 
 <h1>Welcome to the Jobs Dashboard</h1>
 
-<form action='/search_results' method='get'>
-  Search:
-  <input type='text' name='search_terms' placeholder='Search Terms'>
+<form action='/' method='get'>
+  <input type='text' name='terms' placeholder='Search Terms'>
   <input type='text' name='location' placeholder='Location'>
   <input type='submit' value='Search'>
 </form>
+
+<% if terms = params[:terms] && location = params[:location] %>
+
+   <%= erb :search_results, locals: { jobs:     jobs,
+                                      terms:    terms,
+                                      location: location } %>
+
+<% end %>
