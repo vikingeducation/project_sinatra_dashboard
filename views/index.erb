@@ -4,3 +4,17 @@
   <input type="text" name="query" placeholder="Enter your search here">
   <input type="submit" value="Search jobs!">
 </form>
+
+<!-- display last scrape results -->
+<table>
+<%CSV.read("jobs.csv").each do |row|%>
+  <%url = row[-1]%>
+  <tr><%row[0..3].each_with_index do |cell, index| %>
+    <%if index == 0%>
+      <td><a href=<%=url%>><%=cell%></a></td>
+    <%else%>
+      <td><%=cell%></td>
+    <%end%>
+  <%end%></tr> 
+<%end%>
+</table>
