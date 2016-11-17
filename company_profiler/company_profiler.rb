@@ -23,19 +23,20 @@ module CompanyProfiler
       profile = Profile.new
       profile.overall = overall_rating(company_info)
       profile.culture = culture_rating(company_info)
-      profile.compensation = compensation_rating(company_info) 
+      profile.compensation = compensation_rating(company_info)
+      profile
     end
 
     def self.overall_rating(company_info)
-      #
+      company_info["response"]["employers"][0]["overallRating"]
     end
 
     def self.culture_rating(company_info)
-      #
+      company_info["response"]["employers"][0]["cultureAndValuesRating"]
     end
 
     def self.compensation_rating(company_info)
-      #
+      company_info["response"]["employers"][0]["compensationAndBenefitsRating"]
     end
 
     def self.get_glassdoor_data(c_name)
@@ -50,4 +51,4 @@ module CompanyProfiler
     end
 end
 
-pp CompanyProfiler.get_profile("Google")
+p CompanyProfiler.get_profile("Google")
