@@ -6,12 +6,15 @@ require 'csv'
 require 'httparty'
 require_relative 'scraper'
 require_relative 'helper'
+enable :session
 helpers Locator
 
 get '/' do
   # run scraper if search
-  default_location = get_ip_location
-
+  unless session["default_location"]
+    session["default_location"] = get_ip_location
+  end
+  
   query = params[:query]
   location = params[:location]
 
@@ -23,5 +26,5 @@ get '/' do
   else
   end
 
-  erb :index, locals: {input: array_mine, default_location: default_location}
+  erb :index, locals: {input: array_mine, default_location: session["default_location"]}
 end
