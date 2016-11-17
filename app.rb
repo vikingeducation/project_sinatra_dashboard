@@ -28,6 +28,13 @@ post '/' do
     jobs = convert_to_hashes(jobs)
   end
 
+  # TODO move and make more OOP
+  profiler = CompanyProfiler.new(request.ip, request.user_agent)
+
+  jobs.map do |job|
+    job[:glassdoor] = profiler.get_comp_info(job)
+  end
+
   if jobs.empty?
     erb :no_jobs_found
   else
