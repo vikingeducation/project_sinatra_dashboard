@@ -2,6 +2,7 @@
 require 'sinatra'
 require 'sinatra/reloader'
 require 'figaro'
+require_relative './figaro_file'
 require_relative 'helpers/dice_scraper_helper'
 require_relative 'helpers/locator_helper'
 require_relative 'test_results'
@@ -16,28 +17,19 @@ get '/' do
   erb :index
 end
 
+# TODO: Glassdoor access denied?
+# Job links dont go to link, they redirect to '/'
+# WHY?? How is this supposed to work?
+
 post '/' do
   if settings.development?
     data = TestData.new
     jobs = data.test_data
   else
-    terms = params[:terms]
-    location = params[:location]
+    profiler = CompanyProfiler.new(request.ip, request.user_agent)
 
-    jobs = search(terms, location)
-    jobs = convert_to_hashes(jobs)
+    jobs = search( params[:terms], params[:location], profiler )
   end
 
-  # TODO move and make more OOP
-  profiler = CompanyProfiler.new(request.ip, request.user_agent)
-
-  jobs.map do |job|
-    job[:glassdoor] = profiler.get_comp_info(job)
-  end
-
-  if jobs.empty?
-    erb :no_jobs_found
-  else
-    erb :table, :locals => { :jobs => jobs }
-  end
+  erb :table, :locals => { :jobs => jobs }
 end

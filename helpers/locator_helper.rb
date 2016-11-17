@@ -4,10 +4,13 @@ module LocatorHelper
   def get_IP_location(ip_address)
     ip_address = '146.63.99.201' if settings.development?
 
-    response = Net::HTTP.get("freegeoip.net", "/json/#{ip_address}")
+    # TODO fix wierd port error
+    # response =  JSON.parse(
+    #                 Net::HTTP.get("freegeoip.net", "/json/#{ip_address}")
+    #             )
+    #
+    # response['city']
 
-    json = JSON.parse(response)
-
-    json['city']
+    "Honolulu"
   end
 end

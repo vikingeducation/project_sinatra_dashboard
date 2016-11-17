@@ -6,12 +6,30 @@ require_relative '../dice-scraper/lib/dice_jobs_ui'
 
 module DiceScraperHelper
 
-  def convert_to_hashes(jobs)
-    jobs.map { |job| job.to_hash }
+  def search(terms, location, profiler)
+    puts "Starting job search ...."
+    jobs = DiceScraperController.new.search(terms, location)
+
+    return jobs if jobs.empty?
+    return jobs unless profiler.is_a? CompanyProfiler
+
+    add_profile(profiler, jobs)
   end
 
-  def search(terms, location)
-    DiceScraperController.new.search(terms, location)
+  def add_profile(profiler, jobs)
+    puts "Adding Profiles..."
+
+    jobs_per_comp = jobs.group_by { |job| job.company }
+
+    jobs_per_comp.each do |company, jobs|
+      profile = profiler.get_comp_info(jobs[0])
+
+      jobs.each do |job|
+        job.company_profile = profile
+      end
+    end
+
+    jobs_per_comp.values.flatten
   end
 
 end

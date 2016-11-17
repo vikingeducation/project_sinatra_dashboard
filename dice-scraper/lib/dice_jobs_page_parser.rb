@@ -1,5 +1,5 @@
 Job =  Struct.new( :title, :company, :link, :location,
-                   :post_date, :comp_id, :job_id ) do
+                   :post_date, :comp_id, :job_id, :company_profile ) do
                       def to_a
                         [ title, company, link, location,
                           post_date, comp_id, job_id ]
@@ -10,8 +10,6 @@ Job =  Struct.new( :title, :company, :link, :location,
                           location: location, post_date: post_date,
                           comp_id: comp_id, job_id: job_id, link: link }
                       end
-
-
                     end
 
 class DiceJobsPageParser
