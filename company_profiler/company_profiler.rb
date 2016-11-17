@@ -1,41 +1,51 @@
 require 'httparty'
 require 'json'
 
+
+require 'pp'
+require_relative '../figaro_file'
+
 module CompanyProfiler
 
   BASE_URI = "http://api.glassdoor.com/api/api.htm?v=1&format=json"
   PID = ENV['GLASS_ID']
   KEY = ENV['GLASS_KEY']
+  Profile = Struct.new(:overall, :culture, :compensation)
 
   def self.get_profile(c_name)
-
-  end
-
-
-
-  def self.culture_rating()
-    #
-  end
-
-  def self.values_rating()
-    #
-  end
-
-  def self.compensation_rating
-    #
-  end
-
-  def self.benefits_rating
-    #
+    glassdoor_data = get_glassdoor_data(c_name)
+    create_company_profile(glassdoor_data)
   end
 
   private
-  
-  def self.get_json(c_name)
-    HTTParty.get("#{BASE_URI}&t.p=#{PID}&t.k=#{KEY}&action=employers&q=#{c_name}")
-  end
 
+    def self.create_company_profile(company_info)
+      profile = Profile.new
+      profile.overall = overall_rating(company_info)
+    end
+
+    def self.overall_rating(company_info)
+      #
+    end
+
+    def self.culture_rating(company_info)
+      #
+    end
+
+    def self.compensation_rating(company_info)
+      #
+    end
+
+    def self.get_glassdoor_data(c_name)
+      # unknown rate limit
+      sleep(0.75)
+      api_response = HTTParty.get("#{ BASE_URI }&t.p=#{ PID }&t.k=#{KEY}&action=employers&q=#{ c_name }").body
+      parse_glassdoor_api(api_response)
+    end
+
+    def self.parse_glassdoor_api(json)
+      JSON.parse(json)
+    end
 end
 
-
-    # HTTParty.get("#{BASE_URI}&t.p=#{PID}&t.k=#{KEY}&action=employers&q=#{c_name}&userip=192.168.43.42&useragent=Mozilla/%2F4.0")
+pp CompanyProfiler.get_profile("Google")
