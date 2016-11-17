@@ -1,9 +1,11 @@
 #!/usr/bin/env ruby
 require 'sinatra'
 require 'sinatra/reloader'
+require 'figaro'
 require_relative 'helpers/dice_scraper_helper'
 require_relative 'helpers/locator_helper'
 require_relative 'test_results'
+require_relative 'classes/glassdoor'
 
 enable :sessions
 
