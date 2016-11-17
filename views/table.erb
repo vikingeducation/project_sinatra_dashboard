@@ -1,0 +1,35 @@
+<%= erb :search_form %>
+
+<% if jobs.empty? %>
+
+  <%= erb :no_jobs_found %>
+
+<% else %>
+
+  <table>
+    <tr>
+      <th>Job Title</th>
+      <th>Company</th>
+      <th>Location</th>
+      <th>Posting Date</th>
+    </tr>
+
+    <% jobs.each do |row| %>
+    <tr>
+      <td>
+        <a href= <% row[:link] %> ><%= row[:title] %></a>
+      </td>
+      <td>
+        <%= row[:company] %>
+      </td>
+      <td>
+        <%= row[:location] %>
+      </td>
+      <td>
+        <%= row[:post_date] %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+
+<% end %>

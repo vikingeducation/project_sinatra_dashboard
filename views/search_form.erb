@@ -1,0 +1,7 @@
+<form action = "/" method = "post" >
+  Enter a job search term:
+  <input type = "text" name = "terms" >
+  Enter a job location:
+  <input type = "text" name = "location" value= <%= session[:location] unless session[:location].nil? %> >
+  <input type = "submit" value = "Submit!" >
+</form>
