@@ -22,6 +22,8 @@ module CompanyProfiler
     def self.create_company_profile(company_info)
       profile = Profile.new
       profile.overall = overall_rating(company_info)
+      profile.culture = culture_rating(company_info)
+      profile.compensation = compensation_rating(company_info) 
     end
 
     def self.overall_rating(company_info)
