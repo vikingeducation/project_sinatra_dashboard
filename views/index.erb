@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="overrides.css">
+  <style>
+  li {
+    margin-top: 3px;
+    margin-bottom: 3px;
+  }
+
+  body {
+    background-color: rgb(179, 240, 255);
+  }
+  </style>
+
+</head>
+<body>
+
+  <br />
+  <div class="container panel panel-default">
+    <div class="panel-title">
+      <h1 class="text-center">Welcome to the Jobs Dashboard</h1>
+    </div>
+
+    <div class="row text-center">
+      <form action='/' method='get'>
+        <input type='text' name='terms' placeholder='Search Terms'>
+        <input type='text' name='location' placeholder='Location'
+        value='<%= locals[:location] %>'>
+        <input class='btn btn-success' type='submit' value='Search'>
+      </form>
+    </div>
+  <br/>
+    <% if locals[:terms] && locals[:location] %>
+
+    <%= erb :search_results, locals: { jobs:     locals[:jobs],
+      terms:    locals[:terms],
+      location: locals[:location] } %>
+
+      <% end %>
+    </div>
+  </body>
+  </html>
