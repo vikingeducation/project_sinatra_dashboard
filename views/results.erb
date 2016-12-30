@@ -1,0 +1,17 @@
+<table class="table">
+    <tr>
+      <td>Title</td>
+      <td>Company</td>
+      <td>Location</td>
+      <td>Date</td>
+    </tr>
+    <% postings.each do |posting| %>
+      <tr>
+        <td><%=posting.title %></td>
+        <td><%=posting.company %></td>
+        <td><%=posting.location %></td>
+        <td><%=posting.date %></td>
+      </tr>
+    <% end %>
+
+</table>
