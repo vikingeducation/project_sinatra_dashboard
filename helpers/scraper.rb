@@ -34,7 +34,7 @@ class Scraper
     page.links_with(:class => "dice-btn-link loggedInVisited").each do |link|
       @postings << scrape_info(link)
       counter += 1
-      puts "scraping"
+      puts link
       break if counter > 3
     end
   end
