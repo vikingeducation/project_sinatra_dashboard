@@ -1,10 +1,8 @@
-require 'csv'
-
 Job = Struct.new(:title, :company, :link, :location, :date, :company_id, :job_id)
 
 class Scraper 
 
-  attr_accessor :postings
+  attr_reader :postings
 
   def initialize(search_terms, location)
     results = get_results(search_terms, location)
@@ -25,6 +23,8 @@ class Scraper
   end
 
   def get_url(search_terms, location)
+    search_terms = search_terms.gsub(" ","+")
+    location = location.gsub(" ","%2C+")
     "https://www.dice.com/jobs?q=#{search_terms}&l=#{location}"
   end
 
@@ -33,9 +33,10 @@ class Scraper
     counter = 0
     page.links_with(:class => "dice-btn-link loggedInVisited").each do |link|
       @postings << scrape_info(link)
-      counter += 1
       puts link
-      break if counter > 3
+      #for dev purposes, scraping entire page is too time-intensive
+      counter += 1
+      break if counter > 9
     end
   end
 
@@ -78,9 +79,3 @@ class Scraper
   end
 
 end
-
-=begin
-load 'scraper.rb'
-a = Scraper.new
-a.collect_results(a.get_results)
-=end

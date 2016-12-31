@@ -1,0 +1,12 @@
+<% company = profiles.shift %>
+        <% if company.profile.nil? %>
+          <td>no info found</td>
+          <td>no info found</td>
+          <td>no info found</td>
+          <td>no info found</td>
+        <% else %>
+          <td><%=company.overall_rating %></td>
+          <td><%=company.compensation_and_benefits %></td>
+          <td><%=company.career_opps %></td>
+          <td><%=company.work_life_balance %></td>
+        <% end %>

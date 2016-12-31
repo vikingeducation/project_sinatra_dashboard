@@ -2,10 +2,14 @@
 
 <table class="table">
     <tr>
-      <td>Title</td>
-      <td>Company</td>
-      <td>Location</td>
-      <td>Date</td>
+      <td><strong>Title</strong></td>
+      <td><strong>Company</strong></td>
+      <td><strong>Location</strong></td>
+      <td><strong>Date</strong></td>
+      <td><strong>Overall Rating</strong></td>
+      <td><strong>Compensation/Benefits</strong></td>
+      <td><strong>Career Opportunities</strong></td>
+      <td><strong>Work-Life Balance</strong></td>
     </tr>
     <% postings.each do |posting| %>
       <tr>
@@ -13,7 +17,8 @@
         <td><%=posting.company %></td>
         <td><%=posting.location %></td>
         <td><%=posting.date %></td>
+        <!-- for "Company" column -->
+        <%= erb :"shared/ratings", locals: { profiles: profiles } %>
       </tr>
     <% end %>
-
 </table>
