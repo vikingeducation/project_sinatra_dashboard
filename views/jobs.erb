@@ -1,0 +1,39 @@
+<div class="container">
+	<h2>Search Results for <%= city %>, <%= state %> </h2><br><br><br><br>
+	<table class="table">
+		<thead>
+	    	<tr>
+	        	<th>Job Title</th>
+	        	<th>Company Name</th>
+	        	<th>Dice Link</th>
+	        	<th>Location</th>
+	        	<th>Posted Date</th>
+	        	<th>Company ID</th>
+	        	<th>Job ID</th>
+	        	<th>Glass Door Rating</th>
+	      	</tr>
+	    </thead>
+	    <tbody>
+	    	<% jobs.each do |job| %>
+	      		<tr>
+	        		<td><%= job[0] %></td>
+	        		<td><%= job[1] %></td>
+	        		<td><a href="<%= job[2] %>">Link</a></td>
+	        		<td><%= job[3] %></td>
+	        		<td><%= job[4] %></td>
+	        		<td><%= job[5] %></td>
+	        		<td><%= job[6] %></td>
+	        		<td><%= job[7] %></td>
+	      		</tr>
+	      	<% end %>
+	    </tbody>
+	</table>
+	<br><br><br>
+	<form action="/" method="get">
+		<button type="submit" class="btn btn-default">Start new search</button>
+	</form>
+	<br><br><br>
+</div>
+<br><br>
+<a href='https://www.glassdoor.com/index.htm'>powered by <img src='https://www.glassdoor.com/static/img/api/glassdoor_logo_80.png' title='Job Search' /></a>
+
