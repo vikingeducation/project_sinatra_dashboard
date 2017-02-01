@@ -1,2 +1,129 @@
-<h1>Hello World</h1>
-<%= geodata.ip %> (<%= geodata.city %>, <%= geodata.state %>)
+<div class="main-content container">
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title">Search for Jobs near <%= geodata.city %>, <%= geodata.state %></h3>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="search-container">
+          <div class="col-sm-8 col-xs-8">
+           <form action="/search_jobs" method="post">
+              <div class="form-group">
+                Site to search: &nbsp;
+                <label class="radio-inline">
+                  <input type="radio" name="job_site" value="dice" checked> Dice
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="job_site" value="indeed" disabled> Indeed
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="job_site" value="hired" disabled> Hired
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="job_site" value="some_other_site" disabled> ...
+                </label>
+              </div>
+              <div class="row">
+                <div class="col-sm-5">
+                  <div class="form-group row search-container">
+                    <div class="col-xs-6 search-container">
+                      Location (zip code):
+                    </div>
+                    <div class="col-xs-6">
+                      <input type="text" name="zip_code" class="form-control" value="<%= geodata.zip_code %>">
+                    </div>
+                  </div>
+                </div>
+              </div> 
+              <div class="row">
+                <div class="col-sm-5">
+                  <div class="form-group row search-container">
+                    <div class="col-xs-6">
+                      Search radius: &nbsp;
+                    </div>
+                    <div class="col-xs-6">
+                      <input type="number" step="1" name="radius" class="form-control" value="30">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-5">
+                  <div class="form-group row search-container"> 
+                    <div class="col-xs-6">
+                      Number of results: &nbsp;
+                    </div>
+                    <div class="col-xs-6">
+                      <input type="number" step="1" name="num_jobs" class="form-control" value="30">
+                    </div>
+                  </div>
+                </div>
+              </div> 
+              <div class="form-group">
+                Glassdoor Integration: &nbsp;
+                <label class="radio-inline">
+                  <input type="radio" name="glassdoor" value="yes"> Y
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="glassdoor" value="no" checked> N
+                </label>
+              </div>
+              <div class="input-group">
+                <input type="text" name="query" class="form-control" placeholder="Job Query">
+                <span class="input-group-btn">
+                  <button type="submit" class="btn btn-primary" type="button">Search</button>
+                </span>
+              </div>
+            </form>
+          </div>
+          <div class="col-sm-4 col-xs-4">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title">Search for Companies</h3>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="search-container">
+          <div class="col-sm-8 col-xs-8">
+            <form action="/search_companies" method="post">
+              <div class="form-group">
+                Number of results to display: &nbsp;
+                <label class="radio-inline">
+                  <input type="radio" name="num_results" value="1" checked> 1
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="num_results" value="2"> 2
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="num_results" value="3"> 3
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="num_results" value="4"> 4
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="num_results" value="5"> 5
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="num_results" value="all"> all
+                </label>
+              </div>
+              <div class="input-group">
+                <input type="text" name="query" class="form-control" placeholder="Company Name">
+                <span class="input-group-btn">
+                  <button type="submit" class="btn btn-primary" type="button">Search</button>
+                </span>
+              </div>
+            </form>
+          </div>
+          <div class="col-sm-4 col-xs-4 text-right">
+            <a href='https://www.glassdoor.com/index.htm'>powered by <img src='https://www.glassdoor.com/static/img/api/glassdoor_logo_80.png' title='Job Search' /></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
