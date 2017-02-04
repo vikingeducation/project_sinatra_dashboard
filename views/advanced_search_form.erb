@@ -1,0 +1,123 @@
+<a href="/simple_search">Nope. Take me back to the simple form.</a>
+<form action="/search" method="post">
+	<h2 class="h3">Find listings</h2>
+	
+	<label for="for_one">With <b><u>at least one</u></b></label>
+	<input type="text" class="u-full-width" name="for_one" placeholder="Of these words">
+	
+	<div class="row">
+		<label for="for_all">With <b><u>all</u></b></label>
+		<input type="text" class="u-full-width" name="for_all" placeholder="Of these words">
+	</div>
+	
+	<div class="row">
+		<label for="for_none">With <b><u>none</u></b></label>
+		<input type="text" class="u-full-width" name="for_none" placeholder="Of these words">
+	</div>
+	
+	<div class="row">
+		<label for="for_exact">With this <b><u>exact</u></b></label>
+		<input type="text" class="u-full-width" name="for_exact" placeholder="Phrase">
+	</div>
+	
+	<div class="row">
+		<div class="columns six">
+			<label for="for_jt"><b><u>Within</u></b></label>
+			<input type="text" class="u-full-width" name="for_jt" placeholder="Job title">
+		</div>
+		<div class="columns six">
+			<label for="for_com"><b><u>Within</u></b></label>
+			<input type="text" class="u-full-width" name="for_com" placeholder=" Company name">
+		</div>
+	</div>
+	
+	<h2 class="h3">Located in</h2>
+	
+	<div class="row">
+		<label for="for_loc">City, state or zip code</label>
+		<input type="text" class="u-full-width" name="for_loc" placeholder="" value="<%= location %>">
+	</div>
+	
+	<div class="row">
+		<label for="radius">(Or <b><u>within</u></b>
+		<select class="form-select" name="radius">
+			<option value="">Exact Location</option>
+			<option value="5">5 miles</option>
+			<option value="10">10 miles</option>
+			<option value="20">20 miles</option>
+			<option value="30" selected>30 miles</option>
+			<option value="40">40 miles</option>
+			<option value="50">50 miles</option>
+			<option value="60">60 miles</option>
+			<option value="70">70 miles</option>
+			<option value="80">80 miles</option>
+			<option value="90">90 miles</option>
+			<option value="100">100 miles</option>
+		</select>
+		of my desired location)
+		</label>
+	</div>
+	
+	<h2 class="h3">Preferably</h2>
+	<label for="jtype">Employment Type</label>
+	<div class="row">
+		<div class="column one-third">
+			<label for="jtype">
+				<input type="checkbox" name="jtype" value="Full Time">
+				<span class="label-body">Full-Time</span>
+			</label>
+		</div>
+		<div class="column one-third">
+			<label for="jtype">
+				<input type="checkbox" name="jtype" value="Part Time">
+				<span class="label-body">Part-Time</span>
+			</label>
+		</div>
+		<div class="column one-third">
+			<label for="jtype">
+				<input type="checkbox" name="jtype" value="Contracts">
+				<span class="label-body">Contracts</span>
+			</label>
+		</div>
+	</div>
+	<div class="row">
+	<label for="posteddate"><b><u>Posted within</u></b> the last</label>
+		<select name="posteddate">
+			<option value="3">3 days</option>
+			<option value="7">7 days</option>
+			<option value="10">10 days</option>
+			<option value="15">15 days</option>
+			<option value="20">20 days</option>
+			<option value="25">25 days</option>
+			<option value="30">30 days</option>
+		</select>
+		</div>
+		<div class="row">
+		<fieldset>
+		<label for="sort"><b><u>Sort</u></b> by</label>
+			<label for="sort" class="radio-inline">
+			<input type="radio" value="relevance" checked>
+			<span>Relevance</span>
+		</label>
+			<label for="sort" class="radio-inline">
+				<input type="radio" name="sort" value="date">
+				<span>Date</span>
+			</label>
+			</fieldset>
+		</div>
+		<div class="row">
+		<label for="telecommute"><b><u>Telecommute</u></b></label>
+		</div>
+		<div class="row">
+			<label for="telecommute">
+				<input type="checkbox" name="telecommute" value="true">
+				<span class="label-body">Yes</span>
+			</label>
+		</div>
+		<div class="row">
+			<label for="limit"><b><u>Limit</u></b> jobs per page to 
+				<input type="number" min="1" max="100" name="limit">
+			</label>
+		</div>
+	<button type="submit" class="button-primary">Search</button>
+</form>
