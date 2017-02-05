@@ -1,5 +1,5 @@
 module DashboardHelper
-  def prep_dice_opts(params)
+  def params_to_opts(params)
     params = params.map do |param|
       param = [param[0], param[1].gsub(' ', '+').gsub(',', '%2C')]
     end
@@ -12,10 +12,14 @@ module DashboardHelper
   end
 
   def set_location(ip)
-    location = Locator.new(ip).get_response
+    locator = Locator.new(ip)
+    location = parse_locator(locator.response)
+    session['location'] = location
+  end
+
+  def parse_locator_response(location)
     search = location.parsed_response['city']
     search += ', ' + location.parsed_response['region_code'].match(/\d+/) unless location.parsed_response['region_code'].match(/\d+/)
-    session['location'] = search
   end
 
   def display_form(advanced)

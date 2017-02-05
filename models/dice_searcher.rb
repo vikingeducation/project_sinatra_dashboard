@@ -1,7 +1,6 @@
 require 'rubygems'
 require 'bundler/setup'
 require 'mechanize'
-require 'pry-byebug' if development?
 
 class DiceSearcher
   attr_reader :results
@@ -44,8 +43,8 @@ class DiceSearcher
         r.company = company(result)
         r.location = location(result)
         r.date = date(result)
-        r.companyid = company_id(result, i)
-        r.jobid = job_id(result, i)
+        r.companyid = company_id(result)
+        r.jobid = job_id(result)
         r.link = link(result)
         @results << r
       end
@@ -69,11 +68,11 @@ class DiceSearcher
     convert_date(date).strftime("%a,  %e %b %Y,  %l:%M %p")
   end
 
-  def company_id(result, i)
+  def company_id(result)
     result.search('ul.list-inline li h3 a')[0][:href].match(/dice.com\/jobs\/detail\/.*\/(.*)\//)[1] if result.search('ul.list-inline li h3 a')[0][:href].match(/dice.com\/jobs\/detail\/.*\/(.*)\//)
   end
 
-  def job_id(result, i)
+  def job_id(result)
     result.search('ul.list-inline li h3 a')[0][:href].match(/dice.com\/jobs\/detail\/.*\/.*\/(.*)?\?/)[1] if result.search('ul.list-inline li h3 a')[0][:href].match(/dice.com\/jobs\/detail\/.*\/.*\/(.*)?\?/)
   end
 

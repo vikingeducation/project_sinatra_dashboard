@@ -26,8 +26,8 @@ get '/' do
 end
 
 post '/search' do
-  dice_terms = prep_dice_opts(params)
-  dice = DiceSearcher.new(dice_terms)
+  opts = params_to_opts(params)
+  dice = DiceSearcher.new(opts)
   ratings = CompanyProfiler.new(dice.results, ip)
   ratings.get_company_ratings
   compiled = merge_data(dice.results, ratings.ratings)

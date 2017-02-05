@@ -9,6 +9,7 @@ gem 'json'
 gem 'mechanize', '~>2.7.2', '<2.7.3'
 gem 'httparty'
 gem 'envyable'
+gem 'google-api-client'
 
 group :development do
   gem 'pry-byebug'

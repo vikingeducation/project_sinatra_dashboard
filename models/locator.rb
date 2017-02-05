@@ -4,6 +4,7 @@ class Locator
   attr_reader :response
   def initialize(ip)
     @ip = ip
+    get_response
   end
 
   def get_response
