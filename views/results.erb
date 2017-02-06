@@ -1,0 +1,34 @@
+<% if File.exists?('./public/search_results.csv') %>
+<h3>Here's what we found in "<%= searched %>"</h3>
+<div class="row">
+  <div class="columns twelve u-text-right">
+    <a href="/search_results.csv" class="button">Download (.CSV)</a>
+  </div>
+</div>
+<table class="u-full-width">
+<% 
+CSV.foreach('./public/search_results.csv').with_index do |line, i|
+  line.to_a
+  if i == 0 
+%>
+  <thead> 
+    <tr>
+	 <% line.each { |item|  %> <th> <%= item %> </th> <% } %>
+    </tr>
+  </thead>
+  <tbody>
+<% else %>
+    <tr>
+      <% line.each do |item| %> 
+      <td><%= if item
+      item = item.match(/http(s?):\/\//) ? '<a href="' + item + '">View Listing</a>' : item 
+      end %></td>
+      <% end%>
+    </tr>
+<%
+end
+end
+%>
+  </tbody>
+</table>
+<% end %>

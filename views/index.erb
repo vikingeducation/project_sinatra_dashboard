@@ -1,0 +1,6 @@
+<div class="container">
+<h1 class="u-text-center">Search Jobs</h1>
+<%=  erb display_form(advanced_form), :locals => { 'location' => location } %>
+<hr>
+<%= erb :results, :locals => { 'searched' => session['search_loc']} %>
+</div>

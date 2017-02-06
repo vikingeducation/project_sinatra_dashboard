@@ -1,0 +1,23 @@
+<form action="/search" method="post">
+	<div class="row">
+		<div class="columns eight">
+		<label for="for_all">Search</label>
+		<input type="text" name="for_all" class="u-full-width"  placeholder="Job title, keywords or company name">
+	</div>
+	<div class="columns four">	
+		<label for="for_loc">Location</label>
+		<input type="text" name="for_loc" class="u-full-width" value="<%= location %>">
+	</div>
+	</div>
+	<div class="row">
+	<div class="columns twelve u-text-right">
+		<span><a href="/advanced_search">Advanced Search</a>
+		</span>
+	</div>
+	</div>
+	<div class="row">
+	<div class="columns twelve u-text-center">
+		<button type="submit" class="">Search</button>
+	</div>
+	</div>
+</form>
