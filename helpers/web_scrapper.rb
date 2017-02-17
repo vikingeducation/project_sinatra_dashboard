@@ -1,6 +1,8 @@
 
 require 'rubygems'
 require 'mechanize'
+require './helpers/company_profiler.rb'
+require 'pry'
 
 module JobScrapper
 
@@ -10,13 +12,18 @@ class WebScrapper
     @job_posts = []
   end
 
-  def parse_all_job_adverts(city= "Galway", keyword = "ruby", company = "", date)
+  def parse_all_job_adverts(city, keyword, company, date, ip)
     date == "" ? date = ((Time.now - 100*24*60*60).strftime "%Y-%m-%d") : date
     1.upto(number_of_jobs_found(city, keyword)/10) do |i|
       current_page = page_with_search_results(city, keyword)
-      parse_short_job_advert(current_page, company, date)
+      parse_short_job_advert(current_page, company, date, ip)
     end
     @job_posts
+  end
+
+  def company_ratings(company, ip)
+    profiler = CompanyProfiler.new(company, ip)
+    profiler.get_ratings
   end
 
   private
@@ -35,12 +42,13 @@ class WebScrapper
     results.match(/\d{1,3}$/)[0].to_i
   end
 
-  def parse_short_job_advert(page, company, date)
+  def parse_short_job_advert(page, company, date, ip)
     company = company.split.map {|w| w.capitalize}.join(" ")
     page.search('div.row.result').each do |advert|
+      # binding.pry
       if (get_job_company_name(advert).include? company) && Date.strptime(date) < Date.strptime(posting_date(advert))
         array = scrapping_data_from(advert)
-        puts "DBG: array = #{array.inspect}"
+        array << company_ratings(company, ip)
         @job_posts << array
       end
     end
@@ -79,7 +87,7 @@ class WebScrapper
       t = Time.now - date*24*60*60
       t.strftime "%Y-%m-%d"
     else
-      "n\/a"
+      ((Time.now).strftime "%Y-%m-%d")
     end
   end
 
