@@ -17,35 +17,32 @@ enable :sessions
 set :session_secret, '*&(^B234'
 
 get "/" do
-  # binding.pry
   ip_locator = GPSLocator.new(request.ip)
-  #city = ip_locator.get_raw_response["city"]
-  city = "Galway"
-  # profiler = CompanyProfiler.new("Accenture", ip_locator)
-  # test_glass = profiler.get_raw_response
-  keyword = session[:keyword] || ''
-  company = session[:company] || ''
-  date = session[:adv_date] || ""
+  city = session[:city] || ip_locator.get_raw_response["city"]
+  # city = session[:city] || "Galway"
+  keyword = session[:keyword] || "ruby"
+  company = session[:company] || ""
+  date = session[:date] || ""
   session[:city] = city
-  # session[:keyword] = keyword
-  # session[:company] = company
-  # session[:adv_date] = date
   jobs = all_jobs(city, keyword, company, date, ip_locator)
-  erb :index, locals: {jobs: jobs, city: city}
+  erb :index, locals: {jobs: jobs}
 end
 
 post "/search_refine" do
+  session.clear
   params[:city].nil? ? city = session[:city] : city = params[:city]
   keyword = params[:keyword]
   company = params[:company]
   date = params[:adv_date]
-  jobs = all_jobs(city, keyword, company, date)
-  session[:jobs] = jobs
-  erb :index, locals: {jobs: jobs}
-  # redirect to("/search")
+  session[:keyword] = keyword
+  session[:company] = company
+  session[:date] = date
+  session[:city] = city
+  redirect to "/"
 end
 
-# get "/search_results" do
-
+# get "/clear_session" do
+#   session.clear
+#   redirect to "/"
 # end
 

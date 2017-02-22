@@ -30,7 +30,7 @@
     <h1>The Job Hunt Central</h1>
     <br>
     <h3>Refine your search:</h3>
-    <form>
+    <form action="/search_refine" method="post">
       <div class="form-group">
         <label for="city">City</label>
         <input type="text" class="form-control" name="city" placeholder="ie. Galway">
@@ -59,13 +59,29 @@
       <th>Company</th>
       <th>City</th>
       <th>Posted on</th>
+      <th>Total Rating</th>
+      <th>Rating</th>
+      <th>Culture</th>
+      <th>Leadership</th>
+      <th>Benefits</th>
+      <th>Prospects</th>
+      <th>W/L Balance</th>
+      <th>Recommend?</th>
     </tr>
     <%jobs.each do |job_post|%>
     <tr>
       <td><a href="<%=job_post[4]%>"><%=job_post[0]%></a></td>
       <td><%=job_post[1]%></td>
       <td><%=job_post[2]%></td>
-      <td><%=job_post[3]%></td>
+      <td><%=Date.parse(job_post[3]).strftime "%y-%m-%d"%></td>
+      <td><%=job_post[5]["overallRating"]%></td>
+      <td><%=job_post[5]["ratingDescription"]%></td>
+      <td><%=job_post[5]["cultureAndValuesRating"]%></td>
+      <td><%=job_post[5]["seniorLeadershipRating"]%></td>
+      <td><%=job_post[5]["compensationAndBenefitsRating"]%></td>
+      <td><%=job_post[5]["careerOpportunitiesRating"]%></td>
+      <td><%=job_post[5]["workLifeBalanceRating"]%></td>
+      <td><%=job_post[5]["recommendToFriendRating"]%></td>
     </tr>
     <%end%>
   </table>

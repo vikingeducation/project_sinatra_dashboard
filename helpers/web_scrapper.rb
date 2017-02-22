@@ -14,41 +14,43 @@ class WebScrapper
 
   def parse_all_job_adverts(city, keyword, company, date, ip)
     date == "" ? date = ((Time.now - 100*24*60*60).strftime "%Y-%m-%d") : date
-    1.upto(number_of_jobs_found(city, keyword)/10) do |i|
-      current_page = page_with_search_results(city, keyword)
+    # number_of_jobs = number_of_jobs_found(city, keyword)
+    current_page = page_with_search_results(city, keyword)
+    while current_page != nil
       parse_short_job_advert(current_page, company, date, ip)
+      next_page = current_page.link_with(:text => "Next »")
+      next_page.nil? ? current_page = nil : current_page = next_page.click
+      return @job_posts if @job_posts.length >= 20
     end
     @job_posts
   end
+
+  private
 
   def company_ratings(company, ip)
     profiler = CompanyProfiler.new(company, ip)
     profiler.get_ratings
   end
 
-  private
-
-  def page_with_search_results(city, keyword, page_no = 1)
+  def page_with_search_results(city, keyword)
     agent = Mechanize.new { |agt| agt.user_agent_alias = 'Mac Firefox' }
-    agent.history_added = Proc.new { sleep 0.5 }
-    indeed_page = "https:\/\/ie.indeed.com\/jobs\?q=#{keyword}&l=#{city}&start=#{(page_no-1)*10}"
-    page = agent.get(indeed_page)
-    page
+    agent.history_added = Proc.new { sleep 0.3 }
+    agent.get("https:\/\/ie.indeed.com\/jobs\?q=#{keyword}&l=#{city}")
   end
 
   def number_of_jobs_found(city, keyword)
     results = page_with_search_results(city, keyword)
     results = results.search('div#searchCount').children.text
-    results.match(/\d{1,3}$/)[0].to_i
+    results == "" ? 0 : results.match(/\d{1,3}$/)[0].to_i
   end
 
   def parse_short_job_advert(page, company, date, ip)
-    company = company.split.map {|w| w.capitalize}.join(" ")
+    searched_company = company.split.map {|w| w.capitalize}.join(" ")
     page.search('div.row.result').each do |advert|
-      # binding.pry
-      if (get_job_company_name(advert).include? company) && Date.strptime(date) < Date.strptime(posting_date(advert))
+      current_company = get_job_company_name(advert)
+      if (current_company.include? searched_company) && Date.strptime(date) < Date.strptime(posting_date(advert))
         array = scrapping_data_from(advert)
-        array << company_ratings(company, ip)
+        array << company_ratings(current_company, ip)
         @job_posts << array
       end
     end

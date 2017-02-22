@@ -11,8 +11,8 @@ class CompanyProfiler
     PARTNER_ID=124372
     GLASS_KEY='c62TkDAnELg'
 
-    # API_KEY = ENV["GLASS_KEY"]
-    # ID = ENV["PARTNER_ID"]
+  # API_KEY = ENV["GLASS_KEY"]
+  # ID = ENV["PARTNER_ID"]
 
   def initialize(company, ip)
     @ip = ip
@@ -26,32 +26,31 @@ class CompanyProfiler
   end
 
   def get_raw_response
-    HTTParty.get(BASE_URI, @options)
+      sleep 0.10
+      HTTParty.get(BASE_URI, @options)
   end
 
   def get_ratings
-    if self.get_raw_response["response"]
-      array_with_ratings = self.get_raw_response["response"]["employers"][0]
+    json_array = self.get_raw_response
+    if json_array["response"]["employers"].any?
+      array_with_ratings = json_array["response"]["employers"][0]
       {"overallRating" => array_with_ratings["overallRating"],
-                    "ratingDescription"=> array_with_ratings["ratingDescription"],
-                    "cultureAndValuesRating"=> array_with_ratings["cultureAndValuesRating"],
-                    "seniorLeadershipRating"=> array_with_ratings["seniorLeadershipRating"],
-                    "compensationAndBenefitsRating"=> array_with_ratings["compensationAndBenefitsRating"],
-                    "careerOpportunitiesRating"=> array_with_ratings["careerOpportunitiesRating"],
-                    "workLifeBalanceRating"=> array_with_ratings["workLifeBalanceRating"],
-                    "recommendToFriendRating"=> array_with_ratings["recommendToFriendRating"]
-                      }
-                    else
-                      puts "DBG: self.get_raw_response = #{self.get_raw_response.inspect}"
-                      {"overallRating" => "n/a",
-                    "ratingDescription"=> "n/a",
-                    "cultureAndValuesRating"=>"n/a",
-                    "seniorLeadershipRating"=> "n/a",
-                    "compensationAndBenefitsRating"=>"n/a",
-                    "careerOpportunitiesRating"=> "n/a",
-                    "workLifeBalanceRating"=> "n/a",
-                    "recommendToFriendRating"=> "n/a"
-                      }
+        "ratingDescription"=> array_with_ratings["ratingDescription"],
+        "cultureAndValuesRating"=> array_with_ratings["cultureAndValuesRating"],
+        "seniorLeadershipRating"=> array_with_ratings["seniorLeadershipRating"],
+        "compensationAndBenefitsRating"=> array_with_ratings["compensationAndBenefitsRating"],
+        "careerOpportunitiesRating"=> array_with_ratings["careerOpportunitiesRating"],
+        "workLifeBalanceRating"=> array_with_ratings["workLifeBalanceRating"],
+        "recommendToFriendRating"=> array_with_ratings["recommendToFriendRating"]}
+    else
+      {"overallRating" => "n/a",
+      "ratingDescription"=> "n/a",
+      "cultureAndValuesRating"=>"n/a",
+      "seniorLeadershipRating"=> "n/a",
+      "compensationAndBenefitsRating"=>"n/a",
+      "careerOpportunitiesRating"=> "n/a",
+      "workLifeBalanceRating"=> "n/a",
+      "recommendToFriendRating"=> "n/a"}
     end
   end
 
