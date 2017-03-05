@@ -1,0 +1,21 @@
+<%= erb :search, :locals => { :keywords => @keywords, :locations => @locations } %>
+
+<% if @message %>
+  <div class="row">  
+    <div class="two-thirds column">
+      <span style="color: red;"><%= @message %></span>
+    </div>
+  </div>
+<% end %>
+
+<% if @new_results && !@new_results.empty? %>
+
+<%= erb :"shared/results", :locals => { :results => @new_results, 
+                                        :heading => "Latest Search Results" } %>
+<% end %>
+
+<% if @previous_results && !@previous_results.empty? %>
+
+<%= erb :"shared/results", :locals => { :results => @previous_results, 
+                                        :heading => "Previous Results" } %>
+<% end %>

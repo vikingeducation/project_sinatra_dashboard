@@ -1,0 +1,86 @@
+<%# # views/results.erb %>
+
+<%# add the bootstrap lines in the layout erb %>
+
+
+<div class="row">
+  <div class="col-md-4">
+    <h3>Title or Keyword: <%= title_or_keyword %></h3>
+  </div>
+  <div class="col-md-4">
+    <h3>Location: <%= location %></h4>
+    <br>
+  </div>
+</div>
+
+<div class="row">
+  <div class="container">
+    <% if results.empty? %>
+      <h3>"No jobs found!"</h3>
+    <% else %>
+      <table class="table table-striped table-bordered">
+        <tr>
+          <%# print col headings %>
+          <th>Date Posted</th>
+          <th>Job Title</th>
+          <th>Company Name</th>
+          <th>Location</th>
+          <th>Job Link</th>
+          <th>Employer ID</th>
+          <th>Job ID</th>
+          <th>Culture And Values</th>
+          <th>Compensation And Benefits</th>
+          <th>Career Opportunities</th>
+          <th>Work Life Balance</th>
+          <th>Headline</th>
+          <th>Pros</th>
+          <th>Cons</th>
+        </tr>
+        <% results.each do |row|   # choose a few, not all %>
+            <tr>
+              <td><%= row[0] %></td>  
+              <td><%= row[1] %></td>
+              <td><%= row[2] %></td>
+              <td><%= row[3] %></td>
+              <td>
+                <a color=blue href= "<%= row[4] %>"><%= row[4] %></a>
+              </td><td>
+                <%= row[5] %>
+              </td>
+              <td>
+                <%= row[6] %>
+              </td>
+              <td>
+                <%= row[7] %>
+              </td>
+              <td>
+                <%= row[8] %>
+              </td>
+              <td>
+                <%= row[9] %>
+              </td>
+              <td>
+                <%= row[10] %>
+              </td>
+              <td>
+                <%= row[11] %>
+              </td>
+              <td>
+                <%= row[12] %>
+              </td>
+              <td>
+                <%= row[13] %>
+              </td>
+              <td>
+                <%= row[14] %>
+              </td>
+            </tr>
+        <% end %>  
+      </table>
+    <% end %>
+    <br>
+    <p>Employer Review Ratings: <a href='https://www.glassdoor.com/index.htm'>powered by <img src='https://www.glassdoor.com/static/img/api/glassdoor_logo_80.png' title='Job Search' /></a></p>  
+  </div>
+</div>
+
+
