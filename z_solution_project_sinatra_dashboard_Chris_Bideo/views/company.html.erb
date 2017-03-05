@@ -1,0 +1,35 @@
+<h1>Company</h1>
+<% if data && !data.empty? %>
+	<% data.each do |company| %>
+		<ul>
+			<% company.each do |key, value| %>
+				<li>
+					<span class="key">
+						<%= key %>
+					</span>
+					<% if key == :image %>
+						<img src="<%= value %>" alt="Image"/>
+					<% elsif value.is_a?(Hash) %>
+						<ul>
+							<% value.each do |sub_key, sub_value| %>
+								<li>
+									<% if sub_key == :image %>
+										<img src="<%= sub_value %>" alt="Image"/>
+									<% else %>
+										<%= sub_value %>
+									<% end %>
+								</li>
+							<% end %>
+						</ul>
+					<% else %>
+						<span class="value">
+							<%= value %>
+						</span>
+					<% end %>
+				</li>
+			<% end %>
+		</ul>
+	<% end %>
+<% else %>
+	<p>No data found</p>
+<% end %>

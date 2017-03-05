@@ -1,0 +1,21 @@
+<%# views/index.erb %>
+
+<%# Welcome page %>
+
+<h2>All the information you need for that perfect position!</h2>
+<h3>This site will help you:</h3>
+<h3>1. Find information on available positions in your area using dice.com</h3>
+<h3>2. Reviews and ratings for a company you select</h3>
+<h3>3. Company news to prepare for an interview</h3>
+<h3>4. Other useful features (TBD)</h3>
+<br>
+<h3>Your zip code is <%= location %></h3>
+<br>
+<h3>Enter the following:</h3>
+<form action = "index" method = "post">
+  Title or Keyword: <input type = "text" name = "title_or_keyword">
+  <input type = "submit" value = " Submit! ">
+</form>
+
+
+
