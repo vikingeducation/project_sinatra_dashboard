@@ -39,9 +39,14 @@ class Scraper
     end
   end
 
+  def sanitize_location(l)
+    return if l.nil?
+    l.gsub(/\s/, "+").gsub(/,/, "%2C")
+  end
+
   def parse_options(opts)
     query = opts[:query] || "programmer"
-    location = opts[:location] || "San_Francisco_Bay_Area%2C_CA"
+    location = sanitize_location(opts[:location]) || "San_Francisco_Bay_Area%2C_CA"
     radius = opts[:radius] || "30"
     startpage = opts[:startpage] || "1"
     "q-#{query}-l-#{location}-radius-#{radius}-startPage-#{startpage}-jobs"
