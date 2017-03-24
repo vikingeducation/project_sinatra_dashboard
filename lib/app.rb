@@ -1,35 +1,20 @@
 require "sinatra"
-require "sinatra/reloader" if development?
 require "erb"
-require_relative "scraper"
 require "json"
-require "pp"
+require_relative "scraper"
+require_relative "locator"
+
+require "sinatra/reloader" if development?
+require "pp" if development?
 
 use Rack::Session::Cookie, :key => 'rack.session',
                            :path => '/',
                            :secret => 'your_secret'
 
-class Locator
-  attr_accessor :agent
 
-  BASE_URI = "http://freegeoip.net"
-
-  def initialize
-    @agent = Mechanize.new
-  end
-
-  def from_ip(ip)
-    url = [BASE_URI, "json", ip].join("/")
-    page = agent.get(url)
-    JSON.parse(page.body)
-  end
-
-  def location(ip)
-    d = from_ip(ip)
-    [d["city"], d["region_name"], d["country_name"]].join(", ")
-  end
-
-end
+# ------------------------------------------------------------------------
+# Helpers
+# ------------------------------------------------------------------------
 
 def load_location
   session[:location] && JSON.parse(session[:location])
