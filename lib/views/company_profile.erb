@@ -1,0 +1,14 @@
+<h1><%= search %></h1>
+
+<% if profiles.empty? %>
+<p>There's no data about this company.</p>
+<% end %>
+
+<% profiles.each do |profile| %>
+<hr>
+<ul>
+  <% profile.each do |k, v| %>
+  <li><b><%= "#{k.gsub(/(?<=[a-zA-Z])(?=[A-Z])/, " ")}: " %></b> <%= v %></li>
+  <% end %>
+</ul>
+<% end %>

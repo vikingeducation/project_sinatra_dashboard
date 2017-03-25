@@ -1,3 +1,6 @@
+require "mechanize"
+require "json"
+
 class Locator
   attr_accessor :agent
 

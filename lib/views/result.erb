@@ -1,26 +1,30 @@
 <h1>Result</h1>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Index</th>
-      <th>Position</th>
-      <th>Company Name</th>
-      <th>Job Link</th>
-      <th>Description</th>
-      <th>Location</th>
-      <th>Posted at</th>
-      <th>Company Link</th>
-    </tr>
-  </thead>
-  <tbody>
-  <% result.each_with_index do |job, i| %>
-    <tr>
-      <td><%= i + 1 %></td>
-      <% job.each do |item| %>
-      <td><%= item %></td>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Index</th>
+        <th>Position</th>
+        <th>Company Name</th>
+        <th>Job Link</th>
+        <th>Description</th>
+        <th>Location</th>
+        <th>Posted at</th>
+        <th>Company Link</th>
+        <th>Company review</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% result.each_with_index do |job, i| %>
+      <tr>
+        <td><%= i + 1 %></td>
+        <% job.each do |item| %>
+        <td><%= item %></td>
+        <% end %>
+        <td><a href="/company-profile?company_name=<%= urlize(job[1]) %>"><%= job[1] %></a></td>
+      </tr>
       <% end %>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</div>
