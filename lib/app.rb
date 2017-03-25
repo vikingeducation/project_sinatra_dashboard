@@ -75,13 +75,10 @@ post "/" do
   erb :result, locals
 end
 
-
-
 get "/company-profile" do
   company = params["company_name"]
   ip = resolve_ip(request.ip)
-  # remove id and key!
-  opts = {ip: ip, id: 134984, key: "fQ4JYfEDT3Q", company: company}
+  opts = {ip: ip, company: company}
   profile = CompanyProfiler.new.profile(opts)
   save_featured_reviews!(company, profile)
   locals = {locals: {search: company, profiles: profile["response"]["employers"]}}
