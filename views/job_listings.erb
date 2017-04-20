@@ -1,0 +1,38 @@
+<h1 class="text-center">
+  Current Job Listings in 
+  <% if @location.empty? %>
+    <%= @current_location %>
+  <% else %>
+    <%= @city %>
+  <% end%>
+</h1>
+<h3 class="text-center"><a href="/">New Search</a></h3>
+<h4 class="text-center" ><a class="text-success" href='https://www.glassdoor.com/index.htm'>powered by <img src='https://www.glassdoor.com/static/img/api/glassdoor_logo_80.png' title='Job Search' /></a> </h4>
+<div class="container-fluid">
+  <table class="table table-hover table-responsive">
+    <caption>Job Search Results</caption>
+    <thead>
+      <tr>
+        <th>#</th>
+        <% @column_names.length.times do |i| %>
+          <th> <%= @column_names[i] %> </th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% @jobs_data.length.times do |i| %>
+        <tr>
+          <td> <%= i + 1 %> </td>
+          <% @jobs_data[i].length.times do |j| %>
+            <% if j == 2 %>
+              <td> <a href= <%= @jobs_data[i][j] %>> <%= @jobs_data[i][j] %> </a> </td>
+              <% else %>
+              <td> <%= @jobs_data[i][j] %> </td> 
+            <% end %>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+</div>

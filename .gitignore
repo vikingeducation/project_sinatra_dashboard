@@ -1,0 +1,2 @@
+*.csv
+/helpers/glassdoor_key_helper.rb
