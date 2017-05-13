@@ -2,6 +2,7 @@ require 'rubygems'
 require 'bundler/setup'
 require 'mechanize'
 require 'csv'
+require 'pry'
 
 
 class JobHunter
@@ -55,6 +56,7 @@ class JobHunter
 
     puts 'Done'
     puts
+    #binding.pry
     return results
     
     
@@ -105,6 +107,9 @@ class JobHunter
     end
   end
 end
+#job = JobHunter.new
+
+#job.get_me_a_job
 
 
 

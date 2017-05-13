@@ -4,7 +4,16 @@
 <p><%= location %></p>
 
 
+<tr>
+	<th>Job</th>
+	<th>Location</th>
+</tr>
+<br>
+<% data.each do |job| %> 
+<tr>
+	<td><%= job[1] %></td>
+	<td><%= job[3] %></td>
+</tr>
 
-<% data.each do |job| %>
-	<p><%= job %></p>
+<br>
 <% end %>
