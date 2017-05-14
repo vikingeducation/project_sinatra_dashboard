@@ -4,7 +4,7 @@ require 'pry'
 require 'csv'
 require 'sinatra'
 require './web_scraper.rb'
-
+require '.locator.rb'
 enable :sessions
 
 get '/' do 

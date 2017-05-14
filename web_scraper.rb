@@ -107,7 +107,7 @@ class JobHunter
     end
   end
 end
-#job = JobHunter.new
+job = JobHunter.new
 
 #job.get_me_a_job
 
