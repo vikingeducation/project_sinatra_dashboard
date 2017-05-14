@@ -1,17 +1,14 @@
 <div class="jumbotron">
 <div calss= "container">
-<h1>Welcome</h1>
 
-
-
-
-<form class='form-group' action= '/show_job' method= 'post' >
-  <input class='form-control input-lg search-bar' type="text" name="job" placeholder="Job Title">
+  <h1>Jobs in <%= session[:location] %></h1>
   
-  <input class='form-control input-lg search-bar' type ="text" name ="location" placeholder="Location">
-  <br>
-  <button class='btn btn-default' type = "submit" value="search">Search</button>
-</form>
+    <form class='form-group' action= '/show_job' method= 'post' >
+      <input class='form-control input-lg search-bar' type="text" name="job" placeholder="Job Title">
+      <input class='form-control input-lg search-bar' type ="text" name ="location" placeholder="Location">
+      <br>
+      <button class='btn btn-default' type = "submit" value="search">Search</button>
+    </form>
 
 </div>
 </div>

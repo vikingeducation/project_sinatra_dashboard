@@ -2,9 +2,10 @@ require 'mechanize'
 require 'json'
 
 
-ADDRESS = "http://www.freegeoip.net/json/github.com"
+ADDRESS = "http://www.freegeoip.net/json/?q=127.0.0.1"
 
 class Locator
+
 	def initialize
 		@agent = Mechanize.new
 		@agent.history_added = Proc.new { sleep 0.5}
@@ -12,14 +13,24 @@ class Locator
 	end
 
 	def get_location
-		loc = @agent.get(ADDRESS) do |page|
+			@agent.get(ADDRESS) do |page|
 			data = JSON.parse(page.body)
-			puts data["city"]
+			parsed_results = parse_json(data)
+
+			return parsed_results[1]
 		end
-		
+	end
+
+	def parse_json(data)
+		ip = data["ip"]
+		city = data["city"]
+		state = data["region_code"]
+		latitude = data["latitude"]
+		longitude = data["longitude"]		
+
+	  return parsed_json_location = [ip,city,state,latitude, longitude]
 	end
 end
 
-find = Locator.new
-
-find.get_location
+#find = Locator.new
+#find.get_location
