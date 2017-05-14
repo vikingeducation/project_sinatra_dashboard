@@ -3,7 +3,7 @@
 <p><%= job %></p>
 <p><%= location %></p>
 
-
+<table class="table table-striped">
 <tr>
 	<th>Job</th>
 	<th>Location</th>
@@ -11,9 +11,10 @@
 <br>
 <% data.each do |job| %> 
 <tr>
-	<td><%= job[1] %></td>
+	<td><%= job[1].join(" ") %></td>
 	<td><%= job[3] %></td>
 </tr>
 
 <br>
 <% end %>
+</table>
