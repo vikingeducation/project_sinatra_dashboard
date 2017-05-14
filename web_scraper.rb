@@ -18,8 +18,6 @@ class JobHunter
   def get_me_a_job
     results = []
     puts
-  
-
     @agent.get(@address) do |page|
 
       # Note that we could skip actually submitting the form by just
