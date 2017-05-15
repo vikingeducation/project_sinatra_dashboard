@@ -5,6 +5,7 @@ require 'csv'
 require 'sinatra'
 require './web_scraper.rb'
 require './locator.rb'
+require './company_profiler.rb'
 enable :sessions
 
 get '/' do 
@@ -23,6 +24,7 @@ post '/show_job' do
 
 	jobs = JobHunter.new(@job, @location)
 	results = jobs.get_me_a_job
+	#@company = Company_profiler.new()
 
 	erb :show_job, locals: { location: @location, job: @job, data: results}
 

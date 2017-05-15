@@ -14,7 +14,7 @@ class CompanyProfiler
 
 	include HTTParty
 
-	def initialize(company)
+	def initialize(company="google")
 		
 		@address = BASE_URI
 		@options = { :query => {
@@ -27,16 +27,16 @@ class CompanyProfiler
 								 						"t.k".to_sym => API_KEY
 			}}
 			
-		@glass_review = self.class.get(BASE_URI, @options)
+		@glass_review = self.class.get(BASE_URI, @options).parsed_response
 	end
 
 	def show_results
-		pp @glass_review.body
+		pp @glass_review
 	end
 
 
 end
 
-company = CompanyProfiler.new("google")
+company = CompanyProfiler.new("netflix")
 
 company.show_results
