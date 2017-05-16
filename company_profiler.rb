@@ -9,6 +9,7 @@ Envyable.load('config/env.yml')
 API_KEY = ENV["API_KEY"]
 ID = ENV["ID"]
 BASE_URI = "http://api.glassdoor.com/api/api.htm?"
+Review = Struct.new(:name, :location,)
 
 class CompanyProfiler
 
@@ -30,8 +31,12 @@ class CompanyProfiler
 		@glass_review = self.class.get(BASE_URI, @options).parsed_response
 	end
 
-	def show_results
-		pp @glass_review
+	def parsed_data
+		results = []
+		name =  @glass_review["response"]["employers"][0]["name"]
+		location = @glass_review["response"]["employers"][0]["featuredReview"]["location"]
+		job_review = Review.new(name, location)
+		puts job_review.location
 	end
 
 
@@ -39,4 +44,4 @@ end
 
 company = CompanyProfiler.new("netflix")
 
-company.show_results
+company.parsed_data
