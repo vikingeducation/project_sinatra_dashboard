@@ -1,0 +1,28 @@
+
+
+
+
+
+<table class="table table-striped">
+<tr class="success">
+
+	<th>Job</th>
+	<th>Company</th>
+	
+	<th>Location</th>
+	<th>Date</th>
+</tr>
+<br>
+<% data.each do |job| %> 
+<tr>
+	
+	<td><%= job[1].join(" ") %></td>
+	<td><%= job[2].join(" ") %></td>
+	
+	<td><%= job[3] %></td>
+	<td><%= job[0] %></td>
+</tr>
+
+<br>
+<% end %>
+</table>
