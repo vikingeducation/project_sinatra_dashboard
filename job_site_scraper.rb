@@ -38,7 +38,7 @@ class JobSiteScraper
         job_posting.company = parse_company_name(listing)
         job_posting.location = parse_job_location(listing)
         job_posting.link = parse_job_link(listing)
-        # job_posting.post_date = parse_job_post_date(listing)
+        job_posting.post_date = parse_job_post_date(listing)
         job_posting.job_id = parse_job_id(listing)
 
         job_postings << job_posting
@@ -95,18 +95,22 @@ class JobSiteScraper
 
     # parse the raw date to determine how many days/hours ago the
     # job listing was posted.
-    parsed_raw_date = raw_date.match(/(\d+)\s(\w+)\sago/i).captures
-    time_value = parsed_raw_date[0]
-    time_unit = parsed_raw_date[1]
-    job_posted = nil
+    unless raw_date.empty?
+      parsed_raw_date = raw_date.match(/(\d+)\s(\w+)\sago/i).captures
+      time_value = parsed_raw_date[0]
+      time_unit = parsed_raw_date[1]
+      job_posted = nil
 
-    if time_unit =~ /day(s)?/
-      job_posted = (Time.now - (time_value.to_i * 24 * 60 * 60))
-    elsif time_unit =~ /hour(s)?/
-      job_posted = (Time.now - (time_value.to_i * 60 * 60))
+      if time_unit =~ /day(s)?/
+        job_posted = (Time.now - (time_value.to_i * 24 * 60 * 60))
+      elsif time_unit =~ /hour(s)?/
+        job_posted = (Time.now - (time_value.to_i * 60 * 60))
+      end
+
+      "#{job_posted.year}-#{job_posted.month}-#{job_posted.day}"
+    else
+      "Unknown"
     end
-
-    "#{job_posted.year}-#{job_posted.month}-#{job_posted.day}"
   end
 
   # parses the job listing for its id. Not sure what value there is in this..
