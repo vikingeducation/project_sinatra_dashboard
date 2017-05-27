@@ -9,7 +9,7 @@ get '/' do
   erb :index
 end
 
-post "/search" do
+get "/search" do
   job_search_term = params[:job_search_term]
   job_location = params[:job_location]
 
