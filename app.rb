@@ -6,5 +6,5 @@ require 'pry-byebug'
 require './helpers/job_site_scraper'
 
 get '/' do
-  erb :home
+  erb :index
 end
