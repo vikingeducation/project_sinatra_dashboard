@@ -7,7 +7,7 @@ JobPosting = Struct.new(:title, :company, :location, :link, :post_date, :job_id 
 # Instead of scraping dice.com as specified in the assignment,
 # I'm scraping indeed.com as Dice doesn't have jobs in SG.
 class JobSiteScraper
-  BASE_URL = 'https://www.indeed.com.sg/jobs'
+  BASE_URL = 'https://www.indeed.com.sg'
 
   attr_reader :agent
 
@@ -25,7 +25,7 @@ class JobSiteScraper
     job_postings = []
 
     # get the first page of search results.
-    search_url = "#{BASE_URL}?q=#{search_term}&l=#{location}"
+    search_url = "#{BASE_URL}/jobs?q=#{search_term}&l=#{location}"
     page = self.agent.get(search_url)
 
     while page
