@@ -1,7 +1,7 @@
 <h1>Sinatra Job Hunt Central</h1>
 <p>The beginnings of our great job dashboard.</p>
 
-<form action="/search" method="post">
+<form action="/search" method="get">
   <div class="form-group">
     <label>Job search term</label>
     <input type="text" class="form-control" name="job_search_term" placeholder="Ruby on Rails">
@@ -14,3 +14,29 @@
     <button type="submit" class="btn btn-primary">Search</button>
   </div>
 </form>
+
+<% if locals[:job_postings] %>
+  <h2> Search results</h2>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Job Title</th>
+        <th>Company</th>
+        <th>Location</th>
+        <th>Link</th>
+        <th>Post Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% locals[:job_postings].each do |job_posting| %>
+        <tr>
+          <td><%= job_posting.title %></td>
+          <td><%= job_posting.company %></td>
+          <td><%= job_posting.location %></td>
+          <td><a href="<%= job_posting.link %>">Link</a></td>
+          <td><%= job_posting.post_date %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
