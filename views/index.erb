@@ -10,7 +10,7 @@
   </div>
   <div class="form-group">
     <label>Job location</label>
-    <input type="text" class="form-control" name="job_location" placeholder="Singapore">
+    <input type="text" class="form-control" name="job_location" placeholder="Singapore" value="<%= locals[:city] %>, <%= locals[:city] %>">
   </div>
   <div class="form-group">
     <button type="submit" class="btn btn-primary">Search</button>
@@ -18,8 +18,8 @@
 </form>
 
 <% if locals[:job_postings] %>
-  <h2> Search Results</h2>
-  <p><%= locals[:job_postings].length %> results in total</p>
+  <h2>Jobs in <%= locals[:city] %>, <%= locals[:city] %></h2>
+  <p><%= locals[:job_postings].length %> jobs in total</p>
   <table class="table table-hover table-condensed">
     <thead>
       <tr>
