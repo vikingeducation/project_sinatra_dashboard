@@ -3,8 +3,13 @@ require 'sinatra/reloader' if development?
 require 'erb'
 require 'pry-byebug'
 
+require './helpers/job_dashboard_helpers'
 require './helpers/job_site_scraper'
 require './helpers/locator'
+
+helpers JobDashboardHelpers
+
+enable :sessions
 
 get '/' do
   if settings.development?
@@ -13,15 +18,17 @@ get '/' do
     request_ip = request.ip
   end
 
-  geodata = Locator.new.locate(request_ip)
-  country = geodata["country_name"]
-  city = geodata["city"]
+  visitor_location = load_visitor(request_ip)
+  city = visitor_location[0]
+  country = visitor_location[1]
 
   locals = {
     request_ip: request_ip,
     country: country,
     city: city
   }
+
+  save_visitor(city, country)
 
   erb :index, locals: locals
 end
