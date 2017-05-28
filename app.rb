@@ -4,9 +4,26 @@ require 'erb'
 require 'pry-byebug'
 
 require './helpers/job_site_scraper'
+require './helpers/locator'
 
 get '/' do
-  erb :index
+  if settings.development?
+    request_ip = "202.40.249.81"
+  else
+    request_ip = request.ip
+  end
+
+  geodata = Locator.new.locate(request_ip)
+  country = geodata["country_name"]
+  city = geodata["city"]
+
+  locals = {
+    request_ip: request_ip,
+    country: country,
+    city: city
+  }
+
+  erb :index, locals: locals
 end
 
 get "/search" do
