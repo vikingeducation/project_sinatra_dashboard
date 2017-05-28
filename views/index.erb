@@ -1,5 +1,7 @@
 <h1>Sinatra Job Hunt Central</h1>
 <p>The beginnings of our great job dashboard.</p>
+<p>Request IP: <%= locals[:request_ip] %></p>
+<p>Source: <%= locals[:country] %>, <%= locals[:city] %></p>
 
 <form action="/search" method="get">
   <div class="form-group">
