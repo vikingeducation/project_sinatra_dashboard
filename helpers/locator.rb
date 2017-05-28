@@ -11,5 +11,5 @@ class Locator
 end
 
 if $0 == __FILE__
-  pp Locator.new.locate("www.google.com")
+  pp Locator.new.locate("pop.singnet.com.sg") # 202.40.249.81
 end
