@@ -37,6 +37,10 @@ get "/search" do
   job_search_term = params[:job_search_term]
   job_location = params[:job_location]
 
+  visitor_location = load_visitor(request_ip)
+  city = visitor_location[0]
+  country = visitor_location[1]
+
   scraper = JobSiteScraper.new
   job_postings = scraper.scrape_job_postings(job_search_term, job_location)
 
