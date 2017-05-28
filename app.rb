@@ -12,20 +12,14 @@ helpers JobDashboardHelpers
 enable :sessions
 
 get '/' do
-  if settings.development?
-    request_ip = "202.40.249.81"
-  else
-    request_ip = request.ip
-  end
-
   visitor_location = load_visitor(request_ip)
   city = visitor_location[0]
   country = visitor_location[1]
 
   locals = {
     request_ip: request_ip,
-    country: country,
-    city: city
+    city: city,
+    country: country
   }
 
   save_visitor(city, country)
@@ -44,5 +38,12 @@ get "/search" do
   scraper = JobSiteScraper.new
   job_postings = scraper.scrape_job_postings(job_search_term, job_location)
 
-  erb :index, locals: { job_postings: job_postings }
+  locals = {
+    request_ip: request_ip,
+    city: city,
+    country: country,
+    job_postings: job_postings
+  }
+
+  erb :index, locals: locals
 end
