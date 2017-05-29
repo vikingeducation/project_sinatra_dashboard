@@ -2,3 +2,6 @@
 
 # Ignore CSV files
 *.csv
+
+# Ignore YAML files
+*.yaml
