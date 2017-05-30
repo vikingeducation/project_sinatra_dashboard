@@ -32,6 +32,11 @@ class CompanyProfiler
     end
   end
 
+  # gets the featuredReview hash from the company result
+  def featured_review(result)
+    result["featuredReview"]
+  end
+
   private
 
   # loads my Glassdoor API partner ID and key from a YAML file
@@ -48,4 +53,5 @@ if $0 == __FILE__
   result = profiler.filter_results(results, "Google")
 
   pp result
+  pp profiler.featured_review(result)
 end
