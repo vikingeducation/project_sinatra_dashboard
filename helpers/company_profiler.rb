@@ -36,14 +36,14 @@ class CompanyProfiler
   def ratings(result)
     unless result.nil?
       {
-        description:                  result["ratingDescription"],
-        overall:                      result["overallRating"],
-        culture_and_values:           result["cultureAndValuesRating"],
-        senior_leadership:            result["seniorLeadershipRating"],
-        compensation_and_benefits:    result["compensationAndBenefitsRating"],
-        career_opportunities:         result["careerOpportunitiesRating"],
-        work_life_balance:            result["workLifeBalanceRating"],
-        recommend_to_friend:          result["recommendToFriendRating"]
+        description:                 result["ratingDescription"],
+        overall:                     result["overallRating"],
+        culture_and_values:          result["cultureAndValuesRating"],
+        senior_leadership:           result["seniorLeadershipRating"],
+        compensation_and_benefits:   result["compensationAndBenefitsRating"],
+        career_opportunities:        result["careerOpportunitiesRating"],
+        work_life_balance:           result["workLifeBalanceRating"],
+        recommend_to_friend:         result["recommendToFriendRating"]
       }
     end
   end
