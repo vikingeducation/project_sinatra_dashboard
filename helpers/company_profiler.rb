@@ -37,6 +37,22 @@ class CompanyProfiler
     result["featuredReview"] unless result.nil?
   end
 
+  # gets the ratings info that we're interested in from the company result
+  def ratings(result)
+    unless result.nil?
+      {
+        description:                  result["ratingDescription"],
+        overall:                      result["overallRating"],
+        culture_and_values:           result["cultureAndValuesRating"],
+        senior_leadership:            result["seniorLeadershipRating"],
+        compensation_and_benefits:    result["compensationAndBenefitsRating"],
+        career_opportunities:         result["careerOpportunitiesRating"],
+        work_life_balance:            result["workLifeBalanceRating"],
+        recommend_to_friend:          result["recommendToFriendRating"]
+      }
+    end
+  end
+
   private
 
   # loads my Glassdoor API partner ID and key from a YAML file
@@ -50,8 +66,9 @@ if $0 == __FILE__
   profiler = CompanyProfiler.new
 
   results = profiler.search(query: query)
-  result = profiler.filter_results(results, "Google")
+  result = profiler.exact_match(results, "Google")
 
   pp result
   pp profiler.featured_review(result)
+  pp profiler.ratings(result)
 end
