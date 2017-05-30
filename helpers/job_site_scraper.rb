@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'mechanize'
 
-JobPosting = Struct.new(:title, :company, :location, :link, :post_date, :job_id )
+JobPosting = Struct.new(:title, :company, :location, :link, :post_date)
 
 # A simple job site web scraper, using Mechanize and Nokogiri.
 # Instead of scraping dice.com as specified in the assignment,
@@ -40,7 +40,6 @@ class JobSiteScraper
         job_posting.location = parse_job_location(listing)
         job_posting.link = parse_job_link(listing)
         job_posting.post_date = parse_job_post_date(listing)
-        job_posting.job_id = parse_job_id(listing)
 
         job_postings << job_posting
       end
@@ -112,11 +111,6 @@ class JobSiteScraper
     else
       "Unknown"
     end
-  end
-
-  # parses the job listing for its id. Not sure what value there is in this..
-  def parse_job_id(listing)
-    listing.attribute("id").value.strip
   end
 end
 
