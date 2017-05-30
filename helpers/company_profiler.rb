@@ -34,7 +34,7 @@ class CompanyProfiler
 
   # gets the featuredReview hash from the company result
   def featured_review(result)
-    result["featuredReview"]
+    result["featuredReview"] unless result.nil?
   end
 
   private
