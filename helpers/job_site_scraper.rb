@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'mechanize'
+require './company_profiler'
 
 JobPosting = Struct.new(:title, :company, :location, :link, :post_date, :ratings, :featured_review)
 
@@ -9,7 +10,9 @@ JobPosting = Struct.new(:title, :company, :location, :link, :post_date, :ratings
 class JobSiteScraper
   BASE_URL = 'https://www.indeed.com.sg'
 
-  attr_reader :agent
+  attr_reader :agent,
+              :profiler,
+              :company_profiles
 
   def initialize
     @agent = Mechanize.new do |agent|
@@ -18,6 +21,9 @@ class JobSiteScraper
 
     # rate limit Mechanize instance.
     self.agent.history_added = Proc.new { sleep 0.5 }
+
+    @profiler = CompanyProfiler.new
+    @company_profiles = {}
   end
 
   # returns an array of JobPosting structs, to prepare for outputting to a file
