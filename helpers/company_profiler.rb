@@ -24,11 +24,11 @@ class CompanyProfiler
     self.class.get(self.class.base_uri, options)
   end
 
-  # filter company search results to return only the entries that
-  # exactly match the company name we're looking for
-  def filter_results(results, company)
+  # filter company search results to return only the entry that
+  # exactly matches the company name we're looking for
+  def exact_match(results, company)
     if results["success"] && results["status"] == "OK"
-      results["response"]["employers"].select { |result| result["name"].match(/#{company}/i) }.first
+      results["response"]["employers"].select { |result| result["exactMatch"] }.first
     end
   end
 
