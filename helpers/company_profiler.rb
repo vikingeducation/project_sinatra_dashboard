@@ -28,7 +28,7 @@ class CompanyProfiler
   # exactly match the company name we're looking for
   def filter_results(results, company)
     if results["success"] && results["status"] == "OK"
-      results["response"]["employers"].select { |result| result["name"] == company }.first
+      results["response"]["employers"].select { |result| result["name"].match(/#{company}/i) }.first
     end
   end
 
@@ -41,10 +41,11 @@ class CompanyProfiler
 end
 
 if $0 == __FILE__
+  query = { q: "Google", l: "Singapore"}
   profiler = CompanyProfiler.new
 
-  query = { q: "Google", l: "Singapore"}
   results = profiler.search(query: query)
-  filtered_result = profiler.filter_results(results, query[:q])
-  pp filtered_result
+  result = profiler.filter_results(results, "Google")
+
+  pp result
 end
