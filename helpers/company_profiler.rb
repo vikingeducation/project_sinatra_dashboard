@@ -24,6 +24,14 @@ class CompanyProfiler
     self.class.get(self.class.base_uri, options)
   end
 
+  # filter company search results to return only the entries that
+  # exactly match the company name we're looking for
+  def filter_results(results, company)
+    if results["success"] && results["status"] == "OK"
+      results["response"]["employers"].select { |result| result["name"] == company }
+    end
+  end
+
   private
 
   # loads my Glassdoor API partner ID and key from a YAML file
@@ -36,5 +44,6 @@ if $0 == __FILE__
   profiler = CompanyProfiler.new
 
   query = { q: "Google", l: "Singapore"}
-  pp profiler.search(query: query)
+  results = profiler.search(query: query)
+  pp profiler.filter_results(results, query[:q])
 end
