@@ -58,7 +58,40 @@ class JobSiteScraper
       end
     end
 
+    profile_companies(job_postings, location)
+
     job_postings
+  end
+
+  # given an array of JobPostings, checks Glassdoor for each posting
+  # that has a company, and retrieves company ratings / featured review
+  def profile_companies(job_postings, location)
+    job_postings.each do |job_posting|
+      company = job_posting.company
+
+      # check if we already have a previous result for this company's
+      # ratings and featured review - if so, use it
+      if @company_profiles.keys.include?(company)
+        job_posting.ratings = @company_profiles[company][:ratings]
+        job_posting.featured_review = @company_profiles[company][:featured_review]
+      else
+        # no previous result, so let's hit the Glassdoor API
+        query = { q: company, l: location}
+        search_result = @profiler.search(query: query)
+
+        if search_result
+          ratings = @profiler.ratings(search_result)
+          featured_review = @profiler.featured_review(search_result)
+
+          # update our hash and JobPosting struct
+          @company_profiles[company] = {}
+          @company_profiles[company][:ratings] = ratings
+          @company_profiles[company][:featured_review] = featured_review
+          job_posting.ratings = ratings
+          job_posting.featured_review = featured_review
+        end
+      end
+    end
   end
 
   private
