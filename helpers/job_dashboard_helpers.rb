@@ -1,3 +1,5 @@
+require_relative './locator'
+
 module JobDashboardHelpers
   def request_ip
     if settings.development?
