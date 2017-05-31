@@ -28,6 +28,8 @@
         <th>Location</th>
         <th>Link</th>
         <th>Post Date</th>
+        <th>Glassdoor Ratings</th>
+        <th>Featured Review</th>
       </tr>
     </thead>
     <tbody>
@@ -38,6 +40,8 @@
           <td><%= job_posting.location %></td>
           <td><a href="<%= job_posting.link %>">Link</a></td>
           <td><%= job_posting.post_date %></td>
+          <td>-</td>
+          <td>-</td>
         </tr>
       <% end %>
     </tbody>
