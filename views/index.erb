@@ -1,7 +1,7 @@
 <h1>Sinatra Job Hunt Central</h1>
 <p>The beginnings of our great job dashboard.</p>
 <p>Request IP: <%= locals[:request_ip] %></p>
-<p>Source: <%= locals[:country] %>, <%= locals[:city] %></p>
+<p>Source: <%= locals[:visitor_city] %>, <%= locals[:visitor_country] %></p>
 
 <form action="/search" method="get">
   <div class="form-group">
@@ -10,7 +10,7 @@
   </div>
   <div class="form-group">
     <label>Job location</label>
-    <input type="text" class="form-control" name="job_location" placeholder="Singapore" value="<%= locals[:city] %>, <%= locals[:city] %>">
+    <input type="text" class="form-control" name="job_location" value="<%= locals[:visitor_city] %>, <%= locals[:visitor_country] %>">
   </div>
   <div class="form-group">
     <button type="submit" class="btn btn-primary">Search</button>
@@ -18,7 +18,7 @@
 </form>
 
 <% if locals[:job_postings] %>
-  <h2>Jobs in <%= locals[:city] %>, <%= locals[:city] %></h2>
+  <h2>Jobs in <%= locals[:job_location] %></h2>
   <p><%= locals[:job_postings].length %> jobs in total</p>
   <table class="table table-hover table-condensed">
     <thead>
@@ -28,8 +28,7 @@
         <th>Location</th>
         <th>Link</th>
         <th>Post Date</th>
-        <th>Glassdoor Ratings</th>
-        <th>Featured Review</th>
+        <th>Glassdoor Info</th>
       </tr>
     </thead>
     <tbody>
@@ -40,8 +39,7 @@
           <td><%= job_posting.location %></td>
           <td><a href="<%= job_posting.link %>">Link</a></td>
           <td><%= job_posting.post_date %></td>
-          <td>-</td>
-          <td>-</td>
+          <td><a href="/glassdoor?company=<%= job_posting.company %>">Link</a></td>
         </tr>
       <% end %>
     </tbody>

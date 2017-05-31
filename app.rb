@@ -12,16 +12,16 @@ enable :sessions
 
 get '/' do
   visitor_location = load_visitor(request_ip)
-  city = visitor_location[0]
-  country = visitor_location[1]
+  visitor_city = visitor_location[0]
+  visitor_country = visitor_location[1]
 
   locals = {
     request_ip: request_ip,
-    city: city,
-    country: country
+    visitor_city: visitor_city,
+    visitor_country: visitor_country
   }
 
-  save_visitor(city, country)
+  save_visitor(visitor_city, visitor_country)
 
   erb :index, locals: locals
 end
@@ -31,16 +31,17 @@ get "/search" do
   job_location = params[:job_location]
 
   visitor_location = load_visitor(request_ip)
-  city = visitor_location[0]
-  country = visitor_location[1]
+  visitor_city = visitor_location[0]
+  visitor_country = visitor_location[1]
 
   scraper = JobSiteScraper.new
   job_postings = scraper.scrape_job_postings(job_search_term, job_location)
 
   locals = {
     request_ip: request_ip,
-    city: city,
-    country: country,
+    visitor_city: visitor_city,
+    visitor_country: visitor_country,
+    job_location: job_location,
     job_postings: job_postings
   }
 
