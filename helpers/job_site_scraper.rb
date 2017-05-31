@@ -1,6 +1,5 @@
 require 'rubygems'
 require 'mechanize'
-require './company_profiler'
 
 JobPosting = Struct.new(:title, :company, :location, :link, :post_date, :ratings, :featured_review)
 
@@ -21,13 +20,10 @@ class JobSiteScraper
 
     # rate limit Mechanize instance.
     self.agent.history_added = Proc.new { sleep 0.5 }
-
-    @profiler = CompanyProfiler.new
-    @company_profiles = {}
   end
 
-  # returns an array of JobPosting structs, to prepare for outputting to a file
-  def scrape_job_postings(search_term = "rails", location = "Singapore")
+  # returns an array of JobPosting structs
+  def scrape_job_postings(search_term = "Ruby on Rails", location = "Singapore")
     job_postings = []
 
     # get the first page of search results.
@@ -58,40 +54,7 @@ class JobSiteScraper
       end
     end
 
-    profile_companies(job_postings, location)
-
     job_postings
-  end
-
-  # given an array of JobPostings, checks Glassdoor for each posting
-  # that has a company, and retrieves company ratings / featured review
-  def profile_companies(job_postings, location)
-    job_postings.each do |job_posting|
-      company = job_posting.company
-
-      # check if we already have a previous result for this company's
-      # ratings and featured review - if so, use it
-      if @company_profiles.keys.include?(company)
-        job_posting.ratings = @company_profiles[company][:ratings]
-        job_posting.featured_review = @company_profiles[company][:featured_review]
-      else
-        # no previous result, so let's hit the Glassdoor API
-        query = { q: company, l: location}
-        search_result = @profiler.search(query: query)
-
-        if search_result
-          ratings = @profiler.ratings(search_result)
-          featured_review = @profiler.featured_review(search_result)
-
-          # update our hash and JobPosting struct
-          @company_profiles[company] = {}
-          @company_profiles[company][:ratings] = ratings
-          @company_profiles[company][:featured_review] = featured_review
-          job_posting.ratings = ratings
-          job_posting.featured_review = featured_review
-        end
-      end
-    end
   end
 
   private
@@ -154,6 +117,12 @@ class JobSiteScraper
 end
 
 if $0 == __FILE__
+  start_time = Time.now
   scraper = JobSiteScraper.new
-  pp scraper.scrape_job_postings
+  job_postings = scraper.scrape_job_postings
+  end_time = Time.now
+
+  pp job_postings
+  puts "Number of results: #{job_postings.length}"
+  puts "Time taken: #{end_time - start_time}s"
 end
