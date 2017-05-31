@@ -5,7 +5,6 @@ require 'pry-byebug'
 
 require './helpers/job_dashboard_helpers'
 require './helpers/job_site_scraper'
-require './helpers/locator'
 
 helpers JobDashboardHelpers
 
