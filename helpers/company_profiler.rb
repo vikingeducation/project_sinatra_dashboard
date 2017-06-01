@@ -19,14 +19,11 @@ class CompanyProfiler
     self.class.default_params :'t.p' => config["t.p"], :'t.k' => config["t.k"]
   end
 
-  # hits Glassdoor API to search for company data
-  def search(options = {})
-    self.class.get(self.class.base_uri, options)
-  end
-
   # grabs the company data we need from the search results
   # that we got from hitting the Glassdoor API
-  def build_company_data(results)
+  def build_company_data(query = {})
+    results = search(query)
+
     company_data = []
 
     if results["success"] && results["status"] == "OK"
@@ -43,6 +40,13 @@ class CompanyProfiler
 
       company_data.length > 0 ? company_data : nil
     end
+  end
+
+  private
+
+  # hits Glassdoor API to search for company data
+  def search(query = {})
+    self.class.get(self.class.base_uri, query)
   end
 
   # gets the featuredReview hash for the employer
@@ -66,8 +70,6 @@ class CompanyProfiler
     end
   end
 
-  private
-
   # loads my Glassdoor API partner ID and key from a YAML file
   def load_config
     YAML.load(File.read("#{File.dirname(__FILE__)}/config/company_profiler.yaml"))
@@ -78,8 +80,5 @@ if $0 == __FILE__
   query = { q: "Amazon", l: "Singapore"}
   profiler = CompanyProfiler.new
 
-  results = profiler.search(query: query)
-
-  # pp results
-  pp profiler.build_company_data(results)
+  pp profiler.build_company_data(query: query)
 end
