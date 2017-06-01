@@ -26,9 +26,9 @@
         <th>Job Title</th>
         <th>Company</th>
         <th>Location</th>
-        <th>Link</th>
+        <th>Job Link</th>
         <th>Post Date</th>
-        <th>Glassdoor Info</th>
+        <th>Glassdoor</th>
       </tr>
     </thead>
     <tbody>
@@ -39,7 +39,13 @@
           <td><%= job_posting.location %></td>
           <td><a href="<%= job_posting.link %>">Link</a></td>
           <td><%= job_posting.post_date %></td>
-          <td><a href="/glassdoor?company=<%= job_posting.company %>">Link</a></td>
+          <td>
+            <% unless job_posting.company.empty? %>
+              <a href="/glassdoor?company=<%= job_posting.company %>&location=<%= locals[:job_location] %>">Link</a>
+            <% else %>
+              -
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>
