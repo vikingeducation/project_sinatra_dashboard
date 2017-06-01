@@ -19,8 +19,7 @@ class CompanyProfiler
     self.class.default_params :'t.p' => config["t.p"], :'t.k' => config["t.k"]
   end
 
-  # makes API call, and filter results for a company with a name that
-  # exactly matches our query
+  # hits Glassdoor API to search for company data
   def search(options = {})
     self.class.get(self.class.base_uri, options)
   end
@@ -30,6 +29,14 @@ class CompanyProfiler
   def exact_match(results)
     if results["success"] && results["status"] == "OK"
       results["response"]["employers"].select { |result| result["exactMatch"] }.first
+    end
+  end
+
+  # filter company search results to return all other entries
+  # that are not exact matches for the company name we're looking for
+  def all_other_matches(results)
+    if results["success"] && results["status"] == "OK"
+      results["response"]["employers"].select { |result| !result["exactMatch"] }
     end
   end
 
@@ -54,6 +61,11 @@ class CompanyProfiler
     end
   end
 
+  # returns the company name from a search result
+  def company(result)
+    result["name"] unless result.nil?
+  end
+
   private
 
   # loads my Glassdoor API partner ID and key from a YAML file
@@ -63,11 +75,10 @@ class CompanyProfiler
 end
 
 if $0 == __FILE__
-  query = { q: "Google", l: "Singapore"}
+  query = { q: "Amazon", l: "Singapore"}
   profiler = CompanyProfiler.new
 
   results = profiler.search(query: query)
 
   pp results
-  pp profiler.exact_match(results)
 end
