@@ -22,9 +22,15 @@ class CompanyProfiler
   # makes API call, and filter results for a company with a name that
   # exactly matches our query
   def search(options = {})
-    all_results = self.class.get(self.class.base_uri, options)
+    self.class.get(self.class.base_uri, options)
+  end
 
-    exact_match(all_results, options[:query][:q])
+  # filter company search results to return only the entry that
+  # exactly matches the company name we're looking for
+  def exact_match(results)
+    if results["success"] && results["status"] == "OK"
+      results["response"]["employers"].select { |result| result["exactMatch"] }.first
+    end
   end
 
   # gets the featuredReview hash from the company result
@@ -54,23 +60,14 @@ class CompanyProfiler
   def load_config
     YAML.load(File.read("#{File.dirname(__FILE__)}/company_profiler/company_profiler.yaml"))
   end
-
-  # filter company search results to return only the entry that
-  # exactly matches the company name we're looking for
-  def exact_match(results, company)
-    if results["success"] && results["status"] == "OK"
-      results["response"]["employers"].select { |result| result["exactMatch"] }.first
-    end
-  end
 end
 
 if $0 == __FILE__
   query = { q: "Google", l: "Singapore"}
   profiler = CompanyProfiler.new
 
-  result = profiler.search(query: query)
+  results = profiler.search(query: query)
 
-  pp result
-  pp profiler.featured_review(result)
-  pp profiler.ratings(result)
+  pp results
+  pp profiler.exact_match(results)
 end
