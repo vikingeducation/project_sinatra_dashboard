@@ -24,6 +24,27 @@ class CompanyProfiler
     self.class.get(self.class.base_uri, options)
   end
 
+  # grabs the company data we need from the search results
+  # that we got from hitting the Glassdoor API
+  def build_company_data(results)
+    company_data = []
+
+    if results["success"] && results["status"] == "OK"
+      employers = results["response"]["employers"]
+      employers.each do |employer|
+        hash = {}
+        hash[:employer] = employer["name"]
+        hash[:ratings] = ratings(employer)
+        hash[:featured_review] = featured_review(employer)
+        hash[:exact_match] = employer["exactMatch"]
+
+        company_data << hash
+      end
+
+      company_data.length > 0 ? company_data : nil
+    end
+  end
+
   # gets the featuredReview hash from the company result
   def featured_review(result)
     result["featuredReview"] unless result.nil?
