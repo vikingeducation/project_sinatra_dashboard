@@ -58,7 +58,7 @@ class CompanyProfiler
 
   # loads my Glassdoor API partner ID and key from a YAML file
   def load_config
-    YAML.load(File.read("#{File.dirname(__FILE__)}/company_profiler/company_profiler.yaml"))
+    YAML.load(File.read("#{File.dirname(__FILE__)}/config/company_profiler.yaml"))
   end
 end
 
