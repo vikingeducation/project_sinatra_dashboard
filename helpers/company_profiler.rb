@@ -45,23 +45,23 @@ class CompanyProfiler
     end
   end
 
-  # gets the featuredReview hash from the company result
-  def featured_review(result)
-    result["featuredReview"] unless result.nil?
+  # gets the featuredReview hash for the employer
+  def featured_review(employer)
+    employer["featuredReview"] unless employer.nil?
   end
 
-  # gets the ratings info that we're interested in from the company result
-  def ratings(result)
-    unless result.nil?
+  # gets the ratings info we're interested in for the employer
+  def ratings(employer)
+    unless employer.nil?
       {
-        description:                 result["ratingDescription"],
-        overall:                     result["overallRating"],
-        culture_and_values:          result["cultureAndValuesRating"],
-        senior_leadership:           result["seniorLeadershipRating"],
-        compensation_and_benefits:   result["compensationAndBenefitsRating"],
-        career_opportunities:        result["careerOpportunitiesRating"],
-        work_life_balance:           result["workLifeBalanceRating"],
-        recommend_to_friend:         result["recommendToFriendRating"]
+        description:                employer["ratingDescription"],
+        overall:                    employer["overallRating"],
+        culture_and_values:         employer["cultureAndValuesRating"],
+        senior_leadership:          employer["seniorLeadershipRating"],
+        compensation_and_benefits:  employer["compensationAndBenefitsRating"],
+        career_opportunities:       employer["careerOpportunitiesRating"],
+        work_life_balance:          employer["workLifeBalanceRating"],
+        recommend_to_friend:        employer["recommendToFriendRating"]
       }
     end
   end
@@ -80,5 +80,6 @@ if $0 == __FILE__
 
   results = profiler.search(query: query)
 
-  pp results
+  # pp results
+  pp profiler.build_company_data(results)
 end
