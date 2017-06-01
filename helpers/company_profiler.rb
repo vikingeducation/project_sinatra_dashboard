@@ -24,22 +24,6 @@ class CompanyProfiler
     self.class.get(self.class.base_uri, options)
   end
 
-  # filter company search results to return only the entry that
-  # exactly matches the company name we're looking for
-  def exact_match(results)
-    if results["success"] && results["status"] == "OK"
-      results["response"]["employers"].select { |result| result["exactMatch"] }.first
-    end
-  end
-
-  # filter company search results to return all other entries
-  # that are not exact matches for the company name we're looking for
-  def all_other_matches(results)
-    if results["success"] && results["status"] == "OK"
-      results["response"]["employers"].select { |result| !result["exactMatch"] }
-    end
-  end
-
   # gets the featuredReview hash from the company result
   def featured_review(result)
     result["featuredReview"] unless result.nil?
@@ -59,11 +43,6 @@ class CompanyProfiler
         recommend_to_friend:         result["recommendToFriendRating"]
       }
     end
-  end
-
-  # returns the company name from a search result
-  def company(result)
-    result["name"] unless result.nil?
   end
 
   private
