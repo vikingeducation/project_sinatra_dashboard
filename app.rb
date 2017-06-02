@@ -5,6 +5,7 @@ require 'pry-byebug'
 
 require './helpers/job_dashboard_helpers'
 require './helpers/job_site_scraper'
+require './helpers/company_profiler'
 
 helpers JobDashboardHelpers
 
@@ -46,4 +47,23 @@ get "/search" do
   }
 
   erb :index, locals: locals
+end
+
+# creating separate route for Glassdoor data due to
+# slow response from their API
+get "/glassdoor" do
+  company = params[:company]
+  location = params[:location]
+
+  profiler = CompanyProfiler.new
+  query = { q: company, l: location }
+
+  company_data = profiler.build_company_data(query: query)
+
+  locals = {
+    company: company,
+    company_data: company_data
+  }
+
+  erb :glassdoor, locals: locals
 end
