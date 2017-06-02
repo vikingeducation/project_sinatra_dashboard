@@ -10,8 +10,7 @@ class JobSiteScraper
   BASE_URL = 'https://www.indeed.com.sg'
 
   attr_reader :agent,
-              :profiler,
-              :company_profiles
+              :profiler
 
   def initialize
     @agent = Mechanize.new do |agent|
