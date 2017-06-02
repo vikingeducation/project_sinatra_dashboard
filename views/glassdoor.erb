@@ -1,2 +1,54 @@
-<h1>Glassdoor API results</h1>
-<p>Company: <%= locals[:company] %>
+<h1>Glassdoor API</h1>
+<% if locals[:company_data] %>
+  <p>Number of results: <%= locals[:company_data].length %></p>
+  <table class="table table-hover table-condensed">
+    <thead>
+      <tr>
+        <th>Company</th>
+        <th>Rating Description</th>
+        <th>Overall Rating</th>
+        <th>Culture and Values</th>
+        <th>Senior Leadership</th>
+        <th>Compensation and Benefits</th>
+        <th>Career Opportunities</th>
+        <th>Work-Life Balance</th>
+        <th>Recommend to Friend</th>
+        <th>Featured Review</th>
+        <th>Review Pros</th>
+        <th>Review Cons</th>
+        <th>Review Rating</th>
+        <th>Review Date</th>
+        <th>Exact Match</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% locals[:company_data].each do |entry| %>
+        <tr>
+          <td><%= entry[:employer] %></td>
+          <td><%= entry[:ratings][:description] %></td>
+          <td><%= entry[:ratings][:overall] %></td>
+          <td><%= entry[:ratings][:culture_and_values] %></td>
+          <td><%= entry[:ratings][:senior_leadership] %></td>
+          <td><%= entry[:ratings][:compensation_and_benefits] %></td>
+          <td><%= entry[:ratings][:career_opportunities] %></td>
+          <td><%= entry[:ratings][:work_life_balance] %></td>
+          <td><%= entry[:ratings][:recommend_to_friend] %></td>
+          <% if entry[:featured_review] %>
+            <td><a href="<%= entry[:featured_review]["attributionURL"] %>"><%= entry[:featured_review]["headline"] %></a></td>
+            <td><%= entry[:featured_review]["pros"] %></td>
+            <td><%= entry[:featured_review]["cons"] %></td>
+            <td><%= entry[:featured_review]["overall"] %></td>
+            <td><%= entry[:featured_review]["reviewDateTime"] %></td>
+          <% else %>
+            <% 5.times do %>
+              <td>n/a</td>
+            <% end %>
+          <% end %>
+          <td><%= entry[:exact_match] ? "Y" : "N" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <h3>No results found for this company.</h3>
+<% end %>
