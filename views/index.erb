@@ -1,0 +1,70 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1>Sinatra Job Hunt Central</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <h3>The beginnings of a great job hunt dashboard.</h3>
+    <p>Request IP: <%= locals[:request_ip] %></p>
+    <p>Source: <%= locals[:visitor_city] %>, <%= locals[:visitor_country] %></p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/search" method="get">
+      <div class="form-group">
+        <label>Job search term</label>
+        <input type="text" class="form-control" name="job_search_term" placeholder="Ruby on Rails">
+      </div>
+      <div class="form-group">
+        <label>Job location</label>
+        <input type="text" class="form-control" name="job_location" value="<%= locals[:visitor_city] %>, <%= locals[:visitor_country] %>">
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Search</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <% if locals[:job_postings] %>
+      <h2>Jobs in <%= locals[:job_location] %></h2>
+      <p><%= locals[:job_postings].length %> jobs in total</p>
+      <table class="table table-hover table-condensed">
+        <thead>
+          <tr>
+            <th>Job Title</th>
+            <th>Company</th>
+            <th>Location</th>
+            <th>Job Link</th>
+            <th>Post Date</th>
+            <th>Glassdoor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% locals[:job_postings].each do |job_posting| %>
+            <tr>
+              <td><%= job_posting.title %></td>
+              <td><%= job_posting.company %></td>
+              <td><%= job_posting.location %></td>
+              <td><a href="<%= job_posting.link %>">Link</a></td>
+              <td><%= job_posting.post_date %></td>
+              <td>
+                <% unless job_posting.company.empty? %>
+                  <a href="/glassdoor?company=<%= job_posting.company %>&location=<%= locals[:job_location] %>">Link</a>
+                <% else %>
+                  -
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>
