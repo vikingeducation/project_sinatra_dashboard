@@ -29,8 +29,8 @@ post '/search' do
   job_scraper.csv_file.create_file(job_scraper.results)
 
     locals = {
-    location: location,
-    postings: postings
+    :location: location,
+    :postings: postings
   }
 
   erb :index, :locals => locals
