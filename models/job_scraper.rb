@@ -20,33 +20,17 @@ class JobScraper
 
     # this gives your Mechanize object
     # an 0.5 second wait time after every HTML request
-    # Don't forget it!!!
     @scraper.history_added = Proc.new { sleep 0.5 }
     @csv_file = CsvWriter.new
-  end
-
-  def run
-    create_search
-    extract_job_details
-    @csv_file.create_file(@results)
-    # Print out the page using the "pretty print" command
-    pp @results
   end
 
   def create_search(search_term, location, radius)
     dice_form = @page.form
     # Enter the search terms and submit the form
-    # dice_form.SearchTerms = "Ruby"
     dice_form.SearchTerms = search_term
-    # dice_form.LocationSearchTerms = "London"
     dice_form.LocationSearchTerms = location
     dice_form.Radius = radius.to_i
 
-    binding.pry
-
-    puts "The search term is #{search_term}"
-    puts "The location is #{location}"
-    puts "The radius is #{radius}"
     dice_form.checkbox_with(:name => 'JobTypeFilter_2').check
     button = dice_form.button_with(:value => "Search")
     # Actually submit the form
@@ -58,7 +42,7 @@ class JobScraper
     links = @page.parser.css("h2.standardLink").children
 
     @page = @page.parser.css("div#SearchResults").text.strip
-    remove message from the beginning of the page
+    # remove from the beginning of the page
     @page = @page.split("\"MESSAGE.ADVERT_SHORTLIST_COUNT_ALERT\" NOT FOUND\n\n\n\n\n\n\n\n\n\n\n")
 
     i = 0
@@ -74,6 +58,5 @@ class JobScraper
       @results << listing
       i += 1
     end
-    pp @results
   end
 end

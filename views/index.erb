@@ -3,21 +3,77 @@
 <html>
 <head>
   <title>Job Scraper</title>
-  <link rel="stylesheet" type="text/css" href="/views.css">
+  <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 <body>
-  <div class = "container">
-    <h1>Welcome to Sinatra - Web Scraper!</h1>
-    <p>
-      <h2>Enter your search terms</h2>
-      <form action = "/search" method = "post">
-        <!-- <input type = "submit" value = "I bet this much"> -->
-        <p><input name ="search_terms"><label> Search word</label></p>
-        <p><input name = "location"><label> Location</label></p>
-        <p><input name = "radius"><label> Radius</label></p>
-        <input type = "submit" value = "Search">
-      </form>
-    </p>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Welcome to Sinatra - Web Scraper!</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Enter your search terms</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <form action = "/search" method = "post">
+          <div class="form-group">
+            <label for="searchWord">Search word</label>
+            <input type="text" class="form-control" id="search_terms" placeholder="Ruby on Rails">
+          </div>
+          <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" class="form-control" id="location" placeholder="London">
+          </div>
+          <div class="form-group">
+            <label for="radius">Radius</label>
+            <input type="text" class="form-control" id="radius" placeholder="10">
+          </div>
+          <button type="submit" class="btn btn-default">Search</button>
+        </form>
+      </div>
+      <p></p>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-bordered">
+            <thead>
+             <tr>
+               <th>Job Title</th>
+               <th>Company</th>
+               <th>Location</th>
+               <th>Job Link</th>
+               <th>Post Date</th>
+               <th>Job ID</th>
+             </tr>
+           </thead>
+           <tbody>
+            <% locals[:postings].each do |job| %>
+             <tr>
+               <td><%= job.title %></td>
+               <td><%= job.company %></td>
+               <td><%= job.location %></td>
+               <td><a href="<%= job.link %>">Link</a></td>
+               <td><%= job.post_date %></td>
+             </tr>
+            <% end %>
+           </tbody>
+        </table>
+      </div>
+    </div>
+
+
   </div>
 </body>
 </html>

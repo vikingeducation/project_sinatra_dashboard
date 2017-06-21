@@ -8,8 +8,8 @@ require "./models/job_scraper.rb"
 enable :sessions
 
 get '/' do
-  # For each new game, clear any active sessions
-  session.clear 
+  # For each new search, clear any active sessions
+  # session.clear 
   erb :index
 end
 
@@ -18,10 +18,9 @@ post '/search' do
   location = params[:location]
   radius = params[:radius]
 
-  search_term = session[:search_terms]
-  location = session[:location]
-  radius = session[:radius]
-
+  # session[:search_terms] = search_term 
+  # session[:location] = location 
+  # session[:radius] = radius
 
   job_scraper = JobScraper.new
 
