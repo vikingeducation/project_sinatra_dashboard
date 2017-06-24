@@ -1,4 +1,4 @@
-# ./models/GeoLocationHelper
+# ./models/geo_location_helper.rb
 require 'httparty'
 
 # Locate the IP address of the user

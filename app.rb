@@ -4,6 +4,7 @@ require "sinatra/reloader" if development?
 require "./models/job_scraper.rb"
 require "./models/locator.rb"
 require "./helpers/geo_location_helper.rb"
+require "./helpers/gladssdoorg_helper.rb"
 
 helpers GeoLocationHelper
 
