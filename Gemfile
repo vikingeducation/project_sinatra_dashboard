@@ -3,3 +3,4 @@
   gem 'pry' # because you'll probably need 
   gem 'thin'
   gem 'sinatra-contrib'
+  gem 'httparty'

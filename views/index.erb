@@ -46,11 +46,17 @@
       <p></p>
     </div>
 
+    <% if !locals[:postings].nil? %>
+      <br />
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Jobs in <%= locals[:city] %>, <%= locals[:country] %></h4>
+        </div>
+      </div>
 
-    <div class="row">
-      <p></p>
-      <div class="col-md-12">
-        <% if !locals[:postings].nil? %>
+      <div class="row">
+        <p></p>
+        <div class="col-md-12">
           <table class="table table-bordered">
               <thead>
                <tr>
@@ -63,7 +69,6 @@
                </tr>
              </thead>
              <tbody>
-              
               <% locals[:postings].each do |job| %>
                <tr>
                  <td><%= job.title %></td>
@@ -76,11 +81,9 @@
               <% end %>
              </tbody>
           </table>
-        <% end %>
+        </div>
       </div>
-    </div>
-
-
+    <% end %>
   </div>
 </body>
 </html>

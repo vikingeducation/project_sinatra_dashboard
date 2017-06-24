@@ -24,7 +24,7 @@ class JobScraper
     @csv_file = CsvWriter.new
   end
 
-  def create_search(search_term, location, radius)
+  def create_search(search_term=Ruby, location=London, radius=10)
     dice_form = @page.form
     # Enter the search terms and submit the form
     dice_form.SearchTerms = search_term
