@@ -4,11 +4,11 @@ require 'mechanize'
 require 'csv' 
 require_relative 'csv_writer'
 
-Job = Struct.new(:title, :company, :location, :link, :post_date, :job_id )
+Job = Struct.new(:title, :company, :location, :link, :post_date, :job_id, :culture, :compensation, :worklife, :career, :overall, :featjobTitle, :featheadline, :featoverall)
 
 class JobScraper
 
-  attr_accessor :results, :scraper, :page, :csv_file
+  attr_accessor :results, :scraper, :page, :csv_file, :cp
 
   def initialize
     # Instantiate a new Mechanize
@@ -22,6 +22,7 @@ class JobScraper
     # an 0.5 second wait time after every HTML request
     @scraper.history_added = Proc.new { sleep 0.5 }
     @csv_file = CsvWriter.new
+
   end
 
   def create_search(search_term=Ruby, location=London, radius=10)
@@ -59,4 +60,19 @@ class JobScraper
       i += 1
     end
   end
+
+  def get_company_ratings
+    @listings.each do |job|
+      @cp = CompanyProfiler.new(job.company)
+      job.culture = @cp.culture_rating
+      job.compensation = @cp.compensation_rating
+      job.worklife = @cp.work_life_rating
+      job.career = @cp.career_rating
+      job.overall = @cp.overall_rating
+      temp = @cp.featured_review?
+
+      job.featjobTitle = temp[:jobtitle]
+      job.featheadline = temp[:headline]
+      job.featoverall = temp[:overall]
+    end
 end

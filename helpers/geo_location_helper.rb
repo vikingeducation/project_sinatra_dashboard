@@ -2,7 +2,6 @@
 module GeoLocationHelper
   def get_id
     if settings.development?
-      # "51.101.60.235"
       "90.223.204.82"
     else
       request.ip
