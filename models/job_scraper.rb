@@ -3,12 +3,13 @@ require 'bundler/setup'
 require 'mechanize'
 require 'csv' 
 require_relative 'csv_writer'
+require_relative 'company_profiler'
 
 Job = Struct.new(:title, :company, :location, :link, :post_date, :job_id, :culture, :compensation, :worklife, :career, :overall, :featjobTitle, :featheadline, :featoverall)
 
 class JobScraper
 
-  attr_accessor :results, :scraper, :page, :csv_file, :cp
+  attr_accessor :results, :scraper, :page, :csv_file
 
   def initialize
     # Instantiate a new Mechanize
@@ -61,18 +62,24 @@ class JobScraper
     end
   end
 
-  def get_company_ratings
-    @listings.each do |job|
-      @cp = CompanyProfiler.new(job.company)
-      job.culture = @cp.culture_rating
-      job.compensation = @cp.compensation_rating
-      job.worklife = @cp.work_life_rating
-      job.career = @cp.career_rating
-      job.overall = @cp.overall_rating
-      temp = @cp.featured_review?
+  def get_company_ratings(partner_id, api_key)
+    @results.each do |job|
 
-      job.featjobTitle = temp[:jobtitle]
-      job.featheadline = temp[:headline]
-      job.featoverall = temp[:overall]
+      puts "Company to find ratings for #{job.company}"
+      cp = CompanyProfiler.new(job.company, partner_id, api_key)
+
+      if !cp.response.nil?
+        job.culture = cp.culture_rating
+        job.compensation = cp.compensation_rating
+        job.worklife = cp.work_life_rating
+        job.career = cp.career_rating
+        job.overall = cp.overall_rating
+        temp = cp.featured_review?
+
+        job.featjobTitle = temp[:jobtitle]
+        job.featheadline = temp[:headline]
+        job.featoverall = temp[:overall]
+      end
     end
+  end
 end

@@ -9,24 +9,27 @@ class CompanyProfiler
   include HTTParty
 
   BASE_URI = 'http://api.glassdoor.com/api/api.htm'
-  PARTNER_ID = ENV["PARTNER_ID"]
-  API_KEY = ENV["API_KEY"]
+  # PARTNER_ID = ENV["PARTNER_ID"]
+  # API_KEY = ENV["API_KEY"]
   
   attr_accessor :params, :response, :featured_response
 
-  def initialize(company)
+  def initialize(company, partner_id, api_key)
     @params = 
     {query: 
       {v: "1",
       format: "json",
-      "t.p": PARTNER_ID,
-      "t.k": API_KEY,
+      # "t.p": PARTNER_ID,
+      # "t.k": API_KEY,
+      "t.p": partner_id,
+      "t.k": api_key,
       action: "employers",
       q: company,
       userip: "0.0.0.0",
       useragent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
       }
     }
+    puts "the query string #{@params}"
     temp_json = HTTParty.get(BASE_URI, @params)
     parse_response(temp_json) if response_valid?(temp_json)
   end
@@ -36,7 +39,8 @@ class CompanyProfiler
   end
 
   def parse_response(temp)
-     @response = temp["response"]["employers"].first 
+     @response = temp["response"]["employers"].first
+     puts "#" 
   end
 
   def culture_rating

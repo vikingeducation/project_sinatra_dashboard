@@ -68,7 +68,7 @@
                  <th>Job ID</th>
                  <th>Culture</th>
                  <th>Compensation</th>
-                 <th>Work-Life/th>
+                 <th>Work-Life</th>
                  <th>Career</th>
                  <th>Overall</th>
                  <th>Featured JobTitle</th>
@@ -85,6 +85,14 @@
                  <td><a href="<%= job.link %>">Link</a></td>
                  <td><%= job.post_date %></td>
                  <td><%= job.job_id %></td>
+                 <td><%= job.culture %></td>
+                 <td><%= job.compensation %></td>
+                 <td><%= job.worklife %></td>
+                 <td><%= job.career %></td>
+                 <td><%= job.overall %></td>
+                 <td><%= job.featjobTitle %></td>
+                 <td><%= job.featheadline %></td>
+                 <td><%= job.featoverall %></td>
                </tr>
               <% end %>
              </tbody>
