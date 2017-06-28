@@ -26,7 +26,7 @@ class JobScraper
 
   end
 
-  def create_search(search_term=Ruby, location=London, radius=10)
+  def create_search(search_term="", location="", radius="")
     dice_form = @page.form
     # Enter the search terms and submit the form
     dice_form.SearchTerms = search_term
@@ -62,12 +62,11 @@ class JobScraper
     end
   end
 
-  def get_company_ratings(partner_id, api_key)
+  # def get_company_ratings(partner_id, api_key)
+  def get_company_ratings
     @results.each do |job|
-
-      puts "Company to find ratings for #{job.company}"
-      cp = CompanyProfiler.new(job.company, partner_id, api_key)
-
+      sleep 0.10
+      cp = CompanyProfiler.new(job.company)
       if !cp.response.nil?
         job.culture = cp.culture_rating
         job.compensation = cp.compensation_rating

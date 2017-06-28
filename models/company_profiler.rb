@@ -9,20 +9,18 @@ class CompanyProfiler
   include HTTParty
 
   BASE_URI = 'http://api.glassdoor.com/api/api.htm'
-  # PARTNER_ID = ENV["PARTNER_ID"]
-  # API_KEY = ENV["API_KEY"]
+  PARTNER_ID = ENV["PARTNER_ID"]
+  API_KEY = ENV["API_KEY"]
   
   attr_accessor :params, :response, :featured_response
 
-  def initialize(company, partner_id, api_key)
+  def initialize(company)
     @params = 
     {query: 
       {v: "1",
       format: "json",
-      # "t.p": PARTNER_ID,
-      # "t.k": API_KEY,
-      "t.p": partner_id,
-      "t.k": api_key,
+      "t.p": PARTNER_ID,
+      "t.k": API_KEY,
       action: "employers",
       q: company,
       userip: "0.0.0.0",

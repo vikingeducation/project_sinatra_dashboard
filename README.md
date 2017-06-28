@@ -10,18 +10,20 @@ Remember to sign up for the Glassdoor api to get a partner ID and API key
 [https://www.glassdoor.com/developer/index.htm]
 
 
-## Run this application (from home directory)
+## Set your environment variables and then run this application (from home directory)
 
 ```
-ruby app.rb PARTNER_ID=<xxxx> API_KEY=<xxxx>
+export PARTNER_ID="<xxxx>"
+export API_KEY="<xxxx>"
+ruby app.rb
 ```
 
-## In development mode, run like this
+## In development mode, run like this:
 
 ```
-ruby app.rb development PARTNER_ID=<xxxx> API_KEY=<xxxx>
+ruby app.rb development
 ```
 
-Access `http://localhost:4567` from the browser
+Access `http://localhost:4567` to interact with application
 
 
