@@ -1,25 +1,32 @@
 <!-- search form -->
-<header>
-  <h1>Welcome to your job hunt center!</h1>
-  <h2>Let's get started</h2>
-</header>
+<div class="container">
+  <h1>Find Your Job</h1>
+  <form action="/search" method="post">
+    <div class="form-group row">
+      <label for="url" class="col-2 col-form-label">URL:</label>
+      <input class="form-control" id="url" type="text" name="url" placeholder="http://www.dice.com">
+    </div>
 
-<form action="/search" method="post">
-  URL: <br>
-  <input type="text" name="url" placeholder="http://www.dice.com">
-  <br>
-  Keywords: <br>
-  <input type="text" name="search_term" placeholder="Entry Level Ruby Developer">
-  <br>
-  Type: <br>
-  <input type="text" name="time_type" placeholder="Full Time OR Part Time">
-  <br>
-  Location: <br>
-  <input type="text" name="search_location" placeholder="West Hollywood, CA">
-  <br>
-  Radius (in miles): <br>
-  <input type="text" name="radius" placeholder="5, 10, 20 or 30">
-  <br>
-  <br>
-  <input type="submit" name="submit_search" value="Search!">
-</form>
+    <div class="form-group row">
+      <label for="keywords" class="col-2 col-form-label">Keywords:</label>
+      <input class="form-control" id="keywords" type="text" name="search_term" placeholder="Entry Level Ruby Developer">
+    </div>
+
+    <div class="form-group row">
+      <label for="time_type" class="col-2 col-form-label">Time:</label>
+      <input class="form-control" id="time_type" type="text" name="time_type" placeholder="Full Time OR Part Time">
+    </div>
+
+    <div class="form-group row">
+      <label for="location" class="col-2 col-form-label">Location:</label>
+      <input class="form-control" id="location" type="text" name="search_location" placeholder="West Hollywood, CA">
+    </div>
+
+    <div class="form-group row">
+      <label for="radius" class="col-2 col-form-label">Radius (in miles):</label>
+      <input class="form-control" id="radius" type="text" name="radius" placeholder="5, 10, 20 or 30">
+    </div>
+
+    <input class="btn btn-primary btn-lg" type="submit" name="submit_search" value="Search!">
+  </form>
+</div>

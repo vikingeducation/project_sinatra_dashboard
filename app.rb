@@ -11,6 +11,10 @@ enable :sessions
 
 
 get '/' do
+  erb :index
+end
+
+get '/start' do
   erb :search_form
 end
 

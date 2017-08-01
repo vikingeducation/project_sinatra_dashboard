@@ -1,9 +1,9 @@
 <!-- display results from search -->
 
-<table>
+<table class="table table-hover">
   <tr>
     <% @csv_table.headers.each do |header| %>
-    <th><%= header %></th>
+    <th scope="row"><%= header %></th>
     <% end %>
   </tr>
   <% @csv_table.each do |row| %>
