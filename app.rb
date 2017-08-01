@@ -15,7 +15,13 @@ get '/' do
 end
 
 post '/search' do
-  find_jobs(search_params)
-  @csv_table = CSV.open("jobs.csv")
+  # pausing scraping during development
+  # options = search_params
+  # find_jobs(options)
+  erb :search_complete
+end
+
+get '/search' do
+  @csv_table = CSV.open("jobs.csv", :headers => true).read
   erb :results
 end

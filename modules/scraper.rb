@@ -28,11 +28,9 @@ class Scraper
 
 
   def filter_job_listings(options = {})
-    job_links = search_with_params(:keywords, :location, :distance, :time_type).search('.complete-serp-result-div')
+    job_links = search_with_params(options[:keywords], options[:location], options[:distance], options[:time_type]).search('.complete-serp-result-div')
     job_links.each do |r|
       job_details = job_post_details(r)
-      # print_job_details(job_details)
-      # puts
       save_job_post(job_details)
       delay(@sleep_time)
     end
