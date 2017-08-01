@@ -1,2 +1,3 @@
 *.csv
-/hidden.rb 
+/hidden.rb
+/response_object.rb
