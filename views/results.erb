@@ -1,0 +1,13 @@
+<!-- display results from search -->
+
+<table border="0" cellspacing="5" cellpadding="5">
+
+  <% @csv_table.each do |row| %>
+    <tr>
+      <% row.each do |element| %>
+        <td><%= element %></td>
+      <% end %>
+    </tr>
+  <% end %>
+
+</table>
