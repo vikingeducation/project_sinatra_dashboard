@@ -51,10 +51,10 @@ class Scraper
     company_name = find_details('li.employer', job_post_page).chomp(",")
     location = find_details('li.location', job_post_page)
     posting_date = job_date(job_post_page)
-    company_id = get_text("Dice Id", job_post_page).delete "Dice Id : "
-    job_id = get_text("Position Id", job_post_page).delete "Position Id : "
+    # company_id = get_text("Dice Id", job_post_page).delete "Dice Id : "
+    # job_id = get_text("Position Id", job_post_page).delete "Position Id : "
     job_url = job_post_page.uri
-    details = { :title => job_title, :co_name => company_name, :l => location, :date => posting_date, :co_id => company_id, :job_id => job_id, :url => job_url }
+    details = { :title => job_title, :co_name => company_name, :l => location, :date => posting_date, :url => job_url }
   end
 
 
@@ -100,7 +100,7 @@ class Scraper
 
 
   def save_job_post(options = {})
-    headers = ["Job Title", "Company Name", "Location", "Date Posted", "Company ID", "Posting ID", "Job Posting URL", "Overall Rating", "Culture and Values Rating", "Compensation and Benefits Rating", "Worklife Balance Rating", "Featured Reviews: Pros", "Featured Reviews: Cons"]
+    headers = ["Job Title", "Company Name", "Location", "Date Posted", "Job Posting URL"]
     CSV.open('jobs.csv', 'a+') do |csv|
       csv << headers if csv.count.eql? 0
       csv << options.values

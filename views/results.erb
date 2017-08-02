@@ -6,13 +6,17 @@
 <table class="table table-hover">
   <tr>
     <% @csv_table.headers.each do |header| %>
-    <th scope="row"><%= header %></th>
+    <th scope="row"><%= header unless header == "Job Posting URL" %></th>
     <% end %>
+    <th>Job Posting URL</th>
   </tr>
   <% @csv_table.each do |row| %>
     <tr>
       <% row.each do |element| %>
-        <td><%= element[1] %></td>
+        <td><%= element[1] unless element[0] == "Job Posting URL"%></td>
+        <% if element[0] == "Job Posting URL" %>
+        <td><a href= <%= element[1] %>><%= element[1] %></a><td>
+          <% end %>
       <% end %>
     </tr>
   <% end %>
