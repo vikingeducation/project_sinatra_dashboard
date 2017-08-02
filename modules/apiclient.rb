@@ -17,14 +17,8 @@ class APIClient
   def company_rating(company="Crescent Solutions, Inc.")
     response = send_request(company)
     response_body = JSON.parse(response.body)
-    pp response_body
-
     if response_body["response"]["employers"].empty?
-      headers = ["Overall Rating", "Culture and Values Rating", "Comp. and Bene Ratings", "Worklife Balance", "Pros", "Cons"]
-      CSV.open('ratings.csv', 'a+', :headers => true) do |csv|
-        csv << headers if csv.count.eql? 0
-        csv << ["No Info available for this employer"]
-      end
+      no_company_info_save
     else
       if response_body["response"]["totalRecordCount"] > 1
         response_body["response"]["employers"].each do |hash|
@@ -52,15 +46,11 @@ class APIClient
       # puts "Culture And Values Rating: #{response_body["cultureAndValuesRating"]}"
       # puts "Compensation And Benefits Rating: #{response_body["compensationAndBenefitsRating"]}"
       # puts "Worklife Balance Rating: #{response_body["workLifeBalanceRating"]}"
-      headers = ["Overall Rating", "Culture and Values Rating", "Comp. and Bene Rating", "Worklife Balance", "Pros", "Cons"]
-      CSV.open('ratings.csv', 'a+', :headers => true) do |csv|
-        csv << headers if csv.count.eql? 0
-        csv << ratings.values
-      end
+      save_ratings(ratings)
     end
   end
 
-
+private
 
   def send_request(company)
     uri = (@base_uri + "?")
@@ -80,6 +70,23 @@ class APIClient
     request.response
   end
 
+
+  def no_company_info_save
+    headers = ["Overall Rating", "Culture and Values Rating", "Comp. and Bene Ratings", "Worklife Balance", "Pros", "Cons"]
+    CSV.open('ratings.csv', 'a+', :headers => true) do |csv|
+      csv << headers if csv.count.eql? 0
+      csv << ["No Info available for this employer"]
+    end
+  end
+
+
+  def save_ratings(ratings)
+    headers = ["Overall Rating", "Culture and Values Rating", "Comp. and Bene Rating", "Worklife Balance", "Pros", "Cons"]
+    CSV.open('ratings.csv', 'a+', :headers => true) do |csv|
+      csv << headers if csv.count.eql? 0
+      csv << ratings.values
+    end
+  end
 
 
 

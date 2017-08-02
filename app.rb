@@ -4,7 +4,8 @@ require 'erb'
 require 'csv'
 require './modules/scraper.rb'
 require './helpers/helper_methods.rb'
-require './apiclient.rb'
+require './modules/apiclient.rb'
+require './modules/geo_ip.rb'
 require './hidden.rb'
 require 'sinatra/reloader' if development?
 require 'pry-byebug' if development?
@@ -14,6 +15,9 @@ enable :sessions
 include APIHelpers
 
 get '/' do
+  ip_client = GEOIP.new("72.174.4.38")
+  location = ip_client.location_info
+  session[:search_location] = location
   erb :index
 end
 
@@ -23,10 +27,11 @@ end
 
 post '/search' do
   # pausing scraping during development
-  # options = search_params
-  # find_jobs(options)
+  location = session[:search_location]
+  options = search_params
+  options[:location] = location
+  find_jobs(options)
   @client = APIClient.new(PARAMETERS)
-  puts "#{@client}"
   @csv_table = CSV.open("jobs.csv", :headers => true)
   @csv_table.each do |row|
     row.each do |element|
@@ -36,10 +41,12 @@ post '/search' do
       end
     end
   end
+  session[:search_location] = location
   erb :search_complete
 end
 
 get '/search' do
+  @location = session[:search_location]
   @jobs_table = CSV.open("jobs.csv", :headers => true).read
   @ratings_table = CSV.open("ratings.csv", :headers => true).read
   @combined = @jobs_table.to_a.each_with_index.map {|row, index| row.to_a.concat(@ratings_table.to_a[index]) }
