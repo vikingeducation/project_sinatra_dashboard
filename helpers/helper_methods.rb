@@ -12,5 +12,12 @@ def search_params
               :keywords => params[:search_term],
               :location => params[:search_location],
               :distance => params[:radius],
-              :time_type => params[:time_type] }
+              :time_type => params[:time_type]
+            }
+  if params[:search_location] == "ip"
+    options[:location] = nil
+  else
+    options[:location] = params[:search_location]
+  end
+  options
 end

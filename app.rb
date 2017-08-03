@@ -6,7 +6,7 @@ require './modules/scraper.rb'
 require './helpers/helper_methods.rb'
 require './modules/apiclient.rb'
 require './modules/geo_ip.rb'
-require './hidden.rb'
+require './hidden.rb' # holds API partner key and id for glassdoor and PARAMETERS
 require 'sinatra/reloader' if development?
 require 'pry-byebug' if development?
 
@@ -16,8 +16,7 @@ include APIHelpers
 
 get '/' do
   ip_client = GEOIP.new("72.174.4.38")
-  location = ip_client.location_info
-  session[:search_location] = location
+  session[:ip_location] = (ip_client.location_info)
   erb :index
 end
 
@@ -26,14 +25,15 @@ get '/start' do
 end
 
 post '/search' do
-  # pausing scraping during development
-  location = session[:search_location]
+  location = session[:ip_location]
   options = search_params
-  options[:location] = location
+  if options[:location].nil?
+    options[:location] = location
+  end
   find_jobs(options)
   @client = APIClient.new(PARAMETERS)
-  @csv_table = CSV.open("jobs.csv", :headers => true)
-  @csv_table.each do |row|
+  @job_table = CSV.open("jobs.csv", :headers => true)
+  @job_table.each do |row|
     row.each do |element|
       if element[0] == "Company Name"
         @client.company_rating(element[1])
@@ -41,15 +41,16 @@ post '/search' do
       end
     end
   end
-  session[:search_location] = location
+  session[:jobs_table] = @csv_table
+  session[:ip_location] = location
   erb :search_complete
 end
 
 get '/search' do
-  @location = session[:search_location]
-  @jobs_table = CSV.open("jobs.csv", :headers => true).read
+  @location = session[:ip_location]
+  @job_table = session[:jobs_table]
   @ratings_table = CSV.open("ratings.csv", :headers => true).read
-  @combined = @jobs_table.to_a.each_with_index.map {|row, index| row.to_a.concat(@ratings_table.to_a[index]) }
+  @combined = @job_table.to_a.each_with_index.map {|row, index| row.to_a.concat(@ratings_table.to_a[index]) }
   CSV.open('all.csv', "a+") do |row|
     @combined.each do |line|
       row << line

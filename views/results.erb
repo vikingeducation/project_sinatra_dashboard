@@ -1,6 +1,6 @@
 <!-- display results from search -->
 <header>
-  <h1>Current jobs in <%= @location %>:</h1>
+  <h1>Current jobs in <%= @location.gsub(/,/, " , ") %>:</h1>
 </header>
 
 
