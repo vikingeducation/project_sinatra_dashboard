@@ -51,8 +51,6 @@ class Scraper
     company_name = find_details('li.employer', job_post_page).chomp(",")
     location = find_details('li.location', job_post_page)
     posting_date = job_date(job_post_page)
-    # company_id = get_text("Dice Id", job_post_page).delete "Dice Id : "
-    # job_id = get_text("Position Id", job_post_page).delete "Position Id : "
     job_url = job_post_page.uri
     details = { :title => job_title, :co_name => company_name, :l => location, :date => posting_date, :url => job_url }
   end
@@ -86,16 +84,6 @@ class Scraper
       @text_string = n.text.strip if n.text.include?(string)
     end
     @text_string
-  end
-
-  def print_job_details(options = {})
-    puts "Job Title : #{options[:title]}"
-    puts "Company : #{options[:co_name]}"
-    puts "Location : #{options[:l]}"
-    puts "Posted : #{options[:date]}"
-    puts "Company ID: #{options[:co_id]}"
-    puts "Job ID: #{options[:job_id]}"
-    puts "Job URL : #{options[:url]}"
   end
 
 

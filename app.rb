@@ -25,36 +25,16 @@ get '/start' do
 end
 
 post '/search' do
-  location = session[:ip_location]
-  options = search_params
-  if options[:location].nil?
-    options[:location] = location
-  end
-  find_jobs(options)
-  @client = APIClient.new(PARAMETERS)
-  @job_table = CSV.open("jobs.csv", :headers => true)
-  @job_table.each do |row|
-    row.each do |element|
-      if element[0] == "Company Name"
-        @client.company_rating(element[1])
-        sleep rand(0..3)
-      end
-    end
-  end
-  session[:job_location] = options[:location]
+  search_options = determine_search_params
+  find_jobs(search_options)
+  find_company_info
+  session[:job_location] = search_options[:location]
   erb :search_complete
 end
 
 get '/search' do
   @location = session[:job_location]
-  @job_table = CSV.open("jobs.csv", :headers => true).read
-  @ratings_table = CSV.open("ratings.csv", :headers => true).read
-  @combined = @job_table.to_a.each_with_index.map {|row, index| row.to_a.concat(@ratings_table.to_a[index]) }
-  CSV.open('all.csv', "a+") do |row|
-    @combined.each do |line|
-      row << line
-    end
-  end
+  combine_tables
   @csv_table = CSV.open("all.csv", :headers => true).read
   erb :results
 end

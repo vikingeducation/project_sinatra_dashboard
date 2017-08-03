@@ -7,50 +7,58 @@ require 'json'
 
 class APIClient
 
-  def initialize(options={})
-    @partner_id, @partner_key, @userip, @useragent, @format, @v, @action, @base_uri =
+
+  def initialize(base_uri, options={})
+    @base_uri = base_uri
+    @partner_id, @partner_key, @userip, @useragent, @format, @v, @action =
     options[:partner_id], options[:partner_key], options[:userip], options[:useragent],
-    options[:format], options[:v], options[:action], options[:base_uri]
+    options[:format], options[:v], options[:action]
   end
 
 
-  def company_rating(company="Crescent Solutions, Inc.")
+  def company_rating(company)
     response = send_request(company)
     response_body = JSON.parse(response.body)
     if response_body["response"]["employers"].empty?
       no_company_info_save
     else
-      if response_body["response"]["totalRecordCount"] > 1
-        response_body["response"]["employers"].each do |hash|
-          if hash["name"] == company
-            response_body = hash
-          end
-        end
-      else
-        response_body = response_body["response"]["employers"][0]
-      end
-
-      ratings = {:overall => response_body["overallRating"],
-                 :culture_and_values => response_body["cultureAndValuesRating"],
-                 :compensation_and_benefits => response_body["compensationAndBenefitsRating"],
-                 :worklife_balance => response_body["workLifeBalanceRating"],
-                }
-
-      if response_body.has_key?("featuredReview")
-        ratings[:featured_review_pros] = response_body["featuredReview"]["pros"]
-        ratings[:featured_review_cons] = response_body["featuredReview"]["cons"]
-        # puts "Featured Reviews, Pros: #{response_body["featuredReview"]["pros"]}"
-        # puts "Featured Reviews, Cons: #{response_body["featuredReview"]["cons"]}"
-      end
-      # puts "Overall Rating: #{response_body["overallRating"]}"
-      # puts "Culture And Values Rating: #{response_body["cultureAndValuesRating"]}"
-      # puts "Compensation And Benefits Rating: #{response_body["compensationAndBenefitsRating"]}"
-      # puts "Worklife Balance Rating: #{response_body["workLifeBalanceRating"]}"
-      save_ratings(ratings)
+      employer_rating_hash = parse_employers(response_body, company)
+      co_ratings = parse_ratings(employer_rating_hash)
+      save_ratings(co_ratings)
     end
   end
 
+
 private
+
+
+  def parse_employers(employers_hash, company)
+    if employers_hash["response"]["totalRecordCount"] > 1
+      employers_hash["response"]["employers"].each do |hash|
+        if hash["name"] == company
+          employers_hash = hash
+        end
+      end
+    else
+      employers_hash = employers_hash["response"]["employers"][0]
+    end
+    employers_hash
+  end
+
+
+  def parse_ratings(employers_hash)
+    ratings = {:overall => employers_hash["overallRating"],
+               :culture_and_values => employers_hash["cultureAndValuesRating"],
+               :compensation_and_benefits => employers_hash["compensationAndBenefitsRating"],
+               :worklife_balance => employers_hash["workLifeBalanceRating"],
+              }
+    if employers_hash.has_key?("featuredReview")
+      ratings[:featured_review_pros] = employers_hash["featuredReview"]["pros"]
+      ratings[:featured_review_cons] = employers_hash["featuredReview"]["cons"]
+    end
+    ratings
+  end
+
 
   def send_request(company)
     uri = (@base_uri + "?")
