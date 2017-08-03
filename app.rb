@@ -16,7 +16,7 @@ include APIHelpers
 
 get '/' do
   ip_client = GEOIP.new("72.174.4.38")
-  session[:ip_location] = (ip_client.location_info)
+  session[:ip_location] = ip_client.location_info
   erb :index
 end
 
@@ -41,14 +41,13 @@ post '/search' do
       end
     end
   end
-  session[:jobs_table] = @csv_table
-  session[:ip_location] = location
+  session[:job_location] = options[:location]
   erb :search_complete
 end
 
 get '/search' do
-  @location = session[:ip_location]
-  @job_table = session[:jobs_table]
+  @location = session[:job_location]
+  @job_table = CSV.open("jobs.csv", :headers => true).read
   @ratings_table = CSV.open("ratings.csv", :headers => true).read
   @combined = @job_table.to_a.each_with_index.map {|row, index| row.to_a.concat(@ratings_table.to_a[index]) }
   CSV.open('all.csv', "a+") do |row|

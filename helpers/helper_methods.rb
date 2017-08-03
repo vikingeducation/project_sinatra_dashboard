@@ -10,7 +10,6 @@ end
 def search_params
   options = { :search_url => params[:url],
               :keywords => params[:search_term],
-              :location => params[:search_location],
               :distance => params[:radius],
               :time_type => params[:time_type]
             }
