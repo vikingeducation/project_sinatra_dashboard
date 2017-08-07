@@ -5,7 +5,7 @@ gem 'json'
 gem 'thin'
 gem 'mechanize', '~>2.7.2', '<2.7.3'
 gem 'typhoeus'
-gem 'httparty'
+gem 'smarter_csv', '~> 1.1', '>= 1.1.4'
 
 group :development do
   gem 'pry-byebug'

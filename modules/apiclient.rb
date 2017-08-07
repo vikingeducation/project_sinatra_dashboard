@@ -1,6 +1,5 @@
 require './hidden.rb'
 require 'typhoeus'
-require 'httparty'
 require 'json'
 
 
@@ -20,11 +19,9 @@ class APIClient
     response = send_request(company)
     response_body = JSON.parse(response.body)
     if response_body["response"]["employers"].empty?
-      no_company_info_save
+      co_ratings = no_info_returned(company)
     else
-      employer_rating_hash = parse_employers(response_body, company)
-      co_ratings = parse_ratings(employer_rating_hash)
-      save_ratings(co_ratings)
+      co_ratings = parse_ratings(parse_employers(response_body, company))
     end
   end
 
@@ -79,23 +76,15 @@ private
   end
 
 
-  def no_company_info_save
-    headers = ["Overall Rating", "Culture and Values Rating", "Comp. and Bene Ratings", "Worklife Balance", "Pros", "Cons"]
-    CSV.open('ratings.csv', 'a+', :headers => true) do |csv|
-      csv << headers if csv.count.eql? 0
-      csv << ["No Info available for this employer"]
-    end
+  def no_info_returned(company)
+    ratings = {:overall => "No Info Avail",
+               :culture_and_values => "No Info Avail",
+               :compensation_and_benefits => "No Info Avail",
+               :worklife_balance => "No Info Avail",
+               :featured_review_pros => "No Info Avail",
+               :featured_review_cons => "No Info Avail"
+              }
   end
-
-
-  def save_ratings(ratings)
-    headers = ["Overall Rating", "Culture and Values Rating", "Comp. and Bene Rating", "Worklife Balance", "Pros", "Cons"]
-    CSV.open('ratings.csv', 'a+', :headers => true) do |csv|
-      csv << headers if csv.count.eql? 0
-      csv << ratings.values
-    end
-  end
-
 
 
 end # end of class

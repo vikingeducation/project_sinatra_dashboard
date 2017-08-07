@@ -1,5 +1,4 @@
 require 'typhoeus'
-require 'httparty'
 require 'json'
 
 class GEOIP
@@ -11,7 +10,6 @@ class GEOIP
   def location_info
     response = send_request
     response_body = JSON.parse(response.body)
-    pp response_body
     location = []
     location << response_body["city"] << response_body["region_code"]
     location.join(",")

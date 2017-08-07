@@ -1,4 +1,3 @@
-require './modules/scraper.rb'
 
 def find_jobs(options)
   n = Scraper.new(options[:search_url])
@@ -19,29 +18,35 @@ end
 
 def find_company_info
   @client = APIClient.new(WEBSITE, PARAMETERS)
-  @job_table = CSV.open("jobs.csv", :headers => true)
-  @job_table.each do |row|
-    row.each do |element|
-      if element[0] == "Company Name"
-        @client.company_rating(element[1])
-        sleep rand(0..3)
+  employers, @employers_ratings = [], {}
+  job_table = SmarterCSV.process("jobs.csv")
+  job_table.each do |row|
+    employers << row[:company_name]
+  end
+  employers.uniq!.delete_if {|name| name.is_a?(Integer)}
+  employers.each do |co|
+    co_rating = @client.company_rating(co)
+    sleep rand(0..3)
+    @employers_ratings[co] = co_rating
+  end
+  @employers_ratings
+end
+
+
+def save_employer_ratings(ratings)
+  headers = ["Company Name", "Job Title", "Location", "Date Posted", "Job Posting URL", "Overall Rating", "Culture and Values Rating", "Comp. and Bene Rating", "Worklife Balance", "Pros", "Cons"]
+  CSV.open("all.csv", "a+", headers: true) do |csv|
+    csv << headers if csv.count.eql?(0)
+    CSV.foreach('jobs.csv', headers: true) do |row|
+      if ratings.has_key?(row["Company Name"])
+        combo = row.push(ratings[row["Company Name"]])
+      else
+        combo = row.push(["NO INFO FOUND"])
       end
+      csv << combo
     end
   end
 end
-
-
-def combine_tables
-  @job_table = CSV.open("jobs.csv", :headers => true).read
-  @ratings_table = CSV.open("ratings.csv", :headers => true).read
-  @combined = @job_table.to_a.each_with_index.map {|row, index| row.to_a.concat(@ratings_table.to_a[index]) }
-  CSV.open('all.csv', "a+") do |row|
-    @combined.each do |line|
-      row << line
-    end
-  end
-end
-
 
 private
 

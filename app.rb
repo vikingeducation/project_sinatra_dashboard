@@ -2,8 +2,9 @@ require 'sinatra'
 require 'json'
 require 'erb'
 require 'csv'
-require './modules/scraper.rb'
+require 'smarter_csv'
 require './helpers/helper_methods.rb'
+require './modules/scraper.rb'
 require './modules/apiclient.rb'
 require './modules/geo_ip.rb'
 require './hidden.rb' # holds API partner key and id for glassdoor and PARAMETERS
@@ -12,29 +13,28 @@ require 'pry-byebug' if development?
 
 enable :sessions
 
-include APIHelpers
+include HiddenInfo # holds API partner key and id for glassdoor and PARAMETERS
 
 get '/' do
-  ip_client = GEOIP.new("72.174.4.38")
-  session[:ip_location] = ip_client.location_info
   erb :index
 end
 
 get '/start' do
+  ip_client = GEOIP.new("#{request.ip}") # replace with "72.174.4.38" when testing
+  session[:ip_location] = ip_client.location_info
   erb :search_form
 end
 
 post '/search' do
   search_options = determine_search_params
   find_jobs(search_options)
-  find_company_info
+  save_employer_ratings(find_company_info)
   session[:job_location] = search_options[:location]
   erb :search_complete
 end
 
 get '/search' do
   @location = session[:job_location]
-  combine_tables
   @csv_table = CSV.open("all.csv", :headers => true).read
   erb :results
 end

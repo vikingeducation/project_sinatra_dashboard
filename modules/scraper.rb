@@ -52,7 +52,7 @@ class Scraper
     location = find_details('li.location', job_post_page)
     posting_date = job_date(job_post_page)
     job_url = job_post_page.uri
-    details = { :title => job_title, :co_name => company_name, :l => location, :date => posting_date, :url => job_url }
+    details = { :co_name => company_name, :title => job_title, :l => location, :date => posting_date, :url => job_url }
   end
 
 
@@ -72,7 +72,7 @@ class Scraper
                           "days" => amount * 86400,
                           "weeks" => amount * 86400 * 7,
                           "months" => amount * 86400 * 30
-                        }
+                        } unless amount.nil?
     time_in_seconds = change_to_seconds[time_unit]
     date_posted = Time.now - time_in_seconds
     "#{date_posted.month}/#{date_posted.day}/#{date_posted.year}"
@@ -88,7 +88,7 @@ class Scraper
 
 
   def save_job_post(options = {})
-    headers = ["Job Title", "Company Name", "Location", "Date Posted", "Job Posting URL"]
+    headers = [ "Company Name", "Job Title", "Location", "Date Posted", "Job Posting URL"]
     CSV.open('jobs.csv', 'a+') do |csv|
       csv << headers if csv.count.eql? 0
       csv << options.values
