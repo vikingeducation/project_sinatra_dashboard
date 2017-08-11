@@ -1,0 +1,18 @@
+<table class="results-table" border="visible"
+<tr>
+  <th>Title</th>
+  <th>Company</th>
+  <th>Link</th>
+  <th>Location</th>
+  <th>Date</th>
+  <th>Company ID</th>
+  <th>Job ID</th>
+</tr>
+<% arr_of_arrs = CSV.read("results.csv") %>
+<% arr_of_arrs.each do |job| %>
+  <tr>
+  <% job.each do |elem| %>
+    <th><%=elem%></th>
+  <% end %>
+<% end %>
+</table>

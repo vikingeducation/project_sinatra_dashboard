@@ -1,4 +1,4 @@
-# /scraper.rb
+# \scraper.rb
 require 'rubygems'
 require 'mechanize'
 require 'csv'
@@ -8,6 +8,8 @@ Job = Struct.new(:title, :comp, :link, :loc, :date, :comp_id, :job_id)
 
 # Create scraper
 class JobScraper
+  attr_accessor :output
+
   def initialize(search_term = 'Ruby', location = 'Washington, DC')
     @agent = Mechanize.new
     @agent.history_added = Proc.new {sleep 0.5}
@@ -52,7 +54,7 @@ private
 # write to .csv file
   def write_to_file
     CSV.open("results.csv", "a") do |csv|
-      csv << ["Title", "Company", "Link", "Location", "Date", "Company ID", "Job ID"]
+      # csv << ["Title", "Company", "Link", "Location", "Date", "Company ID", "Job ID"]
       @output.each do |job|
         csv << [job.title, job.comp, job.link, job.loc, job.date, job.comp_id, job.job_id]
       end
