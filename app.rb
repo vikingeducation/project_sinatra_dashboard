@@ -16,10 +16,11 @@ end
 post '/search' do
   # collects search term from user input
   # gets location and passes it to scraper
+  search_term = params[:search_term]
+  location = coords
 
   # scrapes site
-  j = JobScraper.new
+  j = JobScraper.new(search_term, location)
   j.scrape
-  @results = j.output
   redirect to('/')
 end

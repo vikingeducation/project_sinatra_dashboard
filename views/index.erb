@@ -5,11 +5,11 @@
   </head>
   <body>
     <h1>Welcome to Sinatra Job-hunt Central!</h1>
-    <h2>Search Results</h2>
+    <h2>Search Results:</h2>
     <%= erb :"shared/table" %>
     <br>
     <form action="/search" method="post">
-      <textarea type="text" name="search-field" placeholder="Your dream job awaits!"></textarea>
+      <textarea type="text" name="search-term" placeholder="Your dream job awaits!"></textarea>
       <br>
         <input type="submit"  value="Search">
       </form>

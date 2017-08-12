@@ -12,6 +12,7 @@
 <% arr_of_arrs.each do |job| %>
   <tr>
   <% job.each do |elem| %>
+    <% format_link(elem) %>
     <th><%=elem%></th>
   <% end %>
 <% end %>
