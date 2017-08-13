@@ -9,7 +9,7 @@ end
 def determine_search_params
   location = session[:ip_location]
   options = parameters
-  if options[:location].nil?
+  if options[:location] == "ip"
     options[:location] = location
   end
   options
@@ -17,25 +17,74 @@ end
 
 
 def find_company_info
-  @client = APIClient.new(WEBSITE, PARAMETERS)
-  employers, @employers_ratings = [], {}
+  employers = []
   job_table = SmarterCSV.process("jobs.csv")
   job_table.each do |row|
     employers << row[:company_name]
   end
-  employers.uniq!.delete_if {|name| name.is_a?(Integer)}
-  employers.each do |co|
-    co_rating = @client.company_rating(co)
-    sleep rand(0..3)
-    @employers_ratings[co] = co_rating
-  end
-  @employers_ratings
+  @employers_ratings = find_employer_ratings(employers)
 end
 
 
 def save_employer_ratings(ratings)
-  headers = ["Company Name", "Job Title", "Location", "Date Posted", "Job Posting URL", "Overall Rating", "Culture and Values Rating", "Comp. and Bene Rating", "Worklife Balance", "Pros", "Cons"]
-  CSV.open("all.csv", "a+", headers: true) do |csv|
+  if ratings.nil?
+    no_jobs_found
+  else
+    combine_company_info(ratings)
+  end
+end
+
+
+def clear_sessions
+  session.clear
+end
+
+
+private
+
+
+def find_employer_ratings(employers)
+  @client = APIClient.new(WEBSITE, PARAMETERS)
+  employers_ratings = {}
+  if employers == []
+    employers_ratings = nil
+  else
+    employers.uniq!.delete_if {|name| name.is_a?(Integer)}
+    employers.each do |co|
+      co_rating = @client.company_rating(co)
+      sleep rand(0..3)
+      employers_ratings[co] = co_rating
+    end
+  end
+  employers_ratings
+end
+
+
+def parameters
+  options = { :search_url => params[:url],
+              :keywords => params[:search_term],
+              :distance => params[:radius],
+              :time_type => params[:time_type]
+            }
+  if params[:search_location] == "ip"
+    options[:location] = "ip"
+  else
+    options[:location] = params[:search_location]
+  end
+  options
+end
+
+
+def no_jobs_found
+  CSV.open('all.csv', 'w+') do |csv|
+    csv << ["NO JOBS FOUND"]
+  end
+end
+
+
+def combine_company_info(ratings)
+  headers = ["Job Title", "Company Name", "Location", "Date Posted", "Job Posting URL", "Overall Rating", "Culture and Values Rating", "Comp. and Bene Rating", "Worklife Balance", "Pros", "Cons"]
+  CSV.open("all.csv", "w+", headers: true) do |csv|
     csv << headers if csv.count.eql?(0)
     CSV.foreach('jobs.csv', headers: true) do |row|
       if ratings.has_key?(row["Company Name"])
@@ -46,21 +95,4 @@ def save_employer_ratings(ratings)
       csv << combo
     end
   end
-end
-
-private
-
-
-def parameters
-  options = { :search_url => params[:url],
-              :keywords => params[:search_term],
-              :distance => params[:radius],
-              :time_type => params[:time_type]
-            }
-  if params[:search_location] == "ip"
-    options[:location] = nil
-  else
-    options[:location] = params[:search_location]
-  end
-  options
 end

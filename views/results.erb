@@ -1,29 +1,41 @@
 <!-- display results from search -->
-<header>
-  <h1>Current jobs in <%= @location.gsub(/,/, ", ") %>:</h1>
-</header>
+<div class="container">
 
 
-<table class="table table-hover">
+  <header>
+    <h1>
+      <span>Current jobs in <%= @location.gsub(/,/, ", ") %>:</span>
+      <a href="/start" class="btn btn-primary btn-lg align-bottom pull-right">New Search</a>
+    </h1>
+  </header>
 
-  <tr>
-    <% @csv_table.headers.each do |header| %>
-      <th><%= header unless header == "Job Posting URL"%></th>
-    <% end %>
-    <th>Job Posting URL</th>
-  </tr>
+  <body>
+    <% if @csv_table.count == 0 %>
+    <h2>NO JOBS FOUND IN THIS AREA</h2>
+    <% else %>
 
-  <% @csv_table.each do |row| %>
-    <tr>
-      <% row.each do |element| %>
-        <td><%= element[1] unless element[0] == "Job Posting URL" %></td>
-      <% end %>
-      <% row.each do |element| %>
-        <% if element[0] == "Job Posting URL" %>
-          <td><a href= <%= element[1] %>>Click Here</td>
+      <table class="table table-hover">
+
+        <tr>
+          <% @csv_table.headers.each do |header| %>
+            <th><strong><%= header unless header == "Job Posting URL"%></strong></th>
+          <% end %>
+          <th><strong>Job Posting URL</strong></th>
+        </tr>
+
+        <% @csv_table.each do |row| %>
+          <tr>
+            <% row.each do |element| %>
+              <td><%= element[1] unless element[0] == "Job Posting URL" %></td>
+            <% end %>
+            <% row.each do |element| %>
+              <% if element[0] == "Job Posting URL" %>
+                <td><a href= <%= element[1] %>>Click Here</td>
+              <% end %>
+            <% end %>
+          </tr>
         <% end %>
-      <% end %>
-    </tr>
-  <% end %>
 
-</table>
+      </table>
+    <% end %> 
+</div>

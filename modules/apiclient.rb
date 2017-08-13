@@ -32,7 +32,7 @@ private
   def parse_employers(employers_hash, company)
     if employers_hash["response"]["totalRecordCount"] > 1
       employers_hash["response"]["employers"].each do |hash|
-        if hash["name"] == company
+        if hash["name"] == company || hash["name"] == company.gsub(", Inc", "") || hash["name"] == company.gsub(", Inc.", "")
           employers_hash = hash
         end
       end

@@ -20,6 +20,7 @@ get '/' do
 end
 
 get '/start' do
+  clear_sessions
   ip_client = GEOIP.new("#{request.ip}") # replace with "72.174.4.38" when testing
   session[:ip_location] = ip_client.location_info
   erb :search_form
@@ -27,9 +28,9 @@ end
 
 post '/search' do
   search_options = determine_search_params
+  session[:job_location] = search_options[:location]
   find_jobs(search_options)
   save_employer_ratings(find_company_info)
-  session[:job_location] = search_options[:location]
   erb :search_complete
 end
 

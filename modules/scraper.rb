@@ -28,11 +28,12 @@ class Scraper
 
 
   def filter_job_listings(options = {})
-    job_links = search_with_params(options[:keywords], options[:location], options[:distance], options[:time_type]).search('.complete-serp-result-div')
-    job_links.each do |r|
-      job_details = job_post_details(r)
-      save_job_post(job_details)
-      delay(@sleep_time)
+    job_links = search_with_params(options[:keywords], options[:location], options[:distance], options[:time_type]).parser.xpath('//div[@class="complete-serp-result-div"]')
+    if job_links.nil?
+      save_no_jobs
+    else
+      details = job_post_details(job_links)
+      save_job_post(details)
     end
   end
 
@@ -41,38 +42,74 @@ class Scraper
 
 
   def search_with_params(keywords, location, distance, time)
-    results = @agent.get("http://dice.com/jobs?q =#{keywords}&l=#{location}&djtype=#{time}&radius-#{distance}-jobs")
+    results = @agent.get("http://dice.com/jobs?q=#{keywords}&l=#{location}&djtype=#{time}&radius-#{distance}-jobs")
   end
 
 
-  def job_post_details(individual_post)
-    job_post_page = @agent.click(individual_post.at('h3 a'))
-    job_title = find_details('h1#jt.jobTitle', job_post_page)
-    company_name = find_details('li.employer', job_post_page).chomp(",")
-    location = find_details('li.location', job_post_page)
-    posting_date = job_date(job_post_page)
-    job_url = job_post_page.uri
+  def job_post_details(page)
+    company_name = find_info(page, '//span[@itemprop="name"]')
+    job_title = find_info(page,'//span[@itemprop="title"]/text()')
+    location = find_info(page, '//span[@itemprop="addressLocality"]/text()')
+    posting_date = find_posting_date(page)
+    job_url = find_job_url(page)
     details = { :co_name => company_name, :title => job_title, :l => location, :date => posting_date, :url => job_url }
   end
 
 
-  def find_details(css, page)
-    details = page.at(css).text.strip
+  def find_info(page,css)
+    info = []
+    page.search(css).each do |x|
+      info << x.text
+    end
+    info
   end
 
 
-  def job_date(job_post_page)
-    posted_at = job_post_page.at('li.posted.hidden-xs').text.strip
-    time_unit = posted_at.split(" ")[2]
+  def find_posting_date(page)
+    posting_date = []
+    page.search('div ul li.posted').each do |time|
+      posting_date << time.text
+    end
+    posting_date.map! {|time| job_date(time)}
+  end
+
+
+  def find_job_url(page)
+    job_url = []
+    page.search("//a[@itemprop='url']").each do |url|
+      job_url << url.attr('href')
+    end
+    job_url
+  end
+
+
+  def find_details(tag, page)
+    details = page.css(tag).text.strip
+  end
+
+
+  def job_date(posted_at)
+    posted_array = posted_at.split(" ")
+    amount = posted_array[0].to_i unless posted_array == "moments"
+    time_unit = nil
+    if posted_array[0] == "moments"
+      time_unit = posted_array[0]
+    else
+      time_unit = posted_array[1]
+    end
+    time_to_date(time_unit, amount)
+  end
+
+
+  def time_to_date(time_unit, amount)
     time_unit += "s" unless time_unit[-1] == "s"
-    amount = posted_at.split(" ")[1].to_i unless posted_at.split(" ")[1] == "moments"
     change_to_seconds = { "moments" => 30,
                           "minutes" => amount * 60,
                           "hours" => amount * 3600,
                           "days" => amount * 86400,
                           "weeks" => amount * 86400 * 7,
                           "months" => amount * 86400 * 30
-                        } unless amount.nil?
+                      } unless amount.nil?
     time_in_seconds = change_to_seconds[time_unit]
     date_posted = Time.now - time_in_seconds
     "#{date_posted.month}/#{date_posted.day}/#{date_posted.year}"
@@ -83,15 +120,26 @@ class Scraper
     page.search("div.company-header-info div.row div.col-md-12").each do |n|
       @text_string = n.text.strip if n.text.include?(string)
     end
+    puts "#{@text_string}"
     @text_string
   end
 
 
   def save_job_post(options = {})
-    headers = [ "Company Name", "Job Title", "Location", "Date Posted", "Job Posting URL"]
-    CSV.open('jobs.csv', 'a+') do |csv|
+    headers = [ "Job Title", "Company Name", "Location", "Date Posted", "Job Posting URL"]
+    CSV.open('jobs.csv', 'w+') do |csv|
       csv << headers if csv.count.eql? 0
-      csv << options.values
+      # csv << options.values
+      30.times do |i|
+        csv << [options[:title][i], options[:co_name][i], options[:l][i], options[:date][i], options[:url][i]]
+      end
+    end
+  end
+
+
+  def save_no_jobs
+    CSV.open('jobs.csv', 'w+') do |csv|
+      csv << ["NO JOBS FOUND"]
     end
   end
 
