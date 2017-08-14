@@ -5,7 +5,7 @@
   </head>
   <body>
     <h1>Welcome to Sinatra Job-hunt Central!</h1>
-    <h2>Search Results:</h2>
+    <h2>Jobs in <%= location %></h2>
     <%= erb :"shared/table" %>
     <br>
     <form action="/search" method="post">
