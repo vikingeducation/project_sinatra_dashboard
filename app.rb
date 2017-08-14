@@ -11,7 +11,10 @@ enable :sessions
 helpers ScraperHelper
 
 get '/' do
-  session["location"] = get_location
+
+  unless session["location"]
+    session["location"] = get_location
+  end
   erb :index, locals: {location: session["location"]}
 end
 
