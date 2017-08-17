@@ -10,19 +10,25 @@ module ScraperHelper
     end
   end
 
-  def get_zip(ip_address = "23.81.0.59")
-    url = "http://freegeoip.net/json/" + ip_address
-    response = HTTParty.get(url)
-    location_hash = JSON.parse(response.body)
-    return location_hash["zip_code"]
-  end
+  # def get_zip(ip_address = "23.81.0.59")
+  #   url = "http://freegeoip.net/json/" + ip_address
+  #   response = HTTParty.get(url)
+  #   location_hash = JSON.parse(response.body)
+  #   location_hash["zip_code"]
+  # end
 
   def get_location(ip_address = "23.81.0.59")
     url = "http://freegeoip.net/json/" + ip_address
     response = HTTParty.get(url)
     location_hash = JSON.parse(response.body)
-    output = location_hash["city"] + ", " + location_hash["region_code"]
-    output
+    session["location"] = location_hash["city"] + ", " + location_hash["region_code"]
+    session["zip_code"] = location_hash["zip_code"]
   end
+# fix this
 
+  def get_jobs(search_term, location)
+    j = JobScraper.new(search_term, location)
+    j.scrape
+
+  end
 end

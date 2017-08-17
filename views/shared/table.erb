@@ -8,12 +8,12 @@
   <th>Company ID</th>
   <th>Job ID</th>
 </tr>
-<% arr_of_arrs = CSV.read("results.csv") %>
+<% arr_of_arrs = results %>
 <% arr_of_arrs.each do |job| %>
   <tr>
   <% job.each do |elem| %>
     <% format_link(elem) %>
-    <th><%=elem%></th>
+    <tl><%=elem%></tl>
   <% end %>
 <% end %>
 </table>

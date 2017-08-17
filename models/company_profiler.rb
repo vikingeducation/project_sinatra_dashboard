@@ -7,11 +7,12 @@ class CompanyProfiler
   def initialize(company_name = nil)
     @company_name = company_name
     @company_data = {}
+    @base_url = "http://api.glassdoor.com/api/api.htm?"
   end
 
   # get_data
   def get_data
-    # parses response hash from api and returns data when
+    # parses response hash from api and returns data
   end
 
 
