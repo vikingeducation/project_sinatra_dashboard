@@ -7,7 +7,13 @@
   <th>Date</th>
   <th>Company ID</th>
   <th>Job ID</th>
-</tr>
+  <th>Overall</th>
+  <th>Culture and Values</th>
+  <th>Senior Leadership</th>
+  <th>Compensation and Benefits</th>
+  <th>Career Opportunities</th>
+  <th>Work/Life Balance</th>
+<tr>
 <% arr_of_arrs = results %>
 <% arr_of_arrs.each do |job| %>
   <tr>
@@ -16,4 +22,5 @@
     <td><%=elem%></td>
   <% end %>
 <% end %>
+</tr>
 </table>

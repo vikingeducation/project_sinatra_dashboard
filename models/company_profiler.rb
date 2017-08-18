@@ -12,10 +12,18 @@ class CompanyProfiler
     @base_url = "http://api.glassdoor.com/api/api.htm?"
   end
 
-  # parse_data
-  def get_data
-    @company_data = parse_data(send_request)
-    ["4.6","2.4","boomshackalacka"]
+  # get ratings
+  def get_ratings
+    results = parse_data(send_request)
+    if results
+      [results["overallRating"],
+        results["cultureAndValuesRating"],
+        results["seniorLeadershipRating"],
+        results["compensationAndBenefitsRating"],
+        results["careerOpportunitiesRating"],
+        results["workLifeBalanceRating"]
+      ]
+    end
   end
 
   private
