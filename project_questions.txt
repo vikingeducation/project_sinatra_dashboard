@@ -1,0 +1,3 @@
+1. Development Environment?
+2. Slow loading time
+3. best place to parse api responses

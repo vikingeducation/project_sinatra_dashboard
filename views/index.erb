@@ -1,0 +1,19 @@
+<!-- index.erb -->
+<html>
+  <head>
+    <title>Sinatra Job-hunt Central</title>
+  </head>
+  <body>
+    <h1>Welcome to Sinatra Job-hunt Central!</h1>
+    <h2>Jobs in <%= location %></h2>
+    <a href='https://www.glassdoor.com/index.htm'>powered by <img src='https://www.glassdoor.com/static/img/api/glassdoor_logo_80.png' title='Job Search' /></a>
+    <% if results %>
+      <%= erb :"shared/table", locals: {results: results} %>
+    <% end %>
+
+    <br>
+    <form action="/search" method="post">
+      <textarea type="text" name="search-term" placeholder="Your dream job awaits!"></textarea>
+      <br>
+        <input type="submit"  value="Search">
+      </form>
