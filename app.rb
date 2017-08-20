@@ -21,16 +21,20 @@ end
 
 get '/start' do
   clear_sessions
-  ip_client = GEOIP.new("#{request.ip}") # replace with "72.174.4.38" when testing
+  ip_addy = "#{request.ip}"
+  ip_client = GEOIP.new(ip_addy) 
   session[:ip_location] = ip_client.location_info
+  session[:ip_addy] = ip_addy
   erb :search_form
 end
 
 post '/search' do
-  search_options = determine_search_params
+  ip_addy = session[:ip_addy]
+  location = session[:ip_location]
+  search_options = determine_search_params(location)
   session[:job_location] = search_options[:location]
   find_jobs(search_options)
-  save_employer_ratings(find_company_info)
+  save_employer_ratings(find_company_info(ip_addy))
   erb :search_complete
 end
 

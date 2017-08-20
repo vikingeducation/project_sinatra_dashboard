@@ -7,11 +7,12 @@ require 'json'
 class APIClient
 
 
-  def initialize(base_uri, options={})
-    @base_uri = base_uri
-    @partner_id, @partner_key, @userip, @useragent, @format, @v, @action =
-    options[:partner_id], options[:partner_key], options[:userip], options[:useragent],
-    options[:format], options[:v], options[:action]
+  def initialize(base_uri, ip, options={})
+    @partner_id, @partner_key, @useragent, @format, @v, @action =
+    options[:partner_id], options[:partner_key], options[:useragent],
+    options[:format], options[:v], options[:action],
+    @base_uri = base_uri,
+    @userip = ip
   end
 
 
@@ -58,7 +59,7 @@ private
 
 
   def send_request(company)
-    uri = (@base_uri + "?")
+    uri = @base_uri + "?"
     params = { "t.p" => @partner_id,
                "t.k" => @partner_key,
                "userip" => @userip,

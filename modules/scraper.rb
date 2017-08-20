@@ -47,21 +47,17 @@ class Scraper
 
 
   def job_post_details(page)
-    company_name = find_info(page, '//span[@itemprop="name"]')
-    job_title = find_info(page,'//span[@itemprop="title"]/text()')
-    location = find_info(page, '//span[@itemprop="addressLocality"]/text()')
-    posting_date = find_posting_date(page)
-    job_url = find_job_url(page)
-    details = { :co_name => company_name, :title => job_title, :l => location, :date => posting_date, :url => job_url }
+    details = { :title => find_info(page,'//span[@itemprop="title"]/text()'),
+                :co_name => find_info(page, '//span[@itemprop="name"]'),
+                :l => find_info(page, '//span[@itemprop="addressLocality"]/text()'),
+                :date => find_posting_date(page),
+                :url => find_job_url(page)
+               }
   end
 
 
   def find_info(page,css)
-    info = []
-    page.search(css).each do |x|
-      info << x.text
-    end
-    info
+    page.search(css).map { |x| x.text }
   end
 
 

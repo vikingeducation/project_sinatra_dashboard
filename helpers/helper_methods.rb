@@ -1,13 +1,13 @@
-
+# uses web scraper to perform a search based on user search options
 def find_jobs(options)
   n = Scraper.new(options[:search_url])
   options.delete(:search_url)
   n.filter_job_listings(options)
 end
 
-
-def determine_search_params
-  location = session[:ip_location]
+# determines if search location should be based on ip location or entered city
+def determine_search_params(ip_loc)
+  location = ip_loc
   options = parameters
   if options[:location] == "ip"
     options[:location] = location
@@ -15,17 +15,17 @@ def determine_search_params
   options
 end
 
-
-def find_company_info
+# goes through each company returned by webscraper and returns hash containings ratings for each
+def find_company_info(ip)
   employers = []
   job_table = SmarterCSV.process("jobs.csv")
   job_table.each do |row|
     employers << row[:company_name]
   end
-  @employers_ratings = find_employer_ratings(employers)
+  employer_ratings(employers, ip)
 end
 
-
+# checks if
 def save_employer_ratings(ratings)
   if ratings.nil?
     no_jobs_found
@@ -43,20 +43,20 @@ end
 private
 
 
-def find_employer_ratings(employers)
-  @client = APIClient.new(WEBSITE, PARAMETERS)
-  employers_ratings = {}
+def employer_ratings(employers, ip)
+  @client = APIClient.new(WEBSITE, ip, PARAMETERS)
+  ratings_hash = {}
   if employers == []
-    employers_ratings = nil
+    ratings_hash = nil
   else
-    employers.uniq!.delete_if {|name| name.is_a?(Integer)}
+    employers.delete_if {|name| name.is_a?(Integer)}.uniq
     employers.each do |co|
       co_rating = @client.company_rating(co)
       sleep rand(0..3)
-      employers_ratings[co] = co_rating
+      ratings_hash[co] = co_rating
     end
   end
-  employers_ratings
+  ratings_hash
 end
 
 
