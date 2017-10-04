@@ -1,0 +1,10 @@
+<tr>
+	<td><%= num %></td>
+	<td><a href=<%=res[:link]%>><%= res[:title] %></a></td>
+	<td><%= res[:cname] %></td>
+	<td><%= res[:loc] %></td>
+	<td><%= res[:date] %></td>
+	<td><%= res[:cid] %></td>
+	<td><%= res[:jid] %></td>
+	<td><form action="/info" method="post"><button name="info" value="<%= res[:cname] %>">More info!</button></form></td>
+</tr>

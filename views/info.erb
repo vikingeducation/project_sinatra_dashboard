@@ -1,0 +1,40 @@
+<p><%= result %></p>
+<h2> Company Info </h2>
+<% if company_info %>
+<% unless company_info[:rating].nil? %>
+	<p> Website: <a href="http://<%= company_info[:website] %>"><%= company_info[:website] %></a></p>
+<% end %>
+
+<% unless company_info[:rating].nil? %>
+	<p> Overall rating: <%= company_info[:rating] %></p>
+<% end %>
+
+<% unless company_info[:pros].nil? %>
+	<p>Pros: <%= company_info[:pros] %></p>
+<% end %>
+
+<% unless company_info[:cons].nil? %>
+	<p>Cons: <%= company_info[:cons] %></p>
+<% end %>
+
+<% unless company_info[:ceo].nil? %>
+	<p>Ceo: <%= company_info[:ceo]%></p>
+<% end %>
+
+<% unless company_info[:ceo_rating].nil? %>
+	<p>Ceo Approval Rate: <%= company_info[:ceo_rating]%>%</p>
+<% end %>
+<% else %>
+<p>Unfortunately, there is no information on this company!</p>
+<% end %>
+
+<h2> News </h2>
+<% if news %>
+	<% news.each do |headline| %>
+		<a href=<%=headline[:web_url]%>><%=headline[:headline]%></a><br>
+	<% end %>
+<% else %>
+<p> Unfortunately, there is no news on this company! </p>
+<% end %>
+
+<a href='http://www.glassdoor.com/index.htm'>powered by <img src='http://www.glassdoor.com/static/img/api/glassdoor_logo_80.png' title='Job Search' /></a>
