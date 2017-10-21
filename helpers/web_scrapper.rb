@@ -57,13 +57,11 @@ class WebScrapper
   end
 
   def scrapping_data_from(advert)
-      job_description = []
-      job_description << get_job_title(advert)
-      job_description << get_job_company_name(advert)
-      job_description << get_location(advert)
-      job_description << posting_date(advert)
-      job_description << get_posting_link(advert)
-      job_description
+      [get_job_title(advert),
+       get_job_company_name(advert),
+       get_location(advert),
+       posting_date(advert),
+       get_posting_link(advert)]
   end
 
   def get_job_title(node)
