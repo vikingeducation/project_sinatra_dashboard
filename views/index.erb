@@ -1,0 +1,83 @@
+
+<% parsed_json = JSON.parse(json) %>
+<% default_location = "#{parsed_json["city"]}, #{parsed_json["region_name"]}"%>
+
+<html lang="en">
+<head>
+  <title>Job Search</title>
+  <link rel="stylesheet" href=" https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-4">
+      <h1>Job Search</h1>
+      <form action="/"  method="post">
+        <fieldset class="form-group">
+          <label>Job</label>
+          <input class="form-control" type="text" name="position" placeholder="Job">
+          <label>Location</label>
+          <input class="form-control" type="text" name="location" value="<%=default_location%>">
+          <label>Number of Results</label>
+          <input class="form-control" type="text" name="limit" placeholder="# of results">
+        </fieldset>
+        <input class="btn btn-primary" type="submit" value="submit">
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<% if position && location %>
+  <% data = WebScraperProject::WebScraper.run({q: position, l: location, limit: limit}) %>
+
+
+<div class="container">
+  <h3><%=location.split(' ').map(&:capitalize).join(' ')%></h3>
+  <table class="table table-striped">
+    <tr>
+      <th>Position</th>
+      <th>Job Link</th>
+      <th>Date</th>
+      <th>Summary</th>
+      <th>Employer</th>
+      <th>Location</th>
+      <th>Employer_ID</th>
+      <th>Job ID</th>
+      <th>Rating</th>
+    </tr>
+  <% data.each do |position| %>
+
+    <tr>
+    <% profiler = ProfilerHelper::CompanyProfiler.new(position[4]) %>
+
+    <% position.each_with_index do |data, index| %>
+
+      <% if index == 1 %>
+
+        <td><a href="<%=data%>">Job Link</a></td>
+
+      <% else %>
+
+        <td><%= data %></td>
+
+      <% end %>
+
+    <% end %>
+
+    <td>
+
+    <% if profiler.find_job %>
+      <% profiler.ratings.each do |description, rating| %>
+          <%="#{description}: #{rating}" %>
+          <br>
+      <% end %>
+    <% end %>
+    </td>
+
+    </tr>
+  <% end %>
+
+  </table>
+</div>
+<% end %>
+</html>
