@@ -4,7 +4,7 @@ ruby '2.4.2'
 
 gem 'sinatra'
 gem 'dotenv'
-# gem 'httparty'
+gem 'httparty'
 
 group :development do
   gem 'pry'
