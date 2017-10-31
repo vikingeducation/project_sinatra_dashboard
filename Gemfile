@@ -5,6 +5,7 @@ ruby '2.4.2'
 gem 'sinatra'
 gem 'dotenv'
 gem 'httparty'
+gem 'mechanize', '~> 2.7', '>= 2.7.5'
 gem 'thin'
 
 group :development do
