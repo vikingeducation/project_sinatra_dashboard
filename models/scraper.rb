@@ -11,6 +11,7 @@ class Scraper
 
   def initialize(url)
     @base_url = url
+    #@params_url = "https://www.dice.com/jobs?q=Ruby+on+Rails+Engineer&l=New+Orleans%2C+LA&searchid=3113708184159&stst="
     @sleep_time = 0.5
     @agent = Mechanize.new
     @matches = []
@@ -113,9 +114,3 @@ class Scraper
   end
 
 end #scraper
-
-scraper = Scraper.new('https://www.dice.com')
-scraper.scrape(title: 'Ruby on Rails Engineer', location: 'New Orleans, LA', name: 'Anne')
-# scraper.scrape(title: 'Data Analyst Business Analyst', location: 'New Orleans, LA', name: 'Josh')
-
-#@params_url = "https://www.dice.com/jobs?q=Ruby+on+Rails+Engineer&l=New+Orleans%2C+LA&searchid=3113708184159&stst="
