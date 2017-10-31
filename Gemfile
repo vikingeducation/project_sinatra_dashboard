@@ -5,6 +5,7 @@ ruby '2.4.2'
 gem 'sinatra'
 gem 'dotenv'
 gem 'httparty'
+gem 'thin'
 
 group :development do
   gem 'pry'
