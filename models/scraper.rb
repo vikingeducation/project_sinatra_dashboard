@@ -17,10 +17,10 @@ class Scraper
     @matches = []
   end
 
-  def scrape(name:, title:, location:)
+  def scrape(title:, location:)
     set_up_agent
-    retrieve_job_results(name, title, location)
-    export_matches(name)
+    retrieve_job_results(title, location)
+    export_matches
   end
 
   private
@@ -30,7 +30,7 @@ class Scraper
     agent.user_agent_alias = 'Mac Safari'
   end
 
-  def retrieve_job_results(name, title, location)
+  def retrieve_job_results(title, location)
     agent.get(@base_url) do |page|
       result = page.form_with(:id => 'search-form') do |form|
         job_title = form.field_with(:id => 'search-field-keyword')
@@ -40,12 +40,12 @@ class Scraper
         job_location = location
       end.submit
 
-      go_to_job_page(result, name)
+      go_to_job_page(result)
     end
   end
 
-  def go_to_job_page(result, name)
-    puts "Finding results for #{name}"
+  def go_to_job_page(result)
+    puts "Finding results..."
     result.links_with(:href => /jobs\/detail/).each do |link|
       job = Job.new
       job.description_url = "#{@base_url}#{link.href}"
@@ -83,9 +83,9 @@ class Scraper
     @matches << job
   end
 
-  def export_matches(name)
-    puts "Exporting matches for #{name}..."
-    CSV.open("exports/#{name}-jobs-#{Time.now}.csv", 'a') do |csv|
+  def export_matches
+    puts "Exporting matches..."
+    CSV.open("exports/jobs-#{Time.now}.csv", 'a') do |csv|
       csv << [ "title",
               "job_id",
               "description_url",
