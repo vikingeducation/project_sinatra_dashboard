@@ -8,6 +8,7 @@ require_relative 'job'
 
 class Scraper
   attr_reader :agent
+  attr_accessor :output_filename
 
   def initialize(url)
     @base_url = url
@@ -15,6 +16,7 @@ class Scraper
     @sleep_time = 0.5
     @agent = Mechanize.new
     @matches = []
+    @output_filename = ''
   end
 
   def scrape(title:, location:)
@@ -86,7 +88,8 @@ class Scraper
 
   def export_matches
     puts "Exporting matches..."
-    CSV.open("exports/jobs-#{Time.now}.csv", 'a') do |csv|
+    @output_filename = "exports/jobs-#{Time.now}.csv"
+    CSV.open(@output_filename, 'a') do |csv|
       csv << [ "title",
               "job_id",
               "description_url",
