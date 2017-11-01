@@ -4,6 +4,7 @@
   <div class="col">
 
     <h2>Search for Jobs on Dice.com</h2>
+    <p>Note: This will take a couple of minutes and the screen will look a little broken during the process.</p>
 
     <form action="/search" method="post">
 
@@ -11,14 +12,18 @@
       <input type="text" name="title_keyword" class="form-control"><br>
 
       <label>Location:</label>
-      <input type="text" name="location" class="form-control"><br>
+      <input type="text" name="location" class="form-control" value="<%= location %>"><br>
 
-      <input type="submit" value="Search!" >
+      <input type="submit" value="Scrape Dice.com" >
     </form>
   </div> <!-- col -->
+
 </div> <!-- row -->
 
 <hr>
+<% if keyword && location %>
+<h3>Showing results for: <%= keyword %> in <%= location %> (IP: <%= user_ip %>)</h3>
+<% end %>
 
 <div class="row">
   <div class="col-12">
