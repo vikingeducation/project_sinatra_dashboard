@@ -21,6 +21,7 @@ class Scraper
     set_up_agent
     retrieve_job_results(title, location)
     export_matches
+    @matches
   end
 
   private
