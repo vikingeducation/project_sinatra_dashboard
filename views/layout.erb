@@ -13,10 +13,18 @@
   </head>
   <body>
 
-    <%= erb :"shared/navbar" %>
+    <header>
+      <%= erb :"shared/navbar" %>
+    </header>
+
     <div class="container">
       <%= yield %>
-    </div>
+
+      <footer>
+        <%= erb :"shared/footer" %>
+      </footer>
+
+    </div><!-- container -->
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
