@@ -36,3 +36,21 @@ get '/' do
   # Output data to view
   erb :index, locals: { jobs: jobs }
 end
+
+post '/search' do
+  # Build objects
+  keyword = params['title_keyword']
+  location = params['location']
+  scraper = Scraper.new('https://www.dice.com')
+
+  # Modify objects
+  matches = session['jobs']
+  # matches = scraper.scrape(title: keyword, location: location)
+  # scraper.scrape(title: 'Ruby on Rails Engineer', location: 'New Orleans, LA')
+  # scraper.scrape(title: 'Data Analyst Business Analyst', location: 'New Orleans, LA', name: 'Josh')
+
+  # Save objects to session
+
+  # Output data to view
+  erb :index, locals: { jobs: matches }
+end
