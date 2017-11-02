@@ -60,3 +60,13 @@ get '/results' do
 
   erb :index, locals: { keyword: keyword, location: location, jobs: matches, user_ip: user_ip }
 end
+
+get '/job' do
+  id = params['id']
+  scraper = Scraper.new
+  matches = scraper.retrieve_matches_from_yaml
+  job = matches.select { |match| match.job_id == id }.first
+
+  erb :job, locals: { job: job }
+end
+

@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-12">
+    <h1><%= job.title %> <span style="font-size: 50%;">(id <%= job.job_id %>)</span></h1>
+
+    <p>at <%= job.company %> in <%= job.location %> <span style="font-size: 80%;">(id <%= job.company_id %>)</span></p>
+    <p>See company reviews</p>
+    <p>Posted: <%= job.date_posted %></p>
+
+    <p>Salary: <%= job.salary %></p>
+    <p>Remote?: <%= job.remote %></p>
+  </div> <!-- col-12 -->
+</div> <!-- row -->
+
+<div class="row">
+  <div class="col-12">
+    <p><%= job.description %></p>
+    <p><a href="<%= job.description_url %>" target="_blank" alt="<%= job.title %>" title="<%= job.title %>">Read more on Dice</a>
+  </div> <!-- col-6-xs -->
+</div> <!-- row -->
+
+<a href="/results" target="_blank" alt="results" title="results">Back to Results</a>
