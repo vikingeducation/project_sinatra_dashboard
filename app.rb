@@ -10,6 +10,7 @@ require 'pry'
 require './models/job.rb'
 require './models/scraper.rb'
 require './models/free_geo_api.rb'
+require './models/glassdoor_api.rb'
 
 # Routes
 enable :sessions
@@ -19,6 +20,10 @@ get '/' do
   settings.development? ? user_ip = ENV['EX_IP_ADDRESS'] : user_ip = request.ip
   geo_api = FreeGeoAPI.new(user_ip)
   location = geo_api.send_request
+
+  user_agent = request.user_agent
+  glassdoor = GlassdoorAPI.new(user_ip, user_agent)
+  response = glassdoor.send_request
 
   placeholder_job = Job.new
 
