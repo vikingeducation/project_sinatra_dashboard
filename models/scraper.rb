@@ -2,27 +2,40 @@ require 'rubygems'
 require 'bundler/setup'
 require 'mechanize'
 require 'csv'
+require 'json'
+require 'yaml'
 require 'pry'
 
 require_relative 'job'
 
 class Scraper
   attr_reader :agent
-  attr_accessor :output_filename
+  attr_accessor :csv_filename
+  YAML_DATA_FILE = "data/temp.yaml"
 
-  def initialize(url)
+  def initialize(url: '')
     @base_url = url
     #@params_url = "https://www.dice.com/jobs?q=Ruby+on+Rails+Engineer&l=New+Orleans%2C+LA&searchid=3113708184159&stst="
     @sleep_time = 0.5
     @agent = Mechanize.new
     @matches = []
-    @output_filename = ''
+    @csv_filename = ''
   end
 
   def scrape(title:, location:)
     set_up_agent
     retrieve_job_results(title, location)
+    save_matches_to_yaml
     export_matches
+  end
+
+  def retrieve_matches_from_yaml
+    records = YAML.load(File.read(YAML_DATA_FILE))
+
+    records.each do |record|
+      @matches << YAML.load(record)
+    end
+
     @matches
   end
 
@@ -86,10 +99,18 @@ class Scraper
     @matches << job
   end
 
+  def save_matches_to_yaml
+    converted_matches = @matches.map(&:to_yaml)
+
+    File.open(YAML_DATA_FILE,"w") do |f|
+      f.write(converted_matches)
+    end
+  end
+
   def export_matches
     puts "Exporting matches..."
-    @output_filename = "exports/jobs-#{Time.now}.csv"
-    CSV.open(@output_filename, 'a') do |csv|
+    @csv_filename = "exports/jobs-#{Time.now}.csv"
+    CSV.open(@csv_filename, 'a') do |csv|
       csv << [ "title",
               "job_id",
               "description_url",

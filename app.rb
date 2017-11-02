@@ -3,14 +3,13 @@ require 'dotenv/load'
 require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'erb'
-require 'csv'
 require 'pry'
 
 # Classes
 require './models/job.rb'
 require './models/scraper.rb'
 require './models/free_geo_api.rb'
-require './models/glassdoor_api.rb'
+require './models/company_profiler.rb'
 
 # Routes
 enable :sessions
@@ -20,10 +19,6 @@ get '/' do
   settings.development? ? user_ip = ENV['EX_IP_ADDRESS'] : user_ip = request.ip
   geo_api = FreeGeoAPI.new(user_ip)
   location = geo_api.send_request
-
-  user_agent = request.user_agent
-  glassdoor = GlassdoorAPI.new(user_ip, user_agent)
-  response = glassdoor.send_request
 
   placeholder_job = Job.new
 
@@ -43,19 +38,25 @@ end
 set :server_settings, :timeout => 3600
 
 post '/search' do
-  # Build objects
   user_ip = session['user_ip']
   keyword = params['title_keyword']
   location = params['location']
-  scraper = Scraper.new('https://www.dice.com')
 
-  # Modify objects
-  matches = scraper.scrape(title: keyword, location: location)
-  # jobs = CSV.parse("/Users/localflavor/Sites/rails_development/Viking/project_sinatra_dashboard/exports/jobs-2017-11-01 13:34:02 -0500.csv")
-  # jobs = session['jobs']
+  scraper = Scraper.new(url: 'https://www.dice.com')
+  scraper.scrape(title: keyword, location: location)
 
-  # Save objects to session
+  session['keyword'] = keyword
+  session['location'] = location
 
-  # Output data to view
+  redirect('/results')
+end
+
+get '/results' do
+  keyword = session['keyword']
+  location = session['location']
+  user_ip = session['user_ip']
+  scraper = Scraper.new
+  matches = scraper.retrieve_matches_from_yaml
+
   erb :index, locals: { keyword: keyword, location: location, jobs: matches, user_ip: user_ip }
 end
