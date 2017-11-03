@@ -8,6 +8,15 @@
   margin: 5px 0px;
 }
 
+.disclaimer {
+  font-style: italic;
+  text-align: center;
+}
+
+.disclaimer span {
+  font-weight: bold;
+}
+
 /* Reviews */
 .review-credit {
   font-size: 80%;
