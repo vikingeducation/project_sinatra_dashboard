@@ -1,0 +1,19 @@
+<h1><%= company.name %></h1>
+<p><%= company.location %></p>
+<p><a href="<%= company.website %>" target="_blank" alt="Glassdoor" title="Glassdoor">See Profile on Glassdoor</a></p>
+
+<h2>Reviews</h2>
+
+<% if company.reviews %>
+  <% company.reviews.each do |review| %>
+    <article>
+      <h3><%= review.headline %> (<%= review.stars %> Stars)</h3>
+      <p class="review-credit"><%= review.date %> <a href="<%= review.url %>" target="_blank" alt="review" title="review">See Review Online</a></p>
+      <p><strong>Pros:</strong> <%= review.pros %></p>
+      <p><strong>Cons:</strong> <%= review.cons %></p>
+      <p class="review-byline">- <%= company.title %></p>
+    </article>
+  <% end %>
+<% end %>
+
+<a href="/results" target="_blank" alt="results" title="results">Back to Results</a>
