@@ -29,6 +29,11 @@ class Company
     @number_of_rating ||= response['employers'][0]['number_of_ratings']
   end
 
+  def featured_review
+    review_info = response['employers'][0]['featuredReview']
+    @featured_review ||= Review.new(review_info)
+  end
+
   def reviews
     @reviews ||= begin
       review_info = response['employers'][0]['featuredReview']

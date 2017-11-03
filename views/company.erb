@@ -5,9 +5,23 @@
 
     <h2>Reviews</h2>
 
+    <% if company.featured_review %>
+      <article class="review featured">
+        <h4><%= company.featured_review.headline %> (<%= company.featured_review.stars %> Stars)</h4>
+        <p class="featured_review-credit"><%= company.featured_review.date %> <a href="<%= company.featured_review.url %>" target="_blank" alt="featured_review" title="featured_review">See Review Online</a></p>
+        <p><strong>Pros:</strong> <%= company.featured_review.pros %></p>
+        <p><strong>Cons:</strong> <%= company.featured_review.cons %></p>
+        <p class="review-byline">- <%= company.featured_review.title %></p>
+      </article>
+    <% end %>
+  </div> <!-- col-sm -->
+</div> <!-- row -->
+
+<div class="row">
+  <div class="col-sm">
     <% if company.reviews %>
       <% company.reviews.each do |review| %>
-        <article>
+        <article class="review">
           <h4><%= review.headline %> (<%= review.stars %> Stars)</h4>
           <p class="review-credit"><%= review.date %> <a href="<%= review.url %>" target="_blank" alt="review" title="review">See Review Online</a></p>
           <p><strong>Pros:</strong> <%= review.pros %></p>
