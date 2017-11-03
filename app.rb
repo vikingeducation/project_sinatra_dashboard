@@ -6,7 +6,6 @@ require 'erb'
 require 'pry'
 
 # Classes
-require './models/job.rb'
 require './models/scraper.rb'
 require './models/free_geo_api.rb'
 require './models/company_profiler.rb'
