@@ -23,7 +23,7 @@ get '/' do
   session['user_ip'] = user_ip
 
   # Output data to view
-  erb :index, locals: { keyword: nil, location: location, jobs: nil, user_ip: user_ip }
+  erb :index, locals: { keywords: nil, location: location, jobs: nil, user_ip: user_ip }
 end
 
 # Prevent timeout while scraping dice.com
@@ -39,20 +39,20 @@ post '/search' do
   scraper = Scraper.new
   scraper.scrape(keywords: keywords, location: location, distance: distance, remote: remote)
 
-  session['keyword'] = keyword
+  session['keywords'] = keywords
   session['location'] = location
 
   redirect('/results')
 end
 
 get '/results' do
-  keyword = session['keyword']
+  keywords = session['keywords']
   location = session['location']
   user_ip = session['user_ip']
   scraper = Scraper.new
   matches = scraper.retrieve_matches_from_yaml
 
-  erb :index, locals: { keyword: keyword, location: location, jobs: matches, user_ip: user_ip }
+  erb :index, locals: { keywords: keywords, location: location, jobs: matches, user_ip: user_ip }
 end
 
 get '/job' do
