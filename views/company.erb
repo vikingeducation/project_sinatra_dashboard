@@ -1,26 +1,28 @@
-<h1><%= company.name %></h1>
-<p><%= company.location %></p>
-<p><a href="<%= company.website %>" target="_blank" alt="Glassdoor" title="Glassdoor">See Profile on Glassdoor</a></p>
+<div class="row">
+  <div class="col-sm">
+    <h1><%= company.name %></h1>
+    <p><%= company.location %></p>
 
-<h2>Reviews</h2>
+    <h2>Reviews</h2>
 
-<% if company.reviews %>
-  <% company.reviews.each do |review| %>
-    <article>
-      <h3><%= review.headline %> (<%= review.stars %> Stars)</h3>
-      <p class="review-credit"><%= review.date %> <a href="<%= review.url %>" target="_blank" alt="review" title="review">See Review Online</a></p>
-      <p><strong>Pros:</strong> <%= review.pros %></p>
-      <p><strong>Cons:</strong> <%= review.cons %></p>
-      <p class="review-byline">- <%= review.title %></p>
-    </article>
-  <% end %>
-<% end %>
+    <% if company.reviews %>
+      <% company.reviews.each do |review| %>
+        <article>
+          <h4><%= review.headline %> (<%= review.stars %> Stars)</h4>
+          <p class="review-credit"><%= review.date %> <a href="<%= review.url %>" target="_blank" alt="review" title="review">See Review Online</a></p>
+          <p><strong>Pros:</strong> <%= review.pros %></p>
+          <p><strong>Cons:</strong> <%= review.cons %></p>
+          <p class="review-byline">- <%= review.title %></p>
+        </article>
+      <% end %>
+    <% end %>
+  </div> <!-- col-sm -->
+</div> <!-- row -->
 
 <div class="row buttons">
   <div class="col-sm">
-    <a href="<%= company.website %>" target="_blank" role="button" class="btn btn-outline-primary btn-sm">See this Company on Glassdoor</a>
+    <a href="<%= company.website %>" target="_blank" role="button" class="btn btn-outline-primary btn-sm">See Profile on Glassdoor</a>
   </div><!-- col -->
-
 
   <div class="col-sm">
     <a href="/results" target="_blank" role="button" class="btn btn-outline-primary btn-sm">Back to Results</a>
