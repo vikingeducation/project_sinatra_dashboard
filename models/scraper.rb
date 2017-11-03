@@ -15,8 +15,6 @@ class Scraper
 
   def initialize(url: '')
     @base_url = url
-    #@params_url = "https://www.dice.com/jobs?q=Ruby+on+Rails+Engineer&l=New+Orleans%2C+LA&searchid=3113708184159&stst="
-    @sleep_time = 0.5
     @agent = Mechanize.new
     @matches = []
     @csv_filename = ''
