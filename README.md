@@ -17,7 +17,14 @@ This app is easy to install and run, however the scraping takes 30-seconds to a 
 ### To Install
 
 1. `fork` and `clone` the app.
-2. run `bundle`
+2. Run `bundle`
+4. Go to [Glassdoor](https://www.glassdoor.com/developer/index.htm) to get an API key
+3. Generate a `.env` file and populate it with these variables
+```
+EX_IP_ADDRESS = '192.30.253.112'  # or any default IP address you care to use
+partner_id = 'your glassdoor partner id'
+api_key = 'your glassdoor api key'
+```
 
 ### To Use
 
