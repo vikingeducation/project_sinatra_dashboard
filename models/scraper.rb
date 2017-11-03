@@ -109,6 +109,8 @@ class Scraper
   end
 
   def save_matches_to_yaml
+    puts "Caching matches for results page..."
+
     converted_matches = @matches.map(&:to_yaml)
 
     File.open(YAML_DATA_FILE,"w") do |f|
@@ -117,7 +119,7 @@ class Scraper
   end
 
   def export_matches
-    puts "Exporting matches..."
+    puts "Exporting matches to CSV..."
     @csv_filename = "exports/jobs-#{Time.now}.csv"
     CSV.open(@csv_filename, 'a') do |csv|
       csv << [ "title",
