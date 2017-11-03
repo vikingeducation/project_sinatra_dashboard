@@ -20,18 +20,11 @@ get '/' do
   geo_api = FreeGeoAPI.new(user_ip)
   location = geo_api.send_request
 
-  placeholder_job = Job.new
-
-  # Modify objects
-  placeholder_job.add_placeholder_info
-  jobs = [placeholder_job, placeholder_job]
-
   # Save objects to session
-  session['jobs'] = jobs
   session['user_ip'] = user_ip
 
   # Output data to view
-  erb :index, locals: { keyword: nil, location: location, jobs: jobs, user_ip: user_ip }
+  erb :index, locals: { keyword: nil, location: location, jobs: nil, user_ip: user_ip }
 end
 
 # Prevent timeout while scraping dice.com
