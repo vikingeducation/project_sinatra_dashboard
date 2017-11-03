@@ -45,11 +45,22 @@ class Scraper
     agent.user_agent_alias = 'Mac Safari'
   end
 
-  def retrieve_job_results(title, location)
-    agent.get(@base_url) do |page|
+  def retrieve_job_results_via_query_url(keywords, location, distance, remote)
+    puts "Finding results..."
+
+    url = "#{BASE_URL}/#{SEARCH_URI}?for_one=&for_all=#{keywords}&for_exact=&for_none=&for_jt=&for_com=&for_loc=#{location}&sort=relevance&telecommute=#{remote}&radius=#{distance}"
+
+    results_page = agent.get(url)
+    go_to_job_page(results_page)
+  end
+
+  # This method is no longer being used, but I'm keeping this as
+  # an example of how to fill out a form and submit it
+  def retrieve_job_results_via_form(keywords, location)
+    agent.get(BASE_URL) do |page|
       result = page.form_with(:id => 'search-form') do |form|
         job_title = form.field_with(:id => 'search-field-keyword')
-        job_title.value = title
+        job_title.value = keywords
 
         job_location = form.field_with(:id => 'search-field-location')
         job_location = location
@@ -59,12 +70,11 @@ class Scraper
     end
   end
 
-  def go_to_job_page(result)
-    puts "Finding results..."
-    result.links_with(:href => /jobs\/detail/).each do |link|
+  def go_to_job_page(results_page)
+    puts "Scraping each job page..."
+    results_page.links_with(:href => /jobs\/detail/).each do |link|
       job = Job.new
-      job.description_url = "#{@base_url}#{link.href}"
-
+      job.description_url = "#{BASE_URL}#{link.href}"
       job_page = link.click
       build_job(job_page, job)
     end
