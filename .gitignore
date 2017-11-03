@@ -1,5 +1,5 @@
 # csv export files
-/exports/*.csv
+# see exports/.gitignore for ignoring export files
 
 # environment variables
 .env
