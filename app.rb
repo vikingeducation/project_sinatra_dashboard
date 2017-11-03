@@ -70,3 +70,14 @@ get '/job' do
   erb :job, locals: { job: job }
 end
 
+get '/company' do
+  name = params['name']
+  location = params['location']
+  user_agent = request.user_agent.split(' ').first
+  user_ip = session['user_ip']
+
+  profiler = CompanyProfiler.new(user_ip, user_agent)
+  company = profiler.send_request(name, location)
+
+  erb :company, locals: { company: company }
+end
