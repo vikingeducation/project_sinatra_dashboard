@@ -1,0 +1,12 @@
+# ignore export folder files
+exports/*
+
+# track export folder
+!exports/.gitkeep
+
+
+# environment variables
+.env
+
+# sandbox files
+/sandbox

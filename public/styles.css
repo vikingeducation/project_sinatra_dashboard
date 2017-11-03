@@ -1,0 +1,42 @@
+/* Shared */
+
+.buttons {
+  text-align: center;
+}
+
+.buttons .btn {
+  margin: 5px 0px;
+}
+
+.disclaimer {
+  font-style: italic;
+  text-align: center;
+}
+
+.disclaimer span {
+  font-weight: bold;
+}
+
+/* Reviews */
+.review {
+  font-size: 0.8em;
+  background-color: #f1f1f1;
+  margin: 10px 0px;
+  overflow: auto;
+  padding: 4%;
+  border-radius: 10px;
+} /* .featured-review */
+
+.featured {
+  background-color: lightyellow;
+} /* .featured-review */
+
+.review-credit {
+  font-size: 70%;
+  font-style: italic;
+}
+
+.review-byline {
+  float: right;
+  font-style: italic;
+}
