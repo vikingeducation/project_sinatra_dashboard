@@ -1,5 +1,5 @@
-# csv exports
-/exports
+# csv export files
+/exports/*.csv
 
 # environment variables
 .env
