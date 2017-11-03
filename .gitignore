@@ -4,5 +4,5 @@
 # environment variables
 .env
 
-# sandbox env
-sandbox.rb
+# sandbox files
+/sandbox
