@@ -8,8 +8,7 @@ Anne Richardson
 
 ## Project Status
 
-Working on step 3 of 3
-
+App Complete
 
 ## Supporting Info
 
