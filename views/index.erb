@@ -7,11 +7,23 @@
 
     <form action="/search" method="post">
 
-      <label>Title Keyword:</label>
-      <input type="text" name="title_keyword" class="form-control"><br>
+      <label>Title Keywords:</label>
+      <input type="text" name="keywords" class="form-control"><br>
 
       <label>Location:</label>
       <input type="text" name="location" class="form-control" value="<%= location %>"><br>
+
+      <label>Distance:</label>
+      <select name="distance" class="form-control">
+        <option value="0" selected >0 miles</option>
+        <option value="5">5 miles</option>
+        <% (1..5).to_a.each do |distance| %>
+          <option value="<%= distance * 10 %>"><%= distance * 10 %> miles</option>
+        <% end %>
+      </select><br>
+
+      <label>Remote:</label>
+      <input type="checkbox" name="remote" class="form-control"><br>
 
       <button class="btn btn-primary btn-sm btn-block" type="submit">Scrape Dice.com</button>
       <p class="disclaimer"><span>Note:</span> This will take a couple of minutes and the screen will look a little broken during the process.</p>
@@ -20,9 +32,9 @@
 
 </div> <!-- row -->
 
-<% if keyword && location %>
+<% if keywords && location %>
 <hr>
-<h3>Showing results for: <%= keyword %> in <%= location %></h3>
+<h3>Showing results for: <%= keywords %> in <%= location %></h3>
 <% end %>
 
 <div class="row">

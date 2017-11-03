@@ -31,11 +31,13 @@ set :server_settings, :timeout => 3600
 
 post '/search' do
   user_ip = session['user_ip']
-  keyword = params['title_keyword']
+  keywords = params['keywords']
   location = params['location']
+  distance = params['distance']
+  params['remote'] ? remote = 'true' : remote = ''
 
-  scraper = Scraper.new(url: 'https://www.dice.com')
-  scraper.scrape(title: keyword, location: location)
+  scraper = Scraper.new
+  scraper.scrape(keywords: keywords, location: location, distance: distance, remote: remote)
 
   session['keyword'] = keyword
   session['location'] = location

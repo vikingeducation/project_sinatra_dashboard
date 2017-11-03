@@ -11,18 +11,20 @@ require_relative 'job'
 class Scraper
   attr_reader :agent
   attr_accessor :csv_filename
-  YAML_DATA_FILE = "data/temp.yaml"
 
-  def initialize(url: '')
-    @base_url = url
+  YAML_DATA_FILE = "data/temp.yaml"
+  BASE_URL = "https://www.dice.com"
+  SEARCH_URI = "jobs/advancedResult.html"
+
+  def initialize
     @agent = Mechanize.new
     @matches = []
     @csv_filename = ''
   end
 
-  def scrape(title:, location:)
+  def scrape(keywords:, location:, distance:, remote:)
     set_up_agent
-    retrieve_job_results(title, location)
+    retrieve_job_results_via_query_url(keywords, location, distance, remote)
     save_matches_to_yaml
     export_matches
   end
@@ -33,7 +35,6 @@ class Scraper
     records.each do |record|
       @matches << YAML.load(record)
     end
-
     @matches
   end
 
