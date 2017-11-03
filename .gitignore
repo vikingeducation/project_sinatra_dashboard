@@ -1,5 +1,9 @@
-# csv export files
-# see exports/.gitignore for ignoring export files
+# ignore export folder files
+exports/*
+
+# track export folder
+!exports/.gitkeep
+
 
 # environment variables
 .env
