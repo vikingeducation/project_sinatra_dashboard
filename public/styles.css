@@ -1,3 +1,13 @@
+/* Shared */
+
+.buttons {
+  text-align: center;
+}
+
+.buttons .btn {
+  margin: 5px 0px;
+}
+
 /* Reviews */
 .review-credit {
   font-size: 80%;
