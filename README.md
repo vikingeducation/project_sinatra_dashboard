@@ -10,6 +10,31 @@ Anne Richardson
 
 App Complete
 
+## How to Use This App
+
+This app is easy to install and run, however the scraping takes 30-seconds to a couple of minutes, and that's kind of janky.
+
+### To Install
+
+1. `fork` and `clone` the app.
+2. run `bundle`
+
+### To Use
+
+In terminal, run the main app file
+```
+ruby app.rb
+
+# crtl + c to exit
+```
+
+Navigate to localhost
+```
+http://localhost:4567/
+```
+
+Enter your search parameters and click the Scrap button. Results will appear on the same page in about 1 minute after the scraping is complete. Click on the job title to see more info on that job or the company name to see more info on that company.
+
 ## Supporting Info
 
 ### FreeGeo API
