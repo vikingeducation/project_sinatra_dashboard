@@ -14,7 +14,7 @@
       <label>Location:</label>
       <input type="text" name="location" class="form-control" value="<%= location %>"><br>
 
-      <input type="submit" value="Scrape Dice.com" >
+      <input type="submit" value="Scrape Dice.com">
     </form>
   </div> <!-- col -->
 
@@ -42,8 +42,8 @@
       <tbody>
         <% jobs.each do |job| %>
         <tr>
-          <td><a href="<%= job.description_url %>" target="_blank" alt="<%= job.title %>" title="<%= job.title %>"><%= job.title %></a> (<%= job.job_id %>)</td>
-          <td><%= job.company %> (<%= job.company_id %>)</td>
+          <td><a href="/job?id=<%= job.job_id %>"><%= job.title %></a> (<%= job.job_id %>)</td>
+          <td><a href="/company?name=<%= job.company %>&location=<%= job.location %>"><%= job.company %></a> (<%= job.company_id %>)</td>
           <td><%= job.location %></td>
           <td><%= job.date_posted %></td>
           <td><%= job.salary %></td>
