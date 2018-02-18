@@ -3,6 +3,7 @@ require 'pry-byebug'
 require "bundler/setup"
 require 'sinatra'
 require 'sinatra/reloader' if development?
+require 'sinatra/activerecord'
 require './helpers/helper.rb'
 require './helpers/locator.rb'
 require './helpers/company_profiler.rb'
@@ -45,4 +46,3 @@ end
 #   session.clear
 #   redirect to "/"
 # end
-
