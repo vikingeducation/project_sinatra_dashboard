@@ -1,3 +1,5 @@
+Authors: Graham and Vishal
+
 # project_sinatra_dashboard
 let's go for a job hunt!
 
