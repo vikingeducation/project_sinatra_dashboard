@@ -1,0 +1,32 @@
+<%= erb :"header" %>
+
+<body>
+  <div class='container'>
+    <div class='row'>
+      <div class='col-md-offset-2 col-md-8'>
+
+        <h1>Local Job Hunt</h1>
+
+        <form class='input-group' action='/' method='post'>
+          <input type='text' class="form-control" name="search_term" placeholder='Search Jobs' autofocus>
+          <span class='input-group-btn'>
+            <button type='submit' class="btn btn-submit glyphicon glyphicon-search" value='Submit'></button>
+          </span>
+        </form>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-md-12'>
+
+        <% if !results.nil? %>
+          <h3><%= "Jobs near #{city}, #{region}" %></h3>
+
+          <%= erb :"table_partial", :layout => false, :locals => { :results => results } %>
+        <% end %>
+
+        <%= erb :"footer" %>
+
+      </div>
+    </div>
+  </div>
+</body>
