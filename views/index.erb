@@ -1,0 +1,36 @@
+<form action = "scraper" method = "post">
+  Keyword:
+  <input type = "text" name = "keyword">
+  Location:
+  <input type = "test" name = "location">
+  <input type = "submit" value = "Find jobs!">
+</form>
+
+<table>
+  <tr>
+      <% unless jobs.nil? %> 
+        <% jobs[0].keys.each do |k| %> 
+        <th> 
+          <%= k %> 
+        </th>
+        <% end %>
+      <% end %>  
+  </tr>
+  <% unless jobs.nil? %> 
+    <% jobs.each do |job_hash| %>
+  <tr>
+    <%    job_hash.each do |pair| %>
+    <td>
+      <% if pair[0] == :company %>
+        <a href="/glassdoorapi/<%= pair[1] %>">
+          <%= pair[1] %>
+        </a>
+      <% else %>
+          <%= pair[1] %>
+      <% end %>
+    </td>
+    <% end %> 
+  </tr>
+  <%  end %>
+<% end %>
+</table>
