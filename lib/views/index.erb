@@ -1,0 +1,19 @@
+<h1>Home</h1>
+
+<h3>Scrape job postings from Dice?</h3>
+
+<form class="form-inline" action="/" method="post">
+  <select class="form-control" name="scrape">
+    <option value="1">First page results</option>
+    <option value="2">Latest job postings from today</option>
+  </select>
+  <button type="submit" class="btn btn-default">Scrape</button>
+</form>
+
+<h3>See a company profile?</h3>
+
+<form class="form-inline" action="/company-profile" method="get">
+  <label for="company_name">Company name:</label>
+  <input id="company_name" type="text" name="company_name">
+  <button type="submit" class="btn btn-default">Go</button>
+</form>

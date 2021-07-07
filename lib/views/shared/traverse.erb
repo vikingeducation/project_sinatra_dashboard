@@ -1,0 +1,17 @@
+<% if d.is_a?(Hash) %>
+<ul>
+  <% d.each do |k, v| %>
+  <li> <%= k %>: <%= erb :"shared/traverse", :locals => {:d => v} %></li>
+  <% end %>
+</ul>
+<% end %>
+<% if d.is_a?(Array) %>
+<ul>
+  <% d.each do |item| %>
+  <li> <%= erb :"shared/traverse", :locals => {:d => item} %></li>
+  <% end %>
+</ul>
+<% end %>
+<% if d.is_a?(String) %>
+d
+<% end %>
