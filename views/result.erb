@@ -1,0 +1,30 @@
+<div class="container">
+<% if result_liebao.nil? %>
+<h1>Your IP is blocked, Mother fucker!</h1>
+<% else %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Company</th>
+      <th>Salary</th>
+      <th>Place</th>
+      <th>Job Description</th>
+      <th>link</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% result_liebao.each do |row| %>
+    <tr>
+      <% row.each do |element| %>
+      <td><%= element %></td>
+      <% end %>
+
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
+
+
+</div>
