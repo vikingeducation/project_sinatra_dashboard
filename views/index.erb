@@ -1,0 +1,75 @@
+<container>
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>Schwaddys Sweet Dashboard</h1>
+    </div>
+  </div>
+  <div class="row">
+
+    <!-- weather -->
+    <div class="col-xs-6">
+      <h3>Weather for Missoula, Montana</h3>
+      <table class="table table-striped weather">
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>High Temperature</th>
+            <th>Low Temperature</th>
+            <th>Forecast</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% counter = 1 %>
+          <% @my_individualized_weather.each do |day| %>
+          <tr>
+            <td> <%= counter %></td>
+            <td> <%= day.high_temp %> </td>
+            <td> <%= day.low_temp %> </td>
+            <td> <%= day.forecast %> </td>
+          </tr>         
+      <% counter += 1 %>
+      <% end %> 
+        </tbody>
+      </table>
+    </div>
+
+
+    <!-- craigslist -->
+    <div class="col-xs-6">
+      <h3>Search Ebay</h3>
+      <h4>Enter Your Search Criteria and max price</h4>
+      <form action="/ebay" method="post">
+        <textarea type="text" name="keyword" placeholder="e.g. Pokemon..."></textarea>
+        <textarea type="text" name="maxprice" placeholder="e.g. 400"></textarea>
+        <br>
+        <input type="submit" value="Searchify!">
+      </form>
+      <% unless @ebay_results == nil %>
+        <div class="ebay-table">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Number</th>
+                <th>Price</th>
+                <th>Item Name</th>
+                <th>Link</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% item_counter = 1 %>
+              <% @ebay_results.each do |item| %>
+                <tr>
+                  <td> <%= item_counter %></td>
+                  <td> <%= item.price %></td>
+                  <td> <%= item.title %></td>
+                  <td> <a href= "<%= item.link %>" alt="">Link</a></td>
+                </tr>
+                <% item_counter += 1 %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</container>

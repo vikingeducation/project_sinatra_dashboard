@@ -1,0 +1,18 @@
+.ebay-table {
+  height: 300px;
+  overflow: auto;  
+}
+
+table.weather {
+  border: 3px solid #2386C0;
+  border-radius: 9px;
+  box-shadow: 3px 3px 4px #888888;
+}
+
+div.ebay-table {
+  margin-top: 10px;
+  margin-right: 15px;
+  border: 3px solid #2386C0;
+  border-radius: 5px;
+  box-shadow: 3px 3px 4px #888888;
+}
